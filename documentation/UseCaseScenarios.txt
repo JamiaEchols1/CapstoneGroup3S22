@@ -1,0 +1,50 @@
+Create a trip scanario
+
+Context - User is creating a trip
+
+Primary Flow
+1 - User clicks create a new trip button
+2 - User inputs trip name, start time/ end time
+3 - User selects create button
+4 - System creates a new trip successfully
+5 - System navgates into the new trip page
+6 - Display trip details
+
+*Alternative Flow
+** User cancels trip creation
+a3 - User selects cancel button
+a4 - System navigates back to the view all trips page
+
+
+** User does not fill trip information
+a2 - User inputs no data or only partial data
+a3 - System displays error messages on the required fields
+
+
+Login Scenario
+
+
+Context - User has already created an account.
+
+*Primary Flow
+1 - User enters Credentials
+2 - User selects Login
+3 - System verifies credentials successfully
+4 - Display credentials list for user
+
+*Alternative Flows
+** Credentials are invalid and limit (3 attempts) not reached yet
+a3 - System find credentials are invalid
+a4 - System informs user the credentials entered are invalid and if they enter invalid credentials three times they will be locked out for one hour
+a5 - System prompts user to enter correct credentials
+return to step 1 of primary flow
+
+** Credentials are invalid and limit (3 attempts) has been reached
+a3 - System find credentials are invalid
+a4 - System informs user the credentials entered are invalid and that they have been locked out for one hour
+a5 - Any attempt to login for the locked account will fail for the next hour and inform the user they have been locked out
+
+
+Add a waypoint scenario
+
+Context - User adds a waypoint to a trip
