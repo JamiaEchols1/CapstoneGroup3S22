@@ -8158,18 +8158,18 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jechols5\\.nuget\\packages\\": {},
+    "C:\\Users\\jamia\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jechols5\\source\\repos\\JamiaEchols1\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj",
+      "projectUniqueName": "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj",
       "projectName": "TravelPlannerDesktopApp",
-      "projectPath": "C:\\Users\\jechols5\\source\\repos\\JamiaEchols1\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj",
-      "packagesPath": "C:\\Users\\jechols5\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jechols5\\source\\repos\\JamiaEchols1\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\obj\\",
+      "projectPath": "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj",
+      "packagesPath": "C:\\Users\\jamia\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -8177,7 +8177,7 @@
         "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\jechols5\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jamia\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

@@ -4,3 +4,9 @@ C:\Users\jechols5\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlanner
 C:\Users\jechols5\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.sqlproj.AssemblyReference.cache
 C:\Users\jechols5\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.dll
 C:\Users\jechols5\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.pdb
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.dll
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.pdb
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.dacpac
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.dll
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.pdb
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.sqlproj.AssemblyReference.cache

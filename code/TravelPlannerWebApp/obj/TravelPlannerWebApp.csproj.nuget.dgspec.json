@@ -1,36 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jechols5\\source\\repos\\JamiaEchols1\\CapstoneGroup3S22\\code\\TravelPlannerWebApp\\TravelPlannerWebApp.csproj": {}
+    "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerWebApp\\TravelPlannerWebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jechols5\\source\\repos\\JamiaEchols1\\CapstoneGroup3S22\\code\\TravelPlannerWebApp\\TravelPlannerWebApp.csproj": {
+    "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerWebApp\\TravelPlannerWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jechols5\\source\\repos\\JamiaEchols1\\CapstoneGroup3S22\\code\\TravelPlannerWebApp\\TravelPlannerWebApp.csproj",
+        "projectUniqueName": "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerWebApp\\TravelPlannerWebApp.csproj",
         "projectName": "TravelPlannerWebApp",
-        "projectPath": "C:\\Users\\jechols5\\source\\repos\\JamiaEchols1\\CapstoneGroup3S22\\code\\TravelPlannerWebApp\\TravelPlannerWebApp.csproj",
-        "packagesPath": "C:\\Users\\jechols5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jechols5\\source\\repos\\JamiaEchols1\\CapstoneGroup3S22\\code\\TravelPlannerWebApp\\obj\\",
+        "projectPath": "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerWebApp\\TravelPlannerWebApp.csproj",
+        "packagesPath": "C:\\Users\\jamia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerWebApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\jechols5\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jamia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -41,12 +41,26 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.13, )"
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.1, )"
             }
           },
           "imports": [
@@ -67,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
