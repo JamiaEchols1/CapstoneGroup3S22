@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj": {}
+    "C:\\Users\\jamia\\source\\repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj": {
+    "C:\\Users\\jamia\\source\\repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj",
+        "projectUniqueName": "C:\\Users\\jamia\\source\\repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj",
         "projectName": "TravelPlannerDesktopApp",
-        "projectPath": "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj",
+        "projectPath": "C:\\Users\\jamia\\source\\repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\TravelPlannerDesktopApp.csproj",
         "packagesPath": "C:\\Users\\jamia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jamia\\Source\\Repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\obj\\",
+        "outputPath": "C:\\Users\\jamia\\source\\repos\\CapstoneGroup3S22\\code\\TravelPlannerDesktopApp\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [

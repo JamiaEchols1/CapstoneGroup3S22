@@ -15,4 +15,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="TravelPlannerSharedLibrary">
+      <HintPath>..\TravelPlannerSharedLibrary\bin\Release\net6.0\TravelPlannerSharedLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

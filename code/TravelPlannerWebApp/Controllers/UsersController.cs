@@ -149,5 +149,23 @@ namespace TravelPlannerWebApp.Controllers
         {
             return _context.User.Any(e => e.Id == id);
         }
+
+        [Route("login")]
+        [HttpPost]
+        public IActionResult Login(string username, string password)
+        {
+            var users = from user in _context.User
+                        select user;
+            var loggedInUser = users.Where(u => u.Username.Equals(username) && u.Password.Equals(password));
+            if (loggedInUser.Count() != 0)
+            {
+                return View("Success");
+            }
+            else
+            {
+                ViewBag.error = "Invalid Account";
+                return View("Index");
+            }
+        }
     }
 }
