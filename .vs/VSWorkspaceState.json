@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\code"
+    "\\code",
+    "\\code\\TravelPlannerSharedLibrary",
+    "\\code\\TravelPlannerWebApp"
   ],
-  "SelectedNode": "\\code",
+  "SelectedNode": "\\code\\TravelPlannerWebApp\\TravelPlannerWebApp.sln",
   "PreviewInSolutionExplorer": false
 }

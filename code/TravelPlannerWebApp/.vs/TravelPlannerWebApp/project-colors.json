@@ -1,0 +1,46 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "9e5ef21f-16b9-4623-bf0d-33d065d7da85": {
+      "ProjectGuid": "9e5ef21f-16b9-4623-bf0d-33d065d7da85",
+      "DisplayName": "TravelPlannerWebApp",
+      "ColorIndex": 0
+    },
+    "8a4ae3b8-d9a2-4b6a-8cf2-bd33595b301c": {
+      "ProjectGuid": "8a4ae3b8-d9a2-4b6a-8cf2-bd33595b301c",
+      "DisplayName": "TravelPlannerDatabase",
+      "ColorIndex": 1
+    },
+    "f877d415-b006-4d7d-9763-8138d078c7a0": {
+      "ProjectGuid": "f877d415-b006-4d7d-9763-8138d078c7a0",
+      "DisplayName": "TravelPlannerSharedLibrary",
+      "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "b5a3fa08-3207-401c-b943-e29409115e4e": {
+      "ProjectGuid": "b5a3fa08-3207-401c-b943-e29409115e4e",
+      "DisplayName": "TravelPlannerDesktopApp",
+      "ColorIndex": 3
+    },
+    "e1f03105-a990-4c2b-94ac-c0e1918950b8": {
+      "ProjectGuid": "e1f03105-a990-4c2b-94ac-c0e1918950b8",
+      "DisplayName": "TravelPlannerSharedLibrary",
+      "ColorIndex": 4
+    },
+    "9b8c70b6-b3e7-46e4-9e7e-8c85df1c09f7": {
+      "ProjectGuid": "9b8c70b6-b3e7-46e4-9e7e-8c85df1c09f7",
+      "DisplayName": "TravelPlannerSHaredLibrary",
+      "ColorIndex": 5
+    },
+    "929ce92b-688b-497b-a8cb-bfecbd1f0c50": {
+      "ProjectGuid": "929ce92b-688b-497b-a8cb-bfecbd1f0c50",
+      "DisplayName": "TravelPlannerSharedLibrary",
+      "ColorIndex": 6
+    }
+  },
+  "NextColorIndex": 7
+}
