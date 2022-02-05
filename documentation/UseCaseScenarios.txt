@@ -19,7 +19,7 @@ a4 - System navigates back to the view all trips page
 a2 - User inputs no data or only partial data
 a3 - System displays error messages on the required fields
 
-
+-------------------------------------------------------------
 View Trip details Scenario
 
 Context - User is viewing trip details
@@ -30,7 +30,7 @@ Primary Flow
 3 - User selects view button
 5 - System navgates into the trip details page
 
-
+-------------------------------------------------------------
 Login Scenario
 
 Context - User has already created an account.
@@ -53,7 +53,7 @@ a3 - System find credentials are invalid
 a4 - System informs user the credentials entered are invalid and that they have been locked out for one hour
 a5 - Any attempt to login for the locked account will fail for the next hour and inform the user they have been locked out
 
-
+-------------------------------------------------------------
 Add a waypoint scenario
 
 Context - User adds a waypoint to a trip
@@ -76,7 +76,7 @@ a6 - System navigates back to the view trip details page
 a4 - User inputs no data or only partial data
 a5 - System displays error messages on the required fields
 
-
+-------------------------------------------------------------
 Remove a waypoint scenario
 
 Context - User removes a waypoint from a trip
@@ -96,3 +96,23 @@ Primary Flow
 a4 - User selects cancel button
 a5 - System navigates back to the view trip details page
 
+-------------------------------------------------------------
+
+Sign Up Scenario
+
+Context - User signs up for an account
+
+Primary Flow
+1 - User selects sign up on login page
+2 - System opens the sign up modal
+3 - User fills out all fields
+4 - User clicks sign up button
+5 - Account is created
+6 - Modal closes and displays the login page
+
+*Alternative Flow
+** User fills out email field that is already on an existing account
+a3 - User fills out duplicate email
+a4 - User clicks sign up
+a5 - Error message appears on the email field
+a6 - User is not created
