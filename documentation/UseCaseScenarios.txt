@@ -15,14 +15,23 @@ Primary Flow
 a3 - User selects cancel button
 a4 - System navigates back to the view all trips page
 
-
 ** User does not fill trip information
 a2 - User inputs no data or only partial data
 a3 - System displays error messages on the required fields
 
 
-Login Scenario
+View Trip details Scenario
 
+Context - User is viewing trip details
+
+Primary Flow
+1 - User clicks on the desired trip
+2 - View button enables
+3 - User selects view button
+5 - System navgates into the trip details page
+
+
+Login Scenario
 
 Context - User has already created an account.
 
@@ -48,3 +57,42 @@ a5 - Any attempt to login for the locked account will fail for the next hour and
 Add a waypoint scenario
 
 Context - User adds a waypoint to a trip
+
+Primary Flow
+1 - User selects a trip
+2 - System navagates to trip details page
+3 - User click the add waypoint button 
+4 - User enters waypoint location and time
+5 - User clicks add button
+6 - System adds waypoint to the trip
+7 - System navgates into the trip page
+
+*Alternative Flow
+** User cancels waypoint creation
+a5 - User selects cancel button
+a6 - System navigates back to the view trip details page
+
+** User does not fill waypoint information
+a4 - User inputs no data or only partial data
+a5 - System displays error messages on the required fields
+
+
+Remove a waypoint scenario
+
+Context - User removes a waypoint from a trip
+
+Primary Flow
+1 - User selects a trip
+2 - System navagates to trip details page
+3 - User click on a waypoint
+4 - Delete button enables
+5 - User clickes delete button
+6 - Confirmation dialog appears
+4 - User clicks confirm
+7 - System navgates into the trip details page
+
+*Alternative Flow
+** User cancels waypoint deletion
+a4 - User selects cancel button
+a5 - System navigates back to the view trip details page
+
