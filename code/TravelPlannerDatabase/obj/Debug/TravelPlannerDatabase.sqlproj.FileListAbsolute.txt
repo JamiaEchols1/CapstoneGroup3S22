@@ -1,0 +1,12 @@
+C:\Users\cupid\source\repos\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.dacpac
+C:\Users\cupid\source\repos\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.dll
+C:\Users\cupid\source\repos\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.pdb
+C:\Users\cupid\source\repos\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.sqlprojAssemblyReference.cache
+C:\Users\cupid\source\repos\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.dll
+C:\Users\cupid\source\repos\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.pdb
+C:\Users\jamia\Source\Repos\CapstoneStarter\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.dll
+C:\Users\jamia\Source\Repos\CapstoneStarter\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.pdb
+C:\Users\jamia\Source\Repos\CapstoneStarter\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.dacpac
+C:\Users\jamia\Source\Repos\CapstoneStarter\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.dll
+C:\Users\jamia\Source\Repos\CapstoneStarter\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.pdb
+C:\Users\jamia\Source\Repos\CapstoneStarter\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.sqlproj.AssemblyReference.cache
