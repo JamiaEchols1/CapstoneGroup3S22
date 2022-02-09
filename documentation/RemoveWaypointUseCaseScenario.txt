@@ -1,0 +1,16 @@
+Remove a waypoint scenario
+
+Context - User is logged into the system and has navigated to the selected trip's details page
+
+Primary Flow
+1 - User clicks on a waypoint
+2 - Delete button enables
+3 - User clickes delete button
+4 - Confirmation dialog appears
+5 - User clicks confirm
+6 - System navgates into the trip details page
+
+*Alternative Flow
+** User cancels waypoint deletion
+a5 - User selects cancel button
+a6 - System navigates back to the view trip details page

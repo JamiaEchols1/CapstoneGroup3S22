@@ -1,0 +1,9 @@
+View Trip details Scenario
+
+Context - User is is logged into the system and on the home page
+
+Primary Flow
+1 - User clicks on the desired trip
+2 - View button enables
+3 - User selects view button
+5 - System navgates into the trip details page

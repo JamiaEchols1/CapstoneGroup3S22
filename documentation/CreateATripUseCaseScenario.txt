@@ -1,0 +1,22 @@
+Create a trip scanario
+
+Context - User is logged in and has navigated to the trip details page.
+
+Primary Flow
+1 - User clicks create a new trip button
+2 - User inputs trip name, start time/ end time
+3 - User selects create button
+4 - System creates a new trip successfully
+5 - System navgates into the new trip page
+6 - Display trip details
+
+*Alternative Flow
+** User cancels trip creation
+a3 - User selects cancel button
+a4 - System navigates back to the view all trips page
+
+** User does not fill trip information
+a2 - User inputs no data or only partial data
+a3 - System displays error messages on the required fields
+
+

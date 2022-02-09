@@ -1,0 +1,18 @@
+Sign Up Scenario
+
+Context - User is on login page
+
+Primary Flow
+1 - User selects sign up on login page
+2 - System opens the sign up modal
+3 - User fills out all fields
+4 - User clicks sign up button
+5 - Account is created
+6 - Modal closes and displays the login page
+
+*Alternative Flow
+** User fills out email field that is already on an existing account
+a3 - User fills out duplicate email
+a4 - User clicks sign up
+a5 - Error message appears on the email field
+a6 - User is not created
