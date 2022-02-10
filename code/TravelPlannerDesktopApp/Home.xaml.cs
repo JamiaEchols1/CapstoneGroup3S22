@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
 namespace TravelPlannerDesktopApp
@@ -30,6 +31,14 @@ namespace TravelPlannerDesktopApp
         {
             string details = "Welcome : " + LoggedUser.user.Username;
             this.userDetailsTextBlock.Text = details;
+            this.tripsListView.ItemsSource = TripDAL.GetTrips(LoggedUser.user.Id);
+        }
+
+        private void createTripButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddTripPage addTripPage = new AddTripPage();
+            Hide();
+            addTripPage.Show();
         }
     }
 }

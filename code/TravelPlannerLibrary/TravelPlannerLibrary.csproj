@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\LoginDAL.cs" />
+    <Compile Include="DAL\TripDAL.cs" />
     <Compile Include="Models\LoggedUser.cs" />
     <Compile Include="Models\Models.Context.cs">
       <AutoGen>True</AutoGen>
