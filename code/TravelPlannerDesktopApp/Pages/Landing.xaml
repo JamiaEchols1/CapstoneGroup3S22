@@ -11,12 +11,12 @@
 
     <Grid Background="White" ButtonBase.Click="Grid_Click">
 
-        <WrapPanel Margin="5,5,647,350">
+        <WrapPanel Margin="5,5,659,0">
             <n:NavButton Text="Trips" ImageSource="/Images/Trips.png" NavUri="Pages/Trips.xaml"  />
             <n:NavButton Text="Create Trip" ImageSource="/Images/CreateTrip.png" NavUri="Pages/AddTrip.xaml"  />
         </WrapPanel>
 
-        <WrapPanel Margin="666,10,10,350">
+        <WrapPanel Margin="666,10,10,0">
             <n:NavButton Text="Settings" ImageSource="/Images/Settings.png" NavUri="Pages/Settings.xaml"  />
             <n:NavButton Text="Logout" ImageSource="/Images/Logout.png" NavUri="Pages/Login.xaml"/>
         </WrapPanel>
