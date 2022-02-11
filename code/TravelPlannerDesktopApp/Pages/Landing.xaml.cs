@@ -10,26 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelPlannerLibrary.Models;
 
-namespace TravelPlannerDesktopApp
+namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
-    /// Interaction logic for Home.xaml
+    /// Interaction logic for Landing.xaml
     /// </summary>
-    public partial class Home : Window
+    public partial class Landing : Page
     {
-        public Home()
+        public Landing()
         {
             InitializeComponent();
-            setExample();
+            this.sampleSetupText();
         }
 
-        public void setExample()
+        public void sampleSetupText()
         {
-            string details = "Welcome : " + LoggedUser.user.Username;
-            this.userDetailsTextBlock.Text = details;
+            this.WelcomeTextBlock.Text = "Welcome: " + LoggedUser.user.Username;
         }
     }
 }

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\cupid\source\CapstoneRepo\TravelPlannerDesktopApp\obj\Debug\
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\
 TravelPlannerDesktopApp
 none
 false
 DEBUG;TRACE
-C:\Users\cupid\source\CapstoneRepo\TravelPlannerDesktopApp\App.xaml
-2-621098922
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerDesktopApp\App.xaml
+4-1116046492
 
-7375202856
-17-178220230
-Home.xaml;MainWindow.xaml;
+9275697526
+171292748765
+MainWindow.xaml;Pages\Landing.xaml;Pages\Login.xaml;Themes\Generic.xaml;
 
 True
 

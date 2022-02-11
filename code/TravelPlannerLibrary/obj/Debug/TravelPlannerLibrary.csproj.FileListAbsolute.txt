@@ -34,3 +34,15 @@ C:\Users\jamia\source\repos\CapstoneGroup3S22\CapstoneGroup3S22\code\TravelPlann
 C:\Users\jamia\source\repos\CapstoneGroup3S22\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.csproj.CopyComplete
 C:\Users\jamia\source\repos\CapstoneGroup3S22\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.dll
 C:\Users\jamia\source\repos\CapstoneGroup3S22\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.pdb
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\TravelPlannerLibrary.dll.config
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\TravelPlannerLibrary.dll
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\TravelPlannerLibrary.pdb
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\EntityFramework.dll
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\EntityFramework.xml
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.csprojAssemblyReference.cache
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.csproj.CoreCompileInputs.cache
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.csproj.CopyComplete
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.dll
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.pdb

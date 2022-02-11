@@ -26,20 +26,5 @@ namespace TravelPlannerDesktopApp
         {
             InitializeComponent();
         }
-
-        private void handleLogin(object sender, RoutedEventArgs e)
-        {
-            string username = this.usernameTextBox.Text;
-            string password = this.passwordTextBox.Text;
-            User loggedUser = LoginDAL.Login(username, password);
-
-            if (loggedUser != null)
-            {
-                LoggedUser.user = loggedUser;
-                Home home = new Home();
-                Hide();
-                home.Show();
-            }
-        }
     }
 }
