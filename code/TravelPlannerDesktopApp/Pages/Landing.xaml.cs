@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.Models;
 
 namespace TravelPlannerDesktopApp.Pages
@@ -30,6 +31,14 @@ namespace TravelPlannerDesktopApp.Pages
         public void sampleSetupText()
         {
             this.WelcomeTextBlock.Text = "Welcome: " + LoggedUser.user.Username;
+        }
+
+        private void Grid_Click(object sender, RoutedEventArgs e)
+        {
+
+            var ClickedButton = e.OriginalSource as NavButton;
+
+            NavigationService.Navigate(ClickedButton.NavUri);
         }
     }
 }

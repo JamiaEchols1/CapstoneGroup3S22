@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
@@ -28,6 +29,11 @@ namespace TravelPlannerDesktopApp.Pages
         }
 
         private void HandleLogin(object sender, RoutedEventArgs e)
+        {
+    
+        }
+
+        private void Grid_Click(object sender, RoutedEventArgs e)
         {
             string username = this.usernameTextBox.Text;
             string password = this.passwordTextBox.Text;

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerDesktopApp\App.xaml
-4-1116046492
+7-1806416220
 
-9275697526
+12-654478977
 171292748765
-MainWindow.xaml;Pages\Landing.xaml;Pages\Login.xaml;Themes\Generic.xaml;
+MainWindow.xaml;Pages\AddTrip.xaml;Pages\Landing.xaml;Pages\Login.xaml;Pages\Settings.xaml;Pages\Trips.xaml;Themes\Generic.xaml;
 
 True
 

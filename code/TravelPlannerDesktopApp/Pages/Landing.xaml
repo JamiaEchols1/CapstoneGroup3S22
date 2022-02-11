@@ -4,12 +4,25 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TravelPlannerDesktopApp.Pages"
+      xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Landing">
 
-    <Grid Background="White">
-        <TextBlock x:Name="WelcomeTextBlock" HorizontalAlignment="Left" Margin="26,22,0,0" TextWrapping="Wrap" Text="Welcome" VerticalAlignment="Top" Height="19" Width="108"/>
+    <Grid Background="White" ButtonBase.Click="Grid_Click">
 
+        <WrapPanel Margin="5,5,647,350">
+            <n:NavButton Text="Trips" ImageSource="/Images/Trips.png" NavUri="Pages/Trips.xaml"  />
+            <n:NavButton Text="Create Trip" ImageSource="/Images/CreateTrip.png" NavUri="Pages/AddTrip.xaml"  />
+        </WrapPanel>
+
+        <WrapPanel Margin="666,10,10,350">
+            <n:NavButton Text="Settings" ImageSource="/Images/Settings.png" NavUri="Pages/Settings.xaml"  />
+            <n:NavButton Text="Logout" ImageSource="/Images/Logout.png" NavUri="Pages/Login.xaml"/>
+        </WrapPanel>
+
+
+
+        <TextBlock x:Name="WelcomeTextBlock" HorizontalAlignment="Left" Margin="178,30,0,0" TextWrapping="Wrap" Text="Welcome" VerticalAlignment="Top" Height="20" Width="196"/>
     </Grid>
 </Page>
