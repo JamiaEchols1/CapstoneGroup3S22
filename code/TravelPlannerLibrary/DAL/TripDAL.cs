@@ -11,7 +11,7 @@ namespace TravelPlannerLibrary.DAL
     {
         private static readonly TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
 
-        public static void CreateNewTrip(string name, DateTime startDate, DateTime endDate, int userId)
+        public static int CreateNewTrip(string name, DateTime startDate, DateTime endDate, int userId)
         {
             Trip trip = new Trip();
             trip.Name = name;
@@ -19,7 +19,7 @@ namespace TravelPlannerLibrary.DAL
             trip.EndDate = endDate;
             trip.UserId = userId;
             db.Trips.Add(trip);
-            db.SaveChanges();
+            return db.SaveChanges();
         }
 
         public static List<Trip> GetTrips(int userId) => db.Trips.Where(t => t.UserId == userId).ToList();

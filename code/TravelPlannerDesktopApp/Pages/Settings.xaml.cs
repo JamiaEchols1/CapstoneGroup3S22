@@ -12,19 +12,26 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TravelPlannerLibrary.DAL;
-using TravelPlannerLibrary.Models;
+using TravelPlannerDesktopApp.Controls;
 
-namespace TravelPlannerDesktopApp
+namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Settings.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Settings : Page
     {
-        public MainWindow()
+        public Settings()
         {
             InitializeComponent();
+        }
+
+        private void Grid_Click(object sender, RoutedEventArgs e)
+        {
+
+            var ClickedButton = e.OriginalSource as NavButton;
+
+            NavigationService.Navigate(ClickedButton.NavUri);
         }
     }
 }
