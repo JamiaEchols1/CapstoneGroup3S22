@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/code/TravelPlannerDatabase/TravelPlannerDatabase.jfm
+/code/TravelPlannerDatabase/TravelPlannerDatabase.dbmdl
