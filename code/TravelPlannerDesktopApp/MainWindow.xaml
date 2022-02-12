@@ -7,11 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="usernameTextBox" HorizontalAlignment="Left" Height="23" Margin="371,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="passwordTextBox" HorizontalAlignment="Left" Height="23" Margin="371,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="284,187,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="284,232,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top"/>
-        <Button x:Name="loginButton" Content="Login" HorizontalAlignment="Left" Margin="338,284,0,0" VerticalAlignment="Top" Width="75" Click="handleLogin"/>
-
+        <Frame Source="Pages/Login.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
