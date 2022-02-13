@@ -27,7 +27,6 @@ namespace TravelPlannerDesktopApp.Pages
         {
             InitializeComponent();
             this.sampleSetupText();
-            this.tripsListBox.ItemsSource = TripDAL.GetTrips(LoggedUser.user.Id);
         }
 
         public void sampleSetupText()
