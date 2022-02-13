@@ -20,7 +20,22 @@
       "ProjectGuid": "6bd5ee90-a18e-442c-941a-9ffb608284dc",
       "DisplayName": "TravelPlannerWebApp",
       "ColorIndex": 3
+    },
+    "e2d142b9-e874-4308-b79f-d45c000351c7": {
+      "ProjectGuid": "e2d142b9-e874-4308-b79f-d45c000351c7",
+      "DisplayName": "TravelPlannerTestProject",
+      "ColorIndex": 4
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "1821db8f-eb15-4286-a6b0-98b6e51c5043": {
+      "ProjectGuid": "1821db8f-eb15-4286-a6b0-98b6e51c5043",
+      "DisplayName": "TravelPlannerTestProject",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 6
 }

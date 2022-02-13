@@ -1,0 +1,17 @@
+﻿<Window x:Class="TravelPlannerDesktopApp.AddTripPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TravelPlannerDesktopApp"
+        mc:Ignorable="d"
+        Title="AddTripPage" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Center" Margin="0,124,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="addButton" Content="Add Trip" HorizontalAlignment="Left" Margin="510,304,0,0" VerticalAlignment="Top" Click="addButton_Click"/>
+        <Button x:Name="cancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="240,304,0,0" VerticalAlignment="Top" IsCancel="True" Click="cancelButton_Click"/>
+        <DatePicker x:Name="startDatePicker" HorizontalAlignment="Center" Margin="0,179,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="endDatePicker" HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Top" Text="End Date"/>
+
+    </Grid>
+</Window>
