@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelPlannerDesktopApp.Controls;
+using TravelPlannerLibrary.DAL;
+using TravelPlannerLibrary.Models;
 
 namespace TravelPlannerDesktopApp.Pages
 {
@@ -26,12 +28,31 @@ namespace TravelPlannerDesktopApp.Pages
             InitializeComponent();
         }
 
-        private void Grid_Click(object sender, RoutedEventArgs e)
-        {
 
+        private void createTripButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                TripDAL.CreateNewTrip(this.nameTextBox.Text, DateTime.Parse(this.StartDatePicker.Text), DateTime.Parse(this.endDatePicker.Text), LoggedUser.user.Id);
+
+                MessageBox.Show("Trip creation was Successful!");
+
+                NavigationService.Navigate(this.backButton.NavUri);
+            }
+            catch (Exception exception)
+            {
+
+                MessageBox.Show("Error Creating trip. " + exception.Message);
+            }
+            
+        }
+
+        private void NavButton_Click(object sender, RoutedEventArgs e)
+        {
             var ClickedButton = e.OriginalSource as NavButton;
 
             NavigationService.Navigate(ClickedButton.NavUri);
+
         }
     }
 }

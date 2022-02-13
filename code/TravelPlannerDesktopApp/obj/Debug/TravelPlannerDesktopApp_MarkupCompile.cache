@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\
+C:\Users\jamia\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\
 TravelPlannerDesktopApp
 none
 false
 DEBUG;TRACE
-C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\App.xaml
-354144717
+C:\Users\jamia\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\App.xaml
+7659704591
 
-7429208829
-17627334792
-AddTripPage.xaml;Home.xaml;MainWindow.xaml;
+11120776929
+17-1940229624
+MainWindow.xaml;Pages\AddTrip.xaml;Pages\Landing.xaml;Pages\Login.xaml;Pages\Settings.xaml;Pages\Trips.xaml;Themes\Generic.xaml;
 
 False
 

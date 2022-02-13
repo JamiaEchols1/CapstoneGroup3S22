@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelPlannerDesktopApp.Controls;
+using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
 namespace TravelPlannerDesktopApp.Pages
@@ -26,6 +27,7 @@ namespace TravelPlannerDesktopApp.Pages
         {
             InitializeComponent();
             this.sampleSetupText();
+            this.tripsListBox.ItemsSource = TripDAL.GetTrips(LoggedUser.user.Id);
         }
 
         public void sampleSetupText()

@@ -24,5 +24,6 @@
 
 
         <TextBlock x:Name="WelcomeTextBlock" HorizontalAlignment="Left" Margin="178,30,0,0" TextWrapping="Wrap" Text="Welcome" VerticalAlignment="Top" Height="20" Width="196"/>
+        <ListBox x:Name="tripsListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="65,160,65,45"></ListBox>
     </Grid>
 </Page>
