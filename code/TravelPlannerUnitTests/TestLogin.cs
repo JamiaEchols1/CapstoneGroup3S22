@@ -44,12 +44,13 @@ namespace TravelPlannerUnitTests
         public void TestValidUserLogin()
         {
             string expectedUsername = "user1";
-            string expectedPassword = "pw1";
+            string encryptedPassword = "JGSOzecXROhJSz7Ru0Z4Qg==";
+            string decryptedPassword = "password";
             var data = new List<User>
             {
-                new User { Username = "user1", Password = "pw1" },
-                new User { Username = "user2", Password = "pw2" },
-                new User { Username = "user3", Password = "pw3" },
+                new User { Username = "user1", Password = encryptedPassword },
+                new User { Username = "user2", Password = encryptedPassword },
+                new User { Username = "user3", Password = encryptedPassword },
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<User>>();
@@ -57,14 +58,15 @@ namespace TravelPlannerUnitTests
             mockSet.As<IQueryable<User>>().Setup(m => m.Expression).Returns(data.Expression);
             mockSet.As<IQueryable<User>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<User>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
             var mockContext = new Mock<TravelPlannerDatabaseEntities>();
             mockContext.Setup(c => c.Users).Returns(mockSet.Object);
 
             var service = new LoginDAL(mockContext.Object);
-            var loggedUser = service.Login(expectedUsername, expectedPassword);
+            var loggedUser = service.Login(expectedUsername, decryptedPassword);
 
             Assert.AreEqual("user1", loggedUser.Username);
+            Assert.AreEqual(expectedUsername, loggedUser.Username);
+            Assert.AreEqual(encryptedPassword, loggedUser.Password);
         }
 
         [TestMethod]

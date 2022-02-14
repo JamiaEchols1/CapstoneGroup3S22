@@ -23,10 +23,11 @@ namespace TravelPlannerDesktopApp.Pages
     /// </summary>
     public partial class Trips : Page
     {
+        private TripDAL tripDAL = new TripDAL();
         public Trips()
         {
             InitializeComponent();
-            this.tripsListBox.ItemsSource = TripDAL.GetTrips(LoggedUser.user.Id);
+            this.tripsListBox.ItemsSource = tripDAL.GetTrips(LoggedUser.user.Id);
         }
 
         private void Grid_Click(object sender, RoutedEventArgs e)
