@@ -1,0 +1,23 @@
+﻿<Page x:Class="TravelPlannerDesktopApp.Pages.TripInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TravelPlannerDesktopApp.Pages"
+      xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Waypoints">
+
+    <Grid Background="White" ButtonBase.Click="Grid_Click">
+        <WrapPanel Margin="5,5,725,0">
+            <n:NavButton Text="Create Waypoint" ImageSource="/Images/CreateTrip.png" NavUri="Pages/AddWaypoint.xaml"  />
+        </WrapPanel>
+
+        <n:NavButton Text="Back" ImageSource="/Images/Back.png" NavUri="Pages/Trips.xaml" HorizontalAlignment="Right" Margin="0,2,2,0"/>
+
+        <ListBox x:Name="waypointsListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,120,40,40" SelectionChanged="WaypointsListBox_OnSelectionChanged"/>
+
+        <TextBlock x:Name="SelectedTripTextBlock" HorizontalAlignment="Left" Margin="80,10,0,0" TextWrapping="Wrap" Text="Selected Trip:" VerticalAlignment="Top" Height="20" Width="196"/>
+    </Grid>
+</Page>

@@ -36,5 +36,16 @@ namespace TravelPlannerDesktopApp.Pages
 
             NavigationService.Navigate(ClickedButton.NavUri);
         }
+
+        private void TripsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoggedUser.selectedTrip = this.tripsListBox.SelectedItem as Trip;
+            if (LoggedUser.selectedTrip != null)
+            {
+                TripInfo tripInfo = new TripInfo();
+                NavigationService.Navigate(tripInfo);
+            }
+            
+        }
     }
 }

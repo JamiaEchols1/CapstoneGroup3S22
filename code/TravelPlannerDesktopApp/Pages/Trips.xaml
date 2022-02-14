@@ -12,6 +12,6 @@
     <Grid Background="White" ButtonBase.Click="Grid_Click">
         <n:NavButton Text="Back" ImageSource="/Images/Back.png" NavUri="Pages/Landing.xaml" HorizontalAlignment="Right"/>
         <Label Content="View Trips" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="202"/>
-        <ListBox x:Name="tripsListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,120,40,40"/>
+        <ListBox x:Name="tripsListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,120,40,40" SelectionChanged="TripsListBox_OnSelectionChanged"/>
     </Grid>
 </Page>
