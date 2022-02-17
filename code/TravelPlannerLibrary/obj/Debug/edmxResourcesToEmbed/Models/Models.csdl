@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TravelPlannerDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Trip">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dbo_Trip_dbo_User_Id" FromRole="Trip" ToRole="User" />
+    <NavigationProperty Name="Waypoints" Relationship="Self.FK_dbo_Waypoint_dbo_Trip_Id" FromRole="Trip" ToRole="Waypoints" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Trips" Relationship="Self.FK_dbo_Trip_dbo_User_Id" FromRole="User" ToRole="Trip" />
+  </EntityType>
+  <EntityType Name="Waypoint">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="TripId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Trip" Relationship="Self.FK_dbo_Waypoint_dbo_Trip_Id" FromRole="Waypoints" ToRole="Trip" />
+  </EntityType>
+  <Association Name="FK_dbo_Trip_dbo_User_Id">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Trip">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Waypoint_dbo_Trip_Id">
+    <End Role="Trip" Type="Self.Trip" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Waypoints" Type="Self.Waypoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trip">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Waypoints">
+        <PropertyRef Name="TripId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TravelPlannerDatabaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Trips" EntityType="Self.Trip" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Waypoints" EntityType="Self.Waypoint" />
+    <AssociationSet Name="FK_dbo_Trip_dbo_User_Id" Association="Self.FK_dbo_Trip_dbo_User_Id">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Trip" EntitySet="Trips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Waypoint_dbo_Trip_Id" Association="Self.FK_dbo_Waypoint_dbo_Trip_Id">
+      <End Role="Trip" EntitySet="Trips" />
+      <End Role="Waypoints" EntitySet="Waypoints" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

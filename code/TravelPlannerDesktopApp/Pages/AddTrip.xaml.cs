@@ -23,6 +23,7 @@ namespace TravelPlannerDesktopApp.Pages
     /// </summary>
     public partial class AddTrip : Page
     {
+        private TripDAL tripDAL = new TripDAL();
         public AddTrip()
         {
             InitializeComponent();
@@ -31,9 +32,10 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void createTripButton_Click(object sender, RoutedEventArgs e)
         {
+
             try
             {
-                TripDAL.CreateNewTrip(this.nameTextBox.Text, DateTime.Parse(this.StartDatePicker.Text), DateTime.Parse(this.endDatePicker.Text), LoggedUser.user.Id);
+                tripDAL.CreateNewTrip(this.nameTextBox.Text, DateTime.Parse(this.StartDatePicker.Text), DateTime.Parse(this.endDatePicker.Text), LoggedUser.user.Id);
 
                 MessageBox.Show("Trip creation was Successful!");
 
