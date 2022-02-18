@@ -309,7 +309,6 @@
 				<Entry>
 					<Element Type="SqlSimpleColumn" Name="[dbo].[Waypoints].[Id]">
 						<Property Name="IsNullable" Value="False" />
-						<Property Name="IsIdentity" Value="True" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
 								<Element Type="SqlTypeSpecifier">
@@ -342,7 +341,7 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[Waypoints].[Date]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Waypoints].[DateTime]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>

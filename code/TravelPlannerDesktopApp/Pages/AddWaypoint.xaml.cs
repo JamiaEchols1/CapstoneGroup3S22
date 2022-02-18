@@ -40,10 +40,9 @@ namespace TravelPlannerDesktopApp.Pages
         {
             try
             {
-                //TimeSpan.Parse(this.timePicker.Text);
-                //var ts = this.timePicker.Value;
-                //var time = new TimeSpan(0, ts.Value.Hour, ts.Value.Minute, ts.Value.Second, ts.Value.Millisecond);
-                Waypoint newWaypoint = WaypointDAL.CreateNewWaypoint(this.locationTextBox.Text, new TimeSpan(1), LoggedUser.selectedTrip.Id);
+                Console.WriteLine(DateTime.Parse(this.dateTimePicker.Text));
+                
+                Waypoint newWaypoint = WaypointDAL.CreateNewWaypoint(this.locationTextBox.Text, DateTime.Parse(this.dateTimePicker.Text), LoggedUser.selectedTrip.Id);
 
                 MessageBox.Show("Waypoint creation was Successful!");
 

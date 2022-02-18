@@ -12,18 +12,8 @@ namespace TravelPlannerLibrary.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Waypoint
+    public partial class C__RefactorLog
     {
-        public int Id { get; set; }
-        public string Location { get; set; }
-        public System.DateTime DateTime { get; set; }
-        public int TripId { get; set; }
-    
-        public virtual Trip Trip { get; set; }
-
-        public override string ToString()
-        {
-            return Location + " " + DateTime.ToString();
-        }
+        public System.Guid OperationKey { get; set; }
     }
 }

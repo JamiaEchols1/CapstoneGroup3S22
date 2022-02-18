@@ -30,10 +30,9 @@ namespace TravelPlannerLibrary.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Waypoint> Waypoints { get; set; }
 
-
         public override string ToString()
         {
-            return "Name: " + Name + " Start Date: " + StartDate + " End Date: " + EndDate;
+            return Name + " Start Date: " + StartDate.Date.ToString("yyyy-MM-dd") + " End Date: " + EndDate.Date.ToString("yyyy-MM-dd");
         }
     }
 }

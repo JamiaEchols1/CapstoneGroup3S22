@@ -13,7 +13,7 @@ namespace TravelPlannerLibrary.DAL
 
         public static List<Waypoint> GetWaypoints(int tripId) => db.Waypoints.Where(t => t.TripId == tripId).ToList();
 
-        public static Waypoint CreateNewWaypoint(string location, TimeSpan time, int tripId)
+        public static Waypoint CreateNewWaypoint(string location, DateTime time, int tripId)
         {
             if (string.IsNullOrEmpty(location))
             {
@@ -26,9 +26,10 @@ namespace TravelPlannerLibrary.DAL
 
             Waypoint waypoint = new Waypoint();
             waypoint.Location = location;
-            waypoint.Time = time;
+            waypoint.DateTime = time;
             waypoint.TripId = tripId;
             waypoint.Id = db.Waypoints.Count();
+           
             db.Waypoints.Add(waypoint);
             db.SaveChanges();
             return waypoint;

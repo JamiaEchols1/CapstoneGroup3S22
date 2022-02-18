@@ -27,6 +27,7 @@ namespace TravelPlannerDesktopApp.Pages
         {
             InitializeComponent();
             this.sampleSetupText();
+            this.tripsListBox.ItemsSource = TripDAL.GetTrips(LoggedUser.user.Id);
         }
 
         public void sampleSetupText()
@@ -40,6 +41,16 @@ namespace TravelPlannerDesktopApp.Pages
             var ClickedButton = e.OriginalSource as NavButton;
 
             NavigationService.Navigate(ClickedButton.NavUri);
+        }
+
+        private void TripsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoggedUser.selectedTrip = this.tripsListBox.SelectedItem as Trip;
+            if (LoggedUser.selectedTrip != null)
+            {
+                TripInfo tripInfo = new TripInfo();
+                NavigationService.Navigate(tripInfo);
+            }
         }
     }
 }

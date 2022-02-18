@@ -32,7 +32,7 @@ namespace TravelPlannerDesktopApp.Pages
         public void setSelectedWaypointText()
         {
             this.LocationTextBlock.Text = "Location: " + LoggedUser.selectedWaypoint.Location;
-            this.TimeTextBlock.Text = "Time: " + LoggedUser.selectedWaypoint.Time;
+            this.TimeTextBlock.Text = "Time: " + LoggedUser.selectedWaypoint.DateTime;
         }
 
         private void EditWaypointButton_OnClick(object sender, RoutedEventArgs e)

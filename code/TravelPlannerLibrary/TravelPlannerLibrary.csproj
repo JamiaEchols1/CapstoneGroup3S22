@@ -56,6 +56,9 @@
     <Compile Include="DAL\LoginDAL.cs" />
     <Compile Include="DAL\TripDAL.cs" />
     <Compile Include="DAL\WaypointDAL.cs" />
+    <Compile Include="Models\C__RefactorLog.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LoggedUser.cs" />
     <Compile Include="Models\Models.Context.cs">
       <AutoGen>True</AutoGen>
@@ -94,7 +97,6 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Models\Models.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
