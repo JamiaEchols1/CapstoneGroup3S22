@@ -10,3 +10,11 @@ To run the applications:
 Build the solution.
 Set either the Desktop or Web application to the startup project.
 Run the application
+
+To login as a user:
+Right click the web application, set as startup
+Run web app
+At the end of localhost url  add /users
+Click create user and add data make the user's password JGSOzecXROhJSz7Ru0Z4Qg==
+"JGSOzecXROhJSz7Ru0Z4Qg==" translates as "password" so use "password" when logging in
+*password stored in the database must match JGSOzecXROhJSz7Ru0Z4Qg==
