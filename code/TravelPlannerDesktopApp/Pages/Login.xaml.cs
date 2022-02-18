@@ -35,9 +35,10 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
+            LoginDAL loginDal = new LoginDAL();
             string username = this.usernameTextBox.Text;
-            string password = this.passwordTextBox.Text;
-            User loggedUser = LoginDAL.Login(username, password);
+            string password = this.passwordTextBox.Password;
+            User loggedUser = loginDal.Login(username, password);
 
             if (loggedUser != null)
             {
