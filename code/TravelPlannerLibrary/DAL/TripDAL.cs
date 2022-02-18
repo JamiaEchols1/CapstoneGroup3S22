@@ -23,6 +23,18 @@ namespace TravelPlannerLibrary.DAL
             {
                 throw new ArgumentNullException("Must enter a name!");
             }
+            if (startDate == null)
+            {
+                throw new ArgumentNullException("Must enter a start date");
+            }
+            if (endDate == null)
+            {
+                throw new ArgumentNullException("Must enter an end date");
+            }
+            if (DateTime.Today.CompareTo(startDate) >= 0)
+            {
+                throw new ArgumentException("Start date must be on or after current date");
+            }
             if (startDate.CompareTo(endDate) > 0)
             {
                 throw new ArgumentException("Start date must be before end date");

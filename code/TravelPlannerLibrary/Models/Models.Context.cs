@@ -7,7 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TravelPlannerLibrary.Models
+using TravelPlannerLibrary.Models;
+
+namespace TravelPlannerLibrary
 {
     using System;
     using System.Data.Entity;
@@ -25,6 +27,7 @@ namespace TravelPlannerLibrary.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<Trip> Trips { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Waypoint> Waypoints { get; set; }
