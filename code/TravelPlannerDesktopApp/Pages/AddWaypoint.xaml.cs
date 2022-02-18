@@ -23,8 +23,10 @@ namespace TravelPlannerDesktopApp.Pages
     /// </summary>
     public partial class AddWaypoint : Page
     {
+        private WaypointDAL _waypointDal;
         public AddWaypoint()
         {
+            this._waypointDal = new WaypointDAL();
             InitializeComponent();
         }
 
@@ -42,7 +44,7 @@ namespace TravelPlannerDesktopApp.Pages
             {
                 Console.WriteLine(DateTime.Parse(this.dateTimePicker.Text));
                 
-                Waypoint newWaypoint = WaypointDAL.CreateNewWaypoint(this.locationTextBox.Text, DateTime.Parse(this.dateTimePicker.Text), LoggedUser.selectedTrip.Id);
+                Waypoint newWaypoint = this._waypointDal.CreateNewWaypoint(this.locationTextBox.Text, DateTime.Parse(this.dateTimePicker.Text), LoggedUser.selectedTrip.Id);
 
                 MessageBox.Show("Waypoint creation was Successful!");
 

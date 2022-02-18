@@ -23,16 +23,20 @@ namespace TravelPlannerDesktopApp.Pages
     /// </summary>
     public partial class TripInfo : Page
     {
+        private WaypointDAL _waypointDal;
         public TripInfo()
         {
+            this._waypointDal = new WaypointDAL();
             InitializeComponent();
-            this.waypointsListBox.ItemsSource = WaypointDAL.GetWaypoints(LoggedUser.selectedTrip.Id);
+            this.waypointsListBox.ItemsSource = this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id);
             this.setSelectedTripText();
         }
 
         public void setSelectedTripText()
         {
             this.SelectedTripTextBlock.Text = "Selected Trip : " + LoggedUser.selectedTrip.Name;
+            this.TripStartDateTextBlock.Text = "Start Date: " + LoggedUser.selectedTrip.StartDate.ToString("D");
+            this.TripEndDateTextBlock.Text = "End Date: " + LoggedUser.selectedTrip.EndDate.ToString("D");
         }
         private void Grid_Click(object sender, RoutedEventArgs e)
         {

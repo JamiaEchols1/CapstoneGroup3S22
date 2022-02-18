@@ -23,11 +23,13 @@ namespace TravelPlannerDesktopApp.Pages
     /// </summary>
     public partial class Landing : Page
     {
+        private TripDAL _tripDal;
         public Landing()
         {
+            this._tripDal = new TripDAL();
             InitializeComponent();
             this.sampleSetupText();
-            this.tripsListBox.ItemsSource = TripDAL.GetTrips(LoggedUser.user.Id);
+            this.tripsListBox.ItemsSource = this._tripDal.GetTrips(LoggedUser.user.Id);
         }
 
         public void sampleSetupText()

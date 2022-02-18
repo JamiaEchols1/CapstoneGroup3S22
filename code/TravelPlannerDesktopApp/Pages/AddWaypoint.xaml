@@ -11,8 +11,10 @@
       Title="AddWaypoint">
 
     <Grid Background="White">
-        <controls:NavButton x:Name="backButton" Text="Back" Click="NavButton_Click" ImageSource="/Images/Back.png" NavUri="Pages/Trips.xaml" HorizontalAlignment="Right"/>
+        <controls:NavButton x:Name="backButton" Text="Back" Click="NavButton_Click" ImageSource="/Images/Back.png" NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right"/>
         <Label Content="Add A New Waypoint" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="292"/>
+        <Label Content="Location:" Margin="180,186,540,0" VerticalAlignment="Top"/>
+        <Label Content="Date and Time:" Margin="150,226,540,0" VerticalAlignment="Top"/>
         <TextBox x:Name="locationTextBox" HorizontalAlignment="Left" Margin="265,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Location Name"/>
         <Button x:Name="createWaypointButton" Content="Create Waypoint" HorizontalAlignment="Left" Margin="265,338,0,0" VerticalAlignment="Top" Click="CreateWaypointButton_OnClick" Width="270"/>
         <wpfTool:DateTimePicker x:Name="dateTimePicker"  HorizontalAlignment="Left" Margin="265,227,0,0" VerticalAlignment="Top" Width="270"/>

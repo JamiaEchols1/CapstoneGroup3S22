@@ -9,11 +9,18 @@ namespace TravelPlannerLibrary.DAL
 {
     public class WaypointDAL
     {
-        private static readonly TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
+        private static TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
 
-        public static List<Waypoint> GetWaypoints(int tripId) => db.Waypoints.Where(t => t.TripId == tripId).ToList();
+        public WaypointDAL() { }
 
-        public static Waypoint CreateNewWaypoint(string location, DateTime time, int tripId)
+        public WaypointDAL(TravelPlannerDatabaseEntities @object)
+        {
+            db = @object;
+        }
+
+        public List<Waypoint> GetWaypoints(int tripId) => db.Waypoints.Where(t => t.TripId == tripId).ToList();
+
+        public Waypoint CreateNewWaypoint(string location, DateTime time, int tripId)
         {
             if (string.IsNullOrEmpty(location))
             {
@@ -22,6 +29,14 @@ namespace TravelPlannerLibrary.DAL
             if (time == null)
             {
                 throw new ArgumentNullException("Must enter a time");
+            }
+            if (LoggedUser.selectedTrip.StartDate.CompareTo(time) >= 0)
+            {
+                throw new ArgumentException("Date must be on or after trip start date");
+            }
+            if (time.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
+            {
+                throw new ArgumentException("Date must be on or before trip end date");
             }
 
             Waypoint waypoint = new Waypoint();

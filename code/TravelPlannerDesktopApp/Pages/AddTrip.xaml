@@ -13,6 +13,7 @@
     <Grid Background="White">
         <n:NavButton x:Name="backButton" Text="Back" Click="NavButton_Click" ImageSource="/Images/Back.png" NavUri="Pages/Landing.xaml" HorizontalAlignment="Right"/>
         <Label Content="Add A New Trip" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="292"/>
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="269,180,0,0"  VerticalAlignment="Top" Width="46"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="315,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" AutomationProperties.HelpText="Enter Trip name"/>
         <DatePicker x:Name="StartDatePicker" DisplayDateStart="{x:Static sys:DateTime.Today}" HorizontalAlignment="Left" Margin="320,230,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="endDatePicker" DisplayDateStart="{x:Static sys:DateTime.Today}" HorizontalAlignment="Left" Margin="320,285,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.181,-0.208"/>
