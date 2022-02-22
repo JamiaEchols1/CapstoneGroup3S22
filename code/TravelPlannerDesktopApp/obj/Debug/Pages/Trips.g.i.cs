@@ -44,7 +44,7 @@ namespace TravelPlannerDesktopApp.Pages {
         
         #line 15 "..\..\..\Pages\Trips.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.ListBox tripsListBox;
+        internal System.Windows.Controls.TextBlock tripTextBox;
         
         #line default
         #line hidden
@@ -95,7 +95,7 @@ namespace TravelPlannerDesktopApp.Pages {
             #line hidden
             return;
             case 2:
-            this.tripsListBox = ((System.Windows.Controls.ListBox)(target));
+            this.tripTextBox = ((System.Windows.Controls.TextBlock)(target));
             return;
             }
             this._contentLoaded = true;
