@@ -103,13 +103,11 @@ C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDes
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\Landing.g.cs
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\Login.g.cs
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\Settings.g.cs
-C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\Trips.g.cs
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddTrip.baml
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\Landing.baml
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\Login.baml
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\Settings.baml
-C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\Trips.baml
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Themes\Generic.baml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerDesktopApp.exe.config
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerDesktopApp.exe
@@ -151,3 +149,9 @@ C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDesktop
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.csproj.CopyComplete
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.exe
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.pdb
+C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddWaypoint.g.cs
+C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\TripInfo.g.cs
+C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\WaypointInfo.g.cs
+C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddWaypoint.baml
+C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\TripInfo.baml
+C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\WaypointInfo.baml

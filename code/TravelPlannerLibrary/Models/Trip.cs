@@ -11,7 +11,7 @@ namespace TravelPlannerLibrary.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Trip
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +19,59 @@ namespace TravelPlannerLibrary.Models
         {
             this.Waypoints = new HashSet<Waypoint>();
         }
-    
+
         public int Id { get; set; }
-        public string Name { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
+        public string Name
+        {
+            get
+            {
+                return this.Name;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Must enter a name!");
+                }
+            }
+        }
+
+        public System.DateTime StartDate { 
+            get { return StartDate; } 
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Must enter a start date");
+                }
+
+                if (DateTime.Today.CompareTo(value) >= 0)
+                {
+                    throw new ArgumentException("Start date must be on or after current date");
+                }
+                this.StartDate = value;
+            }
+        }
+        public System.DateTime EndDate
+        {
+            get 
+            {
+                return EndDate;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Must enter an end date");
+                }
+
+                if (this.StartDate.CompareTo(value) > 0)
+                {
+                    throw new ArgumentException("Start date must be before end date");
+                }
+                this.EndDate = value;
+            }
+        }
         public int UserId { get; set; }
     
         public virtual User User { get; set; }
