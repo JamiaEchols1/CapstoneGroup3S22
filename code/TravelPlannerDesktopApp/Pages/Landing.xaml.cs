@@ -23,13 +23,13 @@ namespace TravelPlannerDesktopApp.Pages
     /// </summary>
     public partial class Landing : Page
     {
-        private TripDAL tripDAL = new TripDAL();
-
+        private TripDAL _tripDal;
         public Landing()
         {
+            this._tripDal = new TripDAL();
             InitializeComponent();
             this.sampleSetupText();
-            this.tripsListBox.ItemsSource = tripDAL.GetTrips(LoggedUser.user.Id);
+            this.tripsListBox.ItemsSource = this._tripDal.GetTrips(LoggedUser.user.Id);
         }
 
         public void sampleSetupText()
@@ -45,15 +45,14 @@ namespace TravelPlannerDesktopApp.Pages
             NavigationService.Navigate(ClickedButton.NavUri);
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TripsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-
-        private void NavButton_Click(object sender, RoutedEventArgs e)
-        {
-            TripDetailsPage detailsPage = new TripDetailsPage((Trip) this.tripsListBox.SelectedItem);
-            NavigationService.Navigate(detailsPage);
+            LoggedUser.selectedTrip = this.tripsListBox.SelectedItem as Trip;
+            if (LoggedUser.selectedTrip != null)
+            {
+                TripInfo tripInfo = new TripInfo();
+                NavigationService.Navigate(tripInfo);
+            }
         }
     }
 }

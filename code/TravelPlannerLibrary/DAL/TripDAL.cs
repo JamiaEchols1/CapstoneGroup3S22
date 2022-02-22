@@ -9,9 +9,15 @@ namespace TravelPlannerLibrary.DAL
 {
     public class TripDAL
     {
-        private static readonly TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
+        private static TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
 
-        public static int CreateNewTrip(string name, DateTime startDate, DateTime endDate, int userId)
+        public TripDAL() { }
+        public TripDAL(TravelPlannerDatabaseEntities @object)
+        {
+            db = @object;
+        }
+
+        public int CreateNewTrip(string name, DateTime startDate, DateTime endDate, int userId)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -24,6 +30,10 @@ namespace TravelPlannerLibrary.DAL
             if (endDate == null)
             {
                 throw new ArgumentNullException("Must enter an end date");
+            }
+            if (DateTime.Today.CompareTo(startDate) >= 0)
+            {
+                throw new ArgumentException("Start date must be on or after current date");
             }
             if (startDate.CompareTo(endDate) > 0)
             {
@@ -39,7 +49,7 @@ namespace TravelPlannerLibrary.DAL
             return db.SaveChanges();
         }
 
-        public static List<Trip> GetTrips(int userId) => db.Trips.Where(t => t.UserId == userId).ToList();
+        public List<Trip> GetTrips(int userId) => db.Trips.Where(t => t.UserId == userId).ToList();
 
 
     }
