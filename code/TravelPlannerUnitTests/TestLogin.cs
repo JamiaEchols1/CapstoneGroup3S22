@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
@@ -58,15 +59,13 @@ namespace TravelPlannerUnitTests
             mockSet.As<IQueryable<User>>().Setup(m => m.Expression).Returns(data.Expression);
             mockSet.As<IQueryable<User>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<User>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
             var mockContext = new Mock<TravelPlannerDatabaseEntities>();
             mockContext.Setup(c => c.Users).Returns(mockSet.Object);
 
             var service = new LoginDAL(mockContext.Object);
             var loggedUser = service.Login(expectedUsername, decryptedPassword);
 
-            Assert.AreEqual(expectedUsername, loggedUser.Username);
-            Assert.AreEqual(encryptedPassword, loggedUser.Password);
+            Assert.AreEqual("user1", loggedUser.Username);
         }
 
         [TestMethod]

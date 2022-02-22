@@ -1,0 +1,22 @@
+﻿<Page x:Class="TravelPlannerDesktopApp.Pages.AddWaypoint"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TravelPlannerDesktopApp.Pages"
+      xmlns:controls="clr-namespace:TravelPlannerDesktopApp.Controls"
+      xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddWaypoint">
+
+    <Grid Background="White">
+        <controls:NavButton x:Name="backButton" Text="Back" Click="NavButton_Click" ImageSource="/Images/Back.png" NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right"/>
+        <Label Content="Add A New Waypoint" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="292"/>
+        <Label Content="Location:" Margin="180,186,540,0" VerticalAlignment="Top"/>
+        <Label Content="Date and Time:" Margin="150,226,540,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="locationTextBox" HorizontalAlignment="Left" Margin="265,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Location Name"/>
+        <Button x:Name="createWaypointButton" Content="Create Waypoint" HorizontalAlignment="Left" Margin="265,338,0,0" VerticalAlignment="Top" Click="CreateWaypointButton_OnClick" Width="270"/>
+        <wpfTool:DateTimePicker x:Name="dateTimePicker"  HorizontalAlignment="Left" Margin="265,227,0,0" VerticalAlignment="Top" Width="270"/>
+    </Grid>
+</Page>

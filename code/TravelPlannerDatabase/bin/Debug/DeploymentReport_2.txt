@@ -1,0 +1,19 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Trip] (Table)
+       [dbo].[User] (Table)
+       [dbo].[Waypoints] (Table)
+       [dbo].[FK_dbo.Trip_dbo.User_Id] (Foreign Key)
+       [dbo].[FK_dbo.Waypoint_dbo.Trip_Id] (Foreign Key)
+
+** Supporting actions

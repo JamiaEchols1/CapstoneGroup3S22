@@ -59,6 +59,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\..\..\..\..\..\..\Downloads\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -82,6 +85,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AddWaypoint.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Landing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,7 +101,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Trips.xaml">
+    <Page Include="Pages\TripInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WaypointInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -107,6 +118,9 @@
     <Compile Include="Pages\AddTrip.xaml.cs">
       <DependentUpon>AddTrip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddWaypoint.xaml.cs">
+      <DependentUpon>AddWaypoint.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Landing.xaml.cs">
       <DependentUpon>Landing.xaml</DependentUpon>
     </Compile>
@@ -116,8 +130,11 @@
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Trips.xaml.cs">
-      <DependentUpon>Trips.xaml</DependentUpon>
+    <Compile Include="Pages\TripInfo.xaml.cs">
+      <DependentUpon>TripInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WaypointInfo.xaml.cs">
+      <DependentUpon>WaypointInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

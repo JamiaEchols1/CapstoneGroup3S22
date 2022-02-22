@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TravelPlannerDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__RefactorLog">
+    <Key>
+      <PropertyRef Name="OperationKey" />
+    </Key>
+    <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
   <EntityType Name="Trip">
     <Key>
       <PropertyRef Name="Id" />
@@ -24,7 +30,7 @@
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
     <Property Name="TripId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_dbo_Trip_dbo_User_Id">
@@ -56,6 +62,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="TravelPlannerDatabaseModelStoreContainer">
+    <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Trip" EntityType="Self.Trip" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Waypoints" EntityType="Self.Waypoints" Schema="dbo" store:Type="Tables" />

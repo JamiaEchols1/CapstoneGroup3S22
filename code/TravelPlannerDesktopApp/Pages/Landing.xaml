@@ -12,7 +12,6 @@
     <Grid Background="White" ButtonBase.Click="Grid_Click">
 
         <WrapPanel Margin="5,5,659,0">
-            <n:NavButton Text="Trips" ImageSource="/Images/Trips.png" NavUri="Pages/Trips.xaml"  />
             <n:NavButton Text="Create Trip" ImageSource="/Images/CreateTrip.png" NavUri="Pages/AddTrip.xaml"  />
         </WrapPanel>
 
@@ -22,7 +21,7 @@
         </WrapPanel>
 
 
-
+        <ListBox x:Name="tripsListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,120,40,40" SelectionChanged="TripsListBox_OnSelectionChanged"/>
         <TextBlock x:Name="WelcomeTextBlock" HorizontalAlignment="Left" Margin="178,30,0,0" TextWrapping="Wrap" Text="Welcome" VerticalAlignment="Top" Height="20" Width="196"/>
     </Grid>
 </Page>
