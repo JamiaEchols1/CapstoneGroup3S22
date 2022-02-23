@@ -1,0 +1,15 @@
+Remove transportation scenario
+
+Context - User is logged into the system and has navigated to the selected trip's details page
+
+Primary Flow
+1 - User clicks on a transportation instance
+2 - User clicks delete button
+3 - Confirmation dialog appears
+4 - User clicks confirm
+5 - System navgates into the trip details page
+
+*Alternative Flow
+** User cancels transportation deletion
+a5 - User selects cancel button
+a6 - System navigates back to the view trip details page
