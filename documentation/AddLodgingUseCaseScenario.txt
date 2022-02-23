@@ -1,0 +1,19 @@
+Add lodging scenario
+
+Context - User is logged into the system and has navigated to a selected trip's details page
+
+Primary Flow
+1 - User click the add lodging button 
+2 - User enters lodging details
+3 - User clicks add button
+4 - System adds lodging to the trip
+5 - System navgates into the trip page
+
+*Alternative Flow
+** User cancels loding creation
+a3 - User selects back button
+a4 - System navigates back to the view trip details page
+
+** User does not fill lodging information
+a2 - User inputs no data or only partial data
+a3 - System displays error messages on the required fields
