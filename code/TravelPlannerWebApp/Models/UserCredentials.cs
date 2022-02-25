@@ -12,5 +12,7 @@ namespace WebApplication4.Models
         public string Password { get; set; }
 
         public string Username { get; set; }
+
+        public int Id { get; set; }
     }
 }

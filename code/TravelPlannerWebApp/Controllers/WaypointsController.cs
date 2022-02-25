@@ -9,126 +9,121 @@ using System.Web.Mvc;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
-using WebApplication4.ViewModels;
 
 namespace WebApplication4.Controllers
 {
-    public class TripsController : Controller
+    public class WaypointsController : Controller
     {
         private TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
 
-        private TripDetailsViewModel viewmodel = new TripDetailsViewModel();
+        private WaypointDAL waypointDAL = new WaypointDAL();
 
         private TripDAL tripDAL = new TripDAL();
 
-        private WaypointDAL waypointDAL = new WaypointDAL();
-
-        // GET: Trips
+        // GET: Waypoints
         public ActionResult Index()
         {
-            var trips = tripDAL.GetTrips(LoggedUser.user.Id);
-            return View(trips);
+            var waypoints = waypointDAL.GetWaypoints(LoggedUser.selectedTrip.Id);
+            return View(waypoints);
         }
 
-        // GET: Trips/Details/5
+        // GET: Waypoints/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip trip = db.Trips.Find(id);
-            if (trip == null)
+            Waypoint waypoint = db.Waypoints.Find(id);
+            if (waypoint == null)
             {
                 return HttpNotFound();
             }
-            viewmodel.Trip = trip;
-            viewmodel.Waypoints = waypointDAL.GetWaypoints(trip.Id);
-            LoggedUser.selectedTrip = trip;
-
-            return View(viewmodel);
+            LoggedUser.selectedWaypoint = waypoint;
+            return View(waypoint);
         }
 
-        // GET: Trips/Create
-        public ActionResult Create()
+        // GET: Waypoints/Create
+        public ActionResult Create(int? id)
         {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Username");
+            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name");
+            LoggedUser.selectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
             return View();
         }
 
-        // POST: Trips/Create
+        // POST: Waypoints/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,StartDate,EndDate,UserId")] Trip trip)
+        public ActionResult Create([Bind(Include = "Id,Location,DateTime,TripId")] Waypoint waypoint)
         {
             if (ModelState.IsValid)
             {
-                db.Trips.Add(trip);
+                db.Waypoints.Add(waypoint);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Username", trip.UserId);
-            return View(trip);
+            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name", waypoint.TripId);
+            return View(waypoint);
         }
 
-        // GET: Trips/Edit/5
+        // GET: Waypoints/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip trip = db.Trips.Find(id);
-            if (trip == null)
+            Waypoint waypoint = db.Waypoints.Find(id);
+            if (waypoint == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Username", trip.UserId);
-            return View(trip);
+            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name", waypoint.TripId);
+            return View(waypoint);
         }
 
-        // POST: Trips/Edit/5
+        // POST: Waypoints/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,StartDate,EndDate,UserId")] Trip trip)
+        public ActionResult Edit([Bind(Include = "Id,Location,DateTime,TripId")] Waypoint waypoint)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(trip).State = EntityState.Modified;
+                db.Entry(waypoint).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Username", trip.UserId);
-            return View(trip);
+            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name", waypoint.TripId);
+            return View(waypoint);
         }
 
-        // GET: Trips/Delete/5
+        // GET: Waypoints/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip trip = db.Trips.Find(id);
-            if (trip == null)
+            Waypoint waypoint = db.Waypoints.Find(id);
+            if (waypoint == null)
             {
                 return HttpNotFound();
             }
-            return View(trip);
+            return View(waypoint);
         }
 
-        // POST: Trips/Delete/5
+        // POST: Waypoints/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Trip trip = db.Trips.Find(id);
-            db.Trips.Remove(trip);
+            Waypoint waypoint = db.Waypoints.Find(id);
+            db.Waypoints.Remove(waypoint);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

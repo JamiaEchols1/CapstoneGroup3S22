@@ -130,11 +130,13 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TripsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WaypointsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\UserCredentials.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\TripDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -185,6 +187,11 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Login\Authenticate.cshtml" />
     <Content Include="Views\Home\Landing.cshtml" />
+    <Content Include="Views\Waypoints\Create.cshtml" />
+    <Content Include="Views\Waypoints\Delete.cshtml" />
+    <Content Include="Views\Waypoints\Details.cshtml" />
+    <Content Include="Views\Waypoints\Edit.cshtml" />
+    <Content Include="Views\Waypoints\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

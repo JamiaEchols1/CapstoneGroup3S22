@@ -42,7 +42,8 @@ namespace WebApplication4.Controllers
                     LoggedUser.user = new TravelPlannerLibrary.Models.User()
                     {
                         Username = user.Username,
-                        Password = user.Password
+                        Password = user.Password,
+                        Id = loggedUser.Id
                     };
                     return RedirectToAction("../Trips/Index");
                 }
