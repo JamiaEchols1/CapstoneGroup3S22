@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDesktopApp\obj\Debug\
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\
 TravelPlannerDesktopApp
 none
 false
 DEBUG;TRACE
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDesktopApp\App.xaml
+C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerDesktopApp\App.xaml
 9-1132181611
 
-13328470414
-18619439436
+14-513888953
+1878210296
 MainWindow.xaml;Pages\AddTrip.xaml;Pages\AddWaypoint.xaml;Pages\Landing.xaml;Pages\Login.xaml;Pages\Settings.xaml;Pages\TripInfo.xaml;Pages\WaypointInfo.xaml;Themes\Generic.xaml;
 
-False
+True
 
