@@ -20,46 +20,12 @@ namespace WebApplication4.Controllers
             return View();
         }
 
-        // GET: Users/Create
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "Username,Password")] UserCredentials user)
-        {
-            if (ModelState.IsValid)
-            {
-                LoginDAL loginDal = new LoginDAL();
-                var loggedUser = loginDal.Login(user.Username, user.Password);
-
-                if (loggedUser != null)
-                {
-                    LoggedUser.user = new TravelPlannerLibrary.Models.User()
-                    {
-                        Username = user.Username,
-                        Password = user.Password
-                    };
-                    return View("../Home/Index");
-                }
-
-           
-            }
-
-            return RedirectToAction("Login");
-        }
-
         public ActionResult Authenticate()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Authenticate User
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -78,7 +44,7 @@ namespace WebApplication4.Controllers
                         Username = user.Username,
                         Password = user.Password
                     };
-                    return View("../Home/Index");
+                    return RedirectToAction("../Trips/Index");
                 }
 
 

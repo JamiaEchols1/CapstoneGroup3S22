@@ -184,6 +184,7 @@
     <Content Include="Views\Trips\Index.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Login\Authenticate.cshtml" />
+    <Content Include="Views\Home\Landing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

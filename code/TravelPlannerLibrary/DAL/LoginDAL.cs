@@ -38,6 +38,12 @@ namespace TravelPlannerLibrary.DAL
         public static string Encrypt(String decrypted)
         {
             string hash = "Bbouwmanlmfao@2022$";
+
+            if (decrypted == null)
+            {
+                return null;
+            }
+
             byte[] data = UTF8Encoding.UTF8.GetBytes(decrypted);
 
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
@@ -54,6 +60,10 @@ namespace TravelPlannerLibrary.DAL
 
         public static string Decrypt(String encrypted)
         {
+            if (encrypted == null)
+            {
+                return null;
+            }
             string hash = "Bbouwmanlmfao@2022$";
             byte[] data = Convert.FromBase64String(encrypted);
 
