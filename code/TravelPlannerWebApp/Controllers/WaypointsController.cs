@@ -47,7 +47,6 @@ namespace WebApplication4.Controllers
         public ActionResult Create(int? id)
         {
             ViewBag.TripId = new SelectList(db.Trips, "Id", "Name");
-            LoggedUser.selectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
             return View();
         }
 
@@ -62,6 +61,7 @@ namespace WebApplication4.Controllers
             {
                 db.Waypoints.Add(waypoint);
                 db.SaveChanges();
+                LoggedUser.selectedTrip = db.Trips.Where(x => x.Id == waypoint.TripId).FirstOrDefault();
                 return RedirectToAction("Index");
             }
 

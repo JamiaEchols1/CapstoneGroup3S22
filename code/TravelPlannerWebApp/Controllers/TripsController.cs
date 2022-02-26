@@ -61,7 +61,7 @@ namespace WebApplication4.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,StartDate,EndDate,UserId")] Trip trip)
+        public ActionResult Create([Bind(Include = "Id,Name,StartDate,EndDate,User")] Trip trip)
         {
             if (ModelState.IsValid)
             {
