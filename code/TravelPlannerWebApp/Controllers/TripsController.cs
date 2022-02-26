@@ -61,17 +61,17 @@ namespace WebApplication4.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,StartDate,EndDate")] Trip trip)
+        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate")] Trip trip)
         {
             if (ModelState.IsValid)
             {
                 trip.UserId = LoggedUser.user.Id;
-                db.Trips.Add(trip);
-                db.SaveChanges();
+                tripDAL.CreateNewTrip(trip.Name, trip.StartDate, trip.EndDate, trip.UserId);
                 return RedirectToAction("Index");
             }
 
             ViewBag.UserId = new SelectList(db.Users, "Id", "Username", trip.UserId);
+            LoggedUser.selectedTrip = trip;
             return View(trip);
         }
 

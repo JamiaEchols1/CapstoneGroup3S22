@@ -136,6 +136,7 @@
     </Compile>
     <Compile Include="Models\UserCredentials.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AddWaypointViewModel.cs" />
     <Compile Include="ViewModels\TripDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

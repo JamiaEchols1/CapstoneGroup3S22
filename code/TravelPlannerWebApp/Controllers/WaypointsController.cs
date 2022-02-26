@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
+using WebApplication4.ViewModels;
 
 namespace WebApplication4.Controllers
 {
@@ -46,7 +47,14 @@ namespace WebApplication4.Controllers
         // GET: Waypoints/Create
         public ActionResult Create(int? id)
         {
+            if (id == null)
+            {
+                id = LoggedUser.selectedTrip.Id;
+            }
             ViewBag.TripId = new SelectList(db.Trips, "Id", "Name");
+            LoggedUser.selectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
+            ViewBag.StartDate = LoggedUser.selectedTrip.StartDate.ToShortDateString();
+            ViewBag.EndDate = LoggedUser.selectedTrip.EndDate.Date.ToShortDateString();
             return View();
         }
 
@@ -55,13 +63,12 @@ namespace WebApplication4.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Location,DateTime,TripId")] Waypoint waypoint)
+        public ActionResult Create([Bind(Include = "Location,DateTime")] Waypoint waypoint)
         {
             if (ModelState.IsValid)
             {
-                db.Waypoints.Add(waypoint);
-                db.SaveChanges();
-                LoggedUser.selectedTrip = db.Trips.Where(x => x.Id == waypoint.TripId).FirstOrDefault();
+                waypoint.TripId = LoggedUser.selectedTrip.Id;
+                waypointDAL.CreateNewWaypoint(waypoint.Location, waypoint.DateTime, waypoint.TripId);
                 return RedirectToAction("Index");
             }
 
