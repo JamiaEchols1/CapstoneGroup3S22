@@ -60,14 +60,12 @@
 <script type="text/javascript">
     $(function () {
         $('#StartDate').datetimepicker({
-            format: "MM/DD/YYYY",
-            minDate: new Date()
+            minDate: new Date(),
         }).on('dp.change', function (e) {
             $(this).data('DateTimePicker').hide();
         });
 
         $('#EndDate').datetimepicker({
-            format: "MM/DD/YYYY",
             minDate: new Date()
         }).on('dp.change', function (e) {
             $(this).data('DateTimePicker').hide();

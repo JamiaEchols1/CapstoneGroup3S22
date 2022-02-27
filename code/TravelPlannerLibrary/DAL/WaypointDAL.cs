@@ -18,7 +18,7 @@ namespace TravelPlannerLibrary.DAL
             db = @object;
         }
 
-        public List<Waypoint> GetWaypoints(int tripId) => db.Waypoints.Where(t => t.TripId == tripId).ToList();
+        public List<Waypoint> GetWaypoints(int tripId) => db.Waypoints.Where(t => t.TripId == tripId).OrderBy(t => t.DateTime).ToList();
 
         public Waypoint CreateNewWaypoint(string location, DateTime time, int tripId)
         {

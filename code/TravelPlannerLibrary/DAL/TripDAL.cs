@@ -40,7 +40,7 @@ namespace TravelPlannerLibrary.DAL
                 throw new ArgumentException("Start date must be before end date");
             }
             Trip trip = new Trip();
-            trip.Id = db.Trips.Count();
+            trip.Id = db.Trips.Count() + 1;
             trip.Name = name;
             trip.StartDate = startDate; 
             trip.EndDate = endDate;
@@ -49,7 +49,7 @@ namespace TravelPlannerLibrary.DAL
             return db.SaveChanges();
         }
 
-        public List<Trip> GetTrips(int userId) => db.Trips.Where(t => t.UserId == userId).ToList();
+        public List<Trip> GetTrips(int userId) => db.Trips.Where(t => t.UserId == userId).OrderBy(t => t.StartDate).ToList();
 
 
     }

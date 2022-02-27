@@ -51,7 +51,6 @@
 <script type="text/javascript">
     $(function () {
         $('#DateTime').datetimepicker({
-            format: "MM/DD/YYYY",
             minDate: new moment("@ViewBag.StartDate"),
             maxDate: new moment("@ViewBag.EndDate")
         }).on('dp.change', function (e) {
