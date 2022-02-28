@@ -7,9 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using TravelPlannerLibrary.Models;
-
-namespace TravelPlannerLibrary
+namespace TravelPlannerLibrary.Models
 {
     using System;
     using System.Data.Entity;
@@ -31,5 +29,6 @@ namespace TravelPlannerLibrary
         public virtual DbSet<Trip> Trips { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Waypoint> Waypoints { get; set; }
+        public virtual DbSet<Transportation> Transportations { get; set; }
     }
 }

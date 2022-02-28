@@ -11,6 +11,8 @@
         <EntityTypeShape EntityType="TravelPlannerDatabaseModel.Waypoint" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="TravelPlannerDatabaseModel.FK_dbo_Trip_dbo_User_Id" ManuallyRouted="false" />
         <AssociationConnector Association="TravelPlannerDatabaseModel.FK_dbo_Waypoint_dbo_Trip_Id" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.Transportation" Width="1.5" PointX="3.125" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="TravelPlannerDatabaseModel.TransportationWaypoint" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

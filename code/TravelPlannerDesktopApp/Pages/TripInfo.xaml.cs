@@ -24,11 +24,14 @@ namespace TravelPlannerDesktopApp.Pages
     public partial class TripInfo : Page
     {
         private WaypointDAL _waypointDal;
+        private TransportationDAL _transportationDal;
         public TripInfo()
         {
             this._waypointDal = new WaypointDAL();
+            this._transportationDal = new TransportationDAL();
             InitializeComponent();
             this.waypointsListBox.ItemsSource = this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id);
+            this.transportationListBox.ItemsSource = this._transportationDal.GetTransportations(LoggedUser.selectedTrip.Id);
             this.setSelectedTripText();
         }
 

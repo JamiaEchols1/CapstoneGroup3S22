@@ -16,10 +16,11 @@
 
         <n:NavButton Text="Back" ImageSource="/Images/Back.png" NavUri="Pages/Landing.xaml" HorizontalAlignment="Right" Margin="0,2,2,0"/>
 
-        <ListBox x:Name="waypointsListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,120,40,40" SelectionChanged="WaypointsListBox_OnSelectionChanged"/>
+        <ListBox x:Name="waypointsListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,120,40,200" SelectionChanged="WaypointsListBox_OnSelectionChanged"/>
 
         <TextBlock x:Name="SelectedTripTextBlock" HorizontalAlignment="Left" Margin="99,10,0,0" TextWrapping="Wrap" Text="Selected Trip:" VerticalAlignment="Top" Height="20" Width="446"/>
         <TextBlock x:Name="TripStartDateTextBlock" HorizontalAlignment="Left" Margin="99,30,0,0" TextWrapping="Wrap" Text="Start Date:" VerticalAlignment="Top" Height="20" Width="408"/>
         <TextBlock x:Name="TripEndDateTextBlock" HorizontalAlignment="Left" Margin="99,50,0,0" TextWrapping="Wrap" Text="End Date:" VerticalAlignment="Top" Height="20" Width="408"/>
+        <ListBox x:Name="transportationListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,270,40,45"/>
     </Grid>
 </Page>

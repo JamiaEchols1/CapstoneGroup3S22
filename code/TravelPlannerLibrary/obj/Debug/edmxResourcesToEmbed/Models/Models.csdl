@@ -36,6 +36,7 @@
     <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="TripId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Trip" Relationship="Self.FK_dbo_Waypoint_dbo_Trip_Id" FromRole="Waypoints" ToRole="Trip" />
+    <NavigationProperty Name="Transportation" Relationship="TravelPlannerDatabaseModel.TransportationWaypoint" FromRole="Waypoint" ToRole="Transportation" />
   </EntityType>
   <Association Name="FK_dbo_Trip_dbo_User_Id">
     <End Role="User" Type="Self.User" Multiplicity="1">
@@ -78,5 +79,26 @@
       <End Role="Trip" EntitySet="Trips" />
       <End Role="Waypoints" EntitySet="Waypoints" />
     </AssociationSet>
+    <EntitySet Name="Transportations" EntityType="TravelPlannerDatabaseModel.Transportation" />
+    <AssociationSet Name="TransportationWaypoint" Association="TravelPlannerDatabaseModel.TransportationWaypoint">
+      <End Role="Transportation" EntitySet="Transportations" />
+      <End Role="Waypoint" EntitySet="Waypoints" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Transportation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartingWaypointId" Type="Int32" Nullable="false" />
+    <Property Name="ArrivingWaypointId" Type="Int32" Nullable="false" />
+    <Property Name="StartTime" Type="DateTime" Nullable="false" />
+    <Property Name="EndTime" Type="DateTime" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <NavigationProperty Name="Waypoint" Relationship="TravelPlannerDatabaseModel.TransportationWaypoint" FromRole="Transportation" ToRole="Waypoint" />
+  </EntityType>
+  <Association Name="TransportationWaypoint">
+    <End Type="TravelPlannerDatabaseModel.Transportation" Role="Transportation" Multiplicity="1" />
+    <End Type="TravelPlannerDatabaseModel.Waypoint" Role="Waypoint" Multiplicity="1" />
+  </Association>
 </Schema>

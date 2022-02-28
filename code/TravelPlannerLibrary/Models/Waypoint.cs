@@ -20,10 +20,6 @@ namespace TravelPlannerLibrary.Models
         public int TripId { get; set; }
     
         public virtual Trip Trip { get; set; }
-
-        public override string ToString()
-        {
-            return Location + " " + DateTime.ToString();
-        }
+        public virtual Transportation Transportation { get; set; }
     }
 }

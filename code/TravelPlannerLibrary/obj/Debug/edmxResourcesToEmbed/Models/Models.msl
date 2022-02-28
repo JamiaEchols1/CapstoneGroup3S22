@@ -2,15 +2,15 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="TravelPlannerDatabaseModelStoreContainer" CdmEntityContainer="TravelPlannerDatabaseEntities">
     <EntitySetMapping Name="C__RefactorLog">
-      <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.C__RefactorLog">
-        <MappingFragment StoreEntitySet="__RefactorLog">
+      <EntityTypeMapping TypeName="IsTypeOf(TravelPlannerDatabaseModel.C__RefactorLog)">
+        <MappingFragment StoreEntitySet="C__RefactorLog">
           <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Trips">
-      <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.Trip">
-        <MappingFragment StoreEntitySet="Trip">
+      <EntityTypeMapping TypeName="IsTypeOf(TravelPlannerDatabaseModel.Trip)">
+        <MappingFragment StoreEntitySet="Trips">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
@@ -20,8 +20,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.User">
-        <MappingFragment StoreEntitySet="User">
+      <EntityTypeMapping TypeName="IsTypeOf(TravelPlannerDatabaseModel.User)">
+        <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
@@ -29,7 +29,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Waypoints">
-      <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.Waypoint">
+      <EntityTypeMapping TypeName="IsTypeOf(TravelPlannerDatabaseModel.Waypoint)">
         <MappingFragment StoreEntitySet="Waypoints">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Location" ColumnName="Location" />
@@ -38,5 +38,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Transportations">
+      <EntityTypeMapping TypeName="IsTypeOf(TravelPlannerDatabaseModel.Transportation)">
+        <MappingFragment StoreEntitySet="Transportations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DepartingWaypointId" ColumnName="DepartingWaypointId" />
+          <ScalarProperty Name="ArrivingWaypointId" ColumnName="ArrivingWaypointId" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TransportationWaypoint" TypeName="TravelPlannerDatabaseModel.TransportationWaypoint" StoreEntitySet="Transportations">
+      <EndProperty Name="Waypoint">
+        <ScalarProperty Name="Id" ColumnName="Waypoint_Id" />
+      </EndProperty>
+      <EndProperty Name="Transportation">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

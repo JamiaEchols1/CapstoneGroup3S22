@@ -55,5 +55,10 @@ namespace TravelPlannerLibrary.DAL
             db.Waypoints.Remove(waypoint);
             return db.SaveChanges();
         }
+
+        public Waypoint GetWaypoint(int waypointId)
+        {
+            return db.Waypoints.Where(w => w.Id == waypointId).FirstOrDefault();
+        }
     }
 }

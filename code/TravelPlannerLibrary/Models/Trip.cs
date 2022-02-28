@@ -11,7 +11,7 @@ namespace TravelPlannerLibrary.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Trip
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,55 +19,41 @@ namespace TravelPlannerLibrary.Models
         {
             this.Waypoints = new HashSet<Waypoint>();
         }
-
+    
         public int Id { get; set; }
-        public string Name
+        public string Name {
+            get { return this.Name; }
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
+                    throw new ArgumentNullException("Trip must have a name");
+                }
+                this.Name = value;
+            }
+            }
+        public System.DateTime StartDate
         {
-            get
-            {
-                return this.Name;
-            }
+            get { return this.StartDate; }
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (value <= DateTime.Now)
                 {
-                    throw new ArgumentNullException("Must enter a name!");
-                }
-            }
-        }
 
-        public System.DateTime StartDate { 
-            get { return StartDate; } 
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("Must enter a start date");
-                }
-
-                if (DateTime.Today.CompareTo(value) >= 0)
-                {
-                    throw new ArgumentException("Start date must be on or after current date");
+                    throw new ArgumentException("Start date must not be before today");
                 }
                 this.StartDate = value;
             }
         }
         public System.DateTime EndDate
         {
-            get 
-            {
-                return EndDate;
-            }
+            get { return this.EndDate; }
             set
             {
-                if (value == null)
+                if (value <= this.StartDate)
                 {
-                    throw new ArgumentNullException("Must enter an end date");
-                }
 
-                if (this.StartDate.CompareTo(value) > 0)
-                {
-                    throw new ArgumentException("Start date must be before end date");
+                    throw new ArgumentException("End date must not be before start date");
                 }
                 this.EndDate = value;
             }
@@ -77,10 +63,5 @@ namespace TravelPlannerLibrary.Models
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Waypoint> Waypoints { get; set; }
-
-        public override string ToString()
-        {
-            return Name + " Start Date: " + StartDate.Date.ToString("yyyy-MM-dd") + " End Date: " + EndDate.Date.ToString("yyyy-MM-dd");
-        }
     }
 }

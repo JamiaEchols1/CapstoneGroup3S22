@@ -62,6 +62,7 @@
     <Build Include="User.sql" />
     <Build Include="Trip.sql" />
     <Build Include="Waypoints.sql" />
+    <Build Include="Transportation.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

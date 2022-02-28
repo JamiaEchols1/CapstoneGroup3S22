@@ -4,84 +4,112 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TravelPlannerDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__RefactorLog">
-          <Key>
-            <PropertyRef Name="OperationKey" />
-          </Key>
-          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Trip">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="StartDate" Type="date" Nullable="false" />
-          <Property Name="EndDate" Type="date" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Waypoints">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DateTime" Type="datetime" Nullable="false" />
-          <Property Name="TripId" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_dbo_Trip_dbo_User_Id">
-          <End Role="User" Type="Self.User" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Trip">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Waypoint_dbo_Trip_Id">
-          <End Role="Trip" Type="Self.Trip" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Waypoints" Type="Self.Waypoints" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Trip">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Waypoints">
-              <PropertyRef Name="TripId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="TravelPlannerDatabaseModelStoreContainer">
-          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Trip" EntityType="Self.Trip" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Waypoints" EntityType="Self.Waypoints" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_dbo_Trip_dbo_User_Id" Association="Self.FK_dbo_Trip_dbo_User_Id">
-            <End Role="User" EntitySet="User" />
-            <End Role="Trip" EntitySet="Trip" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Waypoint_dbo_Trip_Id" Association="Self.FK_dbo_Waypoint_dbo_Trip_Id">
-            <End Role="Trip" EntitySet="Trip" />
-            <End Role="Waypoints" EntitySet="Waypoints" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="TravelPlannerDatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TravelPlannerDatabaseModelStoreContainer">
+    <EntitySet Name="C__RefactorLog" EntityType="TravelPlannerDatabaseModel.Store.C__RefactorLog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Trips" EntityType="TravelPlannerDatabaseModel.Store.Trips" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="TravelPlannerDatabaseModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Waypoints" EntityType="TravelPlannerDatabaseModel.Store.Waypoints" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Transportations" EntityType="TravelPlannerDatabaseModel.Store.Transportations" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_dbo_Trip_dbo_User_Id" Association="TravelPlannerDatabaseModel.Store.FK_dbo_Trip_dbo_User_Id">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Trip" EntitySet="Trips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Waypoint_dbo_Trip_Id" Association="TravelPlannerDatabaseModel.Store.FK_dbo_Waypoint_dbo_Trip_Id">
+      <End Role="Trip" EntitySet="Trips" />
+      <End Role="Waypoints" EntitySet="Waypoints" />
+    </AssociationSet>
+    <AssociationSet Name="TransportationWaypoint" Association="TravelPlannerDatabaseModel.Store.TransportationWaypoint">
+      <End Role="Transportation" EntitySet="Transportations" />
+      <End Role="Waypoint" EntitySet="Waypoints" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__RefactorLog">
+    <Key>
+      <PropertyRef Name="OperationKey" />
+    </Key>
+    <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Trips">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Waypoints">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Location" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="TripId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transportations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartingWaypointId" Type="int" Nullable="false" />
+    <Property Name="ArrivingWaypointId" Type="int" Nullable="false" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Waypoint_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_Trip_dbo_User_Id">
+    <End Role="User" Type="TravelPlannerDatabaseModel.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Trip" Type="TravelPlannerDatabaseModel.Store.Trips" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Trip">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Waypoint_dbo_Trip_Id">
+    <End Role="Trip" Type="TravelPlannerDatabaseModel.Store.Trips" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Waypoints" Type="TravelPlannerDatabaseModel.Store.Waypoints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trip">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Waypoints">
+        <PropertyRef Name="TripId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransportationWaypoint">
+    <End Role="Transportation" Type="TravelPlannerDatabaseModel.Store.Transportations" Multiplicity="*" />
+    <End Role="Waypoint" Type="TravelPlannerDatabaseModel.Store.Waypoints" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Waypoint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transportation">
+        <PropertyRef Name="Waypoint_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TravelPlannerDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -121,6 +149,7 @@
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TripId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Trip" Relationship="Self.FK_dbo_Waypoint_dbo_Trip_Id" FromRole="Waypoints" ToRole="Trip" />
+          <NavigationProperty Name="Transportation" Relationship="TravelPlannerDatabaseModel.TransportationWaypoint" FromRole="Waypoint" ToRole="Transportation" />
         </EntityType>
         <Association Name="FK_dbo_Trip_dbo_User_Id">
           <End Role="User" Type="Self.User" Multiplicity="1">
@@ -163,53 +192,93 @@
             <End Role="Trip" EntitySet="Trips" />
             <End Role="Waypoints" EntitySet="Waypoints" />
           </AssociationSet>
+          <EntitySet Name="Transportations" EntityType="TravelPlannerDatabaseModel.Transportation" />
+          <AssociationSet Name="TransportationWaypoint" Association="TravelPlannerDatabaseModel.TransportationWaypoint">
+            <End Role="Transportation" EntitySet="Transportations" />
+            <End Role="Waypoint" EntitySet="Waypoints" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Transportation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartingWaypointId" Type="Int32" Nullable="false" />
+          <Property Name="ArrivingWaypointId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Waypoint" Relationship="TravelPlannerDatabaseModel.TransportationWaypoint" FromRole="Transportation" ToRole="Waypoint" />
+        </EntityType>
+        <Association Name="TransportationWaypoint">
+          <End Type="TravelPlannerDatabaseModel.Transportation" Role="Transportation" Multiplicity="1" />
+          <End Type="TravelPlannerDatabaseModel.Waypoint" Role="Waypoint" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TravelPlannerDatabaseModelStoreContainer" CdmEntityContainer="TravelPlannerDatabaseEntities">
-          <EntitySetMapping Name="C__RefactorLog">
-            <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.C__RefactorLog">
-              <MappingFragment StoreEntitySet="__RefactorLog">
-                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Trips">
-            <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.Trip">
-              <MappingFragment StoreEntitySet="Trip">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Waypoints">
-            <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.Waypoint">
-              <MappingFragment StoreEntitySet="Waypoints">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="TripId" ColumnName="TripId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TravelPlannerDatabaseModelStoreContainer" CdmEntityContainer="TravelPlannerDatabaseEntities">
+    <EntitySetMapping Name="C__RefactorLog">
+      <EntityTypeMapping TypeName="IsTypeOf(TravelPlannerDatabaseModel.C__RefactorLog)">
+        <MappingFragment StoreEntitySet="C__RefactorLog">
+          <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trips">
+      <EntityTypeMapping TypeName="IsTypeOf(TravelPlannerDatabaseModel.Trip)">
+        <MappingFragment StoreEntitySet="Trips">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(TravelPlannerDatabaseModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Waypoints">
+      <EntityTypeMapping TypeName="IsTypeOf(TravelPlannerDatabaseModel.Waypoint)">
+        <MappingFragment StoreEntitySet="Waypoints">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="TripId" ColumnName="TripId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transportations">
+      <EntityTypeMapping TypeName="IsTypeOf(TravelPlannerDatabaseModel.Transportation)">
+        <MappingFragment StoreEntitySet="Transportations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DepartingWaypointId" ColumnName="DepartingWaypointId" />
+          <ScalarProperty Name="ArrivingWaypointId" ColumnName="ArrivingWaypointId" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TransportationWaypoint" TypeName="TravelPlannerDatabaseModel.TransportationWaypoint" StoreEntitySet="Transportations">
+      <EndProperty Name="Waypoint">
+        <ScalarProperty Name="Id" ColumnName="Waypoint_Id" />
+      </EndProperty>
+      <EndProperty Name="Transportation">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -223,7 +292,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\LoginDAL.cs" />
+    <Compile Include="DAL\TransportationDAL.cs" />
     <Compile Include="DAL\TripDAL.cs" />
     <Compile Include="DAL\WaypointDAL.cs" />
     <Compile Include="Models\C__RefactorLog.cs">
@@ -74,6 +75,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transportation.cs">
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Trip.cs">
       <DependentUpon>Models.tt</DependentUpon>
@@ -103,6 +107,7 @@
       <DependentUpon>Models.edmx</DependentUpon>
       <LastGenOutput>Models.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\Models.edmx.sql" />
     <Content Include="Models\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Models.edmx</DependentUpon>

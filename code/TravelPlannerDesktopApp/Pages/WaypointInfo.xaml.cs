@@ -63,5 +63,15 @@ namespace TravelPlannerDesktopApp.Pages
 
             NavigationService.Navigate(ClickedButton.NavUri);
         }
+
+        private void transportationListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           Transportation transportation = this.transportationListBox.SelectedItem as Transportation;
+            if (transportation != null)
+            {
+                TransportationInfo transportationInfo = new TransportationInfo(transportation);
+                NavigationService.Navigate(transportationInfo);
+            }
+        }
     }
 }
