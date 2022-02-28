@@ -16,9 +16,3 @@ C:\Users\jamia\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDat
 C:\Users\jamia\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.sqlproj.AssemblyReference.cache
 C:\Users\jamia\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.dll
 C:\Users\jamia\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.pdb
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.dacpac
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.dll
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.pdb
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.dll
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.pdb
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint1\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.sqlproj.AssemblyReference.cache

@@ -42,8 +42,6 @@ namespace TravelPlannerDesktopApp.Pages
         {
             try
             {
-                Console.WriteLine(DateTime.Parse(this.dateTimePicker.Text));
-                
                 Waypoint newWaypoint = this._waypointDal.CreateNewWaypoint(this.locationTextBox.Text, DateTime.Parse(this.dateTimePicker.Text), LoggedUser.selectedTrip.Id);
 
                 MessageBox.Show("Waypoint creation was Successful!");

@@ -17,6 +17,7 @@ namespace TravelPlannerLibrary.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Trip()
         {
+            this.Lodgings = new HashSet<Lodging>();
             this.Waypoints = new HashSet<Waypoint>();
         }
     
@@ -26,13 +27,15 @@ namespace TravelPlannerLibrary.Models
         public System.DateTime EndDate { get; set; }
         public int UserId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Lodging> Lodgings { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Waypoint> Waypoints { get; set; }
 
         public override string ToString()
         {
-            return Name + " Start Date: " + StartDate.Date.ToString("yyyy-MM-dd") + " End Date: " + EndDate.Date.ToString("yyyy-MM-dd");
+            return this.Name + ", Start Date:" + this.StartDate + ", End Date: " + this.EndDate;
         }
     }
 }

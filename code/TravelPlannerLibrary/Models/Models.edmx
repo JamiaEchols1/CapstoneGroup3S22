@@ -11,6 +11,16 @@
           </Key>
           <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="Lodging">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TripId" Type="int" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Trip">
           <Key>
             <PropertyRef Name="Id" />
@@ -38,6 +48,20 @@
           <Property Name="DateTime" Type="datetime" Nullable="false" />
           <Property Name="TripId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_dbo_Lodging_dbo_Trip_Id">
+          <End Role="Trip" Type="Self.Trip" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Lodging" Type="Self.Lodging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lodging">
+              <PropertyRef Name="TripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Trip_dbo_User_Id">
           <End Role="User" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -68,9 +92,14 @@
         </Association>
         <EntityContainer Name="TravelPlannerDatabaseModelStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lodging" EntityType="Self.Lodging" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trip" EntityType="Self.Trip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Waypoints" EntityType="Self.Waypoints" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Lodging_dbo_Trip_Id" Association="Self.FK_dbo_Lodging_dbo_Trip_Id">
+            <End Role="Trip" EntitySet="Trip" />
+            <End Role="Lodging" EntitySet="Lodging" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_Trip_dbo_User_Id" Association="Self.FK_dbo_Trip_dbo_User_Id">
             <End Role="User" EntitySet="User" />
             <End Role="Trip" EntitySet="Trip" />
@@ -91,6 +120,17 @@
           </Key>
           <Property Name="OperationKey" Type="Guid" Nullable="false" />
         </EntityType>
+        <EntityType Name="Lodging">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TripId" Type="Int32" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Trip" Relationship="Self.FK_dbo_Lodging_dbo_Trip_Id" FromRole="Lodging" ToRole="Trip" />
+        </EntityType>
         <EntityType Name="Trip">
           <Key>
             <PropertyRef Name="Id" />
@@ -100,6 +140,7 @@
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lodgings" Relationship="Self.FK_dbo_Lodging_dbo_Trip_Id" FromRole="Trip" ToRole="Lodging" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_Trip_dbo_User_Id" FromRole="Trip" ToRole="User" />
           <NavigationProperty Name="Waypoints" Relationship="Self.FK_dbo_Waypoint_dbo_Trip_Id" FromRole="Trip" ToRole="Waypoints" />
         </EntityType>
@@ -122,6 +163,20 @@
           <Property Name="TripId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Trip" Relationship="Self.FK_dbo_Waypoint_dbo_Trip_Id" FromRole="Waypoints" ToRole="Trip" />
         </EntityType>
+        <Association Name="FK_dbo_Lodging_dbo_Trip_Id">
+          <End Role="Trip" Type="Self.Trip" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Lodging" Type="Self.Lodging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lodging">
+              <PropertyRef Name="TripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Trip_dbo_User_Id">
           <End Role="User" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -152,9 +207,14 @@
         </Association>
         <EntityContainer Name="TravelPlannerDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+          <EntitySet Name="Lodgings" EntityType="Self.Lodging" />
           <EntitySet Name="Trips" EntityType="Self.Trip" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Waypoints" EntityType="Self.Waypoint" />
+          <AssociationSet Name="FK_dbo_Lodging_dbo_Trip_Id" Association="Self.FK_dbo_Lodging_dbo_Trip_Id">
+            <End Role="Trip" EntitySet="Trips" />
+            <End Role="Lodging" EntitySet="Lodgings" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_Trip_dbo_User_Id" Association="Self.FK_dbo_Trip_dbo_User_Id">
             <End Role="User" EntitySet="Users" />
             <End Role="Trip" EntitySet="Trips" />
@@ -174,6 +234,17 @@
             <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.C__RefactorLog">
               <MappingFragment StoreEntitySet="__RefactorLog">
                 <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lodgings">
+            <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.Lodging">
+              <MappingFragment StoreEntitySet="Lodging">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TripId" ColumnName="TripId" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

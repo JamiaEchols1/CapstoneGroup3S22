@@ -12,5 +12,7 @@ namespace TravelPlannerLibrary.Models
         public static Trip selectedTrip { get; set; }
 
         public static Waypoint selectedWaypoint { get; set; }
+
+        public static Lodging selectedLodging { get; set; }
     }
 }

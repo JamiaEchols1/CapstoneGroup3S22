@@ -24,11 +24,14 @@ namespace TravelPlannerDesktopApp.Pages
     public partial class TripInfo : Page
     {
         private WaypointDAL _waypointDal;
+        private LodgingDAL _lodgingDal;
         public TripInfo()
         {
             this._waypointDal = new WaypointDAL();
+            this._lodgingDal = new LodgingDAL();
             InitializeComponent();
             this.waypointsListBox.ItemsSource = this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id);
+            this.lodgingListBox.ItemsSource = this._lodgingDal.GetLodgings(LoggedUser.selectedTrip.Id);
             this.setSelectedTripText();
         }
 
@@ -53,6 +56,16 @@ namespace TravelPlannerDesktopApp.Pages
             {
                 WaypointInfo waypointInfo = new WaypointInfo();
                 NavigationService.Navigate(waypointInfo);
+            }
+        }
+
+        private void LodgingListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoggedUser.selectedLodging = this.lodgingListBox.SelectedItem as Lodging;
+            if (LoggedUser.selectedLodging != null)
+            {
+                LodgingInfo lodgingInfo = new LodgingInfo();
+                NavigationService.Navigate(lodgingInfo);
             }
         }
     }
