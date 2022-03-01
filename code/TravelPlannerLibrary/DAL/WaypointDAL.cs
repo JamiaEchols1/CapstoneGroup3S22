@@ -20,28 +20,46 @@ namespace TravelPlannerLibrary.DAL
 
         public List<Waypoint> GetWaypoints(int tripId) => db.Waypoints.Where(t => t.TripId == tripId).ToList();
 
-        public Waypoint CreateNewWaypoint(string location, DateTime time, int tripId)
+        public Waypoint CreateNewWaypoint(string location, DateTime startTime, DateTime endTime, int tripId)
         {
             if (string.IsNullOrEmpty(location))
             {
                 throw new ArgumentNullException("Must enter a location!");
             }
-            if (time == null)
+            if (startTime == null)
             {
                 throw new ArgumentNullException("Must enter a time");
             }
-            if (LoggedUser.selectedTrip.StartDate.CompareTo(time) >= 0)
+            if (endTime == null)
             {
-                throw new ArgumentException("Date must be on or after trip start date");
+                throw new ArgumentNullException("Must enter a time");
             }
-            if (time.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
+            if (LoggedUser.selectedTrip.StartDate.CompareTo(startTime) >= 0)
             {
-                throw new ArgumentException("Date must be on or before trip end date");
+                throw new ArgumentException("Start date must be on or after trip start date");
+            }
+            if (LoggedUser.selectedTrip.StartDate.CompareTo(endTime) >= 0)
+            {
+                throw new ArgumentException("End date must be on or after trip start date");
+            }
+
+            if (endTime.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
+            {
+                throw new ArgumentException("End date must be on or before trip end date");
+            }
+            if (startTime.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
+            {
+                throw new ArgumentException("Start date must be on or before trip end date");
+            }
+            if (startTime.CompareTo(endTime) >= 0)
+            {
+                throw new ArgumentException("Start date must be before end date");
             }
 
             Waypoint waypoint = new Waypoint();
             waypoint.Location = location;
-            waypoint.DateTime = time;
+            waypoint.StartDateTime = startTime;
+            waypoint.EndDateTime = endTime;
             waypoint.TripId = tripId;
             waypoint.Id = db.Waypoints.Count();
            

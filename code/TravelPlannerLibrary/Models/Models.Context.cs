@@ -26,9 +26,9 @@ namespace TravelPlannerLibrary.Models
         }
     
         public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
+        public virtual DbSet<Transportation> Transportations { get; set; }
         public virtual DbSet<Trip> Trips { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Waypoint> Waypoints { get; set; }
-        public virtual DbSet<Transportation> Transportations { get; set; }
     }
 }

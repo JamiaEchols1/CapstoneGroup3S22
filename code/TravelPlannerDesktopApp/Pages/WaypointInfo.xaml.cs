@@ -23,6 +23,8 @@ namespace TravelPlannerDesktopApp.Pages
     /// </summary>
     public partial class WaypointInfo : Page
     {
+        private TransportationDAL _transportationDAL;
+
         public WaypointInfo()
         {
             InitializeComponent();
@@ -32,7 +34,8 @@ namespace TravelPlannerDesktopApp.Pages
         public void setSelectedWaypointText()
         {
             this.LocationTextBlock.Text = "Location: " + LoggedUser.selectedWaypoint.Location;
-            this.TimeTextBlock.Text = "Time: " + LoggedUser.selectedWaypoint.DateTime;
+            this.TimeTextBlock.Text = "Start Time: " + LoggedUser.selectedWaypoint.StartDateTime;
+            this.EndDateTextBlock.Text = "End Time: " + LoggedUser.selectedWaypoint.EndDateTime;
         }
 
         private void EditWaypointButton_OnClick(object sender, RoutedEventArgs e)
@@ -64,14 +67,11 @@ namespace TravelPlannerDesktopApp.Pages
             NavigationService.Navigate(ClickedButton.NavUri);
         }
 
-        private void transportationListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void NavButton_Click(object sender, RoutedEventArgs e)
         {
-           Transportation transportation = this.transportationListBox.SelectedItem as Transportation;
-            if (transportation != null)
-            {
-                TransportationInfo transportationInfo = new TransportationInfo(transportation);
-                NavigationService.Navigate(transportationInfo);
-            }
+            var ClickedButton = e.OriginalSource as NavButton;
+
+            NavigationService.Navigate(ClickedButton.NavUri);
         }
     }
 }

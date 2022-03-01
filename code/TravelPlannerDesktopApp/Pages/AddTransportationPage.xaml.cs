@@ -29,7 +29,7 @@ namespace TravelPlannerDesktopApp.Pages
             this._waypointDal = new WaypointDAL();
             this._transportationDal = new TransportationDAL();
             InitializeComponent();
-            this.arrivingWaypointComboBox.ItemsSource = this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id).Where(w => w.DateTime > LoggedUser.selectedWaypoint.DateTime);
+            this.arrivingWaypointComboBox.ItemsSource = this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id).Where(w => w.StartDateTime > LoggedUser.selectedWaypoint.EndDateTime);
 
         }
 
@@ -38,8 +38,13 @@ namespace TravelPlannerDesktopApp.Pages
            try
             {
                 Waypoint waypoint = (Waypoint)this.arrivingWaypointComboBox.SelectedItem;
-                DateTime startDate = DateTime.Parse(this.StartTime.ToString());
-                DateTime endTime = DateTime.Parse(this.EndTime.ToString());
+                var waypoints = this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id).Where(w => (w.EndDateTime < waypoint.StartDateTime && w.EndDateTime > LoggedUser.selectedWaypoint.EndDateTime) || (w.StartDateTime < waypoint.StartDateTime && w.StartDateTime > LoggedUser.selectedWaypoint.EndDateTime));
+                if (waypoints.Any())
+                {
+                    throw new Exception("Transportation must be between two consecutive waypoints");
+                }
+                DateTime startDate = LoggedUser.selectedWaypoint.EndDateTime;
+                DateTime endTime = waypoint.StartDateTime;
                 this._transportationDal.CreateANewTransportation(LoggedUser.selectedWaypoint.Id, waypoint.Id, LoggedUser.selectedTrip.Id, startDate, endTime, descriptionTextBox.Text);
                 WaypointInfo waypointInfo = new WaypointInfo();
                 NavigationService.Navigate(waypointInfo);

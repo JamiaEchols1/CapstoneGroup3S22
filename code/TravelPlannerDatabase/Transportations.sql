@@ -1,16 +1,16 @@
-﻿CREATE TABLE [dbo].[Transportation]
+﻿CREATE TABLE [dbo].[Transportations]
 (
 	[Id] INT NOT NULL PRIMARY KEY,
 	[DepartingWaypointId] INT NOT NULL,
 	[ArrivingWaypointId] INT NOT NULL,
 	[TripId] INT NOT NULL,
-	[StartTime] Time not null,
-	[EndTime] Time not null,
+	[StartTime] DATETIME not null,
+	[EndTime] DATETIME not null,
 	[Description] varchar(250) not null,
 	CONSTRAINT [FK_dbo.Transportation_dbo.DepartingWaypoint_Id] FOREIGN KEY ([DepartingWaypointId]) 
-		REFERENCES [dbo].[Waypoints] ([Id]) ON DELETE CASCADE,
+		REFERENCES [dbo].[Waypoints] ([Id]) ON DELETE no action,
 	CONSTRAINT [FK_dbo.Transportation_dbo.ArrivingWaypoint_Id] FOREIGN KEY ([ArrivingWaypointId]) 
 		REFERENCES [dbo].[Waypoints] ([Id]) ON DELETE no ACTION,
 	CONSTRAINT [FK_dbo.Transportation_dbo.Trip_Id] FOREIGN KEY ([TripId])
-		REFERENCES [dbo].[Trip] ([Id]) On delete cascade
+		REFERENCES [dbo].[Trips] ([Id]) On delete no action
 )

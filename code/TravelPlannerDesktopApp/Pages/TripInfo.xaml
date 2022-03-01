@@ -21,6 +21,6 @@
         <TextBlock x:Name="SelectedTripTextBlock" HorizontalAlignment="Left" Margin="99,10,0,0" TextWrapping="Wrap" Text="Selected Trip:" VerticalAlignment="Top" Height="20" Width="446"/>
         <TextBlock x:Name="TripStartDateTextBlock" HorizontalAlignment="Left" Margin="99,30,0,0" TextWrapping="Wrap" Text="Start Date:" VerticalAlignment="Top" Height="20" Width="408"/>
         <TextBlock x:Name="TripEndDateTextBlock" HorizontalAlignment="Left" Margin="99,50,0,0" TextWrapping="Wrap" Text="End Date:" VerticalAlignment="Top" Height="20" Width="408"/>
-        <ListBox x:Name="transportationListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,270,40,45"/>
+        <ListBox x:Name="transportationListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,270,40,45" SelectionChanged="transportationListBox_SelectionChanged"/>
     </Grid>
 </Page>

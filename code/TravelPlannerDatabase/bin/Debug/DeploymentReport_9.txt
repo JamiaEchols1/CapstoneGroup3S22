@@ -1,0 +1,20 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       [dbo].[FK_dbo.Transportation_dbo.DepartingWaypoint_Id] (Foreign Key)
+       [dbo].[FK_dbo.Transportation_dbo.Trip_Id] (Foreign Key)
+     Create
+       [dbo].[FK_dbo.Transportation_dbo.DepartingWaypoint_Id] (Foreign Key)
+       [dbo].[FK_dbo.Transportation_dbo.Trip_Id] (Foreign Key)
+       [dbo].[FK_dbo.Waypoint_dbo.Trip_Id] (Foreign Key)
+
+** Supporting actions

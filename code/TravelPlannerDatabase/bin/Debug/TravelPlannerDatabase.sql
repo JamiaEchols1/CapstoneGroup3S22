@@ -40,6 +40,104 @@ USE [$(DatabaseName)];
 
 
 GO
+PRINT N'Dropping Foreign Key [dbo].[FK_dbo.Waypoint_dbo.Trip_Id]...';
+
+
+GO
+ALTER TABLE [dbo].[Waypoints] DROP CONSTRAINT [FK_dbo.Waypoint_dbo.Trip_Id];
+
+
+GO
+PRINT N'Creating Table [dbo].[Transportations]...';
+
+
+GO
+CREATE TABLE [dbo].[Transportations] (
+    [Id]                  INT           NOT NULL,
+    [DepartingWaypointId] INT           NOT NULL,
+    [ArrivingWaypointId]  INT           NOT NULL,
+    [TripId]              INT           NOT NULL,
+    [StartTime]           TIME (7)      NOT NULL,
+    [EndTime]             TIME (7)      NOT NULL,
+    [Description]         VARCHAR (250) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating Table [dbo].[Trips]...';
+
+
+GO
+CREATE TABLE [dbo].[Trips] (
+    [Id]        INT          NOT NULL,
+    [Name]      VARCHAR (50) NOT NULL,
+    [StartDate] DATE         NOT NULL,
+    [EndDate]   DATE         NOT NULL,
+    [UserId]    INT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating Table [dbo].[Users]...';
+
+
+GO
+CREATE TABLE [dbo].[Users] (
+    [Id]       INT          NOT NULL,
+    [Username] VARCHAR (50) NOT NULL,
+    [Password] VARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+GO
+PRINT N'Creating Foreign Key [dbo].[FK_dbo.Waypoint_dbo.Trip_Id]...';
+
+
+GO
+ALTER TABLE [dbo].[Waypoints] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.Waypoint_dbo.Trip_Id] FOREIGN KEY ([TripId]) REFERENCES [dbo].[Trips] ([Id]);
+
+
+GO
+PRINT N'Creating Foreign Key [dbo].[FK_dbo.Transportation_dbo.DepartingWaypoint_Id]...';
+
+
+GO
+ALTER TABLE [dbo].[Transportations] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.Transportation_dbo.DepartingWaypoint_Id] FOREIGN KEY ([DepartingWaypointId]) REFERENCES [dbo].[Waypoints] ([Id]);
+
+
+GO
+PRINT N'Creating Foreign Key [dbo].[FK_dbo.Transportation_dbo.ArrivingWaypoint_Id]...';
+
+
+GO
+ALTER TABLE [dbo].[Transportations] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.Transportation_dbo.ArrivingWaypoint_Id] FOREIGN KEY ([ArrivingWaypointId]) REFERENCES [dbo].[Waypoints] ([Id]);
+
+
+GO
+PRINT N'Creating Foreign Key [dbo].[FK_dbo.Transportation_dbo.Trip_Id]...';
+
+
+GO
+ALTER TABLE [dbo].[Transportations] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.Transportation_dbo.Trip_Id] FOREIGN KEY ([TripId]) REFERENCES [dbo].[Trips] ([Id]);
+
+
+GO
+PRINT N'Creating Foreign Key [dbo].[FK_dbo.Trip_dbo.User_Id]...';
+
+
+GO
+ALTER TABLE [dbo].[Trips] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.Trip_dbo.User_Id] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id]) ON DELETE CASCADE;
+
+
+GO
 /*
 Post-Deployment Script Template							
 --------------------------------------------------------------------------------------
@@ -52,6 +150,26 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 GO
+
+GO
+PRINT N'Checking existing data against newly created constraints';
+
+
+GO
+USE [$(DatabaseName)];
+
+
+GO
+ALTER TABLE [dbo].[Waypoints] WITH CHECK CHECK CONSTRAINT [FK_dbo.Waypoint_dbo.Trip_Id];
+
+ALTER TABLE [dbo].[Transportations] WITH CHECK CHECK CONSTRAINT [FK_dbo.Transportation_dbo.DepartingWaypoint_Id];
+
+ALTER TABLE [dbo].[Transportations] WITH CHECK CHECK CONSTRAINT [FK_dbo.Transportation_dbo.ArrivingWaypoint_Id];
+
+ALTER TABLE [dbo].[Transportations] WITH CHECK CHECK CONSTRAINT [FK_dbo.Transportation_dbo.Trip_Id];
+
+ALTER TABLE [dbo].[Trips] WITH CHECK CHECK CONSTRAINT [FK_dbo.Trip_dbo.User_Id];
+
 
 GO
 PRINT N'Update complete.';

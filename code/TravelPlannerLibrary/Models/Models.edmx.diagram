@@ -4,15 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="efdf1c0f661c471ca8bd184eb200c023" Name="Diagram1">
-        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.Trip" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.User" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.Waypoint" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+      <Diagram DiagramId="acad97f6aa1d4f4786ac4853001618de" Name="Diagram1">
+        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.Transportation" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.Trip" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.User" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.Waypoint" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="TravelPlannerDatabaseModel.FK_dbo_Transportation_dbo_ArrivingWaypoint_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelPlannerDatabaseModel.FK_dbo_Transportation_dbo_DepartingWaypoint_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelPlannerDatabaseModel.FK_dbo_Transportation_dbo_Trip_Id" ManuallyRouted="false" />
         <AssociationConnector Association="TravelPlannerDatabaseModel.FK_dbo_Trip_dbo_User_Id" ManuallyRouted="false" />
         <AssociationConnector Association="TravelPlannerDatabaseModel.FK_dbo_Waypoint_dbo_Trip_Id" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="TravelPlannerDatabaseModel.Transportation" Width="1.5" PointX="3.125" PointY="3.75" IsExpanded="true" />
-        <AssociationConnector Association="TravelPlannerDatabaseModel.TransportationWaypoint" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

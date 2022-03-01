@@ -1,0 +1,23 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Transportations] (Table)
+       [dbo].[Trips] (Table)
+       [dbo].[Users] (Table)
+       [dbo].[Waypoints] (Table)
+       [dbo].[FK_dbo.Transportation_dbo.DepartingWaypoint_Id] (Foreign Key)
+       [dbo].[FK_dbo.Transportation_dbo.ArrivingWaypoint_Id] (Foreign Key)
+       [dbo].[FK_dbo.Transportation_dbo.Trip_Id] (Foreign Key)
+       [dbo].[FK_dbo.Trip_dbo.User_Id] (Foreign Key)
+       [dbo].[FK_dbo.Waypoint_dbo.Trip_Id] (Foreign Key)
+
+** Supporting actions

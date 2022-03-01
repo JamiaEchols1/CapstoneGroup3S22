@@ -17,49 +17,58 @@ namespace TravelPlannerLibrary.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Trip()
         {
+            this.Transportations = new HashSet<Transportation>();
             this.Waypoints = new HashSet<Waypoint>();
         }
     
         public int Id { get; set; }
-        public string Name {
-            get { return this.Name; }
+
+        private string name;
+        public string Name
+        {
+            get { return name; }
             set
             {
                 if (String.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException("Trip must have a name");
                 }
-                this.Name = value;
+                name = value;
             }
-            }
+        }
+        private DateTime startDate;
         public System.DateTime StartDate
         {
-            get { return this.StartDate; }
+            get { return startDate; }
             set
             {
-                if (value <= DateTime.Now)
+                if (value < DateTime.Now)
                 {
 
                     throw new ArgumentException("Start date must not be before today");
                 }
-                this.StartDate = value;
+                startDate = value;
             }
         }
+
+        private DateTime endDate;
         public System.DateTime EndDate
         {
-            get { return this.EndDate; }
+            get { return endDate; }
             set
             {
-                if (value <= this.StartDate)
+                if (value <= startDate)
                 {
 
                     throw new ArgumentException("End date must not be before start date");
                 }
-                this.EndDate = value;
+                endDate = value;
             }
         }
         public int UserId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transportation> Transportations { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Waypoint> Waypoints { get; set; }

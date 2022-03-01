@@ -1,38 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="TravelPlannerDatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="TravelPlannerDatabaseModelStoreContainer">
-    <EntitySet Name="C__RefactorLog" EntityType="TravelPlannerDatabaseModel.Store.C__RefactorLog" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Trips" EntityType="TravelPlannerDatabaseModel.Store.Trips" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Users" EntityType="TravelPlannerDatabaseModel.Store.Users" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Waypoints" EntityType="TravelPlannerDatabaseModel.Store.Waypoints" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Transportations" EntityType="TravelPlannerDatabaseModel.Store.Transportations" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_dbo_Trip_dbo_User_Id" Association="TravelPlannerDatabaseModel.Store.FK_dbo_Trip_dbo_User_Id">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Trip" EntitySet="Trips" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_Waypoint_dbo_Trip_Id" Association="TravelPlannerDatabaseModel.Store.FK_dbo_Waypoint_dbo_Trip_Id">
-      <End Role="Trip" EntitySet="Trips" />
-      <End Role="Waypoints" EntitySet="Waypoints" />
-    </AssociationSet>
-    <AssociationSet Name="TransportationWaypoint" Association="TravelPlannerDatabaseModel.Store.TransportationWaypoint">
-      <End Role="Transportation" EntitySet="Transportations" />
-      <End Role="Waypoint" EntitySet="Waypoints" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="C__RefactorLog">
+<Schema Namespace="TravelPlannerDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__RefactorLog">
     <Key>
       <PropertyRef Name="OperationKey" />
     </Key>
     <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transportations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="DepartingWaypointId" Type="int" Nullable="false" />
+    <Property Name="ArrivingWaypointId" Type="int" Nullable="false" />
+    <Property Name="TripId" Type="int" Nullable="false" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+    <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
   </EntityType>
   <EntityType Name="Trips">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="StartDate" Type="datetime" Nullable="false" />
-    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
@@ -40,51 +33,74 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Waypoints">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Location" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="DateTime" Type="datetime" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+    <Property Name="EndDateTime" Type="datetime" Nullable="false" />
     <Property Name="TripId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Transportations">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DepartingWaypointId" Type="int" Nullable="false" />
-    <Property Name="ArrivingWaypointId" Type="int" Nullable="false" />
-    <Property Name="StartTime" Type="datetime" Nullable="false" />
-    <Property Name="EndTime" Type="datetime" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Waypoint_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_dbo_Trip_dbo_User_Id">
-    <End Role="User" Type="TravelPlannerDatabaseModel.Store.Users" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Trip" Type="TravelPlannerDatabaseModel.Store.Trips" Multiplicity="*" />
+  <Association Name="FK_dbo_Transportation_dbo_ArrivingWaypoint_Id">
+    <End Role="Waypoints" Type="Self.Waypoints" Multiplicity="1" />
+    <End Role="Transportations" Type="Self.Transportations" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="User">
+      <Principal Role="Waypoints">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Trip">
+      <Dependent Role="Transportations">
+        <PropertyRef Name="ArrivingWaypointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Transportation_dbo_DepartingWaypoint_Id">
+    <End Role="Waypoints" Type="Self.Waypoints" Multiplicity="1" />
+    <End Role="Transportations" Type="Self.Transportations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Waypoints">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transportations">
+        <PropertyRef Name="DepartingWaypointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Transportation_dbo_Trip_Id">
+    <End Role="Trips" Type="Self.Trips" Multiplicity="1" />
+    <End Role="Transportations" Type="Self.Transportations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trips">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transportations">
+        <PropertyRef Name="TripId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Trip_dbo_User_Id">
+    <End Role="Users" Type="Self.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Trips">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_dbo_Waypoint_dbo_Trip_Id">
-    <End Role="Trip" Type="TravelPlannerDatabaseModel.Store.Trips" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Waypoints" Type="TravelPlannerDatabaseModel.Store.Waypoints" Multiplicity="*" />
+    <End Role="Trips" Type="Self.Trips" Multiplicity="1" />
+    <End Role="Waypoints" Type="Self.Waypoints" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Trip">
+      <Principal Role="Trips">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Waypoints">
@@ -92,16 +108,31 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="TransportationWaypoint">
-    <End Role="Transportation" Type="TravelPlannerDatabaseModel.Store.Transportations" Multiplicity="*" />
-    <End Role="Waypoint" Type="TravelPlannerDatabaseModel.Store.Waypoints" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Waypoint">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Transportation">
-        <PropertyRef Name="Waypoint_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <EntityContainer Name="TravelPlannerDatabaseModelStoreContainer">
+    <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transportations" EntityType="Self.Transportations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trips" EntityType="Self.Trips" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Waypoints" EntityType="Self.Waypoints" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_Transportation_dbo_ArrivingWaypoint_Id" Association="Self.FK_dbo_Transportation_dbo_ArrivingWaypoint_Id">
+      <End Role="Waypoints" EntitySet="Waypoints" />
+      <End Role="Transportations" EntitySet="Transportations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Transportation_dbo_DepartingWaypoint_Id" Association="Self.FK_dbo_Transportation_dbo_DepartingWaypoint_Id">
+      <End Role="Waypoints" EntitySet="Waypoints" />
+      <End Role="Transportations" EntitySet="Transportations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Transportation_dbo_Trip_Id" Association="Self.FK_dbo_Transportation_dbo_Trip_Id">
+      <End Role="Trips" EntitySet="Trips" />
+      <End Role="Transportations" EntitySet="Transportations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Trip_dbo_User_Id" Association="Self.FK_dbo_Trip_dbo_User_Id">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Trips" EntitySet="Trips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Waypoint_dbo_Trip_Id" Association="Self.FK_dbo_Waypoint_dbo_Trip_Id">
+      <End Role="Trips" EntitySet="Trips" />
+      <End Role="Waypoints" EntitySet="Waypoints" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>
