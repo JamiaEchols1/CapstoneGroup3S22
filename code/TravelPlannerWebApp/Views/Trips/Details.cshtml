@@ -4,14 +4,13 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Trip Details</h2>
 
 <div>
-    <h4>Trip</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Trip.Name)
+            Destination
         </dt>
 
         <dd>
@@ -19,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Trip.StartDate)
+            Start Date
         </dt>
 
         <dd>
@@ -27,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Trip.EndDate)
+            End Date
         </dt>
 
         <dd>
@@ -37,22 +36,17 @@
 </div>
 
 <div>
-    <h4>Trip</h4>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Trip.Name)
+                Waypoints
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Trip.Name)
+                Start Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Trip.Name)
+                Options
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Trip.Name)
-            </th>
-            <th></th>
         </tr>
 
         @foreach (var item in Model.Waypoints)

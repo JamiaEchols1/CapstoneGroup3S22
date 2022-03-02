@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
+using WebApplication4.Models;
 using WebApplication4.ViewModels;
 
 namespace WebApplication4.Controllers
@@ -61,7 +62,7 @@ namespace WebApplication4.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate")] Trip trip)
+        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate")] AddedTrip trip)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +72,13 @@ namespace WebApplication4.Controllers
             }
 
             ViewBag.UserId = new SelectList(db.Users, "Id", "Username", trip.UserId);
-            LoggedUser.selectedTrip = trip;
+            LoggedUser.selectedTrip = new Trip() 
+            {
+                UserId = trip.UserId,
+                Id = trip.Id,
+                EndDate = trip.EndDate,
+                StartDate = trip.StartDate
+            };
             return View(trip);
         }
 
