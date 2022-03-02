@@ -111,3 +111,47 @@ C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDes
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\Settings.baml
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\Trips.baml
 C:\Users\jamia\source\repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Themes\Generic.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerDesktopApp.exe.config
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerDesktopApp.exe
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerDesktopApp.pdb
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\EntityFramework.dll
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerLibrary.dll
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerLibrary.pdb
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerLibrary.dll.config
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\EntityFramework.xml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.csproj.AssemblyReference.cache
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\MainWindow.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddLodging.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddTrip.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddWaypoint.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\Landing.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\LodgingInfo.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\Login.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\Settings.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\TripInfo.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\WaypointInfo.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\App.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp_MarkupCompile.cache
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp_MarkupCompile.lref
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\MainWindow.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddLodging.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddTrip.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddWaypoint.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\Landing.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\LodgingInfo.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\Login.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\Settings.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\TripInfo.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\WaypointInfo.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Themes\Generic.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.g.resources
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.Properties.Resources.resources
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.csproj.GenerateResource.cache
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.csproj.CoreCompileInputs.cache
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.csproj.CopyComplete
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.exe
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.pdb

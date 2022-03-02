@@ -41,7 +41,8 @@ namespace TravelPlannerLibrary.DAL
 
             Waypoint waypoint = new Waypoint();
             waypoint.Location = location;
-            waypoint.DateTime = time;
+            waypoint.StartDateTime = time;
+            waypoint.EndDateTime = time.AddDays(1);
             waypoint.TripId = tripId;
             waypoint.Id = db.Waypoints.Count();
            

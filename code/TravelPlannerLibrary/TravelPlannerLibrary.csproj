@@ -57,9 +57,6 @@
     <Compile Include="DAL\LoginDAL.cs" />
     <Compile Include="DAL\TripDAL.cs" />
     <Compile Include="DAL\WaypointDAL.cs" />
-    <Compile Include="Models\C__RefactorLog.cs">
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Lodging.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -69,15 +66,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Models.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Models.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Models.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transportation.cs">
+      <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Trip.cs">
       <DependentUpon>Models.tt</DependentUpon>

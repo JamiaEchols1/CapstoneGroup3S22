@@ -72,8 +72,8 @@ namespace TravelPlannerUnitTests
 
             var waypointData = new List<Waypoint>
             {
-                new Waypoint {Location = "Nowhere", DateTime = DateTime.Now, TripId = 0, Id = 0},
-                new Waypoint {Location = "Somewhere", DateTime = DateTime.Now.AddDays(1), TripId = 0, Id = 1}
+                new Waypoint {Location = "Nowhere", StartDateTime = DateTime.Now, TripId = 0, Id = 0},
+                new Waypoint {Location = "Somewhere", StartDateTime = DateTime.Now.AddDays(1), TripId = 0, Id = 1}
             }.AsQueryable();
 
             var mockSetTrip = new Mock<DbSet<Trip>>();

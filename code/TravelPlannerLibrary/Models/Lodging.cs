@@ -21,10 +21,5 @@ namespace TravelPlannerLibrary.Models
         public System.DateTime EndTime { get; set; }
     
         public virtual Trip Trip { get; set; }
-
-        public override string ToString()
-        {
-            return this.Location + ", Start Date: " + this.StartTime + ", End Time: " + this.EndTime;
-        }
     }
 }

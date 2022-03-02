@@ -18,6 +18,7 @@ namespace TravelPlannerLibrary.Models
         public Trip()
         {
             this.Lodgings = new HashSet<Lodging>();
+            this.Transportations = new HashSet<Transportation>();
             this.Waypoints = new HashSet<Waypoint>();
         }
     
@@ -29,13 +30,10 @@ namespace TravelPlannerLibrary.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lodging> Lodgings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transportation> Transportations { get; set; }
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Waypoint> Waypoints { get; set; }
-
-        public override string ToString()
-        {
-            return this.Name + ", Start Date:" + this.StartDate + ", End Date: " + this.EndDate;
-        }
     }
 }
