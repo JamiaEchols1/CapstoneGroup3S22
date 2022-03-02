@@ -43,7 +43,7 @@ namespace TravelPlannerLibrary.DAL
             waypoint.Location = location;
             waypoint.DateTime = time;
             waypoint.TripId = tripId;
-            waypoint.Id = db.Waypoints.Count();
+            waypoint.Id = FindNextID();
            
             db.Waypoints.Add(waypoint);
             db.SaveChanges();
@@ -54,6 +54,23 @@ namespace TravelPlannerLibrary.DAL
         {
             db.Waypoints.Remove(waypoint);
             return db.SaveChanges();
+        }
+
+        public static Waypoint FindWaypointByID(int id)
+        {
+            Waypoint waypoint = db.Waypoints.Find(id);
+            return waypoint;
+        }
+
+        public int FindNextID()
+        {
+            if (db.Waypoints.Count() == 0)
+            {
+                return 0;
+            }
+            var waypointId = db.Waypoints.OrderByDescending(t => t.Id).FirstOrDefault().Id;
+            waypointId++;
+            return waypointId;
         }
     }
 }

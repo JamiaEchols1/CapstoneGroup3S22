@@ -128,9 +128,7 @@ namespace WebApplication4.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Trip trip = db.Trips.Find(id);
-            db.Trips.Remove(trip);
-            db.SaveChanges();
+            tripDAL.RemoveTrip(id);
             return RedirectToAction("Index");
         }
 

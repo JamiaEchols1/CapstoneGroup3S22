@@ -116,7 +116,8 @@ namespace WebApplication4.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Waypoint waypoint = db.Waypoints.Find(id);
+            int validatedId = (int) id;
+            Waypoint waypoint = WaypointDAL.FindWaypointByID(validatedId);
             if (waypoint == null)
             {
                 return HttpNotFound();
@@ -129,9 +130,8 @@ namespace WebApplication4.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Waypoint waypoint = db.Waypoints.Find(id);
-            db.Waypoints.Remove(waypoint);
-            db.SaveChanges();
+            Waypoint waypoint = WaypointDAL.FindWaypointByID(id);
+            WaypointDAL.RemoveWaypoint(waypoint);
             return RedirectToAction("Index");
         }
 

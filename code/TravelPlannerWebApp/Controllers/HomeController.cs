@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
+using WebApplication4.Models;
 
 namespace WebApplication4.Controllers
 {
@@ -28,11 +30,36 @@ namespace WebApplication4.Controllers
             return View();
         }
 
-        public ActionResult Logout()
+        public ActionResult Login()
         {
-            ViewBag.Message = "So you want to logout, huh?";
-            LoggedUser.user = null;
-            return View("../Login/Authenticate");
+            LoggedUser.user = null; 
+            return View();
+        }
+
+        [HttpPost, ActionName("Login")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AuthenticateLogin([Bind(Include = "Username,Password")] UserCredentials user)
+        {
+            if (ModelState.IsValid)
+            {
+                LoginDAL loginDal = new LoginDAL();
+                var loggedUser = loginDal.Login(user.Username, user.Password);
+
+                if (loggedUser != null)
+                {
+                    LoggedUser.user = new TravelPlannerLibrary.Models.User()
+                    {
+                        Username = user.Username,
+                        Password = user.Password,
+                        Id = loggedUser.Id
+                    };
+                    return RedirectToAction("../Trips/Index");
+                }
+
+
+            }
+
+            return RedirectToAction("Login");
         }
     }
 }
