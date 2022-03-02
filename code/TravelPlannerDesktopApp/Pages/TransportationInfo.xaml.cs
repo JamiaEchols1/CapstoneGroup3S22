@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
@@ -47,6 +48,14 @@ namespace TravelPlannerDesktopApp.Pages
             this._transportationDAL.DeleteTransportation(this.transportation);
             TripInfo tripInfo = new TripInfo();
             NavigationService.Navigate(tripInfo);
+        }
+
+        private void Grid_Click(object sender, RoutedEventArgs e)
+        {
+
+            var ClickedButton = e.OriginalSource as NavButton;
+
+            NavigationService.Navigate(ClickedButton.NavUri);
         }
     }
 }

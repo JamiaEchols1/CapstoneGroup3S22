@@ -45,6 +45,15 @@ namespace TravelPlannerDesktopApp.Pages
                 }
                 DateTime startDate = LoggedUser.selectedWaypoint.EndDateTime;
                 DateTime endTime = waypoint.StartDateTime;
+                if (this._waypointDal.GetOverlappingWaypoints(startDate, endTime).Count != 0)
+                {
+                    throw new Exception("Tranportation must not overlap with waypoints");
+                }
+                if (this._transportationDal.GetOverlappingTransportation(startDate, endTime).Count != 0)
+                {
+                    throw new Exception("Tranportation must not overlap with other transportation");
+                }
+
                 this._transportationDal.CreateANewTransportation(LoggedUser.selectedWaypoint.Id, waypoint.Id, LoggedUser.selectedTrip.Id, startDate, endTime, descriptionTextBox.Text);
                 WaypointInfo waypointInfo = new WaypointInfo();
                 NavigationService.Navigate(waypointInfo);

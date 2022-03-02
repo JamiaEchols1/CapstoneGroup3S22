@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelPlannerLibrary.Models;
+using TravelPlannerLibrary.Util;
 
 namespace TravelPlannerLibrary.DAL
 {
@@ -29,6 +30,39 @@ namespace TravelPlannerLibrary.DAL
 
         public int CreateANewTransportation(int departingWaypointId, int arrivalWaypointId, int tripId, DateTime startTime, DateTime endTime, string Description)
         {
+            if (Description == null)
+            {
+                throw new ArgumentNullException("Description cannot be null");
+            }
+
+            if (startTime == null)
+            {
+                throw new ArgumentNullException("Must enter a start time");
+            }
+            if (endTime == null)
+            {
+                throw new ArgumentNullException("Must enter an end time");
+            }
+            if (LoggedUser.selectedTrip.StartDate.CompareTo(startTime) > 0)
+            {
+                throw new ArgumentException("Start date must be on or after trip start date");
+            }
+            if (startTime.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
+            {
+                throw new ArgumentException("Start date must be before trip end date");
+            }
+            if (LoggedUser.selectedTrip.StartDate.CompareTo(endTime) >= 0)
+            {
+                throw new ArgumentException("End date must be after trip start date");
+            }
+            if (endTime.CompareTo(LoggedUser.selectedTrip.EndDate) > 0)
+            {
+                throw new ArgumentException("End date must be on or before trip end date");
+            }
+            if (startTime.CompareTo(endTime) > 0)
+            {
+                throw new ArgumentException("End date must be on or after selected start date");
+            }
             Transportation transportation = new Transportation();
             transportation.Id = db.Transportations.Count();
             transportation.TripId = tripId;
@@ -52,6 +86,22 @@ namespace TravelPlannerLibrary.DAL
         {
             db.Transportations.Remove(transportation);
             return db.SaveChanges();
+        }
+
+        public List<Transportation> GetOverlappingTransportation(DateTime newStartTime, DateTime newEndTime)
+        {
+            List<Transportation> tripTransportation = this.GetTransportations(LoggedUser.selectedTrip.Id);
+            List<Transportation> overlappingTransportation = new List<Transportation>();
+
+            foreach (Transportation current in tripTransportation)
+            {
+                if (TimeChecker.timesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime))
+                {
+                    overlappingTransportation.Add(current);
+                }
+            }
+            return overlappingTransportation;
+
         }
     }
 }

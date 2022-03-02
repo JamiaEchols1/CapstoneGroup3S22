@@ -32,5 +32,10 @@ namespace TravelPlannerLibrary.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transportation> Transportations1 { get; set; }
         public virtual Trip Trip { get; set; }
+
+        public override string ToString()
+        {
+            return "Waypoint: " + this.Location + ", Start: " + this.StartDateTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " + this.EndDateTime.ToString("MM/dd/yyyy h:mm tt");
+        }
     }
 }

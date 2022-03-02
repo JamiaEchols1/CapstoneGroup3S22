@@ -25,5 +25,10 @@ namespace TravelPlannerLibrary.Models
         public virtual Waypoint Waypoint { get; set; }
         public virtual Waypoint Waypoint1 { get; set; }
         public virtual Trip Trip { get; set; }
+
+        public override string ToString()
+        {
+            return "Transportation: " + "Start: " + this.StartTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " + this.EndTime.ToString("MM/dd/yyyy h:mm tt");
+        }
     }
 }

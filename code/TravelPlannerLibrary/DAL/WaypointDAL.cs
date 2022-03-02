@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TravelPlannerLibrary.Models;
+using TravelPlannerLibrary.Util;
 
 namespace TravelPlannerLibrary.DAL
 {
@@ -77,6 +78,22 @@ namespace TravelPlannerLibrary.DAL
         public Waypoint GetWaypoint(int waypointId)
         {
             return db.Waypoints.Where(w => w.Id == waypointId).FirstOrDefault();
+        }
+
+        public List<Waypoint> GetOverlappingWaypoints(DateTime newStartTime, DateTime newEndTime)
+        {
+            List<Waypoint> tripWaypoints = this.GetWaypoints(LoggedUser.selectedTrip.Id);
+            List<Waypoint> overlappingWaypoints = new List<Waypoint>();
+
+            foreach (Waypoint current in tripWaypoints)
+            {
+                if (TimeChecker.timesOverlapping(newStartTime, newEndTime, current.StartDateTime, current.EndDateTime))
+                {
+                    overlappingWaypoints.Add(current);
+                }
+            }
+            return overlappingWaypoints;
+
         }
     }
 }
