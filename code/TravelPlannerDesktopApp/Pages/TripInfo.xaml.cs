@@ -25,13 +25,17 @@ namespace TravelPlannerDesktopApp.Pages
     {
         private WaypointDAL _waypointDal;
         private LodgingDAL _lodgingDal;
+        private TransportationDAL _transportationDal;
         public TripInfo()
         {
             this._waypointDal = new WaypointDAL();
+            this._transportationDal = new TransportationDAL();
             this._lodgingDal = new LodgingDAL();
             InitializeComponent();
             this.waypointsListBox.ItemsSource = this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id);
             this.lodgingListBox.ItemsSource = this._lodgingDal.GetLodgings(LoggedUser.selectedTrip.Id);
+            //this.transportationListBox.ItemsSource = this._transportationDal.GetTransportations(LoggedUser.selectedTrip.Id);
+            //add to waypoints list box
             this.setSelectedTripText();
         }
 

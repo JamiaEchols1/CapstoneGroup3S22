@@ -68,6 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\TimeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -77,11 +81,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\NavButton.cs" />
+    <Compile Include="Controls\TimeControl.xaml.cs">
+      <DependentUpon>TimeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AddLodging.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AddTransportationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,6 +120,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\TransportationInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\TripInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +140,9 @@
   <ItemGroup>
     <Compile Include="Pages\AddLodging.xaml.cs">
       <DependentUpon>AddLodging.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AddTransportationPage.xaml.cs">
+      <DependentUpon>AddTransportationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AddTrip.xaml.cs">
       <DependentUpon>AddTrip.xaml</DependentUpon>
@@ -143,6 +161,9 @@
     </Compile>
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TransportationInfo.xaml.cs">
+      <DependentUpon>TransportationInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TripInfo.xaml.cs">
       <DependentUpon>TripInfo.xaml</DependentUpon>
