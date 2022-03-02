@@ -64,7 +64,7 @@ namespace TravelPlannerLibrary.DAL
             {
                 return 0;
             }
-            var tripId = db.Trips.OrderByDescending(t => t.Id).FirstOrDefault().Id;
+            var tripId = db.Trips.Max(wp => wp.Id); ;
             tripId++;
             return tripId;
         }

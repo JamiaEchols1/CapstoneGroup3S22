@@ -68,7 +68,7 @@ namespace TravelPlannerLibrary.DAL
             {
                 return 0;
             }
-            var waypointId = db.Waypoints.OrderByDescending(t => t.Id).FirstOrDefault().Id;
+            var waypointId = db.Waypoints.Max(wp => wp.Id);
             waypointId++;
             return waypointId;
         }
