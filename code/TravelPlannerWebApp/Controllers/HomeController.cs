@@ -55,6 +55,12 @@ namespace WebApplication4.Controllers
                     };
                     return RedirectToAction("../Trips/Index");
                 }
+                else
+                {
+                    ModelState.AddModelError(nameof(UserCredentials.Username), "Username or Password is incorrect");
+                    ModelState.AddModelError(nameof(UserCredentials.Password), "Username or Password is incorrect");
+                    return View();
+                }
 
 
             }
