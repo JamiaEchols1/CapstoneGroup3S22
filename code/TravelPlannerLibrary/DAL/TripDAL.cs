@@ -32,7 +32,7 @@ namespace TravelPlannerLibrary.DAL
                 throw new ArgumentException("endDate date must be after start date");
             }
             Trip trip = new Trip();
-            trip.Id = _db.Trips.Count();
+            trip.Id = FindNextID();
             trip.Name = name;
             trip.StartDate = startDate; 
             trip.EndDate = endDate;
@@ -40,6 +40,8 @@ namespace TravelPlannerLibrary.DAL
             _db.Trips.Add(trip);
             return _db.SaveChanges();
         }
+
+        public List<Trip> GetTrips(int userId) => _db.Trips.Where(t => t.UserId == userId).OrderBy(t => t.StartDate).ToList();
 
         public void CreateTrip(Trip trip)
         {
@@ -62,8 +64,22 @@ namespace TravelPlannerLibrary.DAL
             _db.SaveChanges();
         }
 
-        public List<Trip> GetTrips(int userId) => _db.Trips.Where(t => t.UserId == userId).ToList();
+        public int FindNextID()
+        {
+            if (_db.Trips.Count() == 0)
+            {
+                return 0;
+            }
+            var tripId = _db.Trips.Max(wp => wp.Id); ;
+            tripId++;
+            return tripId;
+        }
 
-
+        public void RemoveTrip(int id)
+        {
+            Trip trip = _db.Trips.Find(id);
+            _db.Trips.Remove(trip);
+            _db.SaveChanges();
+        }
     }
 }

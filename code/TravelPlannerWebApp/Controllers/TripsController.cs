@@ -7,7 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TravelPlannerLibrary;
+using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
+using WebApplication4.Models;
+using WebApplication4.ViewModels;
 
 namespace WebApplication4.Controllers
 {
@@ -15,11 +18,17 @@ namespace WebApplication4.Controllers
     {
         private TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
 
+        private TripDetailsViewModel viewmodel = new TripDetailsViewModel();
+
+        private TripDAL tripDAL = new TripDAL();
+
+        private WaypointDAL waypointDAL = new WaypointDAL();
+
         // GET: Trips
         public ActionResult Index()
         {
-            var trips = db.Trips.Include(t => t.User);
-            return View(trips.ToList());
+            var trips = tripDAL.GetTrips(LoggedUser.user.Id);
+            return View(trips);
         }
 
         // GET: Trips/Details/5
@@ -34,7 +43,11 @@ namespace WebApplication4.Controllers
             {
                 return HttpNotFound();
             }
-            return View(trip);
+            viewmodel.Trip = trip;
+            viewmodel.Waypoints = waypointDAL.GetWaypoints(trip.Id);
+            LoggedUser.selectedTrip = trip;
+
+            return View(viewmodel);
         }
 
         // GET: Trips/Create
@@ -49,24 +62,23 @@ namespace WebApplication4.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate")] Trip trip)
+        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate")] AddedTrip trip)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    trip.Id = db.Trips.Count();
-                    trip.UserId = LoggedUser.user.Id;
-                    db.Trips.Add(trip);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                } catch (Exception ex)
-                {
-                    return View(trip);
-                }
+                trip.UserId = LoggedUser.user.Id;
+                tripDAL.CreateNewTrip(trip.Name, trip.StartDate, trip.EndDate, trip.UserId);
+                return RedirectToAction("Index");
             }
 
             ViewBag.UserId = new SelectList(db.Users, "Id", "Username", trip.UserId);
+            LoggedUser.selectedTrip = new Trip() 
+            {
+                UserId = trip.UserId,
+                Id = trip.Id,
+                EndDate = trip.EndDate,
+                StartDate = trip.StartDate
+            };
             return View(trip);
         }
 
@@ -123,9 +135,7 @@ namespace WebApplication4.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Trip trip = db.Trips.Find(id);
-            db.Trips.Remove(trip);
-            db.SaveChanges();
+            tripDAL.RemoveTrip(id);
             return RedirectToAction("Index");
         }
 

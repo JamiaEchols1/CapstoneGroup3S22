@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TransportationInfo">
 
-    <Grid  Background="White" ButtonBase.Click="Grid_Click">
+    <Grid  Background="White">
         <TextBlock x:Name="startTimeTextBlock" Text="Start Time: " HorizontalAlignment="Left" Margin="295,114,0,0" VerticalAlignment="Top"/>
         <TextBlock x:Name="endTimeTextBlock" Text="End Time: " HorizontalAlignment="Left" Margin="295,144,0,0" VerticalAlignment="Top"/>
         <TextBlock x:Name="toTextBlock" Text="To:" HorizontalAlignment="Left" Margin="295,174,0,0" VerticalAlignment="Top"/>
@@ -18,7 +18,7 @@
         <Button x:Name="removeTransportationButton" Content="Remove" HorizontalAlignment="Left" Margin="489,325,0,0" VerticalAlignment="Top" Click="removeTransportationButton_Click"/>
 
         <WrapPanel  Margin="713,5,5,335">
-            <n:NavButton x:Name="backButton" Text="Back" ImageSource="/Images/Back.png" NavUri="Pages/TripInfo.xaml" Width="70"/>
+            <n:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/Back.png" NavUri="Pages/TripInfo.xaml" Width="70"/>
         </WrapPanel>
     </Grid>
 </Page>

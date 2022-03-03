@@ -19,19 +19,8 @@ namespace TravelPlannerLibrary.DAL
 
         public User Login(string username, string password)
         {
-            if (string.IsNullOrEmpty(username))
-            {
-                string parameterName = "username";
-                throw new ArgumentNullException(parameterName, "Must enter username");
-            }
-
-            if (string.IsNullOrEmpty(password))
-            {
-                string parameterName = "password";
-                throw new ArgumentNullException(parameterName, "Must enter password");
-            }
             string encryptedPassword = Encrypt(password);
-            User loggedUser = _db.Users.Where(u => u.Username == username).Where(u => u.Password == encryptedPassword).FirstOrDefault();
+            User loggedUser = _db.Users.Where(u => u.Username == username).FirstOrDefault(u => u.Password == encryptedPassword);
             return loggedUser;
         }
 
@@ -48,6 +37,12 @@ namespace TravelPlannerLibrary.DAL
         public static string Encrypt(String decrypted)
         {
             string hash = "Bbouwmanlmfao@2022$";
+
+            if (decrypted == null)
+            {
+                return null;
+            }
+
             byte[] data = UTF8Encoding.UTF8.GetBytes(decrypted);
 
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();

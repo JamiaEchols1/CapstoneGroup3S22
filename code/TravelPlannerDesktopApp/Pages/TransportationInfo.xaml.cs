@@ -59,9 +59,8 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
-        private void Grid_Click(object sender, RoutedEventArgs e)
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
-
             var ClickedButton = e.OriginalSource as NavButton;
 
             NavigationService.Navigate(ClickedButton.NavUri);
