@@ -11,33 +11,52 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Waypoint</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-horizontal">
+    <h4>Waypoint</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add Waypoint" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.StartDateTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EndDateTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add Waypoint" class="btn btn-default" />
+        </div>
+    </div>
+
+    @if (ViewBag.Overlaps != null && ViewBag.Overlaps.Count > 0)
+    {
+        <p style="color:red">The waypoint was not added because of the following conflicts: </p>
+        <ul>
+            @foreach (var conflict in ViewBag.Overlaps)
+            {
+                <li style="color:red">@conflict.Location : @conflict.StartDateTime - @conflict.EndDateTime</li>
+            }
+        </ul>
+    }
+</div>
 }
 
 <div>
@@ -50,11 +69,24 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#DateTime').datetimepicker({
+        $('#StartDateTime').datetimepicker({
             minDate: new moment("@ViewBag.StartDate"),
             maxDate: new moment("@ViewBag.EndDate")
         }).on('dp.change', function (e) {
             $(this).data('DateTimePicker').hide();
+        });
+       $('#EndDateTime').datetimepicker({
+            minDate: new moment("@ViewBag.StartDate"),
+            maxDate: new moment("@ViewBag.EndDate")
+        }).on('dp.change', function (e) {
+            $(this).data('DateTimePicker').hide();
+        });
+
+        $("#StartDateTime").on("dp.change", function (e) {
+            $('#EndDateTime').data("DateTimePicker").minDate(e.date);
+        });
+        $("#EndDateTime").on("dp.change", function (e) {
+            $('#StartDateTime').data("DateTimePicker").maxDate(e.date);
         });
     });
 </script>

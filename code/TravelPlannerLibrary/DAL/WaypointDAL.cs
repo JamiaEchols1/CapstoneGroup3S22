@@ -75,12 +75,6 @@ namespace TravelPlannerLibrary.DAL
             return db.SaveChanges();
         }
 
-        public static Waypoint FindWaypointByID(int id)
-        {
-            Waypoint waypoint = db.Waypoints.Find(id);
-            return waypoint;
-        }
-
         public int FindNextID()
         {
             if (db.Waypoints.Count() == 0)

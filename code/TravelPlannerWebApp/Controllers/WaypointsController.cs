@@ -58,6 +58,10 @@ namespace WebApplication4.Controllers
             LoggedUser.selectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
             ViewBag.StartDate = LoggedUser.selectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.selectedTrip.EndDate;
+            if (AddedWaypoint.ConflictingWaypoints.Count > 0)
+            {
+                ViewBag.Overlaps = AddedWaypoint.ConflictingWaypoints;
+            }
             return View();
         }
 
@@ -66,15 +70,24 @@ namespace WebApplication4.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Location,DateTime")] AddedWaypoint waypoint)
+        public ActionResult Create([Bind(Include = "Location,StartDateTime,EndDateTime")] AddedWaypoint waypoint)
         {
             if (ModelState.IsValid)
             {
                 waypoint.TripId = LoggedUser.selectedTrip.Id;
-                waypointDAL.CreateNewWaypoint(waypoint.Location, waypoint.StartDateTime, waypoint.EndDateTime, waypoint.TripId);
-                return RedirectToAction("Index");
+                var overlaps = waypointDAL.GetOverlappingWaypoints(waypoint.StartDateTime, waypoint.EndDateTime);
+                if (overlaps.Count > 0)
+                {
+                    AddedWaypoint.ConflictingWaypoints = overlaps;
+                    return RedirectToAction("Create", waypoint.TripId);
+                }
+                else
+                {
+                    waypointDAL.CreateNewWaypoint(waypoint.Location, waypoint.StartDateTime, waypoint.EndDateTime, waypoint.TripId);
+                    AddedWaypoint.ConflictingWaypoints = new List<Waypoint>();
+                    return RedirectToAction("Index");
+                }
             }
-
             ViewBag.TripId = new SelectList(db.Trips, "Id", "Name", waypoint.TripId);
             return View(waypoint);
         }
@@ -120,7 +133,7 @@ namespace WebApplication4.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             int validatedId = (int) id;
-            Waypoint waypoint = WaypointDAL.FindWaypointByID(validatedId);
+            Waypoint waypoint = waypointDAL.GetWaypoint(validatedId);
             if (waypoint == null)
             {
                 return HttpNotFound();
@@ -133,7 +146,7 @@ namespace WebApplication4.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Waypoint waypoint = WaypointDAL.FindWaypointByID(id);
+            Waypoint waypoint = waypointDAL.GetWaypoint(id);
             WaypointDAL.RemoveWaypoint(waypoint);
             return RedirectToAction("Index");
         }

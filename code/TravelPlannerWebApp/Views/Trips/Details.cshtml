@@ -45,25 +45,31 @@
                 Start Date
             </th>
             <th>
+                End Date
+            </th>
+            <th>
                 Options
             </th>
         </tr>
 
         @foreach (var item in Model.Waypoints)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDateTime)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "../Waypoints/Create", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "../Waypoints/Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = item.Id })
-                </td>
-            </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDateTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "../Waypoints/Create", new { id = item.Id }) |
+            @Html.ActionLink("Details", "../Waypoints/Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = item.Id })
+        </td>
+    </tr>
         }
     </table> 
 </div>
