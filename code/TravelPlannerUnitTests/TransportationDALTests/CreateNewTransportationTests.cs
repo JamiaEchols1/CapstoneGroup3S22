@@ -62,65 +62,7 @@ namespace TravelPlannerUnitTests
         #endregion
 
         [TestMethod]
-        public void TestGetTransportation()
-        {
-            Waypoint waypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-4), EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0 };
-            var data = new List<Transportation>
-            {
-                new Transportation { Waypoint = waypoint, Description = "test transportation", StartTime = DateTime.Now, EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId= 2, Id = 0},
-                new Transportation { Waypoint = waypoint, Description = "test transportation 1", StartTime = DateTime.Now, EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId= 3, Id = 1},
-                new Transportation { Waypoint = waypoint, Description = "test transportation 2", StartTime = DateTime.Now, EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId= 1, Id = 2},
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Transportation>>();
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
-            mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
-
-            var service = new TransportationDAL(mockContext.Object);
-            var transportations = service.GetTransportation(1, 2);
-
-            Assert.AreEqual(1, transportations.Count);
-            Assert.AreEqual(0, transportations[0].Id);
-            Assert.AreEqual(1, transportations[0].DepartingWaypointId);
-            Assert.AreEqual(2, transportations[0].ArrivingWaypointId);
-            Assert.AreEqual("test transportation", transportations[0].Description);
-        }
-
-        [TestMethod]
-        public void TestGetTransportations()
-        {
-            Waypoint waypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-40), EndDateTime = DateTime.Now.AddMinutes(-5), TripId = 0, Id = 0 };
-            var data = new List<Transportation>
-            {
-                new Transportation { Waypoint = waypoint, Description = "test transportation", StartTime = DateTime.Now, EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId= 2, Id = 0},
-                new Transportation { Waypoint = waypoint, Description = "test transportation 1", StartTime = DateTime.Now, EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 2, ArrivingWaypointId= 3, Id = 1},
-                new Transportation { Waypoint = waypoint, Description = "test transportation 2", StartTime = DateTime.Now, EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId= 1, Id = 2},
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Transportation>>();
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
-            mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
-
-            var service = new TransportationDAL(mockContext.Object);
-            var transportations = service.GetTransportations(1);
-
-            Assert.AreEqual(2, transportations.Count);
-            Assert.AreEqual(0, transportations[0].Id);
-            Assert.AreEqual(1, transportations[1].Id);
-        }
-
-        [TestMethod]
-        public void TestCreateTransportationWithNullDescription()
+        public void TestNullDescription()
         {
             Waypoint waypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-40), EndDateTime = DateTime.Now.AddMinutes(-5), TripId = 0, Id = 0 };
             var data = new List<Transportation>
@@ -144,7 +86,7 @@ namespace TravelPlannerUnitTests
         }
 
         [TestMethod]
-        public void TestCreateTransportationWithEmptyDescription()
+        public void TestEmptyDescription()
         {
             Waypoint waypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-40), EndDateTime = DateTime.Now.AddMinutes(-5), TripId = 0, Id = 0 };
             var data = new List<Transportation>
@@ -168,7 +110,7 @@ namespace TravelPlannerUnitTests
         }
 
         [TestMethod]
-        public void TestCreateTransportationWithSameDepartAndArriveWaypoint()
+        public void TestSameDepartureAndArrivalWaypoint()
         {
             Waypoint waypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-40), EndDateTime = DateTime.Now.AddMinutes(-5), TripId = 0, Id = 0 };
             var data = new List<Transportation>
@@ -192,9 +134,9 @@ namespace TravelPlannerUnitTests
         }
 
         [TestMethod]
-        public void TestCreateTransportationWithStartTimeAfterEndTime()
+        public void TestStartTimeAfterEndTime()
         {
-            Waypoint waypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-40), EndDateTime = DateTime.Now.AddMinutes(-5), TripId = 0, Id = 0 };
+            Waypoint waypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-40), EndDateTime = DateTime.Now.AddMinutes(5), TripId = 0, Id = 0 };
             var data = new List<Transportation>
             {
                 new Transportation { Waypoint = waypoint, Description = "test transportation", StartTime = DateTime.Now, EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId= 2, Id = 0},
@@ -212,20 +154,18 @@ namespace TravelPlannerUnitTests
             mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
 
             var service = new TransportationDAL(mockContext.Object);
-            Assert.ThrowsException<ArgumentException>(() => service.CreateANewTransportation(1, 1, 2, DateTime.Now, DateTime.Now.AddMinutes(-7), "Description"));
+            Assert.ThrowsException<ArgumentException>(() => service.CreateANewTransportation(1, 0, 2, DateTime.Now, DateTime.Now.AddMinutes(-7), "Description"));
         }
 
-/*        [TestMethod]
-        public void TestDeleteTransportation()
+        [TestMethod]
+        public void TestStartTimeBeforeWaypointEndTime()
         {
-            Waypoint waypoint = new Waypoint { Location = "Nowhere", DateTime = DateTime.Now.AddMinutes(-4), TripId = 0, Id = 0 };
-            Transportation transportA = new Transportation { Waypoint = waypoint, Description = "test transportation 2", StartTime = DateTime.Now, EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 3, ArrivingWaypointId = 1, Id = 2 };
-
+            LoggedUser.selectedWaypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(4), EndDateTime = DateTime.Now.AddMinutes(34), TripId = 0, Id = 0 };
             var data = new List<Transportation>
             {
-                new Transportation { Waypoint = waypoint, Description = "test transportation", StartTime = DateTime.Now, EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId= 2, Id = 0},
-                new Transportation { Waypoint = waypoint, Description = "test transportation 1", StartTime = DateTime.Now, EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 2, ArrivingWaypointId= 3, Id = 1},
-                transportA
+                new Transportation { Description = "test transportation", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId= 2, Id = 0},
+                new Transportation { Description = "test transportation 1", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId= 3, Id = 1},
+                new Transportation { Description = "test transportation 2", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId= 1, Id = 2},
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Transportation>>();
@@ -236,11 +176,42 @@ namespace TravelPlannerUnitTests
 
             var mockContext = new Mock<TravelPlannerDatabaseEntities>();
             mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
-            mockContext.Object.Transportations.Contains(transportA);
 
             var service = new TransportationDAL(mockContext.Object);
+            Assert.ThrowsException<ArgumentException>(() => service.CreateANewTransportation(0, 1, 1, DateTime.Now.AddMinutes(33), DateTime.Now.AddMinutes(40), "Description"));
+            LoggedUser.selectedWaypoint = null;
+        }
+
+        [TestMethod]
+        public void TestValidTransportation()
+        {
+            LoggedUser.selectedWaypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33), EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0 };
+            var data = new List<Transportation>
+            {
+                new Transportation { Description = "test transportation", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId= 2, Id = 0},
+                new Transportation { Description = "test transportation 1", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId= 3, Id = 1},
+                new Transportation { Description = "test transportation 2", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId= 1, Id = 2},
+            }.AsQueryable();
+
+            var mockSet = new Mock<DbSet<Transportation>>();
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
+            mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
+            Boolean wasCalled = false;
             
-            Assert.IsFalse(mockContext.Object.Transportations.Contains(transportA));
-        }*/
+            mockContext.Setup(m => m.SaveChanges()).Callback(() => wasCalled = true);
+
+            var service = new TransportationDAL(mockContext.Object);
+
+            service.CreateANewTransportation(0, 1, 1, DateTime.Now.AddMinutes(40), DateTime.Now.AddMinutes(45),
+                "Description");
+
+            Assert.IsTrue(wasCalled);
+            LoggedUser.selectedWaypoint = null;
+        }
     }
 }

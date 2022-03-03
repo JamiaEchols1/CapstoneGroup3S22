@@ -23,10 +23,11 @@ namespace TravelPlannerDesktopApp.Pages
     /// </summary>
     public partial class WaypointInfo : Page
     {
-        private TransportationDAL _transportationDAL;
+        private WaypointDAL _waypointDal;
 
         public WaypointInfo()
         {
+            this._waypointDal = new WaypointDAL();
             InitializeComponent();
             this.setSelectedWaypointText();
         }
@@ -47,7 +48,7 @@ namespace TravelPlannerDesktopApp.Pages
         {
             try
             {
-                WaypointDAL.RemoveWaypoint(LoggedUser.selectedWaypoint);
+                this._waypointDal.RemoveWaypoint(LoggedUser.selectedWaypoint);
 
                 MessageBox.Show("Waypoint Deletion was Successful!");
 

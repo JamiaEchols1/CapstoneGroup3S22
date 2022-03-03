@@ -52,7 +52,7 @@ namespace TravelPlannerDesktopApp.Pages
             catch (Exception exception)
             {
 
-                MessageBox.Show("Error Creating Waypoint. " + exception.Message);
+                MessageBox.Show("Error Creating Logging. " + exception.Message);
             }
         }
 

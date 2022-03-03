@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using TravelPlannerLibrary.Models;
 using System.Security.Cryptography;
 
@@ -10,24 +9,35 @@ namespace TravelPlannerLibrary.DAL
 {
     public class LoginDAL
     {
-        private static TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
+        private static TravelPlannerDatabaseEntities _db = new TravelPlannerDatabaseEntities();
 
         public LoginDAL() { }
         public LoginDAL(TravelPlannerDatabaseEntities @object)
         {
-            db = @object;
+            _db = @object;
         }
 
         public User Login(string username, string password)
         {
-            var encryptedPassword = Encrypt(password);
-            User loggedUser = db.Users.Where(u => u.Username == username).Where(u => u.Password == encryptedPassword).FirstOrDefault<User>();
+            if (string.IsNullOrEmpty(username))
+            {
+                string parameterName = "username";
+                throw new ArgumentNullException(parameterName, "Must enter username");
+            }
+
+            if (string.IsNullOrEmpty(password))
+            {
+                string parameterName = "password";
+                throw new ArgumentNullException(parameterName, "Must enter password");
+            }
+            string encryptedPassword = Encrypt(password);
+            User loggedUser = _db.Users.Where(u => u.Username == username).Where(u => u.Password == encryptedPassword).FirstOrDefault();
             return loggedUser;
         }
 
         public List<User> GetAllUsers()
         {
-            var query = from b in db.Users
+            var query = from b in _db.Users
                         orderby b.Username
                         select b;
 
@@ -50,23 +60,6 @@ namespace TravelPlannerLibrary.DAL
             byte[] result = transform.TransformFinalBlock(data, 0, data.Length);
 
             return Convert.ToBase64String(result);
-        }
-
-        public static string Decrypt(String encrypted)
-        {
-            string hash = "Bbouwmanlmfao@2022$";
-            byte[] data = Convert.FromBase64String(encrypted);
-
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            TripleDESCryptoServiceProvider tripDES = new TripleDESCryptoServiceProvider();
-
-            tripDES.Key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(hash));
-            tripDES.Mode = CipherMode.ECB;
-
-            ICryptoTransform transform = tripDES.CreateDecryptor();
-            byte[] result = transform.TransformFinalBlock(data, 0, data.Length);
-
-            return UTF8Encoding.UTF8.GetString(result);
         }
     }
 }
