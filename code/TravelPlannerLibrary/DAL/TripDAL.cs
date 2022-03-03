@@ -20,7 +20,7 @@ namespace TravelPlannerLibrary.DAL
         public int CreateNewTrip(string name, DateTime startDate, DateTime endDate, int userId)
         {
             Trip trip = new Trip();
-            trip.Id = db.Trips.Count();
+            trip.Id = FindNextID();
             trip.Name = name;
             trip.StartDate = startDate; 
             trip.EndDate = endDate;
@@ -29,13 +29,25 @@ namespace TravelPlannerLibrary.DAL
             return db.SaveChanges();
         }
 
-        public void createTrip(Trip trip)
+        public List<Trip> GetTrips(int userId) => db.Trips.Where(t => t.UserId == userId).OrderBy(t => t.StartDate).ToList();
+
+        public void RemoveTrip(int id)
         {
-            db.Trips.Add(trip);
+            Trip trip = db.Trips.Find(id);
+            db.Trips.Remove(trip);
             db.SaveChanges();
         }
 
-        public List<Trip> GetTrips(int userId) => db.Trips.Where(t => t.UserId == userId).ToList();
+        public int FindNextID()
+        {
+            if (db.Trips.Count() == 0)
+            {
+                return 0;
+            }
+            var tripId = db.Trips.Max(wp => wp.Id); ;
+            tripId++;
+            return tripId;
+        }
 
 
     }

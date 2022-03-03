@@ -9,5 +9,14 @@
        None
 
 ** User actions
+<<<<<<< HEAD
+     Create
+       [dbo].[Trip] (Table)
+       [dbo].[User] (Table)
+       [dbo].[Waypoints] (Table)
+       [dbo].[FK_dbo.Trip_dbo.User_Id] (Foreign Key)
+       [dbo].[FK_dbo.Waypoint_dbo.Trip_Id] (Foreign Key)
+=======
+>>>>>>> origin/main
 
 ** Supporting actions

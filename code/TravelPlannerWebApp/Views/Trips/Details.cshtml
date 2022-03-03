@@ -1,50 +1,73 @@
-﻿@model TravelPlannerLibrary.Models.Trip
+﻿@model WebApplication4.ViewModels.TripDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Trip Details</h2>
 
 <div>
-    <h4>Trip</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            Destination
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Trip.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            Start Date
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+            @Html.DisplayFor(model => model.Trip.StartDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
+            End Date
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EndDate)
+            @Html.DisplayFor(model => model.Trip.EndDate)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.Username)
-        </dd>
-
     </dl>
 </div>
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                Waypoints
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                Options
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Waypoints)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDateTime)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "../Waypoints/Create", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "../Waypoints/Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table> 
+</div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Trip.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

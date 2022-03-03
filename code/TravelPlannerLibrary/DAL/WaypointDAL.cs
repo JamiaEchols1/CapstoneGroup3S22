@@ -19,7 +19,7 @@ namespace TravelPlannerLibrary.DAL
             db = @object;
         }
 
-        public List<Waypoint> GetWaypoints(int tripId) => db.Waypoints.Where(t => t.TripId == tripId).ToList();
+        public List<Waypoint> GetWaypoints(int tripId) => db.Waypoints.Where(t => t.TripId == tripId).OrderBy(t => t.StartDateTime).ToList();
 
         public Waypoint CreateNewWaypoint(string location, DateTime startTime, DateTime endTime, int tripId)
         {
@@ -62,7 +62,7 @@ namespace TravelPlannerLibrary.DAL
             waypoint.StartDateTime = startTime;
             waypoint.EndDateTime = endTime;
             waypoint.TripId = tripId;
-            waypoint.Id = db.Waypoints.Count();
+            waypoint.Id = FindNextID();
            
             db.Waypoints.Add(waypoint);
             db.SaveChanges();
@@ -73,6 +73,23 @@ namespace TravelPlannerLibrary.DAL
         {
             db.Waypoints.Remove(waypoint);
             return db.SaveChanges();
+        }
+
+        public static Waypoint FindWaypointByID(int id)
+        {
+            Waypoint waypoint = db.Waypoints.Find(id);
+            return waypoint;
+        }
+
+        public int FindNextID()
+        {
+            if (db.Waypoints.Count() == 0)
+            {
+                return 0;
+            }
+            var waypointId = db.Waypoints.Max(wp => wp.Id);
+            waypointId++;
+            return waypointId;
         }
 
         public Waypoint GetWaypoint(int waypointId)
