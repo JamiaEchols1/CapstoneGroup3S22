@@ -146,7 +146,7 @@ namespace TravelPlannerUnitTests.TripDALTests
             var service = new TripDAL(mockContext.Object);
 
             Trip trip = new Trip
-                { Name = "Trip4", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(10), UserId = 0 };
+                { Name = "Trip4", StartDate = DateTime.Now.AddDays(1), EndDate = DateTime.Now.AddDays(10), UserId = 0 };
 
 
             service.CreateTrip(trip);

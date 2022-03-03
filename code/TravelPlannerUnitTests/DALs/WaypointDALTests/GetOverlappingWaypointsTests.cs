@@ -56,7 +56,7 @@ namespace TravelPlannerUnitTests.WaypointDALTests
            
             var waypointService = new WaypointDAL(mockContext.Object);
 
-            Assert.AreEqual(2, waypointService.GetOverlappingWaypoints(DateTime.Now, DateTime.Now.AddDays(1)).Count());
+            Assert.AreEqual(2, waypointService.GetOverlappingWaypoints(DateTime.Now, DateTime.Now.AddDays(1).AddHours(-1)).Count());
             LoggedUser.selectedTrip = null;
         }
     }

@@ -14,7 +14,7 @@ namespace TravelPlannerUnitTests.TransportationDALTests
     public class DeleteTransportationTests
     {
         [TestMethod]
-        public void TestDeleteTransaction()
+        public void TestDeleteTransportation()
         {
             LoggedUser.selectedWaypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33), EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0 };
             Transportation transportation = new Transportation { Description = "Description", StartTime = DateTime.Now.AddMinutes(45), EndTime = DateTime.Now.AddMinutes(50), TripId = 2, ArrivingWaypointId = 1, DepartingWaypointId = 0 };

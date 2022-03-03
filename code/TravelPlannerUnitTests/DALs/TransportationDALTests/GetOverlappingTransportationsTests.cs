@@ -14,7 +14,7 @@ namespace TravelPlannerUnitTests.TransportationDALTests
     public class GetOverlappingTransportationsTests
     {
         [TestMethod]
-        public void TestGetOverLappingTransportations()
+        public void TestGetOverlappingTransportations()
         {
             LoggedUser.selectedTrip = new Trip
                 { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 };

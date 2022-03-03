@@ -30,14 +30,6 @@ namespace TravelPlannerLibrary.DAL
             {
                 throw new ArgumentException("Start date must be on or after trip start date");
             }
-            if (startTime.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
-            {
-                throw new ArgumentException("Start date must be before trip end date");
-            }
-            if (LoggedUser.selectedTrip.StartDate.CompareTo(endTime) >= 0)
-            {
-                throw new ArgumentException("End date must be after trip start date");
-            }
             if (endTime.CompareTo(LoggedUser.selectedTrip.EndDate) > 0)
             {
                 throw new ArgumentException("End date must be on or before trip end date");

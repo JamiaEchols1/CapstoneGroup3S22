@@ -45,9 +45,18 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void removeTransportationButton_Click(object sender, RoutedEventArgs e)
         {
-            this._transportationDAL.DeleteTransportation(this.transportation);
-            TripInfo tripInfo = new TripInfo();
-            NavigationService.Navigate(tripInfo);
+            try {
+                this._transportationDAL.DeleteTransportation(this.transportation);
+
+                MessageBox.Show("Transportation Deletion was Successful!");
+
+                NavigationService.Navigate(this.backButton.NavUri);
+            }
+            catch (Exception exception)
+            {
+
+                MessageBox.Show("Error Removing transportation. " + exception.Message);
+            }
         }
 
         private void Grid_Click(object sender, RoutedEventArgs e)

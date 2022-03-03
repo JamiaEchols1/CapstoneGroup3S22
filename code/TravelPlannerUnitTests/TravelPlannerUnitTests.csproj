@@ -71,26 +71,31 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LodgingDALTests\GetOverlappingLodgingsTests.cs" />
-    <Compile Include="LodgingDALTests\CreateNewLodgingTests.cs" />
-    <Compile Include="LodgingDALTests\GetLodgingsTests.cs" />
-    <Compile Include="LodgingDALTests\RemoveLodgingsTests.cs" />
-    <Compile Include="LoginDALTests\TestLogin.cs" />
+    <Compile Include="DALs\LodgingDALTests\GetOverlappingLodgingsTests.cs" />
+    <Compile Include="DALs\LodgingDALTests\CreateNewLodgingTests.cs" />
+    <Compile Include="DALs\LodgingDALTests\GetLodgingsTests.cs" />
+    <Compile Include="DALs\LodgingDALTests\RemoveLodgingsTests.cs" />
+    <Compile Include="DALs\LoginDALTests\TestLogin.cs" />
+    <Compile Include="Models\LodgingTests.cs" />
+    <Compile Include="Models\TripTests.cs" />
+    <Compile Include="Models\TransportationTests.cs" />
+    <Compile Include="Models\UserTests.cs" />
+    <Compile Include="Models\WaypointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransportationDALTests\GetTransportationTests.cs" />
-    <Compile Include="TransportationDALTests\GetTransportationsTests.cs" />
-    <Compile Include="TransportationDALTests\CreateNewTransportationOverrideTests.cs" />
-    <Compile Include="TransportationDALTests\DeleteTransportationTests.cs" />
-    <Compile Include="TransportationDALTests\GetOverlappingTransportationsTests.cs" />
-    <Compile Include="TripDALTests\CreateANewTripTests.cs" />
-    <Compile Include="TripDALTests\GetTripsTests.cs" />
-    <Compile Include="TripDALTests\CreateTripTests.cs" />
-    <Compile Include="WaypointDALTests\GetWaypointsTests.cs" />
-    <Compile Include="TransportationDALTests\CreateNewTransportationTests.cs" />
-    <Compile Include="WaypointDALTests\GetWaypointTests.cs" />
-    <Compile Include="WaypointDALTests\GetOverlappingWaypointsTests.cs" />
-    <Compile Include="WaypointDALTests\CreateNewWaypointTests.cs" />
-    <Compile Include="WaypointDALTests\RemoveWaypointsTests.cs" />
+    <Compile Include="DALs\TransportationDALTests\GetTransportationTests.cs" />
+    <Compile Include="DALs\TransportationDALTests\GetTransportationsTests.cs" />
+    <Compile Include="DALs\TransportationDALTests\CreateNewTransportationOverrideTests.cs" />
+    <Compile Include="DALs\TransportationDALTests\DeleteTransportationTests.cs" />
+    <Compile Include="DALs\TransportationDALTests\GetOverlappingTransportationsTests.cs" />
+    <Compile Include="DALs\TripDALTests\CreateANewTripTests.cs" />
+    <Compile Include="DALs\TripDALTests\GetTripsTests.cs" />
+    <Compile Include="DALs\TripDALTests\CreateTripTests.cs" />
+    <Compile Include="DALs\WaypointDALTests\GetWaypointsTests.cs" />
+    <Compile Include="DALs\TransportationDALTests\CreateNewTransportationTests.cs" />
+    <Compile Include="DALs\WaypointDALTests\GetWaypointTests.cs" />
+    <Compile Include="DALs\WaypointDALTests\GetOverlappingWaypointsTests.cs" />
+    <Compile Include="DALs\WaypointDALTests\CreateNewWaypointTests.cs" />
+    <Compile Include="DALs\WaypointDALTests\RemoveWaypointsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
