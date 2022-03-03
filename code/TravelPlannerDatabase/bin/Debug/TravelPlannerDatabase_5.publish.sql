@@ -15,8 +15,13 @@ SET NUMERIC_ROUNDABORT OFF;
 GO
 :setvar DatabaseName "TravelPlannerDatabase"
 :setvar DefaultFilePrefix "TravelPlannerDatabase"
+<<<<<<< HEAD
 :setvar DefaultDataPath "C:\Users\cupid\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\mssqllocaldb\"
 :setvar DefaultLogPath "C:\Users\cupid\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\mssqllocaldb\"
+=======
+:setvar DefaultDataPath "C:\Users\benev\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\MSSQLLocalDB\"
+:setvar DefaultLogPath "C:\Users\benev\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\MSSQLLocalDB\"
+>>>>>>> origin/main
 
 GO
 :on error exit
@@ -36,6 +41,7 @@ IF N'$(__IsSqlCmdEnabled)' NOT LIKE N'True'
 
 
 GO
+<<<<<<< HEAD
 USE [master];
 
 
@@ -67,10 +73,13 @@ IF EXISTS (SELECT 1
 
 
 GO
+=======
+>>>>>>> origin/main
 USE [$(DatabaseName)];
 
 
 GO
+<<<<<<< HEAD
 IF EXISTS (SELECT 1
            FROM   [master].[dbo].[sysdatabases]
            WHERE  [name] = N'$(DatabaseName)')
@@ -317,6 +326,8 @@ INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('80da94af-8818-43bf-869
 GO
 
 GO
+=======
+>>>>>>> origin/main
 /*
 Post-Deployment Script Template							
 --------------------------------------------------------------------------------------
@@ -331,6 +342,7 @@ Post-Deployment Script Template
 GO
 
 GO
+<<<<<<< HEAD
 DECLARE @VarDecimalSupported AS BIT;
 
 SELECT @VarDecimalSupported = 0;
@@ -349,6 +361,8 @@ IF (@VarDecimalSupported > 0)
 
 
 GO
+=======
+>>>>>>> origin/main
 PRINT N'Update complete.';
 
 

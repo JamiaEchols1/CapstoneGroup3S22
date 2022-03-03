@@ -12,7 +12,9 @@ namespace WebApplication4.Models
         [Required]
         public string Location { get; set; }
         [Required]
-        public System.DateTime DateTime { get; set; }
+        public System.DateTime StartDateTime { get; set; }
+        [Required]
+        public System.DateTime EndDateTime { get; set; }
         public int TripId { get; set; }
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestTrip.cs" />
     <Compile Include="TestWaypoint.cs" />
+    <Compile Include="TestTransportation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

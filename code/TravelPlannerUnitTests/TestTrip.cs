@@ -68,7 +68,7 @@ namespace TravelPlannerUnitTests
             var data = new List<Trip>
             {
                 new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0},
-                new Trip { Name = "Trip2", StartDate = DateTime.Now.AddDays(-34), EndDate = DateTime.Now.AddDays(-30), UserId = 0},
+                new Trip { Name = "Trip2", StartDate = DateTime.Now.AddDays(34), EndDate = DateTime.Now.AddDays(38), UserId = 0},
                 new Trip { Name = "Trip3", StartDate = DateTime.Now.AddDays(4), EndDate = DateTime.Now.AddDays(30), UserId = 1},
             }.AsQueryable();
 
@@ -95,7 +95,7 @@ namespace TravelPlannerUnitTests
             var data = new List<Trip>
             {
                 new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0},
-                new Trip { Name = "Trip2", StartDate = DateTime.Now.AddDays(-34), EndDate = DateTime.Now.AddDays(-30), UserId = 0},
+                new Trip { Name = "Trip2", StartDate = DateTime.Now.AddDays(34), EndDate = DateTime.Now.AddDays(38), UserId = 0},
                 new Trip { Name = "Trip3", StartDate = DateTime.Now.AddDays(4), EndDate = DateTime.Now.AddDays(30), UserId = 1},
             }.AsQueryable();
 
@@ -119,7 +119,7 @@ namespace TravelPlannerUnitTests
             var data = new List<Trip>
             {
                 new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0},
-                new Trip { Name = "Trip2", StartDate = DateTime.Now.AddDays(-34), EndDate = DateTime.Now.AddDays(-30), UserId = 0},
+                new Trip { Name = "Trip2", StartDate = DateTime.Now.AddDays(34), EndDate = DateTime.Now.AddDays(38), UserId = 0},
                 new Trip { Name = "Trip3", StartDate = DateTime.Now.AddDays(4), EndDate = DateTime.Now.AddDays(30), UserId = 1},
             }.AsQueryable();
 
@@ -142,7 +142,7 @@ namespace TravelPlannerUnitTests
             var data = new List<Trip>
             {
                 new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0},
-                new Trip { Name = "Trip2", StartDate = DateTime.Now.AddDays(-34), EndDate = DateTime.Now.AddDays(-30), UserId = 0},
+                new Trip { Name = "Trip2", StartDate = DateTime.Now.AddDays(34), EndDate = DateTime.Now.AddDays(38), UserId = 0},
                 new Trip { Name = "Trip3", StartDate = DateTime.Now.AddDays(4), EndDate = DateTime.Now.AddDays(30), UserId = 1},
             }.AsQueryable();
 

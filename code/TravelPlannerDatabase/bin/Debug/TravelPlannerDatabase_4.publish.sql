@@ -15,8 +15,13 @@ SET NUMERIC_ROUNDABORT OFF;
 GO
 :setvar DatabaseName "TravelPlannerDatabase"
 :setvar DefaultFilePrefix "TravelPlannerDatabase"
+<<<<<<< HEAD
 :setvar DefaultDataPath "C:\Users\cupid\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\mssqllocaldb\"
 :setvar DefaultLogPath "C:\Users\cupid\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\mssqllocaldb\"
+=======
+:setvar DefaultDataPath "C:\Users\benev\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\MSSQLLocalDB\"
+:setvar DefaultLogPath "C:\Users\benev\AppData\Local\Microsoft\Microsoft SQL Server Local DB\Instances\MSSQLLocalDB\"
+>>>>>>> origin/main
 
 GO
 :on error exit
@@ -36,6 +41,7 @@ IF N'$(__IsSqlCmdEnabled)' NOT LIKE N'True'
 
 
 GO
+<<<<<<< HEAD
 USE [master];
 
 
@@ -67,10 +73,13 @@ IF EXISTS (SELECT 1
 
 
 GO
+=======
+>>>>>>> origin/main
 USE [$(DatabaseName)];
 
 
 GO
+<<<<<<< HEAD
 IF EXISTS (SELECT 1
            FROM   [master].[dbo].[sysdatabases]
            WHERE  [name] = N'$(DatabaseName)')
@@ -280,11 +289,24 @@ CREATE TABLE [dbo].[Waypoints] (
     [Location] VARCHAR (50) NOT NULL,
     [DateTime] DATETIME     NOT NULL,
     [TripId]   INT          NOT NULL,
+=======
+PRINT N'Creating Table [dbo].[Lodging]...';
+
+
+GO
+CREATE TABLE [dbo].[Lodging] (
+    [Id]        INT          NOT NULL,
+    [TripId]    INT          NOT NULL,
+    [Location]  VARCHAR (50) NOT NULL,
+    [StartTime] DATETIME     NOT NULL,
+    [EndTime]   DATETIME     NOT NULL,
+>>>>>>> origin/main
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
 
 GO
+<<<<<<< HEAD
 PRINT N'Creating [dbo].[FK_dbo.Trip_dbo.User_Id]...';
 
 
@@ -315,6 +337,15 @@ IF NOT EXISTS (SELECT OperationKey FROM [dbo].[__RefactorLog] WHERE OperationKey
 INSERT INTO [dbo].[__RefactorLog] (OperationKey) values ('80da94af-8818-43bf-8699-1a395316bdad')
 
 GO
+=======
+PRINT N'Creating Foreign Key [dbo].[FK_dbo.Lodging_dbo.Trip_Id]...';
+
+
+GO
+ALTER TABLE [dbo].[Lodging] WITH NOCHECK
+    ADD CONSTRAINT [FK_dbo.Lodging_dbo.Trip_Id] FOREIGN KEY ([TripId]) REFERENCES [dbo].[Trip] ([Id]) ON DELETE CASCADE;
+
+>>>>>>> origin/main
 
 GO
 /*
@@ -331,6 +362,7 @@ Post-Deployment Script Template
 GO
 
 GO
+<<<<<<< HEAD
 DECLARE @VarDecimalSupported AS BIT;
 
 SELECT @VarDecimalSupported = 0;
@@ -346,6 +378,17 @@ IF (@VarDecimalSupported > 0)
     BEGIN
         EXECUTE sp_db_vardecimal_storage_format N'$(DatabaseName)', 'ON';
     END
+=======
+PRINT N'Checking existing data against newly created constraints';
+
+
+GO
+USE [$(DatabaseName)];
+
+
+GO
+ALTER TABLE [dbo].[Lodging] WITH CHECK CHECK CONSTRAINT [FK_dbo.Lodging_dbo.Trip_Id];
+>>>>>>> origin/main
 
 
 GO

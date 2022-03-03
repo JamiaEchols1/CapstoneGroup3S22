@@ -30,7 +30,21 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void HandleLogin(object sender, RoutedEventArgs e)
         {
-    
+            LoginDAL loginDal = new LoginDAL();
+            string username = this.usernameTextBox.Text;
+            string password = this.passwordTextBox.Password;
+            User loggedUser = loginDal.Login(username, password);
+
+            if (loggedUser != null)
+            {
+                LoggedUser.user = loggedUser;
+                Landing landingPage = new Landing();
+                this.NavigationService.Navigate(landingPage);
+            } else
+            {
+                MessageBox.Show("Login failed! No user found.");
+
+            }
         }
 
         private void Grid_Click(object sender, RoutedEventArgs e)

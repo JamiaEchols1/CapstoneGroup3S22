@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
@@ -70,7 +71,7 @@ namespace WebApplication4.Controllers
             if (ModelState.IsValid)
             {
                 waypoint.TripId = LoggedUser.selectedTrip.Id;
-                waypointDAL.CreateNewWaypoint(waypoint.Location, waypoint.DateTime, waypoint.TripId);
+                waypointDAL.CreateNewWaypoint(waypoint.Location, waypoint.StartDateTime, waypoint.EndDateTime, waypoint.TripId);
                 return RedirectToAction("Index");
             }
 
