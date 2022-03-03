@@ -161,6 +161,7 @@ C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlanner
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.exe
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.pdb
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerDesktopApp.exe.config
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerDesktopApp.xml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerDesktopApp.exe
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerDesktopApp.pdb
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\EntityFramework.dll
@@ -168,10 +169,14 @@ C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktop
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerLibrary.dll
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\Xceed.Wpf.Toolkit.dll
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerLibrary.pdb
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerLibrary.xml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerLibrary.dll.config
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\EntityFramework.xml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.csproj.AssemblyReference.cache
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Controls\TimeControl.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\MainWindow.baml
+C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddTransportationPage.baml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Controls\TimeControl.g.cs
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\MainWindow.g.cs
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddLodging.g.cs
@@ -189,10 +194,7 @@ C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktop
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp_MarkupCompile.cache
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp_MarkupCompile.lref
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Controls\TimeControl.baml
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\MainWindow.baml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddLodging.baml
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddTransportationPage.baml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddTrip.baml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\AddWaypoint.baml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\Pages\Landing.baml

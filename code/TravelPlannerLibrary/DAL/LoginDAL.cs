@@ -1,32 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using TravelPlannerLibrary.Models;
-using System.Security.Cryptography;
 
 namespace TravelPlannerLibrary.DAL
 {
-    public class LoginDAL
+    /// <summary>
+    ///     The login Data access layer
+    /// </summary>
+    public class LoginDal
     {
-        private static TravelPlannerDatabaseEntities _db = new TravelPlannerDatabaseEntities();
+        #region Data members
 
-        public LoginDAL() { }
-        public LoginDAL(TravelPlannerDatabaseEntities @object)
+        private static TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="LoginDal" /> class.
+        /// </summary>
+        public LoginDal()
         {
-            _db = @object;
         }
 
-        public User Login(string username, string password)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="LoginDal" /> class.
+        /// </summary>
+        /// <param name="object">The database entity object.</param>
+        public LoginDal(TravelPlannerDatabaseEntities @object)
         {
-            string encryptedPassword = Encrypt(password);
-            User loggedUser = _db.Users.Where(u => u.Username == username).FirstOrDefault(u => u.Password == encryptedPassword);
+            db = @object;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Gets the user with the specified credentials if they are valid.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>
+        ///     The user with the specified credentials or default if the credentials are invalid
+        /// </returns>
+        public User CheckLoginCredentials(string username, string password)
+        {
+            var encryptedPassword = Encrypt(password);
+            var loggedUser = db.Users.Where(u => u.Username == username)
+                                .FirstOrDefault(u => u.Password == encryptedPassword);
             return loggedUser;
         }
 
+        /// <summary>
+        ///     Gets all users.
+        /// </summary>
+        /// <returns>
+        ///     A collection of all users
+        /// </returns>
         public List<User> GetAllUsers()
         {
-            var query = from b in _db.Users
+            var query = from b in db.Users
                         orderby b.Username
                         select b;
 
@@ -34,27 +72,36 @@ namespace TravelPlannerLibrary.DAL
         }
 
         // Credit to https://www.youtube.com/watch?v=EEItNLDw0-A
-        public static string Encrypt(String decrypted)
+        /// <summary>
+        ///     Encrypts the specified string.
+        /// </summary>
+        /// <param name="decrypted">The decrypted.</param>
+        /// <returns>
+        ///     The encrypted string or null
+        /// </returns>
+        public static string Encrypt(string decrypted)
         {
-            string hash = "Bbouwmanlmfao@2022$";
+            const string hash = "Bbouwmanlmfao@2022$";
 
             if (decrypted == null)
             {
                 return null;
             }
 
-            byte[] data = UTF8Encoding.UTF8.GetBytes(decrypted);
+            var data = Encoding.UTF8.GetBytes(decrypted);
 
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            TripleDESCryptoServiceProvider tripDES = new TripleDESCryptoServiceProvider();
+            var md5 = new MD5CryptoServiceProvider();
+            var tripDes = new TripleDESCryptoServiceProvider();
 
-            tripDES.Key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(hash));
-            tripDES.Mode = CipherMode.ECB;
+            tripDes.Key = md5.ComputeHash(Encoding.UTF8.GetBytes(hash));
+            tripDes.Mode = CipherMode.ECB;
 
-            ICryptoTransform transform = tripDES.CreateEncryptor();
-            byte[] result = transform.TransformFinalBlock(data, 0, data.Length);
+            var transform = tripDes.CreateEncryptor();
+            var result = transform.TransformFinalBlock(data, 0, data.Length);
 
             return Convert.ToBase64String(result);
         }
+
+        #endregion
     }
 }

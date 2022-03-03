@@ -1,20 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace WebApplication4.Models
 {
+    /// <summary>
+    ///     The added waypoint class
+    /// </summary>
     public class AddedWaypoint
     {
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        ///     The identifier.
+        /// </value>
         public int Id { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the location.
+        /// </summary>
+        /// <value>
+        ///     The location.
+        /// </value>
         [Required]
         public string Location { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the start date time.
+        /// </summary>
+        /// <value>
+        ///     The start date time.
+        /// </value>
         [Required]
-        public System.DateTime StartDateTime { get; set; }
+        public DateTime StartDateTime { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the end date time.
+        /// </summary>
+        /// <value>
+        ///     The end date time.
+        /// </value>
         [Required]
-        public System.DateTime EndDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the trip identifier.
+        /// </summary>
+        /// <value>
+        ///     The trip identifier.
+        /// </value>
         public int TripId { get; set; }
+
+        #endregion
     }
 }

@@ -1,150 +1,226 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.ModelBinding;
 using System.Web.Mvc;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 using WebApplication4.Models;
-using WebApplication4.ViewModels;
 
 namespace WebApplication4.Controllers
 {
+    /// <summary>
+    ///     The waypoints controller
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     public class WaypointsController : Controller
     {
-        private TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
+        #region Data members
 
-        private WaypointDAL waypointDAL = new WaypointDAL();
+        private readonly TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
 
-        private TripDAL tripDAL = new TripDAL();
+        private readonly WaypointDal waypointDal = new WaypointDal();
+
+        private TripDal tripDal = new TripDal();
+
+        #endregion
+
+        #region Methods
 
         // GET: Waypoints
+        /// <summary>
+        ///     Indexes this instance.
+        /// </summary>
+        /// <returns>
+        ///     the waypoints view result
+        /// </returns>
         public ActionResult Index()
         {
-            var waypoints = waypointDAL.GetWaypoints(LoggedUser.selectedTrip.Id);
-            ViewBag.TripName = LoggedUser.selectedTrip.Name;
+            var waypoints = this.waypointDal.GetWaypoints(LoggedUser.SelectedTrip.Id);
+            ViewBag.TripName = LoggedUser.SelectedTrip.Name;
             return View(waypoints);
         }
 
         // GET: Waypoints/Details/5
+        /// <summary>
+        ///     Detailses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        ///     the waypoint view result
+        /// </returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Waypoint waypoint = db.Waypoints.Find(id);
+
+            var waypoint = this.db.Waypoints.Find(id);
             if (waypoint == null)
             {
                 return HttpNotFound();
             }
-            LoggedUser.selectedWaypoint = waypoint;
+
+            LoggedUser.SelectedWaypoint = waypoint;
             return View(waypoint);
         }
 
         // GET: Waypoints/Create
+        /// <summary>
+        ///     Creates the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        ///     The rendered view
+        /// </returns>
         public ActionResult Create(int? id)
         {
             if (id == null)
             {
-                id = LoggedUser.selectedTrip.Id;
+                id = LoggedUser.SelectedTrip.Id;
             }
-            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name");
-            LoggedUser.selectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
-            ViewBag.StartDate = LoggedUser.selectedTrip.StartDate;
-            ViewBag.EndDate = LoggedUser.selectedTrip.EndDate;
+
+            ViewBag.TripId = new SelectList(this.db.Trips, "Id", "Name");
+            LoggedUser.SelectedTrip = this.db.Trips.FirstOrDefault(x => x.Id == id);
+            ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
+            ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
             return View();
         }
 
         // POST: Waypoints/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        ///     Creates the specified waypoint.
+        /// </summary>
+        /// <param name="waypoint">The waypoint.</param>
+        /// <returns>
+        ///     The index view result
+        /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Location,DateTime")] AddedWaypoint waypoint)
         {
             if (ModelState.IsValid)
             {
-                waypoint.TripId = LoggedUser.selectedTrip.Id;
-                waypointDAL.CreateNewWaypoint(waypoint.Location, waypoint.StartDateTime, waypoint.EndDateTime, waypoint.TripId);
+                waypoint.TripId = LoggedUser.SelectedTrip.Id;
+                this.waypointDal.CreateNewWaypoint(waypoint.Location, waypoint.StartDateTime, waypoint.EndDateTime,
+                    waypoint.TripId);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name", waypoint.TripId);
+            ViewBag.TripId = new SelectList(this.db.Trips, "Id", "Name", waypoint.TripId);
             return View(waypoint);
         }
 
         // GET: Waypoints/Edit/5
+        /// <summary>
+        ///     Edits the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        ///     The waypoint view result
+        /// </returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Waypoint waypoint = db.Waypoints.Find(id);
+
+            var waypoint = this.db.Waypoints.Find(id);
             if (waypoint == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name", waypoint.TripId);
+
+            ViewBag.TripId = new SelectList(this.db.Trips, "Id", "Name", waypoint.TripId);
             return View(waypoint);
         }
 
         // POST: Waypoints/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        ///     Edits the specified waypoint.
+        /// </summary>
+        /// <param name="waypoint">The waypoint.</param>
+        /// <returns>
+        ///     The index action result
+        /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Location,DateTime,TripId")] Waypoint waypoint)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(waypoint).State = EntityState.Modified;
-                db.SaveChanges();
+                this.db.Entry(waypoint).State = EntityState.Modified;
+                this.db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name", waypoint.TripId);
+
+            ViewBag.TripId = new SelectList(this.db.Trips, "Id", "Name", waypoint.TripId);
             return View(waypoint);
         }
 
         // GET: Waypoints/Delete/5
+        /// <summary>
+        ///     Deletes the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        ///     The waypoint action result
+        /// </returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            int validatedId = (int) id;
-            Waypoint waypoint = WaypointDAL.FindWaypointByID(validatedId);
+
+            var validatedId = (int)id;
+            var waypoint = this.waypointDal.GetWaypoint(validatedId);
             if (waypoint == null)
             {
                 return HttpNotFound();
             }
+
             return View(waypoint);
         }
 
         // POST: Waypoints/Delete/5
-        [HttpPost, ActionName("Delete")]
+        /// <summary>
+        ///     Deletes the confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        ///     The index action result
+        /// </returns>
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Waypoint waypoint = WaypointDAL.FindWaypointByID(id);
-            this.waypointDAL.RemoveWaypoint(waypoint);
+            var waypoint = this.waypointDal.GetWaypoint(id);
+            this.waypointDal.RemoveWaypoint(waypoint);
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Releases unmanaged resources and optionally releases managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                this.db.Dispose();
             }
+
             base.Dispose(disposing);
         }
+
+        #endregion
     }
 }

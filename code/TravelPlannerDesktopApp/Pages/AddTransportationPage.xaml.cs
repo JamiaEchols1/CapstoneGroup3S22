@@ -1,84 +1,85 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
 namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
-    /// Interaction logic for AddTransportationPage.xaml
+    ///     Interaction logic for AddTransportationPage.xaml
     /// </summary>
     public partial class AddTransportationPage : Page
     {
-        private WaypointDAL _waypointDal;
-        private TransportationDAL _transportationDal;
+        #region Data members
+
+        private readonly WaypointDal waypointDal;
+        private readonly TransportationDal transportationDal;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddTransportationPage"/> class.
+        /// </summary>
         public AddTransportationPage()
         {
-            this._waypointDal = new WaypointDAL();
-            this._transportationDal = new TransportationDAL();
-            InitializeComponent();
-            this.arrivingWaypointComboBox.ItemsSource = this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id).Where(w => w.StartDateTime >= LoggedUser.selectedWaypoint.EndDateTime);
-
+            this.waypointDal = new WaypointDal();
+            this.transportationDal = new TransportationDal();
+            this.InitializeComponent();
+            this.arrivingWaypointComboBox.ItemsSource = this.waypointDal.GetWaypoints(LoggedUser.SelectedTrip.Id)
+                                                            .Where(w => w.StartDateTime >=
+                                                                        LoggedUser.SelectedWaypoint.EndDateTime);
         }
+
+        #endregion
+
+        #region Methods
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-           try
+            try
             {
-                Waypoint waypoint = (Waypoint)this.arrivingWaypointComboBox.SelectedItem;
+                var waypoint = (Waypoint)this.arrivingWaypointComboBox.SelectedItem;
 
-                DateTime startDate = LoggedUser.selectedWaypoint.EndDateTime;
-                DateTime endTime = waypoint.StartDateTime;
-                var overlappingWaypoints = this._waypointDal.GetOverlappingWaypoints(startDate, endTime);
+                var startDate = LoggedUser.SelectedWaypoint.EndDateTime;
+                var endTime = waypoint.StartDateTime;
+                var overlappingWaypoints = this.waypointDal.GetOverlappingWaypoints(startDate, endTime);
                 if (overlappingWaypoints.Count != 0)
                 {
-                    string message = "The following overlapping waypoint(s) were found.\n";
-                    foreach (var overlappedWaypoint in overlappingWaypoints)
-                    {
-                        message += overlappedWaypoint + "\n";
-                    }
+                    var message = overlappingWaypoints.Aggregate("The following overlapping waypoint(s) were found.\n", (current, overlappedWaypoint) => current + (overlappedWaypoint + "\n"));
+
                     throw new Exception(message + "Transportation must not overlap with other waypoints");
                 }
 
                 var overlappingTransportations =
-                    this._transportationDal.GetOverlappingTransportation(startDate, endTime);
+                    this.transportationDal.GetOverlappingTransportation(startDate, endTime);
                 if (overlappingTransportations.Count != 0)
                 {
-                    string message = "The following overlapping transportation(s) were found.\n";
-                    foreach (var transportation in overlappingTransportations)
-                    {
-                        message += transportation + "\n";
-                    }
+                    var message = overlappingTransportations.Aggregate("The following overlapping transportation(s) were found.\n", (current, transportation) => current + (transportation + "\n"));
+
                     throw new Exception(message + "Transportation must not overlap with transportations");
                 }
 
-                this._transportationDal.CreateANewTransportation(LoggedUser.selectedWaypoint.Id, waypoint.Id, LoggedUser.selectedTrip.Id, startDate, endTime, descriptionTextBox.Text);
-                WaypointInfo waypointInfo = new WaypointInfo();
-                NavigationService.Navigate(waypointInfo);
+                this.transportationDal.CreateANewTransportation(LoggedUser.SelectedWaypoint.Id, waypoint.Id,
+                    LoggedUser.SelectedTrip.Id, startDate, endTime, this.descriptionTextBox.Text);
+                var waypointInfo = new WaypointInfo();
+                NavigationService?.Navigate(waypointInfo);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            WaypointInfo waypointInfo = new WaypointInfo();
-            NavigationService.Navigate(waypointInfo);
+            var waypointInfo = new WaypointInfo();
+            NavigationService?.Navigate(waypointInfo);
         }
+
+        #endregion
     }
 }

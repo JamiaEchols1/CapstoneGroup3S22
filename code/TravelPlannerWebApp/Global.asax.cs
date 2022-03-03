@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace WebApplication4
 {
-    public class MvcApplication : System.Web.HttpApplication
+    /// <summary>
+    ///     The mvc application
+    /// </summary>
+    /// <seealso cref="System.Web.HttpApplication" />
+    public class MvcApplication : HttpApplication
     {
+        #region Methods
+
+        /// <summary>
+        ///     The application start
+        /// </summary>
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -17,5 +23,7 @@ namespace WebApplication4
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        #endregion
     }
 }

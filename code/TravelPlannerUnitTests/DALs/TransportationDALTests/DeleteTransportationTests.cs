@@ -1,29 +1,54 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
-namespace TravelPlannerUnitTests.TransportationDALTests
+namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 {
+    /// <summary>
+    ///     Tests delete tranportation
+    /// </summary>
     [TestClass]
     public class DeleteTransportationTests
     {
+        #region Methods
+
+        /// <summary>
+        ///     Tests the delete transportation.
+        /// </summary>
         [TestMethod]
         public void TestDeleteTransportation()
         {
-            LoggedUser.selectedWaypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33), EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0 };
-            Transportation transportation = new Transportation { Description = "Description", StartTime = DateTime.Now.AddMinutes(45), EndTime = DateTime.Now.AddMinutes(50), TripId = 2, ArrivingWaypointId = 1, DepartingWaypointId = 0 };
+            LoggedUser.SelectedWaypoint = new Waypoint {
+                Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33),
+                EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0
+            };
+            var transportation = new Transportation {
+                Description = "Description", StartTime = DateTime.Now.AddMinutes(45),
+                EndTime = DateTime.Now.AddMinutes(50), TripId = 2, ArrivingWaypointId = 1, DepartingWaypointId = 0
+            };
 
-            var data = new List<Transportation>
-            {
-                new Transportation { Description = "test transportation", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId= 2, Id = 0},
-                new Transportation { Description = "test transportation 1", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId= 3, Id = 1},
-                new Transportation { Description = "test transportation 2", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId= 1, Id = 2},
+            var data = new List<Transportation> {
+                new Transportation {
+                    Description = "test transportation", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId = 2,
+                    Id = 0
+                },
+                new Transportation {
+                    Description = "test transportation 1", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId = 3,
+                    Id = 1
+                },
+                new Transportation {
+                    Description = "test transportation 2", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId = 1,
+                    Id = 2
+                },
                 transportation
             }.AsQueryable();
 
@@ -37,14 +62,16 @@ namespace TravelPlannerUnitTests.TransportationDALTests
             mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
             mockContext.Setup(m => m.SaveChanges()).Returns(mockContext.Object.SaveChanges());
 
-            Boolean wasCalled = false;
+            var wasCalled = false;
             mockContext.Setup(m => m.SaveChanges()).Callback(() => wasCalled = true);
 
-            var service = new TransportationDAL(mockContext.Object);
-            
+            var service = new TransportationDal(mockContext.Object);
+
             service.DeleteTransportation(transportation);
 
             Assert.IsTrue(wasCalled);
         }
+
+        #endregion
     }
 }

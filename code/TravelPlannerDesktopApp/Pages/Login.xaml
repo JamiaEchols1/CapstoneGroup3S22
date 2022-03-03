@@ -1,19 +1,23 @@
 ﻿<Page x:Class="TravelPlannerDesktopApp.Pages.Login"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:TravelPlannerDesktopApp.Pages" 
-      xmlns:n="clr-namespace:TravelPlannerDesktopApp" xmlns:n1="clr-namespace:TravelPlannerDesktopApp.Controls"
-      mc:Ignorable="d" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:n1="clr-namespace:TravelPlannerDesktopApp.Controls"
+      mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Login">
+      Title="checkLoginCredentials">
 
     <Grid Background="White" ButtonBase.Click="Grid_Click">
-        <TextBox x:Name="usernameTextBox" HorizontalAlignment="Left" Height="23" Margin="371,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="284,187,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="284,232,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="passwordTextBox" HorizontalAlignment="Left" Margin="371,232,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
-        <n1:NavButton Text="Login" ImageSource="/Images/Login.png" NavUri="Pages/Landing.xaml" Margin="284,290,315,10" Click="HandleLogin"/>
+        <TextBox x:Name="usernameTextBox" HorizontalAlignment="Left" Height="23" Margin="371,187,0,0"
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <TextBlock HorizontalAlignment="Left" Margin="284,187,0,0" TextWrapping="Wrap" Text="Username"
+                   VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Left" Margin="284,232,0,0" TextWrapping="Wrap" Text="Password"
+                   VerticalAlignment="Top" />
+        <PasswordBox x:Name="passwordTextBox" HorizontalAlignment="Left" Margin="371,232,0,0" VerticalAlignment="Top"
+                     Width="120" Height="23" />
+        <n1:NavButton Text="Login" ImageSource="/Images/Login.png" NavUri="Pages/Landing.xaml" Margin="284,290,315,10"
+                      Click="handleLogin" />
     </Grid>
 </Page>

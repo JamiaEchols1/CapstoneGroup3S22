@@ -6,70 +6,136 @@ using TravelPlannerLibrary.Util;
 
 namespace TravelPlannerLibrary.DAL
 {
-    public class LodgingDAL
+    /// <summary>
+    /// The lodging data access layer
+    /// </summary>
+    public class LodgingDal
     {
-        private static TravelPlannerDatabaseEntities _db = new TravelPlannerDatabaseEntities();
+        #region Data members
 
-        public LodgingDAL() { }
+        private static TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
 
-        public LodgingDAL(TravelPlannerDatabaseEntities @object)
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="LodgingDal" /> class.
+        /// </summary>
+        public LodgingDal()
         {
-            _db = @object;
         }
 
-        public List<Lodging> GetLodgings(int tripId) => _db.Lodgings.Where(t => t.TripId == tripId).ToList();
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="LodgingDal" /> class.
+        /// </summary>
+        /// <param name="object">The database entity object.</param>
+        public LodgingDal(TravelPlannerDatabaseEntities @object)
+        {
+            db = @object;
+        }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Gets the lodgings.
+        /// </summary>
+        /// <param name="tripId">The trip identifier.</param>
+        /// <returns>
+        ///     The list of all lodgings for the specified trip id
+        /// </returns>
+        public List<Lodging> GetLodgings(int tripId)
+        {
+            return db.Lodgings.Where(t => t.TripId == tripId).ToList();
+        }
+
+        /// <summary>
+        ///     Creates a new lodging.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The end time.</param>
+        /// <param name="tripId">The trip identifier.</param>
+        /// <returns>
+        ///     The newly created lodging
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">Must enter a location!</exception>
+        /// <exception cref="System.ArgumentException">
+        ///     Start date must be on or after trip start date
+        ///     or
+        ///     End date must be on or before trip end date
+        ///     or
+        ///     End date must be on or after selected start date
+        /// </exception>
         public Lodging CreateNewLodging(string location, DateTime startTime, DateTime endTime, int tripId)
         {
             if (string.IsNullOrEmpty(location))
             {
-                string parameterName = "location";
+                const string parameterName = "location";
                 throw new ArgumentNullException(parameterName, "Must enter a location!");
             }
-            if (LoggedUser.selectedTrip.StartDate.CompareTo(startTime) > 0)
+
+            if (LoggedUser.SelectedTrip.StartDate.CompareTo(startTime) > 0)
             {
                 throw new ArgumentException("Start date must be on or after trip start date");
             }
-            if (endTime.CompareTo(LoggedUser.selectedTrip.EndDate) > 0)
+
+            if (endTime.CompareTo(LoggedUser.SelectedTrip.EndDate) > 0)
             {
                 throw new ArgumentException("End date must be on or before trip end date");
             }
+
             if (startTime.CompareTo(endTime) > 0)
             {
                 throw new ArgumentException("End date must be on or after selected start date");
             }
 
-            Lodging lodging = new Lodging();
-            lodging.Location = location;
-            lodging.StartTime = startTime;
-            lodging.EndTime = endTime;
-            lodging.TripId = tripId;
-            lodging.Id = _db.Lodgings.Count();
+            var lodging = new Lodging {
+                Location = location,
+                StartTime = startTime,
+                EndTime = endTime,
+                TripId = tripId,
+                Id = db.Lodgings.Count()
+            };
 
-            _db.Lodgings.Add(lodging);
-            _db.SaveChanges();
+            db.Lodgings.Add(lodging);
+            db.SaveChanges();
             return lodging;
         }
+
+        /// <summary>
+        ///     Removes the specified lodging.
+        /// </summary>
+        /// <param name="lodging">The lodging to be removed.</param>
+        /// <returns>
+        ///     The number of state entries written to the database
+        /// </returns>
         public int RemoveLodging(Lodging lodging)
         {
-            _db.Lodgings.Remove(lodging);
-            return _db.SaveChanges();
+            db.Lodgings.Remove(lodging);
+            return db.SaveChanges();
         }
 
+        /// <summary>
+        ///     Gets all of the overlapping lodgings.
+        /// </summary>
+        /// @precondition - newStartTime != null
+        /// newEndTime != null
+        /// @postcondition - none
+        /// <param name="newStartTime">The start time to check against.</param>
+        /// <param name="newEndTime">The end time to check against.</param>
+        /// <returns>
+        ///     A list with all lodgings that overlap the input time span
+        /// </returns>
         public List<Lodging> GetOverlappingLodging(DateTime newStartTime, DateTime newEndTime)
         {
-            List<Lodging> tripLodgings = this.GetLodgings(LoggedUser.selectedTrip.Id);
-            List<Lodging> overlappingLodgings = new List<Lodging>();
+            var tripLodgings = this.GetLodgings(LoggedUser.SelectedTrip.Id);
 
-            foreach(Lodging current in tripLodgings)
-            {
-                if (TimeChecker.timesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime))
-                {
-                    overlappingLodgings.Add(current);
-                }
-            }
-            return overlappingLodgings;
-
+            return tripLodgings.Where(current => TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime)).ToList();
         }
+
+        #endregion
     }
 }

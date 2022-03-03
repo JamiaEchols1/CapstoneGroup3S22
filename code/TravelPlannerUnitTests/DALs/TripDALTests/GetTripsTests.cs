@@ -1,26 +1,37 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
-namespace TravelPlannerUnitTests.TripDALTests
+namespace TravelPlannerUnitTests.DALs.TripDALTests
 {
+    /// <summary>
+    ///     Tests get trip
+    /// </summary>
     [TestClass]
     public class GetTripsTests
     {
+        #region Methods
+
+        /// <summary>
+        ///     Tests the get trips.
+        /// </summary>
         [TestMethod]
         public void TestGetTrips()
         {
-            var data = new List<Trip>
-            {
-                new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0},
-                new Trip { Name = "Trip2", StartDate = DateTime.Now.AddDays(34), EndDate = DateTime.Now.AddDays(38), UserId = 0},
-                new Trip { Name = "Trip3", StartDate = DateTime.Now.AddDays(4), EndDate = DateTime.Now.AddDays(30), UserId = 1},
+            var data = new List<Trip> {
+                new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0 },
+                new Trip {
+                    Name = "Trip2", StartDate = DateTime.Now.AddDays(34), EndDate = DateTime.Now.AddDays(38), UserId = 0
+                },
+                new Trip {
+                    Name = "Trip3", StartDate = DateTime.Now.AddDays(4), EndDate = DateTime.Now.AddDays(30), UserId = 1
+                }
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Trip>>();
@@ -32,12 +43,14 @@ namespace TravelPlannerUnitTests.TripDALTests
             var mockContext = new Mock<TravelPlannerDatabaseEntities>();
             mockContext.Setup(c => c.Trips).Returns(mockSet.Object);
 
-            var service = new TripDAL(mockContext.Object);
+            var service = new TripDal(mockContext.Object);
             var trips = service.GetTrips(0);
 
             Assert.AreEqual(2, trips.Count);
             Assert.AreEqual(0, trips[0].Id);
             Assert.AreEqual(0, trips[1].Id);
         }
+
+        #endregion
     }
 }

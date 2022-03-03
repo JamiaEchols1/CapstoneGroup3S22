@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
@@ -19,28 +8,42 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
-    /// Interaction logic for AddTrip.xaml
+    ///     Interaction logic for AddTrip.xaml
     /// </summary>
     public partial class AddTrip : Page
     {
-        private TripDAL tripDAL = new TripDAL();
+        #region Data members
+
+        private readonly TripDal tripDal = new TripDal();
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AddTrip" /> class.
+        /// </summary>
         public AddTrip()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
+        #endregion
+
+        #region Methods
 
         private void createTripButton_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
-                tripDAL.CreateNewTrip(this.nameTextBox.Text, DateTime.Parse(this.StartDatePicker.Text), DateTime.Parse(this.endDatePicker.Text), LoggedUser.user.Id);
+                this.tripDal.CreateNewTrip(this.nameTextBox.Text, DateTime.Parse(this.startDatePicker.Text),
+                    DateTime.Parse(this.endDatePicker.Text), LoggedUser.User.Id);
 
                 MessageBox.Show("Trip creation was Successful!");
 
-                NavigationService.Navigate(this.backButton.NavUri);
-            } catch (Exception ex)
+                NavigationService?.Navigate(this.backButton.NavUri);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -48,10 +51,11 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void NavButton_Click(object sender, RoutedEventArgs e)
         {
-            var ClickedButton = e.OriginalSource as NavButton;
+            var clickedButton = e.OriginalSource as NavButton;
 
-            NavigationService.Navigate(ClickedButton.NavUri);
-
+            NavigationService?.Navigate(clickedButton.NavUri);
         }
+
+        #endregion
     }
 }
