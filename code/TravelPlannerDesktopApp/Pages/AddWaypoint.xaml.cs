@@ -24,9 +24,11 @@ namespace TravelPlannerDesktopApp.Pages
     public partial class AddWaypoint : Page
     {
         private WaypointDAL _waypointDal;
+        private TransportationDAL _transportationDal;
         public AddWaypoint()
         {
             this._waypointDal = new WaypointDAL();
+            this._transportationDal = new TransportationDAL();
             InitializeComponent();
         }
 
@@ -42,9 +44,18 @@ namespace TravelPlannerDesktopApp.Pages
         {
             try
             {
-                Console.WriteLine(DateTime.Parse(this.dateTimePicker.Text));
-                
-                Waypoint newWaypoint = this._waypointDal.CreateNewWaypoint(this.locationTextBox.Text, DateTime.Parse(this.dateTimePicker.Text), LoggedUser.selectedTrip.Id);
+                DateTime startDate = DateTime.Parse(this.startDateTimePicker.Text);
+                DateTime endDate = DateTime.Parse(this.endDateTimePicker.Text);
+                if (this._waypointDal.GetOverlappingWaypoints(startDate, endDate).Count != 0)
+                {
+                    throw new Exception("Waypoint must not overlap with other waypoints");
+                }
+                if (this._transportationDal.GetOverlappingTransportation(startDate, endDate).Count != 0)
+                {
+                    throw new Exception("Waypoint must not overlap with transportations");
+                }
+
+                Waypoint newWaypoint = this._waypointDal.CreateNewWaypoint(this.locationTextBox.Text, startDate, endDate, LoggedUser.selectedTrip.Id);
 
                 MessageBox.Show("Waypoint creation was Successful!");
 

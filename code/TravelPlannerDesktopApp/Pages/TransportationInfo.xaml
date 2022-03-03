@@ -1,0 +1,24 @@
+﻿<Page x:Class="TravelPlannerDesktopApp.Pages.TransportationInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TravelPlannerDesktopApp.Pages"
+      xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TransportationInfo">
+
+    <Grid  Background="White" ButtonBase.Click="Grid_Click">
+        <TextBlock x:Name="startTimeTextBlock" Text="Start Time: " HorizontalAlignment="Left" Margin="295,114,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="endTimeTextBlock" Text="End Time: " HorizontalAlignment="Left" Margin="295,144,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="toTextBlock" Text="To:" HorizontalAlignment="Left" Margin="295,174,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="fromTextBlock" Text="From:" HorizontalAlignment="left" Margin="295,204,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="editTransportationButton" Content="Edit" HorizontalAlignment="Left" Margin="310,325,0,0" VerticalAlignment="Top" Click="editTransportationButton_Click"/>
+        <Button x:Name="removeTransportationButton" Content="Remove" HorizontalAlignment="Left" Margin="489,325,0,0" VerticalAlignment="Top" Click="removeTransportationButton_Click"/>
+
+        <WrapPanel  Margin="713,5,5,335">
+            <n:NavButton Text="Back" ImageSource="/Images/Back.png" NavUri="Pages/TripInfo.xaml" Width="70"/>
+        </WrapPanel>
+    </Grid>
+</Page>

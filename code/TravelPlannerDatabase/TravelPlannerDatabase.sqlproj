@@ -59,9 +59,11 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="User.sql" />
-    <Build Include="Trip.sql" />
+    <Build Include="Users.sql" />
+    <Build Include="Trips.sql" />
     <Build Include="Waypoints.sql" />
+    <Build Include="Lodgings.sql" />
+    <Build Include="Transportations.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

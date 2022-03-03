@@ -8,9 +8,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Lodgings">
+      <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.Lodging">
+        <MappingFragment StoreEntitySet="Lodgings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TripId" ColumnName="TripId" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transportations">
+      <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.Transportation">
+        <MappingFragment StoreEntitySet="Transportations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DepartingWaypointId" ColumnName="DepartingWaypointId" />
+          <ScalarProperty Name="ArrivingWaypointId" ColumnName="ArrivingWaypointId" />
+          <ScalarProperty Name="TripId" ColumnName="TripId" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Trips">
       <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.Trip">
-        <MappingFragment StoreEntitySet="Trip">
+        <MappingFragment StoreEntitySet="Trips">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
@@ -21,7 +45,7 @@
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="TravelPlannerDatabaseModel.User">
-        <MappingFragment StoreEntitySet="User">
+        <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
@@ -33,7 +57,8 @@
         <MappingFragment StoreEntitySet="Waypoints">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Location" ColumnName="Location" />
-          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+          <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
           <ScalarProperty Name="TripId" ColumnName="TripId" />
         </MappingFragment>
       </EntityTypeMapping>

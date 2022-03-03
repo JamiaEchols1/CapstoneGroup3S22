@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,21 @@ namespace TravelPlannerDesktopApp.Pages
     public partial class TripInfo : Page
     {
         private WaypointDAL _waypointDal;
+        private LodgingDAL _lodgingDal;
+        private TransportationDAL _transportationDal;
         public TripInfo()
         {
             this._waypointDal = new WaypointDAL();
+            this._transportationDal = new TransportationDAL();
+            this._lodgingDal = new LodgingDAL();
             InitializeComponent();
-            this.waypointsListBox.ItemsSource = this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id);
+            List<object> waypointsAndTransportation = new List<object>();
+            waypointsAndTransportation.AddRange(this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id));
+            waypointsAndTransportation.AddRange(this._transportationDal.GetTransportations(LoggedUser.selectedTrip.Id));
+            this.waypointsListBox.ItemsSource = waypointsAndTransportation;
+            this.lodgingListBox.ItemsSource = this._lodgingDal.GetLodgings(LoggedUser.selectedTrip.Id);
+            //this.transportationListBox.ItemsSource = this._transportationDal.GetTransportations(LoggedUser.selectedTrip.Id);
+            //add to waypoints list box
             this.setSelectedTripText();
         }
 
@@ -48,11 +59,35 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void WaypointsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LoggedUser.selectedWaypoint = this.waypointsListBox.SelectedItem as Waypoint;
-            if (LoggedUser.selectedWaypoint != null)
+            var selectedItemType = ObjectContext.GetObjectType(this.waypointsListBox.SelectedItem.GetType());
+            
+            if (selectedItemType == typeof(Waypoint))
             {
-                WaypointInfo waypointInfo = new WaypointInfo();
-                NavigationService.Navigate(waypointInfo);
+                LoggedUser.selectedWaypoint = this.waypointsListBox.SelectedItem as Waypoint;
+                if (LoggedUser.selectedWaypoint != null)
+                {
+                    WaypointInfo waypointInfo = new WaypointInfo();
+                    NavigationService.Navigate(waypointInfo);
+                }
+            }
+            else if (selectedItemType == typeof(Transportation))
+            {
+                LoggedUser.SelectedTransportation = this.waypointsListBox.SelectedItem as Transportation;
+                if (LoggedUser.SelectedTransportation != null)
+                {
+                    TransportationInfo transportationInfo = new TransportationInfo(LoggedUser.SelectedTransportation);
+                    NavigationService.Navigate(transportationInfo);
+                }
+            }
+        }
+
+        private void LodgingListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoggedUser.selectedLodging = this.lodgingListBox.SelectedItem as Lodging;
+            if (LoggedUser.selectedLodging != null)
+            {
+                LodgingInfo lodgingInfo = new LodgingInfo();
+                NavigationService.Navigate(lodgingInfo);
             }
         }
     }

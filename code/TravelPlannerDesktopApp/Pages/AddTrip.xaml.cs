@@ -40,13 +40,10 @@ namespace TravelPlannerDesktopApp.Pages
                 MessageBox.Show("Trip creation was Successful!");
 
                 NavigationService.Navigate(this.backButton.NavUri);
-            }
-            catch (Exception exception)
+            } catch (Exception ex)
             {
-
-                MessageBox.Show("Error Creating trip. " + exception.Message);
+                MessageBox.Show(ex.Message);
             }
-            
         }
 
         private void NavButton_Click(object sender, RoutedEventArgs e)
