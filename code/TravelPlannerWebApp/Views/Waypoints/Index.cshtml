@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Waypoints for @ViewBag.TripName</h2>
+<h2>Waypoints for @ViewBag.TripName</h2> 
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -15,7 +15,10 @@
             @Html.DisplayNameFor(model => model.Location)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDateTime)
+            Start Date
+        </th>
+        <th>
+            End Date
         </th>
         <th>
             Options
@@ -31,8 +34,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.StartDateTime)
             </td>
+               <td>
+                @Html.DisplayFor(modelItem => item.EndDateTime)
+            </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
