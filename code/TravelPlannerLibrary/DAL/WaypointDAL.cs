@@ -62,6 +62,7 @@ namespace TravelPlannerLibrary.DAL
         /// <param name="startTime">The start time.</param>
         /// <param name="endTime">The end time.</param>
         /// <param name="tripId">The trip identifier.</param>
+        /// <param name="description"> The trips description </param>
         /// <returns>
         ///     The newly created waypoint
         /// </returns>
@@ -73,11 +74,15 @@ namespace TravelPlannerLibrary.DAL
         ///     or
         ///     End date must be on or before trip end date
         /// </exception>
-        public Waypoint CreateNewWaypoint(string location, DateTime startTime, DateTime endTime, int tripId)
+        public Waypoint CreateNewWaypoint(string location, DateTime startTime, DateTime endTime, int tripId, string description)
         {
+            if (string.IsNullOrEmpty(description))
+            {
+                throw new ArgumentException("Must enter a description!");
+            }
             if (string.IsNullOrEmpty(location))
             {
-                throw new ArgumentNullException("Must enter a location!");
+                throw new ArgumentException("Must enter a location!");
             }
 
             if (startTime.CompareTo(endTime) >= 0)
@@ -100,6 +105,7 @@ namespace TravelPlannerLibrary.DAL
                 StartDateTime = startTime,
                 EndDateTime = endTime,
                 TripId = tripId,
+                Description = description,
                 Id = this.FindNextId()
             };
 

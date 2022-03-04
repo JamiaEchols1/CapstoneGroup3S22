@@ -15,15 +15,11 @@ namespace TravelPlannerLibrary.Models
     public partial class Transportation
     {
         public int Id { get; set; }
-        public int DepartingWaypointId { get; set; }
-        public int ArrivingWaypointId { get; set; }
         public int TripId { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
         public string Description { get; set; }
     
-        public virtual Waypoint Waypoint { get; set; }
-        public virtual Waypoint Waypoint1 { get; set; }
         public virtual Trip Trip { get; set; }
 
         public override string ToString()

@@ -13,45 +13,12 @@ namespace TravelPlannerUnitTests.Models
         #region Methods
 
         /// <summary>
-        ///     Tests the get arrival waypoint identifier.
-        /// </summary>
-        [TestMethod]
-        public void TestGetArrivalWaypointId()
-        {
-            var transportation = new Transportation {
-                ArrivingWaypointId = 1, DepartingWaypointId = 2, Description = "transportation",
-                StartTime = DateTime.Today, EndTime = DateTime.Today.AddHours(1), Id = 1, TripId = 1
-            };
-            Assert.AreEqual(1, transportation.ArrivingWaypointId);
-        }
-
-        /// <summary>
-        ///     Tests the get departure waypoint identifier.
-        /// </summary>
-        [TestMethod]
-        public void TestGetDepartureWaypointId()
-        {
-            var transportation = new Transportation {
-                ArrivingWaypointId = 1,
-                DepartingWaypointId = 2,
-                Description = "transportation",
-                StartTime = DateTime.Today,
-                EndTime = DateTime.Today.AddHours(1),
-                Id = 1,
-                TripId = 1
-            };
-            Assert.AreEqual(2, transportation.DepartingWaypointId);
-        }
-
-        /// <summary>
         ///     Tests the get description.
         /// </summary>
         [TestMethod]
         public void TestGetDescription()
         {
             var transportation = new Transportation {
-                ArrivingWaypointId = 1,
-                DepartingWaypointId = 2,
                 Description = "transportation",
                 StartTime = DateTime.Today,
                 EndTime = DateTime.Today.AddHours(1),
@@ -68,8 +35,6 @@ namespace TravelPlannerUnitTests.Models
         public void TestGetStartTime()
         {
             var transportation = new Transportation {
-                ArrivingWaypointId = 1,
-                DepartingWaypointId = 2,
                 Description = "transportation",
                 StartTime = DateTime.Today,
                 EndTime = DateTime.Today.AddHours(1),
@@ -86,8 +51,6 @@ namespace TravelPlannerUnitTests.Models
         public void TestEndTime()
         {
             var transportation = new Transportation {
-                ArrivingWaypointId = 1,
-                DepartingWaypointId = 2,
                 Description = "transportation",
                 StartTime = DateTime.Today,
                 EndTime = DateTime.Today.AddHours(1),
@@ -104,8 +67,6 @@ namespace TravelPlannerUnitTests.Models
         public void TestGetId()
         {
             var transportation = new Transportation {
-                ArrivingWaypointId = 1,
-                DepartingWaypointId = 2,
                 Description = "transportation",
                 StartTime = DateTime.Today,
                 EndTime = DateTime.Today.AddHours(1),
@@ -122,8 +83,6 @@ namespace TravelPlannerUnitTests.Models
         public void TestGetTripId()
         {
             var transportation = new Transportation {
-                ArrivingWaypointId = 1,
-                DepartingWaypointId = 2,
                 Description = "transportation",
                 StartTime = DateTime.Today,
                 EndTime = DateTime.Today.AddHours(1),
@@ -140,8 +99,6 @@ namespace TravelPlannerUnitTests.Models
         public void TestToString()
         {
             var transportation = new Transportation {
-                ArrivingWaypointId = 1,
-                DepartingWaypointId = 2,
                 Description = "transportation",
                 StartTime = DateTime.Today,
                 EndTime = DateTime.Today.AddHours(1),

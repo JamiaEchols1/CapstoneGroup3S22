@@ -53,6 +53,15 @@ namespace WebApplication4.Models
         /// </value>
         public int TripId { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the description.
+        /// </summary>
+        /// <value>
+        ///     The description.
+        /// </value>
+        [Required]
+        public string Description { get; set; }
+
         #endregion
     }
 }

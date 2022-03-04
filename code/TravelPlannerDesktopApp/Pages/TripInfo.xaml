@@ -9,11 +9,13 @@
       Title="Waypoints">
 
     <Grid Background="White" ButtonBase.Click="Grid_Click">
-        <WrapPanel Margin="5,5,701,210">
+        <WrapPanel Margin="5,5,685,126">
             <n:NavButton Text="Create Waypoint" ImageSource="/Images/CreateTrip.png" NavUri="Pages/AddWaypoint.xaml"
-                         Width="70" />
+                         Width="83" />
             <n:NavButton Text="Create Lodging" ImageSource="/Images/lodging.png" NavUri="Pages/AddLodging.xaml"
-                         Width="70" />
+                         Width="83" />
+            <n:NavButton Text="Create Transportation" ImageSource="/Images/transportation.png" NavUri="Pages/AddTransportationPage.xaml"
+                         Width="83" />
         </WrapPanel>
 
         <WrapPanel Margin="713,5,5,335">
@@ -21,9 +23,9 @@
         </WrapPanel>
 
 
-        <ListBox x:Name="waypointsListBox" Margin="85,120,430,40"
+        <ListBox x:Name="waypointsAndTransportListBox" Margin="95,120,435,40"
                  SelectionChanged="WaypointsListBox_OnSelectionChanged" />
-        <ListBox x:Name="lodgingListBox" Margin="430,120,85,40" SelectionChanged="LodgingListBox_OnSelectionChanged" />
+        <ListBox x:Name="lodgingListBox" Margin="435,120,95,40" SelectionChanged="LodgingListBox_OnSelectionChanged" />
 
         <TextBlock x:Name="selectedTripTextBlock" HorizontalAlignment="Left" Margin="99,10,0,0" TextWrapping="Wrap"
                    Text="Selected Trip:" VerticalAlignment="Top" Height="20" Width="446" />

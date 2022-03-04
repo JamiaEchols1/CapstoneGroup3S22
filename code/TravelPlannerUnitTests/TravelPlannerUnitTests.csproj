@@ -83,7 +83,6 @@
     <Compile Include="Models\UserTests.cs" />
     <Compile Include="Models\WaypointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DALs\TransportationDALTests\GetTransportationTests.cs" />
     <Compile Include="DALs\TransportationDALTests\GetTransportationsTests.cs" />
     <Compile Include="DALs\TransportationDALTests\CreateNewTransportationOverrideTests.cs" />
     <Compile Include="DALs\TransportationDALTests\DeleteTransportationTests.cs" />

@@ -39,7 +39,7 @@ namespace TravelPlannerDesktopApp.Pages
             }
             else
             {
-                MessageBox.Show("checkLoginCredentials failed! No user found.");
+                MessageBox.Show("Login failed! No user found.");
             }
         }
 

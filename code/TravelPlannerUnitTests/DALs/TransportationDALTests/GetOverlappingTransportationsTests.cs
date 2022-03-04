@@ -34,17 +34,17 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             var data = new List<Transportation> {
                 new Transportation {
                     Description = "test transportation", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId = 2,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
                     Id = 0
                 },
                 new Transportation {
                     Description = "test transportation 1", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, DepartingWaypointId = 2, ArrivingWaypointId = 3,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0,
                     Id = 1
                 },
                 new Transportation {
                     Description = "test transportation 2", StartTime = DateTime.Now.AddMinutes(15),
-                    EndTime = DateTime.Now.AddMinutes(25), TripId = 0, DepartingWaypointId = 3, ArrivingWaypointId = 1,
+                    EndTime = DateTime.Now.AddMinutes(25), TripId = 0,
                     Id = 2
                 }
             }.AsQueryable();

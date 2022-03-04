@@ -10,21 +10,26 @@
       Title="AddWaypoint">
 
     <Grid Background="White">
-        <controls:NavButton x:Name="backButton" Text="Back" Click="NavButton_Click" ImageSource="/Images/Back.png"
+        <controls:NavButton x:Name="backButton" Text="Back" Click="BackButton_Click" ImageSource="/Images/Back.png"
                             NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right" />
         <Label Content="Add A New Waypoint" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
                Width="292" />
-        <Label Content="Location:" Margin="180,186,540,0" VerticalAlignment="Top" />
-        <Label Content="Start Date and Time:" Margin="150,226,540,0" VerticalAlignment="Top" />
-        <Label Content="End Date and Time:" Margin="150,266,540,0" VerticalAlignment="Top" />
-        <TextBox x:Name="locationTextBox" HorizontalAlignment="Left" Margin="265,192,0,0" TextWrapping="Wrap"
+        <Label Content="Location:" Margin="160,61,570,0" VerticalAlignment="Top" />
+        <Label Content="Start Date and Time:" Margin="105,141,534,0" VerticalAlignment="Top" />
+        <Label Content="End Date and Time:" Margin="105,181,534,0" VerticalAlignment="Top" />
+        <TextBox x:Name="locationTextBox" HorizontalAlignment="Left" Margin="271,68,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Location Name" />
         <Button x:Name="createWaypointButton" Content="Create Waypoint" HorizontalAlignment="Left" Margin="265,338,0,0"
                 VerticalAlignment="Top" Click="CreateWaypointButton_OnClick" Width="270" />
-        <wpfTool:DateTimePicker x:Name="startDateTimePicker" HorizontalAlignment="Left" Margin="265,227,0,0"
-                                VerticalAlignment="Top" Width="270" />
-        <wpfTool:DateTimePicker x:Name="endDateTimePicker" HorizontalAlignment="Left" Margin="265,267,0,0"
-                                VerticalAlignment="Top" Width="270" />
+        <wpfTool:DateTimePicker x:Name="startDateTimePicker" HorizontalAlignment="Left" Margin="271,146,0,0"
+                                VerticalAlignment="Top" Width="270"  ValueChanged="datePicker_ValueChanged"/>
+        <wpfTool:DateTimePicker x:Name="endDateTimePicker" HorizontalAlignment="Left" Margin="271,186,0,0"
+                                VerticalAlignment="Top" Width="270"  ValueChanged="datePicker_ValueChanged"/>
+        <Label Content="Description:" Margin="150,101,534,0" VerticalAlignment="Top" />
+        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Margin="271,106,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Description Name"/>
 
+        <TextBlock x:Name="overlappingLabel" Margin="100,255,496,114" TextWrapping="Wrap" Visibility="Collapsed" Text="Overlapping Transportation and Waypoints: "/>
+        <ListBox x:Name="overlappingListBox" Margin="271,220,242,87" Visibility="Collapsed" />
     </Grid>
 </Page>

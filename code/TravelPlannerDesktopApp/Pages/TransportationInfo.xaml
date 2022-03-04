@@ -9,22 +9,21 @@
       Title="TransportationInfo">
 
     <Grid Background="White">
-        <TextBlock x:Name="startTimeTextBlock" Text="Start Time: " HorizontalAlignment="Left" Margin="295,114,0,0"
-                   VerticalAlignment="Top" />
-        <TextBlock x:Name="endTimeTextBlock" Text="End Time: " HorizontalAlignment="Left" Margin="295,144,0,0"
-                   VerticalAlignment="Top" />
-        <TextBlock x:Name="toTextBlock" Text="To:" HorizontalAlignment="Left" Margin="295,174,0,0"
-                   VerticalAlignment="Top" />
-        <TextBlock x:Name="fromTextBlock" Text="From:" HorizontalAlignment="left" Margin="295,204,0,0"
-                   VerticalAlignment="Top" />
-        <Button x:Name="editTransportationButton" Content="Edit" HorizontalAlignment="Left" Margin="310,325,0,0"
+        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="299,125,0,0" TextWrapping="Wrap"
+                   Text="Description:" VerticalAlignment="Top" Height="85" Width="196" />
+        <TextBlock x:Name="startTimeTextBlock" HorizontalAlignment="Left" Margin="299,215,0,0" TextWrapping="Wrap"
+                   Text="Start Date:" VerticalAlignment="Top" Height="20" Width="196" />
+        <TextBlock x:Name="endTimeTextBlock"  HorizontalAlignment="Left" Margin="299,260,0,0" TextWrapping="Wrap"
+                   Text="End Date:" VerticalAlignment="Top" Height="20" Width="196" />
+        <Button x:Name="editTransportationButton" Content="Edit Transportation" HorizontalAlignment="Left" Margin="299,355,0,0"
                 VerticalAlignment="Top" Click="editTransportationButton_Click" />
-        <Button x:Name="removeTransportationButton" Content="Remove" HorizontalAlignment="Left" Margin="489,325,0,0"
+        <Button x:Name="removeTransportationButton" Content="Remove Transportation" HorizontalAlignment="Left" Margin="424,355,0,0"
                 VerticalAlignment="Top" Click="removeTransportationButton_Click" />
 
         <WrapPanel Margin="713,5,5,335">
             <n:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/Back.png"
                          NavUri="Pages/TripInfo.xaml" Width="70" />
         </WrapPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Transportation Info" VerticalAlignment="Top"/>
     </Grid>
 </Page>

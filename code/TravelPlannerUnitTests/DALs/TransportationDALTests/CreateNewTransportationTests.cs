@@ -16,10 +16,6 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
     [TestClass]
     public class TestTransportation
     {
-        #region Data members
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -27,10 +23,6 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         ///     information about and functionality for the current test run.
         /// </summary>
         public TestContext TestContext { get; set; }
-
-        #endregion
-
-        #region Constructors
 
         #endregion
 
@@ -48,18 +40,18 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             };
             var data = new List<Transportation> {
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId = 2,
+                    Description = "test transportation", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
                     Id = 0
                 },
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation 1", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId = 3,
+                    Description = "test transportation 1", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2,
                     Id = 1
                 },
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation 2", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId = 1,
+                    Description = "test transportation 2", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
                     Id = 2
                 }
             }.AsQueryable();
@@ -75,7 +67,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateANewTransportation(1, 2, 1, DateTime.Now, DateTime.Now.AddMinutes(7), null));
+                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), null));
         }
 
         /// <summary>
@@ -90,18 +82,18 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             };
             var data = new List<Transportation> {
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId = 2,
+                    Description = "test transportation", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
                     Id = 0
                 },
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation 1", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId = 3,
+                    Description = "test transportation 1", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2,
                     Id = 1
                 },
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation 2", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId = 1,
+                    Description = "test transportation 2", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
                     Id = 2
                 }
             }.AsQueryable();
@@ -117,7 +109,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateANewTransportation(1, 2, 1, DateTime.Now, DateTime.Now.AddMinutes(7), ""));
+                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), ""));
         }
 
         /// <summary>
@@ -132,18 +124,18 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             };
             var data = new List<Transportation> {
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId = 2,
+                    Description = "test transportation", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
                     Id = 0
                 },
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation 1", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId = 3,
+                    Description = "test transportation 1", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2,
                     Id = 1
                 },
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation 2", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId = 1,
+                    Description = "test transportation 2", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
                     Id = 2
                 }
             }.AsQueryable();
@@ -159,7 +151,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateANewTransportation(1, 1, 1, DateTime.Now, DateTime.Now.AddMinutes(7), "Description"));
+                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), "Description"));
         }
 
         /// <summary>
@@ -174,18 +166,18 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             };
             var data = new List<Transportation> {
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId = 2,
+                    Description = "test transportation", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
                     Id = 0
                 },
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation 1", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId = 3,
+                    Description = "test transportation 1", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2,
                     Id = 1
                 },
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation 2", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId = 1,
+                    Description = "test transportation 2", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
                     Id = 2
                 }
             }.AsQueryable();
@@ -201,7 +193,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateANewTransportation(1, 0, 2, DateTime.Now, DateTime.Now.AddMinutes(-7), "Description"));
+                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(-7), "Description"));
         }
 
         /// <summary>
@@ -217,17 +209,17 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             var data = new List<Transportation> {
                 new Transportation {
                     Description = "test transportation", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId = 2,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
                     Id = 0
                 },
                 new Transportation {
                     Description = "test transportation 1", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId = 3,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2,
                     Id = 1
                 },
                 new Transportation {
                     Description = "test transportation 2", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId = 1,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
                     Id = 2
                 }
             }.AsQueryable();
@@ -243,7 +235,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateANewTransportation(0, 1, 1, DateTime.Now.AddMinutes(33), DateTime.Now.AddMinutes(40),
+                service.CreateANewTransportation(0, DateTime.Now.AddMinutes(33), DateTime.Now.AddMinutes(40),
                     "Description"));
             LoggedUser.SelectedWaypoint = null;
         }
@@ -261,17 +253,17 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             var data = new List<Transportation> {
                 new Transportation {
                     Description = "test transportation", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId = 2,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
                     Id = 0
                 },
                 new Transportation {
                     Description = "test transportation 1", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2, DepartingWaypointId = 2, ArrivingWaypointId = 3,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2,
                     Id = 1
                 },
                 new Transportation {
                     Description = "test transportation 2", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId = 1,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
                     Id = 2
                 }
             }.AsQueryable();
@@ -290,7 +282,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
 
-            service.CreateANewTransportation(0, 1, 1, DateTime.Now.AddMinutes(40), DateTime.Now.AddMinutes(45),
+            service.CreateANewTransportation(0, DateTime.Now.AddMinutes(40), DateTime.Now.AddMinutes(45),
                 "Description");
 
             Assert.IsTrue(wasCalled);

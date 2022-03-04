@@ -483,7 +483,6 @@ C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\Antlr3.Runtime.dll
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\EntityFramework.dll
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\EntityFramework.SqlServer.dll
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\Newtonsoft.Json.dll
@@ -500,7 +499,6 @@ C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\TravelPlannerLibrary.xml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\TravelPlannerLibrary.dll.config
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\EntityFramework.xml
-C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\EntityFramework.SqlServer.xml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\System.Web.Helpers.xml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\System.Web.Mvc.xml
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\bin\System.Web.Optimization.xml

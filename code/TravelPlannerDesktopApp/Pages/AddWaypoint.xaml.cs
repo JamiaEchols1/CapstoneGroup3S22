@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,7 +37,7 @@ namespace TravelPlannerDesktopApp.Pages
 
         #region Methods
 
-        private void NavButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;
 
@@ -47,12 +48,22 @@ namespace TravelPlannerDesktopApp.Pages
         {
             try
             {
+                if (this.startDateTimePicker.Text == null)
+                {
+                    throw new Exception("Must enter a start date!");
+                }
+
+                if (this.endDateTimePicker.Text == null)
+                {
+                    throw new Exception("Must enter an end date!");
+                }
                 var startDate = DateTime.Parse(this.startDateTimePicker.Text);
                 var endDate = DateTime.Parse(this.endDateTimePicker.Text);
                 var overlappingWaypoints = this.waypointDal.GetOverlappingWaypoints(startDate, endDate);
                 if (overlappingWaypoints.Count != 0)
                 {
-                    var message = overlappingWaypoints.Aggregate("The following overlapping waypoint(s) were found.\n", (current, waypoint) => current + (waypoint + "\n"));
+                    var message = overlappingWaypoints.Aggregate("The following overlapping waypoint(s) were found.\n",
+                        (current, waypoint) => current + (waypoint + "\n"));
 
                     throw new Exception(message + "Waypoint must not overlap with other waypoints");
                 }
@@ -61,13 +72,15 @@ namespace TravelPlannerDesktopApp.Pages
                     this.transportationDal.GetOverlappingTransportation(startDate, endDate);
                 if (overlappingTransportations.Count != 0)
                 {
-                    var message = overlappingTransportations.Aggregate("The following overlapping transportation(s) were found.\n", (current, transportation) => current + (transportation + "\n"));
+                    var message = overlappingTransportations.Aggregate(
+                        "The following overlapping transportation(s) were found.\n",
+                        (current, transportation) => current + (transportation + "\n"));
 
                     throw new Exception(message + "Waypoint must not overlap with transportations");
                 }
 
                 var newWaypoint = this.waypointDal.CreateNewWaypoint(this.locationTextBox.Text, startDate, endDate,
-                    LoggedUser.SelectedTrip.Id);
+                    LoggedUser.SelectedTrip.Id, this.descriptionTextBox.Text);
 
                 MessageBox.Show("Waypoint creation was Successful!");
 
@@ -80,6 +93,31 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
-        #endregion
+        private void datePicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (this.startDateTimePicker.Value != null && this.endDateTimePicker.Value != null)
+            {
+                var startDate = DateTime.Parse(this.startDateTimePicker.Text);
+                var endDate = DateTime.Parse(this.endDateTimePicker.Text);
+                var waypointsAndTransportation = new List<object>();
+                waypointsAndTransportation.AddRange(this.waypointDal.GetOverlappingWaypoints(startDate, endDate));
+                waypointsAndTransportation.AddRange(
+                    this.transportationDal.GetOverlappingTransportation(startDate, endDate));
+                this.overlappingListBox.ItemsSource = waypointsAndTransportation;
+            }
+
+            if (this.overlappingListBox.Items.Count > 0)
+            {
+                this.overlappingListBox.Visibility = Visibility.Visible;
+                this.overlappingLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.overlappingListBox.Visibility = Visibility.Collapsed;
+                this.overlappingLabel.Visibility = Visibility.Collapsed;
+            }
+
+            #endregion
+        }
     }
 }
