@@ -105,6 +105,11 @@ namespace WebApplication4.Controllers
                     return RedirectToAction("Index");
                 }
             }
+            else
+            {
+                ErrorMessage = null;
+                AddedWaypoint.ConflictingWaypoints = new List<Waypoint>();
+            }
             return View(waypoint);
         }
 
@@ -113,20 +118,20 @@ namespace WebApplication4.Controllers
             bool isValid = true;
             if (waypoint.StartDateTime >= waypoint.EndDateTime)
             {
-                ErrorMessage = "The start date must be less than the end date";
+                ErrorMessage = "The start date must be before than the end date";
                 isValid = false;
             }
             else if (waypoint.EndDateTime <= waypoint.StartDateTime)
             {
-                ErrorMessage = "The end date must be greater than the start date";
+                ErrorMessage = "The end date must be after than the start date";
                 isValid = false;
             }
-            else if (waypoint.EndDateTime.CompareTo(LoggedUser.SelectedTrip.EndDate) >= 0)
+            else if (waypoint.EndDateTime.CompareTo(LoggedUser.SelectedTrip.EndDate) > 0)
             {
                 ErrorMessage = "End date must be on or before trip end date";
                 isValid = false;
             }
-            else if (waypoint.StartDateTime.CompareTo(LoggedUser.SelectedTrip.EndDate) >= 0)
+            else if (waypoint.StartDateTime.CompareTo(LoggedUser.SelectedTrip.EndDate) > 0)
             {
                 ErrorMessage = "Start date must be on or before trip end date";
                 isValid = false;

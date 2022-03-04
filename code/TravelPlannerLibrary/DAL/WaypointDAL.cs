@@ -90,7 +90,7 @@ namespace TravelPlannerLibrary.DAL
                 throw new ArgumentException("Start date must be before end date");
             }
 
-            if (LoggedUser.SelectedTrip.StartDate.CompareTo(startTime) >= 0)
+            if (LoggedUser.SelectedTrip.StartDate.CompareTo(startTime) > 0)
             {
                 throw new ArgumentException("Start date must be on or after trip start date");
             }

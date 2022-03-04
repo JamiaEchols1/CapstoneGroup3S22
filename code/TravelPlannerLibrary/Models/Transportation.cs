@@ -11,8 +11,12 @@ namespace TravelPlannerLibrary.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Transportation
+
+    /// <summary>
+    /// The transport class
+    /// </summary>
+    /// <seealso cref="TravelPlannerLibrary.Models.TripItem" />
+    public partial class Transportation : TripItem
     {
         public int Id { get; set; }
         public int TripId { get; set; }

@@ -10,8 +10,8 @@
       Title="AddTransportationPage">
 
     <Grid Background="White">
-        <Label Content="Add New Transportation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
-               Width="292" />
+        <Label x:Name="addTransportTitle" Content="Add New Transportation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
+               Width="702" />
         <controls:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/Back.png"
                             NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right" />
 

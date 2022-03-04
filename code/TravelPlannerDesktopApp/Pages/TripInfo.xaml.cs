@@ -63,10 +63,21 @@ namespace TravelPlannerDesktopApp.Pages
         /// </summary>
         public void SetListSources()
         {
-            var waypointsAndTransportation = new List<object>();
-            waypointsAndTransportation.AddRange(this.waypointDal.GetWaypoints(LoggedUser.SelectedTrip.Id));
-            waypointsAndTransportation.AddRange(this.transportationDal.GetTransportationsByTrip(LoggedUser.SelectedTrip.Id));
-            this.waypointsAndTransportListBox.ItemsSource = waypointsAndTransportation;
+            var waypointsAndTransportation = new List<TripItem>();
+            var waypoints = this.waypointDal.GetWaypoints(LoggedUser.SelectedTrip.Id);
+            var transport = this.transportationDal.GetTransportationsByTrip(LoggedUser.SelectedTrip.Id);
+
+            foreach (var item in waypoints)
+            {
+                item.StartDate = item.StartDateTime;
+            }
+            foreach (var item in transport)
+            {
+                item.StartDate = item.StartTime;
+            }
+            waypointsAndTransportation.AddRange(waypoints);
+            waypointsAndTransportation.AddRange(transport);
+            this.waypointsAndTransportListBox.ItemsSource = waypointsAndTransportation.OrderBy(x => x.StartDate);
             this.lodgingListBox.ItemsSource = this.lodgingDal.GetLodgings(LoggedUser.SelectedTrip.Id);
         }
 

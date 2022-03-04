@@ -12,7 +12,7 @@ namespace TravelPlannerLibrary.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Waypoint
+    public partial class Waypoint : TripItem
     {
         public int Id { get; set; }
         public string Location { get; set; }
