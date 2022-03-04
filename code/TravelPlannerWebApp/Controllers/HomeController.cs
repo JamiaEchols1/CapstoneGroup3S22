@@ -11,43 +11,6 @@ namespace WebApplication4.Controllers
     /// <seealso cref="System.Web.Mvc.Controller" />
     public class HomeController : Controller
     {
-        #region Methods
-
-        /// <summary>
-        ///     Indexes this instance.
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        /// <summary>
-        ///     Abouts this instance.
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        /// <summary>
-        ///     Contacts this instance.
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        /// <summary>
-        ///     Logins this instance.
-        /// </summary>
-        /// <returns></returns>
         public ActionResult Login()
         {
             LoggedUser.User = null;
@@ -62,7 +25,7 @@ namespace WebApplication4.Controllers
         ///     login action
         /// </returns>
         [HttpPost]
-        [ActionName("checkLoginCredentials")]
+        [ActionName("Login")]
         [ValidateAntiForgeryToken]
         public ActionResult AuthenticateLogin([Bind(Include = "Username,Password")] UserCredentials user)
         {
@@ -78,17 +41,18 @@ namespace WebApplication4.Controllers
                         Password = user.Password,
                         Id = loggedUser.Id
                     };
+
                     return RedirectToAction("../Trips/Index");
                 }
-
-                ModelState.AddModelError(nameof(UserCredentials.Username), "Username or Password is incorrect");
-                ModelState.AddModelError(nameof(UserCredentials.Password), "Username or Password is incorrect");
-                return View();
+                else
+                {
+                    ModelState.AddModelError(nameof(UserCredentials.Username), "Username or Password is incorrect");
+                    ModelState.AddModelError(nameof(UserCredentials.Password), "Username or Password is incorrect");
+                    return View();
+                }
             }
 
             return RedirectToAction("Login");
         }
-
-        #endregion
     }
 }

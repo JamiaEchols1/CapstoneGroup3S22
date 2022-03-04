@@ -1,5 +1,10 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
@@ -9,77 +14,46 @@ using WebApplication4.ViewModels;
 
 namespace WebApplication4.Controllers
 {
-    /// <summary>
-    /// The trip controller
-    /// </summary>
-    /// <seealso cref="System.Web.Mvc.Controller" />
     public class TripsController : Controller
     {
-        #region Data members
+        private TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
 
-        private readonly TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
+        private TripDetailsViewModel viewmodel = new TripDetailsViewModel();
 
-        private readonly TripDetailsViewModel viewmodel = new TripDetailsViewModel();
+        private TripDal tripDAL = new TripDal();
 
-        private readonly TripDal tripDal = new TripDal();
-
-        private readonly WaypointDal waypointDal = new WaypointDal();
-
-        #endregion
-
-        #region Methods
+        private WaypointDal waypointDAL = new WaypointDal();
 
         // GET: Trips
-        /// <summary>
-        /// Indexes this instance.
-        /// </summary>
-        /// <returns>
-        /// the trips view result
-        /// </returns>
         public ActionResult Index()
         {
-            var trips = this.tripDal.GetTrips(LoggedUser.User.Id);
+            var trips = tripDAL.GetTrips(LoggedUser.User.Id);
             return View(trips);
         }
 
         // GET: Trips/Details/5
-        /// <summary>
-        /// Details the specified identifier.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>
-        /// The viewmodel view result
-        /// </returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var trip = this.db.Trips.Find(id);
+            Trip trip = db.Trips.Find(id);
             if (trip == null)
             {
                 return HttpNotFound();
             }
-
-            this.viewmodel.Trip = trip;
-            this.viewmodel.Waypoints = this.waypointDal.GetWaypoints(trip.Id);
+            viewmodel.Trip = trip;
+            viewmodel.Waypoints = waypointDAL.GetWaypoints(trip.Id);
             LoggedUser.SelectedTrip = trip;
 
-            return View(this.viewmodel);
+            return View(viewmodel);
         }
 
         // GET: Trips/Create
-        /// <summary>
-        /// Creates this instance.
-        /// </summary>
-        /// <returns>
-        /// The rendered view result
-        /// </returns>
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(this.db.Users, "Id", "Username");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Username");
             return View();
         }
 
@@ -91,7 +65,7 @@ namespace WebApplication4.Controllers
         /// </summary>
         /// <param name="trip">The trip.</param>
         /// <returns>
-        /// the trip view result
+        ///  The trip view result
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -100,12 +74,13 @@ namespace WebApplication4.Controllers
             if (ModelState.IsValid)
             {
                 trip.UserId = LoggedUser.User.Id;
-                this.tripDal.CreateNewTrip(trip.Name, trip.StartDate, trip.EndDate, trip.UserId);
+                tripDAL.CreateNewTrip(trip.Name, trip.StartDate, trip.EndDate, trip.UserId);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(this.db.Users, "Id", "Username", trip.UserId);
-            LoggedUser.SelectedTrip = new Trip {
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Username", trip.UserId);
+            LoggedUser.SelectedTrip = new Trip() 
+            {
                 UserId = trip.UserId,
                 Id = trip.Id,
                 EndDate = trip.EndDate,
@@ -114,111 +89,13 @@ namespace WebApplication4.Controllers
             return View(trip);
         }
 
-        // GET: Trips/Edit/5
-        /// <summary>
-        /// Edits the specified identifier.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>
-        /// The trip view result
-        /// </returns>
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var trip = this.db.Trips.Find(id);
-            if (trip == null)
-            {
-                return HttpNotFound();
-            }
-
-            ViewBag.UserId = new SelectList(this.db.Users, "Id", "Username", trip.UserId);
-            return View(trip);
-        }
-
-        // POST: Trips/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        /// <summary>
-        /// Edits the specified trip.
-        /// </summary>
-        /// <param name="trip">The trip.</param>
-        /// <returns>
-        /// The index action result
-        /// </returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,StartDate,EndDate,UserId")] Trip trip)
-        {
-            if (ModelState.IsValid)
-            {
-                this.db.Entry(trip).State = EntityState.Modified;
-                this.db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.UserId = new SelectList(this.db.Users, "Id", "Username", trip.UserId);
-            return View(trip);
-        }
-
-        // GET: Trips/Delete/5
-        /// <summary>
-        /// Deletes the specified identifier.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>
-        /// The trip view result
-        /// </returns>
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var trip = this.db.Trips.Find(id);
-            if (trip == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(trip);
-        }
-
-        // POST: Trips/Delete/5
-        /// <summary>
-        /// Deletes the confirmed.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>
-        /// The index action result
-        /// </returns>
-        [HttpPost]
-        [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            this.tripDal.RemoveTrip(id);
-            return RedirectToAction("Index");
-        }
-
-        /// <summary>
-        /// Releases unmanaged resources and optionally releases managed resources.
-        /// </summary>
-        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                this.db.Dispose();
+                db.Dispose();
             }
-
             base.Dispose(disposing);
         }
-
-        #endregion
     }
 }

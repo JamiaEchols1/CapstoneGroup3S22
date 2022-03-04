@@ -127,12 +127,6 @@ namespace TravelPlannerLibrary.DAL
             return db.SaveChanges();
         }
 
-        /// <summary>
-        ///     Finds the next available identifier.
-        /// </summary>
-        /// <returns>
-        ///     The next available id
-        /// </returns>
         public int FindNextId()
         {
             if (!db.Waypoints.Any())
