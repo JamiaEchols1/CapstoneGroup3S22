@@ -24,6 +24,8 @@ namespace WebApplication4.Controllers
 
         private WaypointDal waypointDAL = new WaypointDal();
 
+        private static string ErrorMessage;
+
         // GET: Trips
         public ActionResult Index()
         {
@@ -54,6 +56,10 @@ namespace WebApplication4.Controllers
         public ActionResult Create()
         {
             ViewBag.UserId = new SelectList(db.Users, "Id", "Username");
+            if (ErrorMessage != null)
+            {
+                ViewBag.ErrorMessage = ErrorMessage;
+            }
             return View();
         }
 
@@ -74,6 +80,11 @@ namespace WebApplication4.Controllers
             if (ModelState.IsValid)
             {
                 trip.UserId = LoggedUser.User.Id;
+                if (trip.StartDate < DateTime.Now)
+                {
+                    ErrorMessage = "Start datetime must be past the current datetime";
+                    return RedirectToAction("Create");
+                }
                 tripDAL.CreateNewTrip(trip.Name, trip.StartDate, trip.EndDate, trip.UserId);
                 return RedirectToAction("Index");
             }
