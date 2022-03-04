@@ -4,15 +4,14 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Waypoint</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+<h4>Trip Details : @ViewBag.TripDetails</h4>
 <div class="form-horizontal">
-    <h4>Waypoint</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -46,6 +45,11 @@
         </div>
     </div>
 
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <p style="color:red">@ViewBag.ErrorMessage</p>
+    }
+
     @if (ViewBag.Overlaps != null && ViewBag.Overlaps.Count > 0)
     {
         <p style="color:red">The waypoint was not added because of the following conflicts: </p>
@@ -71,22 +75,13 @@
     $(function () {
         $('#StartDateTime').datetimepicker({
             minDate: new moment("@ViewBag.StartDate"),
-            maxDate: new moment("@ViewBag.EndDate")
         }).on('dp.change', function (e) {
             $(this).data('DateTimePicker').hide();
         });
        $('#EndDateTime').datetimepicker({
             minDate: new moment("@ViewBag.StartDate"),
-            maxDate: new moment("@ViewBag.EndDate")
         }).on('dp.change', function (e) {
             $(this).data('DateTimePicker').hide();
-        });
-
-        $("#StartDateTime").on("dp.change", function (e) {
-            $('#EndDateTime').data("DateTimePicker").minDate(e.date);
-        });
-        $("#EndDateTime").on("dp.change", function (e) {
-            $('#StartDateTime').data("DateTimePicker").maxDate(e.date);
         });
     });
 </script>

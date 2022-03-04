@@ -82,63 +82,6 @@ namespace WebApplication4.Controllers
             return View(trip);
         }
 
-        // GET: Trips/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Trip trip = db.Trips.Find(id);
-            if (trip == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Username", trip.UserId);
-            return View(trip);
-        }
-
-        // POST: Trips/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,StartDate,EndDate,UserId")] Trip trip)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(trip).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Username", trip.UserId);
-            return View(trip);
-        }
-
-        // GET: Trips/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Trip trip = db.Trips.Find(id);
-            if (trip == null)
-            {
-                return HttpNotFound();
-            }
-            return View(trip);
-        }
-
-        // POST: Trips/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tripDAL.RemoveTrip(id);
-            return RedirectToAction("Index");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

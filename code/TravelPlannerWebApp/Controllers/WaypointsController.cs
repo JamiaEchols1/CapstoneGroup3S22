@@ -19,16 +19,18 @@ namespace WebApplication4.Controllers
     {
         private TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
 
-        private WaypointDAL waypointDAL = new WaypointDAL();
+        private readonly WaypointDAL waypointDAL = new WaypointDAL();
 
-        private TripDAL tripDAL = new TripDAL();
+        private readonly TripDAL tripDAL = new TripDAL();
+
+        private static string ErrorMessage;
 
         // GET: Waypoints
         public ActionResult Index()
         {
             var waypoints = waypointDAL.GetWaypoints(LoggedUser.selectedTrip.Id);
             ViewBag.TripName = LoggedUser.selectedTrip.Name;
-            return View(waypoints);
+            return View("Index", waypoints);
         }
 
         // GET: Waypoints/Details/5
@@ -38,13 +40,14 @@ namespace WebApplication4.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Waypoint waypoint = db.Waypoints.Find(id);
+            int waypointId = (int) id;
+            Waypoint waypoint = waypointDAL.GetWaypoint(waypointId);
             if (waypoint == null)
             {
                 return HttpNotFound();
             }
             LoggedUser.selectedWaypoint = waypoint;
-            return View(waypoint);
+            return View("Details", waypoint);
         }
 
         // GET: Waypoints/Create
@@ -54,15 +57,19 @@ namespace WebApplication4.Controllers
             {
                 id = LoggedUser.selectedTrip.Id;
             }
-            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name");
             LoggedUser.selectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
             ViewBag.StartDate = LoggedUser.selectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.selectedTrip.EndDate;
+            ViewBag.TripDetails = LoggedUser.selectedTrip.Name + " " + LoggedUser.selectedTrip.StartDate + " - " + LoggedUser.selectedTrip.EndDate;
             if (AddedWaypoint.ConflictingWaypoints.Count > 0)
             {
                 ViewBag.Overlaps = AddedWaypoint.ConflictingWaypoints;
             }
-            return View();
+            if (ErrorMessage != null)
+            {
+                ViewBag.ErrorMessage = ErrorMessage;
+            }
+            return View("Create");
         }
 
         // POST: Waypoints/Create
@@ -76,9 +83,12 @@ namespace WebApplication4.Controllers
             {
                 waypoint.TripId = LoggedUser.selectedTrip.Id;
                 var overlaps = waypointDAL.GetOverlappingWaypoints(waypoint.StartDateTime, waypoint.EndDateTime);
-                if (overlaps.Count > 0)
+                if (validateConflictingWaypoints(waypoint))
                 {
-                    AddedWaypoint.ConflictingWaypoints = overlaps;
+                    return RedirectToAction("Create", waypoint.TripId);
+                }
+                else if (!validateDateTimes(waypoint))
+                {
                     return RedirectToAction("Create", waypoint.TripId);
                 }
                 else
@@ -88,41 +98,53 @@ namespace WebApplication4.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name", waypoint.TripId);
             return View(waypoint);
         }
 
-        // GET: Waypoints/Edit/5
-        public ActionResult Edit(int? id)
+        private bool validateDateTimes(AddedWaypoint waypoint)
         {
-            if (id == null)
+            bool isValid = true;
+            if (waypoint.StartDateTime >= waypoint.EndDateTime)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ErrorMessage = "The start date must be less than the end date";
+                isValid = false;
             }
-            Waypoint waypoint = db.Waypoints.Find(id);
-            if (waypoint == null)
+            else if (waypoint.EndDateTime <= waypoint.StartDateTime)
             {
-                return HttpNotFound();
+                ErrorMessage = "The end date must be greater than the start date";
+                isValid = false;
             }
-            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name", waypoint.TripId);
-            return View(waypoint);
+            else if (waypoint.EndDateTime.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
+            {
+                ErrorMessage = "End date must be on or before trip end date";
+                isValid = false;
+            }
+            else if (waypoint.StartDateTime.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
+            {
+                ErrorMessage = "Start date must be on or before trip end date";
+                isValid = false;
+            }
+            else
+            {
+                ErrorMessage = null;
+            }
+            return isValid;
         }
 
-        // POST: Waypoints/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Location,DateTime,TripId")] Waypoint waypoint)
+        private bool validateConflictingWaypoints(AddedWaypoint waypoint)
         {
-            if (ModelState.IsValid)
+            var overlaps = waypointDAL.GetOverlappingWaypoints(waypoint.StartDateTime, waypoint.EndDateTime);
+            bool hasConflicts = false;
+            if (overlaps.Count > 0)
             {
-                db.Entry(waypoint).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                AddedWaypoint.ConflictingWaypoints = overlaps;
+                hasConflicts = true;
             }
-            ViewBag.TripId = new SelectList(db.Trips, "Id", "Name", waypoint.TripId);
-            return View(waypoint);
+            else
+            {
+                AddedWaypoint.ConflictingWaypoints = new List<Waypoint>();
+            }
+            return hasConflicts;
         }
 
         // GET: Waypoints/Delete/5
@@ -138,7 +160,7 @@ namespace WebApplication4.Controllers
             {
                 return HttpNotFound();
             }
-            return View(waypoint);
+            return View("Delete", waypoint);
         }
 
         // POST: Waypoints/Delete/5

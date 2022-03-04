@@ -11,25 +11,6 @@ namespace WebApplication4.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
         public ActionResult Login()
         {
             LoggedUser.user = null; 
@@ -53,6 +34,7 @@ namespace WebApplication4.Controllers
                         Password = user.Password,
                         Id = loggedUser.Id
                     };
+
                     return RedirectToAction("../Trips/Index");
                 }
                 else
@@ -61,8 +43,6 @@ namespace WebApplication4.Controllers
                     ModelState.AddModelError(nameof(UserCredentials.Password), "Username or Password is incorrect");
                     return View();
                 }
-
-
             }
 
             return RedirectToAction("Login");
