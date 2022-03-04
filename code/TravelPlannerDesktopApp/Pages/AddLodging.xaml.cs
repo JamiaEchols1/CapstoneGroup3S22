@@ -27,6 +27,7 @@ namespace TravelPlannerDesktopApp.Pages
         {
             this.lodgingDal = new LodgingDal();
             this.InitializeComponent();
+            this.addLodgingTitle.Content = "Add New Lodging: " + LoggedUser.SelectedTrip.ToString();
         }
 
         #endregion

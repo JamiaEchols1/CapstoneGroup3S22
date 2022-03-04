@@ -12,7 +12,7 @@
     <Grid Background="White">
         <controls:NavButton x:Name="backButton" Text="Back" Click="NavButton_Click" ImageSource="/Images/Back.png"
                             NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right" />
-        <Label Content="Add New Lodging" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+        <Label x:Name="addLodgingTitle"  Content="Add New Lodging" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="705" />
 
         <Label Content="Location:" Margin="156,101,564,0" VerticalAlignment="Top" />
         <TextBox x:Name="locationTextBox" HorizontalAlignment="Left" Margin="271,106,0,0" TextWrapping="Wrap"

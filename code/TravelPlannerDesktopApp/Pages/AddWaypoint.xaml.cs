@@ -31,6 +31,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.waypointDal = new WaypointDal();
             this.transportationDal = new TransportationDal();
             this.InitializeComponent();
+            this.addWaypointTitle.Content = "Add A New Waypoint: " + LoggedUser.SelectedTrip.ToString();
         }
 
         #endregion
