@@ -90,3 +90,5 @@ C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerUnitTes
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerUnitTests\obj\Debug\TravelPlannerUnitTests.csproj.CopyComplete
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerUnitTests\obj\Debug\TravelPlannerUnitTests.dll
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerUnitTests\obj\Debug\TravelPlannerUnitTests.pdb
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerUnitTests\bin\Debug\TravelPlannerUnitTests.xml
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerUnitTests\bin\Debug\TravelPlannerLibrary.xml

@@ -142,9 +142,9 @@ namespace TravelPlannerLibrary.DAL
                 throw new ArgumentException("End date must be on or after selected start date");
             }
 
-            if (LoggedUser.SelectedWaypoint.EndDateTime.CompareTo(transportation.StartTime) > 0)
+            if (LoggedUser.SelectedTrip.EndDate.CompareTo(transportation.StartTime) < 0)
             {
-                throw new ArgumentException("Start date must be on or after waypoint end date");
+                throw new ArgumentException("Start date must be before trip end date");
             }
 
             db.Transportations.Add(transportation);

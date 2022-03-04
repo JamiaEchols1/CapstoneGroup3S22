@@ -34,10 +34,6 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         [TestMethod]
         public void TestNullDescription()
         {
-            var waypoint = new Waypoint {
-                Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-40),
-                EndDateTime = DateTime.Now.AddMinutes(-5), TripId = 0, Id = 0
-            };
             var data = new List<Transportation> {
                 new Transportation {
                     Description = "test transportation", StartTime = DateTime.Now,
@@ -76,10 +72,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         [TestMethod]
         public void TestEmptyDescription()
         {
-            var waypoint = new Waypoint {
-                Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-40),
-                EndDateTime = DateTime.Now.AddMinutes(-5), TripId = 0, Id = 0
-            };
+
             var data = new List<Transportation> {
                 new Transportation {
                     Description = "test transportation", StartTime = DateTime.Now,
@@ -113,57 +106,12 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         }
 
         /// <summary>
-        ///     Tests the same departure and arrival waypoint.
-        /// </summary>
-        [TestMethod]
-        public void TestSameDepartureAndArrivalWaypoint()
-        {
-            var waypoint = new Waypoint {
-                Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-40),
-                EndDateTime = DateTime.Now.AddMinutes(-5), TripId = 0, Id = 0
-            };
-            var data = new List<Transportation> {
-                new Transportation {
-                    Description = "test transportation", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
-                    Id = 0
-                },
-                new Transportation {
-                    Description = "test transportation 1", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2,
-                    Id = 1
-                },
-                new Transportation {
-                    Description = "test transportation 2", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
-                    Id = 2
-                }
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Transportation>>();
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Transportation>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
-            mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
-
-            var service = new TransportationDal(mockContext.Object);
-            Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), "Description"));
-        }
-
-        /// <summary>
         ///     Tests the start time after end time.
         /// </summary>
         [TestMethod]
         public void TestStartTimeAfterEndTime()
         {
-            var waypoint = new Waypoint {
-                Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(-40),
-                EndDateTime = DateTime.Now.AddMinutes(5), TripId = 0, Id = 0
-            };
+
             var data = new List<Transportation> {
                 new Transportation {
                     Description = "test transportation", StartTime = DateTime.Now,
@@ -200,11 +148,15 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         ///     Tests the start time before waypoint end time.
         /// </summary>
         [TestMethod]
-        public void TestStartTimeBeforeWaypointEndTime()
+        public void TestStartTimeBeforeTripStartTime()
         {
-            LoggedUser.SelectedWaypoint = new Waypoint {
-                Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(4),
-                EndDateTime = DateTime.Now.AddMinutes(34), TripId = 0, Id = 0
+            LoggedUser.SelectedTrip = new Trip
+            {
+                Name = "Trip1",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(14),
+                UserId = 0,
+                Id = 0
             };
             var data = new List<Transportation> {
                 new Transportation {
@@ -235,9 +187,9 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateANewTransportation(0, DateTime.Now.AddMinutes(33), DateTime.Now.AddMinutes(40),
+                service.CreateANewTransportation(0, DateTime.Now.AddMinutes(-33), DateTime.Now.AddMinutes(40),
                     "Description"));
-            LoggedUser.SelectedWaypoint = null;
+            LoggedUser.SelectedTrip = null;
         }
 
         /// <summary>
@@ -246,9 +198,13 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         [TestMethod]
         public void TestValidTransportation()
         {
-            LoggedUser.SelectedWaypoint = new Waypoint {
-                Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33),
-                EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0
+            LoggedUser.SelectedTrip = new Trip
+            {
+                Name = "Trip1",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(14),
+                UserId = 0,
+                Id = 0
             };
             var data = new List<Transportation> {
                 new Transportation {
@@ -286,7 +242,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
                 "Description");
 
             Assert.IsTrue(wasCalled);
-            LoggedUser.SelectedWaypoint = null;
+            LoggedUser.SelectedTrip = null;
         }
 
         #endregion
