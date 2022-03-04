@@ -1,19 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace WebApplication4.Models
 {
+    /// <summary>
+    ///     The added trip class
+    /// </summary>
     public class AddedTrip
     {
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        ///     The identifier.
+        /// </value>
         public int Id { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the name.
+        /// </summary>
+        /// <value>
+        ///     The name.
+        /// </value>
         [Required]
         public string Name { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the start date.
+        /// </summary>
+        /// <value>
+        ///     The start date.
+        /// </value>
+        public DateTime StartDate { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the end date.
+        /// </summary>
+        /// <value>
+        ///     The end date.
+        /// </value>
+        public DateTime EndDate { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the user identifier.
+        /// </summary>
+        /// <value>
+        ///     The user identifier.
+        /// </value>
         public int UserId { get; set; }
+
+        #endregion
     }
 }

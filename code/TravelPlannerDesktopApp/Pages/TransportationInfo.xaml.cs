@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
@@ -19,51 +8,68 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
-    /// Interaction logic for TransportationInfo.xaml
+    ///     Interaction logic for TransportationInfo.xaml
     /// </summary>
     public partial class TransportationInfo : Page
     {
-        private WaypointDAL _waypointDAL;
-        private TransportationDAL _transportationDAL;
-        private Transportation transportation;
+        #region Data members
+
+        private readonly WaypointDal _waypointDAL;
+        private readonly TransportationDal transportationDal;
+        private readonly Transportation transportation;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="TransportationInfo" /> class.
+        /// </summary>
+        /// <param name="transportation">The transportation.</param>
         public TransportationInfo(Transportation transportation)
         {
             this.transportation = transportation;
-            this._waypointDAL = new WaypointDAL();
-            this._transportationDAL = new TransportationDAL();
-            InitializeComponent();
-            this.startTimeTextBlock.Text = "Start Time: " + transportation.StartTime.ToString();
-            this.endTimeTextBlock.Text = "End Time: " + transportation.EndTime.ToString();
+            this._waypointDAL = new WaypointDal();
+            this.transportationDal = new TransportationDal();
+            this.InitializeComponent();
+            this.startTimeTextBlock.Text = "Start Time: " + transportation.StartTime;
+            this.endTimeTextBlock.Text = "End Time: " + transportation.EndTime;
             this.toTextBlock.Text = this._waypointDAL.GetWaypoint(transportation.ArrivingWaypointId).ToString();
             this.fromTextBlock.Text = this._waypointDAL.GetWaypoint(transportation.DepartingWaypointId).ToString();
         }
 
+        #endregion
+
+        #region Methods
+
         private void editTransportationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         private void removeTransportationButton_Click(object sender, RoutedEventArgs e)
         {
-            try {
-                this._transportationDAL.DeleteTransportation(this.transportation);
+            try
+            {
+                this.transportationDal.DeleteTransportation(this.transportation);
 
                 MessageBox.Show("Transportation Deletion was Successful!");
 
-                NavigationService.Navigate(this.backButton.NavUri);
+                NavigationService?.Navigate(this.backButton.NavUri);
             }
             catch (Exception exception)
             {
-
                 MessageBox.Show("Error Removing transportation. " + exception.Message);
             }
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ClickedButton = e.OriginalSource as NavButton;
+            var clickedButton = e.OriginalSource as NavButton;
 
-            NavigationService.Navigate(ClickedButton.NavUri);
+            NavigationService?.Navigate(clickedButton.NavUri);
         }
+
+        #endregion
     }
 }

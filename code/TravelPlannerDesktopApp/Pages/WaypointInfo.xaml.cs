@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
@@ -19,36 +8,56 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
-    /// Interaction logic for WaypointInfo.xaml
+    ///     Interaction logic for WaypointInfo.xaml
     /// </summary>
     public partial class WaypointInfo : Page
     {
-        private WaypointDAL _waypointDal;
+        #region Data members
 
+        private readonly WaypointDal waypointDal;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="WaypointInfo" /> class.
+        /// </summary>
         public WaypointInfo()
         {
-            this._waypointDal = new WaypointDAL();
-            InitializeComponent();
-            this.setSelectedWaypointText();
+            this.waypointDal = new WaypointDal();
+            this.InitializeComponent();
+            this.SetSelectedWaypointText();
         }
 
-        public void setSelectedWaypointText()
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Sets the text for the waypoint info
+        ///     @precondition - LoggedUSer != null
+        ///     @postcondition - LocationTextBlock.Text = "Location: " + LoggedUser.selectedWaypoint.Location;
+        ///     TimeTextBlock.Text = "Start Time: " + LoggedUser.selectedWaypoint.StartDateTime;
+        ///     EndDateTextBlock.Text = "End Time: " + LoggedUser.selectedWaypoint.EndDateTime;
+        /// </summary>
+        public void SetSelectedWaypointText()
         {
-            this.LocationTextBlock.Text = "Location: " + LoggedUser.selectedWaypoint.Location;
-            this.TimeTextBlock.Text = "Start Time: " + LoggedUser.selectedWaypoint.StartDateTime;
-            this.EndDateTextBlock.Text = "End Time: " + LoggedUser.selectedWaypoint.EndDateTime;
+            this.locationTextBlock.Text = "Location: " + LoggedUser.SelectedWaypoint.Location;
+            this.timeTextBlock.Text = "Start Time: " + LoggedUser.SelectedWaypoint.StartDateTime;
+            this.endDateTextBlock.Text = "End Time: " + LoggedUser.SelectedWaypoint.EndDateTime;
         }
 
         private void EditWaypointButton_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            //TODO
         }
 
         private void RemoveWaypointButton_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                this._waypointDal.RemoveWaypoint(LoggedUser.selectedWaypoint);
+                this.waypointDal.RemoveWaypoint(LoggedUser.SelectedWaypoint);
 
                 MessageBox.Show("Waypoint Deletion was Successful!");
 
@@ -56,23 +65,24 @@ namespace TravelPlannerDesktopApp.Pages
             }
             catch (Exception exception)
             {
-
                 MessageBox.Show("Error Removing waypoint. " + exception.Message);
             }
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var ClickedButton = e.OriginalSource as NavButton;
+            var clickedButton = e.OriginalSource as NavButton;
 
-            NavigationService.Navigate(ClickedButton.NavUri);
+            NavigationService.Navigate(clickedButton.NavUri);
         }
 
         private void NavButton_Click(object sender, RoutedEventArgs e)
         {
-            var ClickedButton = e.OriginalSource as NavButton;
+            var clickedButton = e.OriginalSource as NavButton;
 
-            NavigationService.Navigate(ClickedButton.NavUri);
+            NavigationService.Navigate(clickedButton.NavUri);
         }
+
+        #endregion
     }
 }

@@ -1,65 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
 namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    ///     Interaction logic for checkLoginCredentials.xaml
     /// </summary>
     public partial class Login : Page
     {
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Login"/> class.
+        /// </summary>
         public Login()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
-        private void HandleLogin(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region Methods
+
+        private void handleLogin(object sender, RoutedEventArgs e)
         {
-            LoginDAL loginDal = new LoginDAL();
-            string username = this.usernameTextBox.Text;
-            string password = this.passwordTextBox.Password;
-            User loggedUser = loginDal.Login(username, password);
+            var loginDal = new LoginDal();
+            var username = this.usernameTextBox.Text;
+            var password = this.passwordTextBox.Password;
+            var loggedUser = loginDal.CheckLoginCredentials(username, password);
 
             if (loggedUser != null)
             {
-                LoggedUser.user = loggedUser;
-                Landing landingPage = new Landing();
-                this.NavigationService.Navigate(landingPage);
-            } else
+                LoggedUser.User = loggedUser;
+                var landingPage = new Landing();
+                NavigationService?.Navigate(landingPage);
+            }
+            else
             {
-                MessageBox.Show("Login failed! No user found.");
-
+                MessageBox.Show("checkLoginCredentials failed! No user found.");
             }
         }
 
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
-            LoginDAL loginDal = new LoginDAL();
-            string username = this.usernameTextBox.Text;
-            string password = this.passwordTextBox.Password;
-            User loggedUser = loginDal.Login(username, password);
+            var loginDal = new LoginDal();
+            var username = this.usernameTextBox.Text;
+            var password = this.passwordTextBox.Password;
+            var loggedUser = loginDal.CheckLoginCredentials(username, password);
 
             if (loggedUser != null)
             {
-                LoggedUser.user = loggedUser;
-                Landing landingPage = new Landing();
-                this.NavigationService.Navigate(landingPage);
+                LoggedUser.User = loggedUser;
+                var landingPage = new Landing();
+                NavigationService?.Navigate(landingPage);
             }
         }
+
+        #endregion
     }
 }

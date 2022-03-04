@@ -1,30 +1,49 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
-namespace TravelPlannerUnitTests.LodgingDALTests
+namespace TravelPlannerUnitTests.DALs.LodgingDALTests
 {
+    /// <summary>
+    /// Tests get overlapping lodgings
+    /// </summary>
     [TestClass]
     public class GetOverlappingLodgingsTests
     {
+        #region Methods
+
+        /// <summary>
+        /// Tests the get overlapping lodgings.
+        /// </summary>
         [TestMethod]
         public void TestGetOverlappingLodgings()
         {
-            LoggedUser.selectedTrip = new Trip
+            LoggedUser.SelectedTrip = new Trip
                 { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 };
 
-            LoggedUser.selectedWaypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33), EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0 };
-            var data = new List<Lodging>
-            {
-                new Lodging { Location = "Test Lodging", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 0},
-                new Lodging { Location = "Test Lodging 2", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 1},
-                new Lodging { Location = "Test Lodging 3", StartTime = DateTime.Now.AddMinutes(15), EndTime = DateTime.Now.AddMinutes(25), TripId = 1, Id = 2},
+            LoggedUser.SelectedWaypoint = new Waypoint {
+                Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33),
+                EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0
+            };
+            var data = new List<Lodging> {
+                new Lodging {
+                    Location = "Test Lodging", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 0
+                },
+                new Lodging {
+                    Location = "Test Lodging 2", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 1
+                },
+                new Lodging {
+                    Location = "Test Lodging 3", StartTime = DateTime.Now.AddMinutes(15),
+                    EndTime = DateTime.Now.AddMinutes(25), TripId = 1, Id = 2
+                }
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Lodging>>();
@@ -36,11 +55,13 @@ namespace TravelPlannerUnitTests.LodgingDALTests
             var mockContext = new Mock<TravelPlannerDatabaseEntities>();
             mockContext.Setup(c => c.Lodgings).Returns(mockSet.Object);
 
-            var service = new LodgingDAL(mockContext.Object);
+            var service = new LodgingDal(mockContext.Object);
 
             Assert.AreEqual(2, service.GetOverlappingLodging(DateTime.Now, DateTime.Now.AddMinutes(30)).Count());
-            LoggedUser.selectedWaypoint = null;
-            LoggedUser.selectedTrip = null;
+            LoggedUser.SelectedWaypoint = null;
+            LoggedUser.SelectedTrip = null;
         }
+
+        #endregion
     }
 }

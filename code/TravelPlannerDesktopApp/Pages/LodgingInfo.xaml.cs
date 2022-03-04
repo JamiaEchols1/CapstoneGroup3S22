@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
@@ -19,52 +8,74 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
-    /// Interaction logic for LodgingInfo.xaml
+    ///     Interaction logic for LodgingInfo.xaml
     /// </summary>
     public partial class LodgingInfo : Page
     {
-        private LodgingDAL _lodgingDal;
+        #region Data members
+
+        private readonly LodgingDal lodgingDal;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="LodgingInfo" /> class.
+        /// </summary>
         public LodgingInfo()
         {
-            this._lodgingDal = new LodgingDAL();
-            InitializeComponent();
-            this.setSelectedLodgingText();
+            this.lodgingDal = new LodgingDal();
+            this.InitializeComponent();
+            this.SetSelectedLodgingText();
         }
 
-        public void setSelectedLodgingText()
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Sets the text for lodging info
+        ///     @precondition - LoggedUser != null
+        ///     @postcondition - LocationtextBlock.Text == "Location: " + LoggedUser.selectedLodging.Location;
+        ///     StartDateTextBlock.Text = "Start Date: " + LoggedUser.selectedLodging.StartTime;
+        ///     EndDateTextBlock.Text = "End Date: " + LoggedUser.selectedLodging.EndTime;
+        /// </summary>
+        public void SetSelectedLodgingText()
         {
-            this.LocationTextBlock.Text = "Location: " + LoggedUser.selectedLodging.Location;
-            this.StartDateTextBlock.Text = "Start Date: " + LoggedUser.selectedLodging.StartTime;
-            this.EndDateTextBlock.Text = "End Date: " + LoggedUser.selectedLodging.EndTime;
+            this.locationTextBlock.Text = "Location: " + LoggedUser.SelectedLodging.Location;
+            this.startDateTextBlock.Text = "Start Date: " + LoggedUser.SelectedLodging.StartTime;
+            this.endDateTextBlock.Text = "End Date: " + LoggedUser.SelectedLodging.EndTime;
         }
 
         private void editLodgingButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
         }
 
         private void removeLodgingButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                this._lodgingDal.RemoveLodging(LoggedUser.selectedLodging);
+                this.lodgingDal.RemoveLodging(LoggedUser.SelectedLodging);
 
                 MessageBox.Show("Lodging Deletion was Successful!");
 
-                NavigationService.Navigate(this.backButton.NavUri);
+                NavigationService?.Navigate(this.backButton.NavUri);
             }
             catch (Exception exception)
             {
-
                 MessageBox.Show("Error Removing lodging. " + exception.Message);
             }
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            var ClickedButton = e.OriginalSource as NavButton;
+            var clickedButton = e.OriginalSource as NavButton;
 
-            NavigationService.Navigate(ClickedButton.NavUri);
+            NavigationService?.Navigate(clickedButton.NavUri);
         }
+
+        #endregion
     }
 }

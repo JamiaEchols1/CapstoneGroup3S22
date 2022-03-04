@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
@@ -19,40 +7,60 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
-    /// Interaction logic for Landing.xaml
+    ///     Interaction logic for Landing.xaml
     /// </summary>
     public partial class Landing : Page
     {
-        private TripDAL _tripDal;
+        #region Data members
+
+        private readonly TripDal tripDal;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Landing" /> class.
+        /// </summary>
         public Landing()
         {
-            this._tripDal = new TripDAL();
-            InitializeComponent();
-            this.sampleSetupText();
-            this.tripsListBox.ItemsSource = this._tripDal.GetTrips(LoggedUser.user.Id);
+            this.tripDal = new TripDal();
+            this.InitializeComponent();
+            this.SampleSetupText();
+            this.tripsListBox.ItemsSource = this.tripDal.GetTrips(LoggedUser.User.Id);
         }
 
-        public void sampleSetupText()
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Sets the welcome text for tha landing page
+        ///     @precondition - LoggedUser != null
+        ///     @postcondition - WelcomeTextBlock.Text == "Welcome: " + LoggedUser.user.Username;
+        /// </summary>
+        public void SampleSetupText()
         {
-            this.WelcomeTextBlock.Text = "Welcome: " + LoggedUser.user.Username;
+            this.welcomeTextBlock.Text = "Welcome: " + LoggedUser.User.Username;
         }
 
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
+            var clickedButton = e.OriginalSource as NavButton;
 
-            var ClickedButton = e.OriginalSource as NavButton;
-
-            NavigationService.Navigate(ClickedButton.NavUri);
+            NavigationService?.Navigate(clickedButton.NavUri);
         }
 
         private void TripsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LoggedUser.selectedTrip = this.tripsListBox.SelectedItem as Trip;
-            if (LoggedUser.selectedTrip != null)
+            LoggedUser.SelectedTrip = this.tripsListBox.SelectedItem as Trip;
+            if (LoggedUser.SelectedTrip != null)
             {
-                TripInfo tripInfo = new TripInfo();
-                NavigationService.Navigate(tripInfo);
+                var tripInfo = new TripInfo();
+                NavigationService?.Navigate(tripInfo);
             }
         }
+
+        #endregion
     }
 }

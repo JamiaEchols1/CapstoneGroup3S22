@@ -1,31 +1,52 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
-namespace TravelPlannerUnitTests.TransportationDALTests
+namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 {
+    /// <summary>
+    ///     Tests get overlapping transportation
+    /// </summary>
     [TestClass]
     public class GetOverlappingTransportationsTests
     {
+        #region Methods
+
+        /// <summary>
+        ///     Tests the get overlapping transportations.
+        /// </summary>
         [TestMethod]
         public void TestGetOverlappingTransportations()
         {
-            LoggedUser.selectedTrip = new Trip
+            LoggedUser.SelectedTrip = new Trip
                 { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 };
 
-
-            LoggedUser.selectedWaypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33), EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0 };
-            var data = new List<Transportation>
-            {
-                new Transportation { Description = "test transportation", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId= 2, Id = 0},
-                new Transportation { Description = "test transportation 1", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 0, DepartingWaypointId = 2, ArrivingWaypointId= 3, Id = 1},
-                new Transportation { Description = "test transportation 2", StartTime = DateTime.Now.AddMinutes(15), EndTime = DateTime.Now.AddMinutes(25), TripId = 0, DepartingWaypointId = 3, ArrivingWaypointId= 1, Id = 2},
+            LoggedUser.SelectedWaypoint = new Waypoint {
+                Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33),
+                EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0
+            };
+            var data = new List<Transportation> {
+                new Transportation {
+                    Description = "test transportation", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId = 2,
+                    Id = 0
+                },
+                new Transportation {
+                    Description = "test transportation 1", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, DepartingWaypointId = 2, ArrivingWaypointId = 3,
+                    Id = 1
+                },
+                new Transportation {
+                    Description = "test transportation 2", StartTime = DateTime.Now.AddMinutes(15),
+                    EndTime = DateTime.Now.AddMinutes(25), TripId = 0, DepartingWaypointId = 3, ArrivingWaypointId = 1,
+                    Id = 2
+                }
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Transportation>>();
@@ -37,11 +58,13 @@ namespace TravelPlannerUnitTests.TransportationDALTests
             var mockContext = new Mock<TravelPlannerDatabaseEntities>();
             mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
 
-            var service = new TransportationDAL(mockContext.Object);
+            var service = new TransportationDal(mockContext.Object);
 
             Assert.AreEqual(2, service.GetOverlappingTransportation(DateTime.Now, DateTime.Now.AddMinutes(30)).Count());
-            LoggedUser.selectedWaypoint = null;
-            LoggedUser.selectedTrip = null;
+            LoggedUser.SelectedWaypoint = null;
+            LoggedUser.SelectedTrip = null;
         }
+
+        #endregion
     }
 }

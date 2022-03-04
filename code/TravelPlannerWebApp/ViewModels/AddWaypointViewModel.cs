@@ -1,17 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using TravelPlannerLibrary.Models;
 
 namespace WebApplication4.ViewModels
 {
+    /// <summary>
+    ///     The add waypoint view model
+    /// </summary>
     public class AddWaypointViewModel
     {
-        public Waypoint waypoint { get; set; }
+        #region Data members
 
-        public DateTime selectedTripStartDate = LoggedUser.selectedTrip.StartDate;
+        /// <summary>
+        ///     The selected trip start date
+        /// </summary>
+        public DateTime SelectedTripStartDate = LoggedUser.SelectedTrip.StartDate;
 
-        public DateTime selectedTripEndDate = LoggedUser.selectedTrip.EndDate;
+        /// <summary>
+        ///     The selected trip end date
+        /// </summary>
+        public DateTime SelectedTripEndDate = LoggedUser.SelectedTrip.EndDate;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the waypoint.
+        /// </summary>
+        /// <value>
+        ///     The waypoint.
+        /// </value>
+        public Waypoint Waypoint { get; set; }
+
+        #endregion
     }
 }

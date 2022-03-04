@@ -1,27 +1,33 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
-namespace TravelPlannerUnitTests
+namespace TravelPlannerUnitTests.DALs.LoginDALTests
 {
+    /// <summary>
+    /// Tests login
+    /// </summary>
     [TestClass]
     public class TestLogin
     {
+        #region Methods
+
+        /// <summary>
+        /// Tests the get all users.
+        /// </summary>
         [TestMethod]
         public void TestGetAllUsers()
         {
-            var data = new List<User>
-            {
+            var data = new List<User> {
                 new User { Username = "user1", Password = "pw" },
                 new User { Username = "user2", Password = "pw" },
-                new User { Username = "user3", Password = "pw" },
+                new User { Username = "user3", Password = "pw" }
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<User>>();
@@ -33,7 +39,7 @@ namespace TravelPlannerUnitTests
             var mockContext = new Mock<TravelPlannerDatabaseEntities>();
             mockContext.Setup(c => c.Users).Returns(mockSet.Object);
 
-            var service = new LoginDAL(mockContext.Object);
+            var service = new LoginDal(mockContext.Object);
             var users = service.GetAllUsers();
 
             Assert.AreEqual(3, users.Count);
@@ -42,17 +48,19 @@ namespace TravelPlannerUnitTests
             Assert.AreEqual("user3", users[2].Username);
         }
 
+        /// <summary>
+        /// Tests the valid user login.
+        /// </summary>
         [TestMethod]
         public void TestValidUserLogin()
         {
-            string expectedUsername = "user1";
-            string encryptedPassword = "JGSOzecXROhJSz7Ru0Z4Qg==";
-            string decryptedPassword = "password";
-            var data = new List<User>
-            {
+            const string expectedUsername = "user1";
+            const string encryptedPassword = "JGSOzecXROhJSz7Ru0Z4Qg==";
+            const string decryptedPassword = "password";
+            var data = new List<User> {
                 new User { Username = "user1", Password = encryptedPassword },
                 new User { Username = "user2", Password = encryptedPassword },
-                new User { Username = "user3", Password = encryptedPassword },
+                new User { Username = "user3", Password = encryptedPassword }
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<User>>();
@@ -63,22 +71,24 @@ namespace TravelPlannerUnitTests
             var mockContext = new Mock<TravelPlannerDatabaseEntities>();
             mockContext.Setup(c => c.Users).Returns(mockSet.Object);
 
-            var service = new LoginDAL(mockContext.Object);
-            var loggedUser = service.Login(expectedUsername, decryptedPassword);
+            var service = new LoginDal(mockContext.Object);
+            var loggedUser = service.CheckLoginCredentials(expectedUsername, decryptedPassword);
 
             Assert.AreEqual("user1", loggedUser.Username);
         }
 
+        /// <summary>
+        /// Tests the invalid user login.
+        /// </summary>
         [TestMethod]
         public void TestInvalidUserLogin()
         {
-            string expectedUsername = "user4";
-            string expectedPassword = "pw4";
-            var data = new List<User>
-            {
+            const string expectedUsername = "user4";
+            const string expectedPassword = "pw4";
+            var data = new List<User> {
                 new User { Username = "user1", Password = "pw1" },
                 new User { Username = "user2", Password = "pw2" },
-                new User { Username = "user3", Password = "pw3" },
+                new User { Username = "user3", Password = "pw3" }
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<User>>();
@@ -90,8 +100,8 @@ namespace TravelPlannerUnitTests
             var mockContext = new Mock<TravelPlannerDatabaseEntities>();
             mockContext.Setup(c => c.Users).Returns(mockSet.Object);
 
-            var service = new LoginDAL(mockContext.Object);
-            var loggedUser = service.Login(expectedUsername, expectedPassword);
+            var service = new LoginDal(mockContext.Object);
+            var loggedUser = service.CheckLoginCredentials(expectedUsername, expectedPassword);
 
             Assert.AreEqual(null, loggedUser);
         }

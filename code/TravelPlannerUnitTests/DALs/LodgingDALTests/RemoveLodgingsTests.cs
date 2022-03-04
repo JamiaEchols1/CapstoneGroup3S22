@@ -1,29 +1,51 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
-namespace TravelPlannerUnitTests.LodgingDALTests
+namespace TravelPlannerUnitTests.DALs.LodgingDALTests
 {
+    /// <summary>
+    /// Tests remove lodgings
+    /// </summary>
     [TestClass]
     public class RemoveLodgingsTests
     {
+        #region Methods
+
+        /// <summary>
+        /// Tests the delete lodging.
+        /// </summary>
         [TestMethod]
         public void TestDeleteLodging()
         {
-            LoggedUser.selectedWaypoint = new Waypoint { Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33), EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0 };
-            Lodging lodging = new Lodging() { Location = "Lodging", StartTime = DateTime.Now.AddMinutes(45), EndTime = DateTime.Now.AddMinutes(50), TripId = 2};
+            LoggedUser.SelectedWaypoint = new Waypoint {
+                Location = "Nowhere", StartDateTime = DateTime.Now.AddMinutes(33),
+                EndDateTime = DateTime.Now.AddMinutes(40), TripId = 0, Id = 0
+            };
+            var lodging = new Lodging {
+                Location = "Lodging", StartTime = DateTime.Now.AddMinutes(45), EndTime = DateTime.Now.AddMinutes(50),
+                TripId = 2
+            };
 
-            var data = new List<Lodging>
-            {
-                new Lodging { Location = "test lodging", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 1, Id = 0},
-                new Lodging { Location = "test lodging 1", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 2, Id = 1},
-                new Lodging { Location = "test lodging 2", StartTime = DateTime.Now.AddMinutes(10), EndTime = DateTime.Now.AddMinutes(14), TripId = 3, Id = 2},
+            var data = new List<Lodging> {
+                new Lodging {
+                    Location = "test lodging", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, Id = 0
+                },
+                new Lodging {
+                    Location = "test lodging 1", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 2, Id = 1
+                },
+                new Lodging {
+                    Location = "test lodging 2", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3, Id = 2
+                },
                 lodging
             }.AsQueryable();
 
@@ -37,15 +59,17 @@ namespace TravelPlannerUnitTests.LodgingDALTests
             mockContext.Setup(c => c.Lodgings).Returns(mockSet.Object);
             mockContext.Setup(m => m.SaveChanges()).Returns(mockContext.Object.SaveChanges());
 
-            Boolean wasCalled = false;
+            var wasCalled = false;
             mockContext.Setup(m => m.SaveChanges()).Callback(() => wasCalled = true);
 
-            var service = new LodgingDAL(mockContext.Object);
+            var service = new LodgingDal(mockContext.Object);
 
             service.RemoveLodging(lodging);
 
             Assert.IsTrue(wasCalled);
-            LoggedUser.selectedWaypoint = null;
+            LoggedUser.SelectedWaypoint = null;
         }
+
+        #endregion
     }
 }

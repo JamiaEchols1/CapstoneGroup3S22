@@ -1,137 +1,194 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TravelPlannerDesktopApp.Controls
 {
     /// <summary>
-    /// Interaction logic for TimeControl.xaml
+    ///     Interaction logic for TimeControl.xaml
     /// </summary>
     public partial class TimeControl : UserControl
     {
+        #region Data members
+
+        /// <summary>
+        ///     The value property
+        /// </summary>
+        public static readonly DependencyProperty ValueProperty =
+            DependencyProperty.Register("Value", typeof(TimeSpan), typeof(TimeControl),
+                new FrameworkPropertyMetadata(DateTime.Now.TimeOfDay,
+                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChanged));
+
+        /// <summary>
+        ///     The hours property
+        /// </summary>
+        public static readonly DependencyProperty HoursProperty =
+            DependencyProperty.Register("Hours", typeof(int), typeof(TimeControl),
+                new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTimeChanged));
+
+        /// <summary>
+        ///     The minutes property
+        /// </summary>
+        public static readonly DependencyProperty MinutesProperty =
+            DependencyProperty.Register("Minutes", typeof(int), typeof(TimeControl),
+                new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTimeChanged));
+
+        /// <summary>
+        ///     The seconds property
+        /// </summary>
+        public static readonly DependencyProperty SecondsProperty =
+            DependencyProperty.Register("Seconds", typeof(int), typeof(TimeControl),
+                new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTimeChanged));
+
+        /// <summary>
+        ///     The milliseconds property
+        /// </summary>
+        public static readonly DependencyProperty MillisecondsProperty =
+            DependencyProperty.Register("Milliseconds", typeof(int), typeof(TimeControl),
+                new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTimeChanged));
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the value.
+        /// </summary>
+        /// <value>
+        ///     The value.
+        /// </value>
+        public TimeSpan Value
+        {
+            get => (TimeSpan)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
+        }
+
+        /// <summary>
+        ///     Gets or sets the hours.
+        /// </summary>
+        /// <value>
+        ///     The hours.
+        /// </value>
+        public int Hours
+        {
+            get => (int)GetValue(HoursProperty);
+            set => SetValue(HoursProperty, value);
+        }
+
+        /// <summary>
+        ///     Gets or sets the minutes.
+        /// </summary>
+        /// <value>
+        ///     The minutes.
+        /// </value>
+        public int Minutes
+        {
+            get => (int)GetValue(MinutesProperty);
+            set => SetValue(MinutesProperty, value);
+        }
+
+        /// <summary>
+        ///     Gets or sets the seconds.
+        /// </summary>
+        /// <value>
+        ///     The seconds.
+        /// </value>
+        public int Seconds
+        {
+            get => (int)GetValue(SecondsProperty);
+            set => SetValue(SecondsProperty, value);
+        }
+
+        /// <summary>
+        ///     Gets or sets the milliseconds.
+        /// </summary>
+        /// <value>
+        ///     The milliseconds.
+        /// </value>
+        public int Milliseconds
+        {
+            get => (int)GetValue(MillisecondsProperty);
+            set => SetValue(MillisecondsProperty, value);
+        }
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="TimeControl" /> class.
+        /// </summary>
         public TimeControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
+
+        #endregion
+
+        #region Methods
+
         private static void OnValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            TimeControl control = obj as TimeControl;
+            var control = obj as TimeControl;
             var newTime = (TimeSpan)e.NewValue;
 
-            control.Hours = newTime.Hours;
-            control.Minutes = newTime.Minutes;
-            control.Seconds = newTime.Seconds;
-            control.Milliseconds = newTime.Milliseconds;
+            if (control != null)
+            {
+                control.Hours = newTime.Hours;
+                control.Minutes = newTime.Minutes;
+                control.Seconds = newTime.Seconds;
+                control.Milliseconds = newTime.Milliseconds;
+            }
         }
-
 
         private static void OnTimeChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            TimeControl control = obj as TimeControl;
-            control.Value = new TimeSpan(0, control.Hours, control.Minutes, control.Seconds, control.Milliseconds);
+            var control = obj as TimeControl;
+            if (control != null)
+            {
+                control.Value = new TimeSpan(0, control.Hours, control.Minutes, control.Seconds, control.Milliseconds);
+            }
         }
 
-        public TimeSpan Value
+        private Tuple<int, int> getMaxAndCurrentValues(string name)
         {
-            get { return (TimeSpan)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
-        }
-        public static readonly DependencyProperty ValueProperty =
-        DependencyProperty.Register("Value", typeof(TimeSpan), typeof(TimeControl),
-        new FrameworkPropertyMetadata(DateTime.Now.TimeOfDay, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnValueChanged)));
-
-
-
-        public int Hours
-        {
-            get { return (int)GetValue(HoursProperty); }
-            set { SetValue(HoursProperty, value); }
-        }
-        public static readonly DependencyProperty HoursProperty =
-        DependencyProperty.Register("Hours", typeof(int), typeof(TimeControl),
-        new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnTimeChanged)));
-
-        public int Minutes
-        {
-            get { return (int)GetValue(MinutesProperty); }
-            set { SetValue(MinutesProperty, value); }
-        }
-        public static readonly DependencyProperty MinutesProperty =
-        DependencyProperty.Register("Minutes", typeof(int), typeof(TimeControl),
-        new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnTimeChanged)));
-
-        public int Seconds
-        {
-            get { return (int)GetValue(SecondsProperty); }
-            set { SetValue(SecondsProperty, value); }
-        }
-
-        public static readonly DependencyProperty SecondsProperty =
-        DependencyProperty.Register("Seconds", typeof(int), typeof(TimeControl),
-        new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnTimeChanged)));
-
-
-        public int Milliseconds
-        {
-            get { return (int)GetValue(MillisecondsProperty); }
-            set { SetValue(MillisecondsProperty, value); }
-        }
-
-        public static readonly DependencyProperty MillisecondsProperty =
-        DependencyProperty.Register("Milliseconds", typeof(int), typeof(TimeControl),
-        new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnTimeChanged)));
-
-
-        private Tuple<int, int> GetMaxAndCurentValues(String name)
-        {
-            int maxValue = 0;
-            int currValue = 0;
+            var maxValue = 0;
+            var currentValue = 0;
 
             switch (name)
             {
                 case "ff":
                     maxValue = 1000;
-                    currValue = Milliseconds;
+                    currentValue = this.Milliseconds;
                     break;
 
                 case "ss":
                     maxValue = 60;
-                    currValue = Seconds;
+                    currentValue = this.Seconds;
                     break;
 
                 case "mm":
                     maxValue = 60;
-                    currValue = Minutes;
+                    currentValue = this.Minutes;
                     break;
 
                 case "hh":
                     maxValue = 24;
-                    currValue = Hours;
+                    currentValue = this.Hours;
                     break;
             }
 
-            return new Tuple<int, int>(maxValue, currValue);
+            return new Tuple<int, int>(maxValue, currentValue);
         }
 
-        private void UpdateTimeValue(String name, int delta)
+        private void updateTimeValue(string name, int delta)
         {
-            var values = GetMaxAndCurentValues(name);
-            int maxValue = values.Item1;
-            int currValue = values.Item2;
+            var (maxValue, currentValue) = this.getMaxAndCurrentValues(name);
 
             // Set new value
-            int newValue = currValue + delta;
+            var newValue = currentValue + delta;
 
             if (newValue == maxValue)
             {
@@ -142,24 +199,23 @@ namespace TravelPlannerDesktopApp.Controls
                 newValue += maxValue;
             }
 
-
             switch (name)
             {
                 case "ff":
-                    Milliseconds = newValue;
+                    this.Milliseconds = newValue;
 
                     break;
 
                 case "ss":
-                    Seconds = newValue;
+                    this.Seconds = newValue;
                     break;
 
                 case "mm":
-                    Minutes = newValue;
+                    this.Minutes = newValue;
                     break;
 
                 case "hh":
-                    Hours = newValue;
+                    this.Hours = newValue;
                     break;
             }
         }
@@ -168,50 +224,63 @@ namespace TravelPlannerDesktopApp.Controls
         {
             try
             {
-                int delta = 0;
-                String name = ((TextBox)sender).Name;
+                var delta = 0;
+                var name = ((TextBox)sender).Name;
 
-                if (args.Key == Key.Up) { delta = 1; }
-                else if (args.Key == Key.Down) { delta = -1; }
+                switch (args.Key)
+                {
+                    case Key.Up:
+                        delta = 1;
+                        break;
+                    case Key.Down:
+                        delta = -1;
+                        break;
+                }
 
-                UpdateTimeValue(name, delta);
+                this.updateTimeValue(name, delta);
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
 
         private void OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
             try
             {
-                var g = (Grid)(sender);
+                var g = (Grid)sender;
                 var value = g.Children.OfType<TextBox>().FirstOrDefault();
 
-                UpdateTimeValue(value.Name, e.Delta / Math.Abs(e.Delta));
+                if (value != null)
+                {
+                    this.updateTimeValue(value.Name, e.Delta / Math.Abs(e.Delta));
+                }
             }
-            catch { }
-
+            catch
+            {
+                // ignored
+            }
         }
 
-        private Boolean IsTextAllowed(String name, String text)
+        private bool isTextAllowed(string name, string text)
         {
             try
             {
-                foreach (Char c in text.ToCharArray())
-                {
-                    if (Char.IsDigit(c) || Char.IsControl(c)) continue;
-                    else return false;
-                }
-
-                var values = GetMaxAndCurentValues(name);
-                int maxValue = values.Item1;
-
-                int newValue = Convert.ToInt32(text);
-
-                if (newValue < 0 || newValue >= (Int32)maxValue)
+                if (text.Any(c => !char.IsDigit(c) && !char.IsControl(c)))
                 {
                     return false;
                 }
 
+                var values = this.getMaxAndCurrentValues(name);
+                var maxValue = values.Item1;
+
+                var newValue = Convert.ToInt32(text);
+
+                if (newValue < 0 || newValue >= maxValue)
+                {
+                    return false;
+                }
             }
             catch
             {
@@ -221,34 +290,45 @@ namespace TravelPlannerDesktopApp.Controls
             return true;
         }
 
-        private void OnPreviewTextInput(Object sender, TextCompositionEventArgs e)
+        private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             try
             {
                 var tb = (TextBox)sender;
 
-
-                e.Handled = !IsTextAllowed(tb.Name, tb.Text + e.Text);
+                e.Handled = !this.isTextAllowed(tb.Name, tb.Text + e.Text);
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
-
 
         private void OnTextPasting(object sender, DataObjectPastingEventArgs e)
         {
             try
             {
-                String name = ((TextBox)sender).Name;
+                var name = ((TextBox)sender).Name;
 
-                if (e.DataObject.GetDataPresent(typeof(String)))
+                if (e.DataObject.GetDataPresent(typeof(string)))
                 {
-                    String text = (String)e.DataObject.GetData(typeof(String));
-                    if (!IsTextAllowed(name, text)) e.CancelCommand();
+                    var text = (string)e.DataObject.GetData(typeof(string));
+                    if (!this.isTextAllowed(name, text))
+                    {
+                        e.CancelCommand();
+                    }
                 }
-                else e.CancelCommand();
+                else
+                {
+                    e.CancelCommand();
+                }
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
 
+        #endregion
     }
 }
