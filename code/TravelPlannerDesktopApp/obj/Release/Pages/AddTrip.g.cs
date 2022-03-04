@@ -31,6 +31,7 @@ using System.Windows.Shapes;
 using System.Windows.Shell;
 using TravelPlannerDesktopApp.Controls;
 using TravelPlannerDesktopApp.Pages;
+using Xceed.Wpf.Toolkit;
 
 
 namespace TravelPlannerDesktopApp.Pages {

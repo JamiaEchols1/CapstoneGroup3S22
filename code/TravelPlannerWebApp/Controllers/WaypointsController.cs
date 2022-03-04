@@ -134,7 +134,7 @@ namespace WebApplication4.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Waypoint waypoint = WaypointDAL.FindWaypointByID(id);
-            WaypointDAL.RemoveWaypoint(waypoint);
+            this.waypointDAL.RemoveWaypoint(waypoint);
             return RedirectToAction("Index");
         }
 

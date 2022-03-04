@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TravelPlannerLibrary.Models;
 using TravelPlannerLibrary.Util;
 
@@ -27,34 +25,20 @@ namespace TravelPlannerLibrary.DAL
             {
                 throw new ArgumentNullException("Must enter a location!");
             }
-            if (startTime == null)
+
+            if (startTime.CompareTo(endTime) >= 0)
             {
-                throw new ArgumentNullException("Must enter a time");
+                throw new ArgumentException("Start date must be before end date");
             }
-            if (endTime == null)
-            {
-                throw new ArgumentNullException("Must enter a time");
-            }
+
             if (LoggedUser.selectedTrip.StartDate.CompareTo(startTime) >= 0)
             {
                 throw new ArgumentException("Start date must be on or after trip start date");
-            }
-            if (LoggedUser.selectedTrip.StartDate.CompareTo(endTime) >= 0)
-            {
-                throw new ArgumentException("End date must be on or after trip start date");
             }
 
             if (endTime.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
             {
                 throw new ArgumentException("End date must be on or before trip end date");
-            }
-            if (startTime.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
-            {
-                throw new ArgumentException("Start date must be on or before trip end date");
-            }
-            if (startTime.CompareTo(endTime) >= 0)
-            {
-                throw new ArgumentException("Start date must be before end date");
             }
 
             Waypoint waypoint = new Waypoint();
@@ -69,7 +53,7 @@ namespace TravelPlannerLibrary.DAL
             return waypoint;
         }
 
-        public static int RemoveWaypoint(Waypoint waypoint)
+        public int RemoveWaypoint(Waypoint waypoint)
         {
             db.Waypoints.Remove(waypoint);
             return db.SaveChanges();

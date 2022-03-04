@@ -46,13 +46,27 @@ namespace TravelPlannerDesktopApp.Pages
             {
                 DateTime startDate = DateTime.Parse(this.startDateTimePicker.Text);
                 DateTime endDate = DateTime.Parse(this.endDateTimePicker.Text);
-                if (this._waypointDal.GetOverlappingWaypoints(startDate, endDate).Count != 0)
+                var overlappingWaypoints = this._waypointDal.GetOverlappingWaypoints(startDate, endDate);
+                if (overlappingWaypoints.Count != 0)
                 {
-                    throw new Exception("Waypoint must not overlap with other waypoints");
+                    string message = "The following overlapping waypoint(s) were found.\n";
+                    foreach (var waypoint in overlappingWaypoints)
+                    {
+                        message += waypoint + "\n";
+                    }
+                    throw new Exception(message + "Waypoint must not overlap with other waypoints");
                 }
-                if (this._transportationDal.GetOverlappingTransportation(startDate, endDate).Count != 0)
+
+                var overlappingTransportations =
+                    this._transportationDal.GetOverlappingTransportation(startDate, endDate);
+                if (overlappingTransportations.Count != 0)
                 {
-                    throw new Exception("Waypoint must not overlap with transportations");
+                    string message = "The following overlapping transportation(s) were found.\n";
+                    foreach (var transportation in overlappingTransportations)
+                    {
+                        message += transportation + "\n";
+                    }
+                    throw new Exception(message + "Waypoint must not overlap with transportations");
                 }
 
                 Waypoint newWaypoint = this._waypointDal.CreateNewWaypoint(this.locationTextBox.Text, startDate, endDate, LoggedUser.selectedTrip.Id);

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TravelPlannerLibrary.Models;
 using TravelPlannerLibrary.Util;
 
@@ -10,42 +8,27 @@ namespace TravelPlannerLibrary.DAL
 {
     public class LodgingDAL
     {
-        private static TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
+        private static TravelPlannerDatabaseEntities _db = new TravelPlannerDatabaseEntities();
 
         public LodgingDAL() { }
 
         public LodgingDAL(TravelPlannerDatabaseEntities @object)
         {
-            db = @object;
+            _db = @object;
         }
 
-        public List<Lodging> GetLodgings(int tripId) => db.Lodgings.Where(t => t.TripId == tripId).ToList();
+        public List<Lodging> GetLodgings(int tripId) => _db.Lodgings.Where(t => t.TripId == tripId).ToList();
 
         public Lodging CreateNewLodging(string location, DateTime startTime, DateTime endTime, int tripId)
         {
             if (string.IsNullOrEmpty(location))
             {
-                throw new ArgumentNullException("Must enter a location!");
-            }
-            if (startTime == null)
-            {
-                throw new ArgumentNullException("Must enter a start time");
-            }
-            if (endTime == null)
-            {
-                throw new ArgumentNullException("Must enter an end time");
+                string parameterName = "location";
+                throw new ArgumentNullException(parameterName, "Must enter a location!");
             }
             if (LoggedUser.selectedTrip.StartDate.CompareTo(startTime) > 0)
             {
                 throw new ArgumentException("Start date must be on or after trip start date");
-            }
-            if (startTime.CompareTo(LoggedUser.selectedTrip.EndDate) >= 0)
-            {
-                throw new ArgumentException("Start date must be before trip end date");
-            }
-            if (LoggedUser.selectedTrip.StartDate.CompareTo(endTime) >= 0)
-            {
-                throw new ArgumentException("End date must be after trip start date");
             }
             if (endTime.CompareTo(LoggedUser.selectedTrip.EndDate) > 0)
             {
@@ -61,16 +44,16 @@ namespace TravelPlannerLibrary.DAL
             lodging.StartTime = startTime;
             lodging.EndTime = endTime;
             lodging.TripId = tripId;
-            lodging.Id = db.Lodgings.Count();
+            lodging.Id = _db.Lodgings.Count();
 
-            db.Lodgings.Add(lodging);
-            db.SaveChanges();
+            _db.Lodgings.Add(lodging);
+            _db.SaveChanges();
             return lodging;
         }
         public int RemoveLodging(Lodging lodging)
         {
-            db.Lodgings.Remove(lodging);
-            return db.SaveChanges();
+            _db.Lodgings.Remove(lodging);
+            return _db.SaveChanges();
         }
 
         public List<Lodging> GetOverlappingLodging(DateTime newStartTime, DateTime newEndTime)

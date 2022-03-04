@@ -38,20 +38,30 @@ namespace TravelPlannerDesktopApp.Pages
            try
             {
                 Waypoint waypoint = (Waypoint)this.arrivingWaypointComboBox.SelectedItem;
-                var waypoints = this._waypointDal.GetWaypoints(LoggedUser.selectedTrip.Id).Where(w => (w.EndDateTime < waypoint.StartDateTime && w.EndDateTime > LoggedUser.selectedWaypoint.EndDateTime) || (w.StartDateTime < waypoint.StartDateTime && w.StartDateTime > LoggedUser.selectedWaypoint.EndDateTime));
-                if (waypoints.Any())
-                {
-                    throw new Exception("Transportation must be between two consecutive waypoints");
-                }
+
                 DateTime startDate = LoggedUser.selectedWaypoint.EndDateTime;
                 DateTime endTime = waypoint.StartDateTime;
-                if (this._waypointDal.GetOverlappingWaypoints(startDate, endTime).Count != 0)
+                var overlappingWaypoints = this._waypointDal.GetOverlappingWaypoints(startDate, endTime);
+                if (overlappingWaypoints.Count != 0)
                 {
-                    throw new Exception("Tranportation must not overlap with waypoints");
+                    string message = "The following overlapping waypoint(s) were found.\n";
+                    foreach (var overlappedWaypoint in overlappingWaypoints)
+                    {
+                        message += overlappedWaypoint + "\n";
+                    }
+                    throw new Exception(message + "Transportation must not overlap with other waypoints");
                 }
-                if (this._transportationDal.GetOverlappingTransportation(startDate, endTime).Count != 0)
+
+                var overlappingTransportations =
+                    this._transportationDal.GetOverlappingTransportation(startDate, endTime);
+                if (overlappingTransportations.Count != 0)
                 {
-                    throw new Exception("Tranportation must not overlap with other transportation");
+                    string message = "The following overlapping transportation(s) were found.\n";
+                    foreach (var transportation in overlappingTransportations)
+                    {
+                        message += transportation + "\n";
+                    }
+                    throw new Exception(message + "Transportation must not overlap with transportations");
                 }
 
                 this._transportationDal.CreateANewTransportation(LoggedUser.selectedWaypoint.Id, waypoint.Id, LoggedUser.selectedTrip.Id, startDate, endTime, descriptionTextBox.Text);
