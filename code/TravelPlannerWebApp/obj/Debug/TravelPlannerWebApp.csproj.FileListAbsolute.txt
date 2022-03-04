@@ -395,8 +395,6 @@ C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlanner
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\roslyn\VBCSCompiler.exe
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\Antlr3.Runtime.dll
-C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\EntityFramework.dll
-C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\EntityFramework.SqlServer.dll
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\Newtonsoft.Json.dll
@@ -412,7 +410,6 @@ C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlanner
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\TravelPlannerLibrary.pdb
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\TravelPlannerLibrary.dll.config
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\EntityFramework.xml
-C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\EntityFramework.SqlServer.xml
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\System.Web.Helpers.xml
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\System.Web.Mvc.xml
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\System.Web.Optimization.xml
@@ -599,3 +596,5 @@ C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\obj\Debug\TravelPlannerWebApp.csproj.CopyComplete
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\obj\Debug\WebApplication4.dll
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerWebApp\obj\Debug\WebApplication4.pdb
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\WebApplication4.xml
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerWebApp\bin\TravelPlannerLibrary.xml

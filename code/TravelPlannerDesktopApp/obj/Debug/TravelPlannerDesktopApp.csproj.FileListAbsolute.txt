@@ -212,3 +212,5 @@ C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktop
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.csproj.CopyComplete
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.exe
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.pdb
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerDesktopApp.xml
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\bin\Debug\TravelPlannerLibrary.xml

@@ -82,7 +82,7 @@ namespace TravelPlannerLibrary.DAL
             }
             if (string.IsNullOrEmpty(location))
             {
-                throw new ArgumentException("Must enter a location!");
+                throw new ArgumentNullException("Must enter a location!");
             }
 
             if (startTime.CompareTo(endTime) >= 0)
