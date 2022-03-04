@@ -40,20 +40,6 @@ namespace TravelPlannerLibrary.DAL
         #region Methods
 
         /// <summary>
-        ///     Gets all of the transportations by departing and arriving waypoints.
-        /// </summary>
-        /// <param name="departingWaypointId">The departing waypoint identifier.</param>
-        /// <param name="arrivalWaypointId">The arrival waypoint identifier.</param>
-        /// <returns>
-        ///     A collection of all transportations with the specified departing and arrival waypoints
-        /// </returns>
-        public List<Transportation> GetTransportationByWaypoint(int departingWaypointId, int arrivalWaypointId)
-        {
-            return db.Transportations.Where(t =>
-                t.DepartingWaypointId == departingWaypointId && t.ArrivingWaypointId == arrivalWaypointId).ToList();
-        }
-
-        /// <summary>
         ///     Gets all the transportations for the specified trip id.
         /// </summary>
         /// <param name="tripId">The trip identifier.</param>
@@ -73,8 +59,6 @@ namespace TravelPlannerLibrary.DAL
         /// arrivalWaypointId != departingWaypointId;
         /// selectedWaypoint.EndDateTime.CompareTo(startTime) &lt;= 0;
         /// @postcondition - transportation is added to the db with the specified values
-        /// <param name="departingWaypointId">The departing waypoint identifier.</param>
-        /// <param name="arrivalWaypointId">The arrival waypoint identifier.</param>
         /// <param name="tripId">The trip identifier.</param>
         /// <param name="startTime">The start time.</param>
         /// <param name="endTime">The end time.</param>
@@ -90,7 +74,7 @@ namespace TravelPlannerLibrary.DAL
         ///     or
         ///     Start date must be on or after waypoint end date
         /// </exception>
-        public int CreateANewTransportation(int departingWaypointId, int arrivalWaypointId, int tripId,
+        public Transportation CreateANewTransportation(int tripId,
             DateTime startTime, DateTime endTime, string description)
         {
             if (string.IsNullOrEmpty(description))
@@ -104,14 +88,14 @@ namespace TravelPlannerLibrary.DAL
                 throw new ArgumentException("End date must be on or after selected start date");
             }
 
-            if (arrivalWaypointId == departingWaypointId)
+            if (LoggedUser.SelectedTrip.StartDate.CompareTo(startTime) >= 0)
             {
-                throw new ArgumentException("Departure waypoint cannot be the same as arrival waypoint");
+                throw new ArgumentException("Start date must be on or after trip start date");
             }
 
-            if (LoggedUser.SelectedWaypoint.EndDateTime.CompareTo(startTime) > 0)
+            if (endTime.CompareTo(LoggedUser.SelectedTrip.EndDate) >= 0)
             {
-                throw new ArgumentException("Start date must be on or after waypoint end date");
+                throw new ArgumentException("End date must be on or before trip end date");
             }
 
             var transportation = new Transportation {
@@ -119,12 +103,11 @@ namespace TravelPlannerLibrary.DAL
                 TripId = tripId,
                 StartTime = startTime,
                 EndTime = endTime,
-                Description = description,
-                ArrivingWaypointId = arrivalWaypointId,
-                DepartingWaypointId = departingWaypointId
+                Description = description
             };
             db.Transportations.Add(transportation);
-            return db.SaveChanges();
+            db.SaveChanges();
+            return transportation;
         }
 
         /// <summary>
@@ -157,11 +140,6 @@ namespace TravelPlannerLibrary.DAL
             if (transportation.StartTime.CompareTo(transportation.EndTime) > 0)
             {
                 throw new ArgumentException("End date must be on or after selected start date");
-            }
-
-            if (transportation.ArrivingWaypointId == transportation.DepartingWaypointId)
-            {
-                throw new ArgumentException("Departure waypoint cannot be the same as arrival waypoint");
             }
 
             if (LoggedUser.SelectedWaypoint.EndDateTime.CompareTo(transportation.StartTime) > 0)

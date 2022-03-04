@@ -30,18 +30,18 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             };
             var data = new List<Transportation> {
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 1, ArrivingWaypointId = 2,
+                    Description = "test transportation", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
                     Id = 0
                 },
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation 1", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1, DepartingWaypointId = 2, ArrivingWaypointId = 3,
+                    Description = "test transportation 1", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
                     Id = 1
                 },
                 new Transportation {
-                    Waypoint = waypoint, Description = "test transportation 2", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3, DepartingWaypointId = 3, ArrivingWaypointId = 1,
+                    Description = "test transportation 2", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
                     Id = 2
                 }
             }.AsQueryable();

@@ -46,6 +46,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.locationTextBlock.Text = "Location: " + LoggedUser.SelectedWaypoint.Location;
             this.timeTextBlock.Text = "Start Time: " + LoggedUser.SelectedWaypoint.StartDateTime;
             this.endDateTextBlock.Text = "End Time: " + LoggedUser.SelectedWaypoint.EndDateTime;
+            this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedWaypoint.Description;
         }
 
         private void EditWaypointButton_OnClick(object sender, RoutedEventArgs e)

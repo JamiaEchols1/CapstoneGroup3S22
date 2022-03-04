@@ -14,9 +14,8 @@ namespace TravelPlannerDesktopApp.Pages
     {
         #region Data members
 
-        private readonly WaypointDal _waypointDAL;
+        private readonly WaypointDal waypointDal;
         private readonly TransportationDal transportationDal;
-        private readonly Transportation transportation;
 
         #endregion
 
@@ -25,17 +24,26 @@ namespace TravelPlannerDesktopApp.Pages
         /// <summary>
         ///     Initializes a new instance of the <see cref="TransportationInfo" /> class.
         /// </summary>
-        /// <param name="transportation">The transportation.</param>
-        public TransportationInfo(Transportation transportation)
+        public TransportationInfo()
         {
-            this.transportation = transportation;
-            this._waypointDAL = new WaypointDal();
+            this.waypointDal = new WaypointDal();
             this.transportationDal = new TransportationDal();
             this.InitializeComponent();
-            this.startTimeTextBlock.Text = "Start Time: " + transportation.StartTime;
-            this.endTimeTextBlock.Text = "End Time: " + transportation.EndTime;
-            this.toTextBlock.Text = this._waypointDAL.GetWaypoint(transportation.ArrivingWaypointId).ToString();
-            this.fromTextBlock.Text = this._waypointDAL.GetWaypoint(transportation.DepartingWaypointId).ToString();
+            this.SetSelectedTransportText();
+        }
+
+        /// <summary>
+        /// Sets the selected transportation text
+        /// @precondition - LoggedUser.SelectedTransportation != null
+        /// @postcondition -  this.startTimeTextBlock.Text = "Start Time: " + LoggedUser.SelectedTransportation.StartTime;
+        ///                   this.endTimeTextBlock.Text = "End Time: " + LoggedUser.SelectedTransportation.EndTime;
+        ///                   this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTransportation.Description;
+        /// </summary>
+        public void SetSelectedTransportText()
+        {
+            this.startTimeTextBlock.Text = "Start Time: " + LoggedUser.SelectedTransportation.StartTime;
+            this.endTimeTextBlock.Text = "End Time: " + LoggedUser.SelectedTransportation.EndTime;
+            this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTransportation.Description;
         }
 
         #endregion
@@ -51,7 +59,7 @@ namespace TravelPlannerDesktopApp.Pages
         {
             try
             {
-                this.transportationDal.DeleteTransportation(this.transportation);
+                this.transportationDal.DeleteTransportation(LoggedUser.SelectedTransportation);
 
                 MessageBox.Show("Transportation Deletion was Successful!");
 

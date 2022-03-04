@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,7 +10,7 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerUnitTests.DALs.LoginDALTests
 {
     /// <summary>
-    /// Tests login
+    ///     Tests login
     /// </summary>
     [TestClass]
     public class TestLogin
@@ -19,7 +18,7 @@ namespace TravelPlannerUnitTests.DALs.LoginDALTests
         #region Methods
 
         /// <summary>
-        /// Tests the get all users.
+        ///     Tests the get all users.
         /// </summary>
         [TestMethod]
         public void TestGetAllUsers()
@@ -49,7 +48,7 @@ namespace TravelPlannerUnitTests.DALs.LoginDALTests
         }
 
         /// <summary>
-        /// Tests the valid user login.
+        ///     Tests the valid user login.
         /// </summary>
         [TestMethod]
         public void TestValidUserLogin()
@@ -78,7 +77,7 @@ namespace TravelPlannerUnitTests.DALs.LoginDALTests
         }
 
         /// <summary>
-        /// Tests the invalid user login.
+        ///     Tests the invalid user login.
         /// </summary>
         [TestMethod]
         public void TestInvalidUserLogin()
@@ -105,5 +104,7 @@ namespace TravelPlannerUnitTests.DALs.LoginDALTests
 
             Assert.AreEqual(null, loggedUser);
         }
+
+        #endregion
     }
 }

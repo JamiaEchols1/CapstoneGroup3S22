@@ -106,7 +106,7 @@ namespace WebApplication4.Controllers
             {
                 waypoint.TripId = LoggedUser.SelectedTrip.Id;
                 this.waypointDal.CreateNewWaypoint(waypoint.Location, waypoint.StartDateTime, waypoint.EndDateTime,
-                    waypoint.TripId);
+                    waypoint.TripId, waypoint.Description);
                 return RedirectToAction("Index");
             }
 

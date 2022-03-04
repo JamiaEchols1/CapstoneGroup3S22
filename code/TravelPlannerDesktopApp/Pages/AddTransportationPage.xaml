@@ -5,26 +5,29 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d"
+      xmlns:controls="clr-namespace:TravelPlannerDesktopApp.Controls"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddTransportationPage">
 
     <Grid Background="White">
-        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Margin="345,112,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="120" />
-        <Label x:Name="descriptionLabel" Content="Description" Margin="250,110,455,315" />
-        <ComboBox x:Name="arrivingWaypointComboBox" HorizontalAlignment="Left" Margin="345,168,0,0"
-                  VerticalAlignment="Top" Width="120" />
-        <Label Content="Start Time:" HorizontalAlignment="Left" Margin="270,214,0,0" VerticalAlignment="Top" />
-        <Label Content="End Time:" HorizontalAlignment="Left" Margin="270,259,0,0" VerticalAlignment="Top" />
-        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="510,340,0,0"
-                VerticalAlignment="Top" Click="SaveButton_Click" />
-        <Button x:Name="cancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="290,340,0,0"
-                VerticalAlignment="Top" Click="cancelButton_Click" />
-        <wpfTool:DateTimePicker x:Name="startDateTimePicker" HorizontalAlignment="Left" Margin="340,220,0,0"
-                                VerticalAlignment="Top" Width="270" />
-        <wpfTool:DateTimePicker x:Name="endDateTimePicker" HorizontalAlignment="Left" VerticalAlignment="Top"
-                                Width="270" Margin="339,264,0,0" />
+        <Label Content="Add New Transportation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
+               Width="292" />
+        <controls:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/Back.png"
+                            NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right" />
 
+        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Margin="271,106,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Description" />
+        <Label x:Name="descriptionLabel" Content="Description:" Margin="150,101,534,0" VerticalAlignment="Top" />
+        <Label Content="Start Time:" Margin="156,141,534,0" VerticalAlignment="Top" />
+        <Label Content="End Time:" Margin="156,181,534,0" VerticalAlignment="Top" />
+        <Button x:Name="saveButton" Content="Create Transportation" HorizontalAlignment="Left" Margin="271,368,0,0"
+                VerticalAlignment="Top"  Width="270" Click="createTransportationButton_Click" />
+        <wpfTool:DateTimePicker x:Name="startDateTimePicker" HorizontalAlignment="Left" Margin="271,146,0,0"
+                                VerticalAlignment="Top" Width="270" ValueChanged="datePicker_ValueChanged"/>
+        <wpfTool:DateTimePicker x:Name="endDateTimePicker" HorizontalAlignment="Left" Margin="271,186,0,0"
+                                VerticalAlignment="Top" Width="270" ValueChanged="datePicker_ValueChanged" />
+        <TextBlock x:Name="overlappingLabel" Margin="100,255,496,114" TextWrapping="Wrap" Visibility="Collapsed" Text="Overlapping Transportation and Waypoints: "/>
+        <ListBox x:Name="overlappingListBox" Margin="271,220,242,87" Visibility="Collapsed" />
 
     </Grid>
 </Page>

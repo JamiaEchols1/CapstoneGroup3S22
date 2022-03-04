@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using TravelPlannerDesktopApp.Controls;
@@ -15,9 +16,9 @@ namespace TravelPlannerDesktopApp.Pages
     {
         #region Data members
 
-        private readonly WaypointDal _waypointDal;
-        private readonly LodgingDal _lodgingDal;
-        private readonly TransportationDal _transportationDal;
+        private readonly WaypointDal waypointDal;
+        private readonly LodgingDal lodgingDal;
+        private readonly TransportationDal transportationDal;
 
         #endregion
 
@@ -28,17 +29,11 @@ namespace TravelPlannerDesktopApp.Pages
         /// </summary>
         public TripInfo()
         {
-            this._waypointDal = new WaypointDal();
-            this._transportationDal = new TransportationDal();
-            this._lodgingDal = new LodgingDal();
+            this.waypointDal = new WaypointDal();
+            this.transportationDal = new TransportationDal();
+            this.lodgingDal = new LodgingDal();
             this.InitializeComponent();
-            var waypointsAndTransportation = new List<object>();
-            waypointsAndTransportation.AddRange(this._waypointDal.GetWaypoints(LoggedUser.SelectedTrip.Id));
-            waypointsAndTransportation.AddRange(this._transportationDal.GetTransportationsByTrip(LoggedUser.SelectedTrip.Id));
-            this.waypointsListBox.ItemsSource = waypointsAndTransportation;
-            this.lodgingListBox.ItemsSource = this._lodgingDal.GetLodgings(LoggedUser.SelectedTrip.Id);
-            //this.transportationListBox.ItemsSource = this._transportationDal.GetTransportationsByTrip(LoggedUser.selectedTrip.Id);
-            //add to waypoints list box
+            this.SetListSources();
             this.SetSelectedTripText();
         }
 
@@ -60,6 +55,21 @@ namespace TravelPlannerDesktopApp.Pages
             this.tripEndDateTextBlock.Text = "End Date: " + LoggedUser.SelectedTrip.EndDate.ToString("D");
         }
 
+        /// <summary>
+        /// Sets the waypoint transport source.
+        /// @precondition - LoggedUser.SelectedTrip != null
+        /// @postcondition - waypointsAndTransportListBox contains all waypoints and transportation for the selected trip
+        ///                  lodgingListBox contains all lodging for the selected trip
+        /// </summary>
+        public void SetListSources()
+        {
+            var waypointsAndTransportation = new List<object>();
+            waypointsAndTransportation.AddRange(this.waypointDal.GetWaypoints(LoggedUser.SelectedTrip.Id));
+            waypointsAndTransportation.AddRange(this.transportationDal.GetTransportationsByTrip(LoggedUser.SelectedTrip.Id));
+            this.waypointsAndTransportListBox.ItemsSource = waypointsAndTransportation;
+            this.lodgingListBox.ItemsSource = this.lodgingDal.GetLodgings(LoggedUser.SelectedTrip.Id);
+        }
+
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;
@@ -69,11 +79,11 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void WaypointsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedItemType = ObjectContext.GetObjectType(this.waypointsListBox.SelectedItem.GetType());
+            var selectedItemType = ObjectContext.GetObjectType(this.waypointsAndTransportListBox.SelectedItem.GetType());
 
             if (selectedItemType == typeof(Waypoint))
             {
-                LoggedUser.SelectedWaypoint = this.waypointsListBox.SelectedItem as Waypoint;
+                LoggedUser.SelectedWaypoint = this.waypointsAndTransportListBox.SelectedItem as Waypoint;
                 if (LoggedUser.SelectedWaypoint != null)
                 {
                     var waypointInfo = new WaypointInfo();
@@ -82,10 +92,10 @@ namespace TravelPlannerDesktopApp.Pages
             }
             else if (selectedItemType == typeof(Transportation))
             {
-                LoggedUser.SelectedTransportation = this.waypointsListBox.SelectedItem as Transportation;
+                LoggedUser.SelectedTransportation = this.waypointsAndTransportListBox.SelectedItem as Transportation;
                 if (LoggedUser.SelectedTransportation != null)
                 {
-                    var transportationInfo = new TransportationInfo(LoggedUser.SelectedTransportation);
+                    var transportationInfo = new TransportationInfo();
                     NavigationService?.Navigate(transportationInfo);
                 }
             }

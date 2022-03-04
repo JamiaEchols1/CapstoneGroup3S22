@@ -44,6 +44,15 @@ namespace TravelPlannerDesktopApp.Pages
         {
             try
             {
+                if (this.startDatePicker.Text == null)
+                {
+                    throw new Exception("Must enter a start date!");
+                }
+
+                if (this.endDatePicker.Text == null)
+                {
+                    throw new Exception("Must enter an end date!");
+                }
                 var newLodging = this.lodgingDal.CreateNewLodging(this.locationTextBox.Text,
                     DateTime.Parse(this.startDatePicker.Text), DateTime.Parse(this.endDatePicker.Text),
                     LoggedUser.SelectedTrip.Id);
