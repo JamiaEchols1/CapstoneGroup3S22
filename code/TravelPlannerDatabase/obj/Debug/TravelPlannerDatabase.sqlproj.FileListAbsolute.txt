@@ -31,3 +31,13 @@ C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDatabas
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDatabase\obj\Debug\predeploy.sql
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.dll
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.pdb
+C:\Users\cupid\Desktop\www\CapstoneGroup3S22\code\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.dacpac
+C:\Users\cupid\Desktop\www\CapstoneGroup3S22\code\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.dll
+C:\Users\cupid\Desktop\www\CapstoneGroup3S22\code\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.pdb
+C:\Users\cupid\Desktop\www\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.sqlprojAssemblyReference.cache
+C:\Users\cupid\Desktop\www\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\Model.xml
+C:\Users\cupid\Desktop\www\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\refactor.xml
+C:\Users\cupid\Desktop\www\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\postdeploy.sql
+C:\Users\cupid\Desktop\www\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\predeploy.sql
+C:\Users\cupid\Desktop\www\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.dll
+C:\Users\cupid\Desktop\www\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.pdb
