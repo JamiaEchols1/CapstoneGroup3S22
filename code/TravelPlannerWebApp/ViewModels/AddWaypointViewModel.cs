@@ -4,7 +4,7 @@ using TravelPlannerLibrary.Models;
 namespace WebApplication4.ViewModels
 {
     /// <summary>
-    ///     The add waypooint view model
+    ///     The add waypoint view model
     /// </summary>
     public class AddWaypointViewModel
     {

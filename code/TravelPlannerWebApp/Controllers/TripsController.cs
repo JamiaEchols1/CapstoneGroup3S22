@@ -44,7 +44,7 @@ namespace WebApplication4.Controllers
 
         // GET: Trips/Details/5
         /// <summary>
-        /// Detailses the specified identifier.
+        /// Details the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>

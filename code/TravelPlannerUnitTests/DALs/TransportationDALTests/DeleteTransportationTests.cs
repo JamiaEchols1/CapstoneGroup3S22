@@ -11,7 +11,7 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 {
     /// <summary>
-    ///     Tests delete tranportation
+    ///     Tests delete transportation
     /// </summary>
     [TestClass]
     public class DeleteTransportationTests

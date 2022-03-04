@@ -149,10 +149,10 @@ namespace TravelPlannerUnitTests.DALs.TripDALTests
         }
 
         /// <summary>
-        ///     Tests the add vaild trip.
+        ///     Tests the add valid trip.
         /// </summary>
         [TestMethod]
-        public void TestAddVaildTrip()
+        public void TestAddValidTrip()
         {
             var data = new List<Trip> {
                 new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0 },

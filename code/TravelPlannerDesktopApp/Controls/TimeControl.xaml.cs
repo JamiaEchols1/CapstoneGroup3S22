@@ -152,43 +152,43 @@ namespace TravelPlannerDesktopApp.Controls
             }
         }
 
-        private Tuple<int, int> getMaxAndCurentValues(string name)
+        private Tuple<int, int> getMaxAndCurrentValues(string name)
         {
             var maxValue = 0;
-            var currValue = 0;
+            var currentValue = 0;
 
             switch (name)
             {
                 case "ff":
                     maxValue = 1000;
-                    currValue = this.Milliseconds;
+                    currentValue = this.Milliseconds;
                     break;
 
                 case "ss":
                     maxValue = 60;
-                    currValue = this.Seconds;
+                    currentValue = this.Seconds;
                     break;
 
                 case "mm":
                     maxValue = 60;
-                    currValue = this.Minutes;
+                    currentValue = this.Minutes;
                     break;
 
                 case "hh":
                     maxValue = 24;
-                    currValue = this.Hours;
+                    currentValue = this.Hours;
                     break;
             }
 
-            return new Tuple<int, int>(maxValue, currValue);
+            return new Tuple<int, int>(maxValue, currentValue);
         }
 
         private void updateTimeValue(string name, int delta)
         {
-            var (maxValue, currValue) = this.getMaxAndCurentValues(name);
+            var (maxValue, currentValue) = this.getMaxAndCurrentValues(name);
 
             // Set new value
-            var newValue = currValue + delta;
+            var newValue = currentValue + delta;
 
             if (newValue == maxValue)
             {
@@ -272,7 +272,7 @@ namespace TravelPlannerDesktopApp.Controls
                     return false;
                 }
 
-                var values = this.getMaxAndCurentValues(name);
+                var values = this.getMaxAndCurrentValues(name);
                 var maxValue = values.Item1;
 
                 var newValue = Convert.ToInt32(text);

@@ -69,7 +69,7 @@
         </Grid>
 
         <!-- Milliseconds -->
-        <Grid Grid.Column="6" Name="miliseconds" Focusable="True" MouseWheel="OnMouseWheel">
+        <Grid Grid.Column="6" Name="milliseconds" Focusable="True" MouseWheel="OnMouseWheel">
             <TextBox x:Name="ff" TextWrapping="Wrap"
                      Text="{Binding Path=Milliseconds, ElementName=UserControl, Mode=Default}"
                      PreviewKeyDown="OnKeyDown" PreviewTextInput="OnPreviewTextInput"

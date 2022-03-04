@@ -148,7 +148,7 @@ namespace TravelPlannerLibrary.DAL
         }
 
         /// <summary>
-        ///     Removes the trip with the specifeid identifier.
+        ///     Removes the trip with the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// @preconditon - none

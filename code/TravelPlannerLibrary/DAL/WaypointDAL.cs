@@ -57,7 +57,7 @@ namespace TravelPlannerLibrary.DAL
         /// @precondition - !string.IsNullOrEmpty(location);
         /// startTime.CompareTo(endTime) &lt; 0;
         /// endTime.CompareTo(LoggedUser.selectedTrip.EndDate) &lt; 0;
-        /// @postconditon - if input valid new waypoint is created, else none
+        /// @postcondition - if input valid new waypoint is created, else none
         /// <param name="location">The location.</param>
         /// <param name="startTime">The start time.</param>
         /// <param name="endTime">The end time.</param>
@@ -152,7 +152,7 @@ namespace TravelPlannerLibrary.DAL
         }
 
         /// <summary>
-        ///     Gets the waypoints that overlap wit the specifed date range.
+        ///     Gets the waypoints that overlap wit the specified date range.
         /// </summary>
         /// @precondition - newStartTime != null
         /// newEndTIme != null, newEndTime &gt; newStartTime
