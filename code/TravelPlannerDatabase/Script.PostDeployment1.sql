@@ -9,3 +9,8 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+BEGIN
+    INSERT INTO [Users]
+        ([Id], [Username], [Password])
+    VALUES (0, 'user', 'JGSOzecXROhJSz7Ru0Z4Qg==')
+END

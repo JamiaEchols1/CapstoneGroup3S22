@@ -21,7 +21,7 @@ namespace WebApplication4
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
-                new { controller = "Home", action = "checkLoginCredentials", id = UrlParameter.Optional }
+                new { controller = "Home", action = "Login", id = UrlParameter.Optional }
             );
         }
 

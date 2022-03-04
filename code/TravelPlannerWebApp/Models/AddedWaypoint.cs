@@ -1,67 +1,57 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+using TravelPlannerLibrary.Models;
 
 namespace WebApplication4.Models
 {
     /// <summary>
-    ///     The added waypoint class
+    /// The added waypoint model
     /// </summary>
     public class AddedWaypoint
     {
-        #region Properties
-
-        /// <summary>
-        ///     Gets or sets the identifier.
-        /// </summary>
-        /// <value>
-        ///     The identifier.
-        /// </value>
         public int Id { get; set; }
-
         /// <summary>
-        ///     Gets or sets the location.
+        /// Gets or sets the location.
         /// </summary>
         /// <value>
-        ///     The location.
+        /// The location.
         /// </value>
         [Required]
         public string Location { get; set; }
-
         /// <summary>
-        ///     Gets or sets the start date time.
+        /// Gets or sets the start date time.
         /// </summary>
         /// <value>
-        ///     The start date time.
+        /// The start date time.
         /// </value>
         [Required]
-        public DateTime StartDateTime { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the end date time.
-        /// </summary>
-        /// <value>
-        ///     The end date time.
-        /// </value>
+        [Display(Name = "Start Date", AutoGenerateFilter = false)]
+        public System.DateTime StartDateTime { get; set; }
         [Required]
-        public DateTime EndDateTime { get; set; }
-
+        [Display(Name = "End Date", AutoGenerateFilter = false)]
+        public System.DateTime EndDateTime { get; set; }
         /// <summary>
-        ///     Gets or sets the trip identifier.
+        /// Gets or sets the trip identifier.
         /// </summary>
         /// <value>
-        ///     The trip identifier.
+        /// The trip identifier.
         /// </value>
         public int TripId { get; set; }
 
         /// <summary>
-        ///     Gets or sets the description.
+        /// The conflicting waypoints
+        /// </summary>
+        public static List<Waypoint> ConflictingWaypoints = new List<Waypoint>();
+
+        /// <summary>
+        /// Gets or sets the description.
         /// </summary>
         /// <value>
-        ///     The description.
+        /// The description.
         /// </value>
-        [Required]
-        public string Description { get; set; }
-
-        #endregion
+        public  string Description { get; set; }
     }
 }
