@@ -91,13 +91,6 @@
         }).on('dp.change', function (e) {
             $(this).data('DateTimePicker').hide();
         });
-
-        $("#StartDate").on("dp.change", function (e) {
-            $('#EndDate').data("DateTimePicker").minDate(e.date);
-        });
-        $("#EndDate").on("dp.change", function (e) {
-            $('#StartDate').data("DateTimePicker").maxDate(e.date);
-        });
     });
 </script>
 
