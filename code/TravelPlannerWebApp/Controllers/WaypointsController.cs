@@ -23,8 +23,6 @@ namespace WebApplication4.Controllers
 
         private readonly TripDal tripDAL = new TripDal();
 
-        private static string ErrorMessage;
-
         // GET: Waypoints
         public ActionResult Index()
         {
@@ -51,20 +49,16 @@ namespace WebApplication4.Controllers
         }
 
         // GET: Waypoints/Create
-        public ActionResult Create(int? id)
+        public ActionResult Create(int? id, string ErrorMessage)
         {
             if (id == null)
             {
                 id = LoggedUser.SelectedTrip.Id;
             }
             LoggedUser.SelectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
+            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
-            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
-            if (AddedWaypoint.ConflictingWaypoints.Count > 0)
-            {
-                ViewBag.Overlaps = AddedWaypoint.ConflictingWaypoints;
-            }
             if (ErrorMessage != null)
             {
                 ViewBag.ErrorMessage = ErrorMessage;
@@ -89,74 +83,51 @@ namespace WebApplication4.Controllers
             if (ModelState.IsValid)
             {
                 waypoint.TripId = LoggedUser.SelectedTrip.Id;
-                var overlaps = waypointDAL.GetOverlappingWaypoints(waypoint.StartDateTime, waypoint.EndDateTime);
-                if (validateConflictingWaypoints(waypoint))
+                string ErrorMessage = validateDateTimes(waypoint);
+                if (ErrorMessage == null)
                 {
-                    return RedirectToAction("Create", waypoint.TripId);
+                    ErrorMessage = validateConflictingWaypoints(waypoint);
                 }
-                else if (!validateDateTimes(waypoint))
+                if (ErrorMessage != null)
                 {
-                    return RedirectToAction("Create", waypoint.TripId);
+                    return RedirectToAction("Create", new { ErrorMessage = ErrorMessage});
                 }
                 else
                 {
                     waypointDAL.CreateNewWaypoint(waypoint.Location, waypoint.StartDateTime, waypoint.EndDateTime, waypoint.TripId, waypoint.Description);
-                    AddedWaypoint.ConflictingWaypoints = new List<Waypoint>();
                     return RedirectToAction("Index");
                 }
-            }
-            else
-            {
-                ErrorMessage = null;
-                AddedWaypoint.ConflictingWaypoints = new List<Waypoint>();
             }
             return View(waypoint);
         }
 
-        private bool validateDateTimes(AddedWaypoint waypoint)
+        private string validateDateTimes(AddedWaypoint waypoint)
         {
-            bool isValid = true;
-            if (waypoint.StartDateTime >= waypoint.EndDateTime)
+            string ErrorMessage = null;
+            if (waypoint.StartDateTime.CompareTo(waypoint.EndDateTime) > 0)
             {
-                ErrorMessage = "The start date must be before than the end date";
-                isValid = false;
+                ErrorMessage = "The start date must be before the end date";
             }
-            else if (waypoint.EndDateTime <= waypoint.StartDateTime)
+            if (waypoint.EndDateTime.CompareTo(waypoint.StartDateTime) < 0)
             {
-                ErrorMessage = "The end date must be after than the start date";
-                isValid = false;
+                ErrorMessage = "The end date must be after the start date";
             }
-            else if (waypoint.EndDateTime.CompareTo(LoggedUser.SelectedTrip.EndDate) > 0)
-            {
-                ErrorMessage = "End date must be on or before trip end date";
-                isValid = false;
-            }
-            else if (waypoint.StartDateTime.CompareTo(LoggedUser.SelectedTrip.EndDate) > 0)
-            {
-                ErrorMessage = "Start date must be on or before trip end date";
-                isValid = false;
-            }
-            else
-            {
-                ErrorMessage = null;
-            }
-            return isValid;
+            return ErrorMessage;
         }
 
-        private bool validateConflictingWaypoints(AddedWaypoint waypoint)
+        private string validateConflictingWaypoints(AddedWaypoint waypoint)
         {
             var overlaps = waypointDAL.GetOverlappingWaypoints(waypoint.StartDateTime, waypoint.EndDateTime);
-            bool hasConflicts = false;
+            string ErrorMessage = null;
             if (overlaps.Count > 0)
             {
-                AddedWaypoint.ConflictingWaypoints = overlaps;
-                hasConflicts = true;
+                ErrorMessage = "The waypoint was not added because of the following conflicts:" + "\n";
+                foreach (var overlap in overlaps)
+                {
+                    ErrorMessage += overlap.Location + " " + overlap.StartDateTime + " - " + overlap.EndDateTime + ". ";
+                }
             }
-            else
-            {
-                AddedWaypoint.ConflictingWaypoints = new List<Waypoint>();
-            }
-            return hasConflicts;
+            return ErrorMessage;
         }
 
         // GET: Waypoints/Delete/5

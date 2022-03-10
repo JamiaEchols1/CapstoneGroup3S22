@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using TravelPlannerLibrary.Models;
+using WebApplication4.Common;
 
 namespace WebApplication4.Models
 {
@@ -28,9 +29,11 @@ namespace WebApplication4.Models
         /// The start date time.
         /// </value>
         [Required]
+        [TripStartDateRequirement (ErrorMessage = "The Start Date is not in range of the trip date")]
         [Display(Name = "Start Date", AutoGenerateFilter = false)]
         public System.DateTime StartDateTime { get; set; }
         [Required]
+        [TripEndDateRequirement (ErrorMessage = "The End Date is not in range of the trip date")]
         [Display(Name = "End Date", AutoGenerateFilter = false)]
         public System.DateTime EndDateTime { get; set; }
         /// <summary>
@@ -40,11 +43,6 @@ namespace WebApplication4.Models
         /// The trip identifier.
         /// </value>
         public int TripId { get; set; }
-
-        /// <summary>
-        /// The conflicting waypoints
-        /// </summary>
-        public static List<Waypoint> ConflictingWaypoints = new List<Waypoint>();
 
         /// <summary>
         /// Gets or sets the description.
