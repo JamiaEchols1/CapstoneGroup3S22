@@ -97,3 +97,16 @@ C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerLibrary
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.csproj.CopyComplete
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.dll
 C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.pdb
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\TravelPlannerLibrary.dll.config
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\TravelPlannerLibrary.xml
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\TravelPlannerLibrary.dll
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\TravelPlannerLibrary.pdb
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\EntityFramework.dll
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\EntityFramework.xml
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.csproj.AssemblyReference.cache
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.csproj.CoreCompileInputs.cache
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.csproj.CopyComplete
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.dll
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerLibrary\obj\Debug\TravelPlannerLibrary.pdb
