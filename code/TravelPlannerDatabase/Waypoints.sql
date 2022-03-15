@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Waypoints]
 (
     [Id] INT NOT NULL PRIMARY KEY,
-    [Location] varchar(50) not null,
+    [Location] varchar(250) not null,
     [StartDateTime] DateTime not null,
     [EndDateTime] DateTime not null,
     [TripId] int not null,

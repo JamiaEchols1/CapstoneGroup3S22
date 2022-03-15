@@ -7,12 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TravelPlannerLibrary
+namespace TravelPlannerLibrary.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using TravelPlannerLibrary.Models;
     
     public partial class TravelPlannerDatabaseEntities : DbContext
     {

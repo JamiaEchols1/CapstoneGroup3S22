@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
+using WebApplication4.Common;
 using WebApplication4.Models;
 using WebApplication4.ViewModels;
 
@@ -45,6 +46,9 @@ namespace WebApplication4.Controllers
                 return HttpNotFound();
             }
             LoggedUser.SelectedWaypoint = waypoint;
+            string mapURL = "https://www.google.com/maps/embed/v1/place?key=AIzaSyDJEezkTFgj0PAnzJQJVVEhfZbpUmH27s0";
+            string waypointLocation = HttpUtility.UrlEncode(waypoint.Location);
+            ViewBag.url = mapURL + "&q=" + waypointLocation;
             return View("Details", waypoint);
         }
 
