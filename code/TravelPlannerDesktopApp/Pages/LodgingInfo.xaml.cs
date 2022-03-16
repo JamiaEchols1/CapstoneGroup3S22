@@ -46,6 +46,22 @@ namespace TravelPlannerDesktopApp.Pages
             this.locationTextBlock.Text = "Location: " + LoggedUser.SelectedLodging.Location;
             this.startDateTextBlock.Text = "Start Date: " + LoggedUser.SelectedLodging.StartTime;
             this.endDateTextBlock.Text = "End Date: " + LoggedUser.SelectedLodging.EndTime;
+            this.mapWebBrowser.Source = new Uri("https://www.google.com/maps/place/" + FormatLocationString());
+        }
+
+        private string FormatLocationString()
+        {
+            string output = "";
+
+            string[] locationParts = LoggedUser.SelectedLodging.Location.Split(' ');
+            foreach (var part in locationParts)
+            {
+                output += part + "+";
+            }
+
+
+            output.Remove(output.Length - 1);
+            return output;
         }
 
         private void editLodgingButton_Click(object sender, RoutedEventArgs e)

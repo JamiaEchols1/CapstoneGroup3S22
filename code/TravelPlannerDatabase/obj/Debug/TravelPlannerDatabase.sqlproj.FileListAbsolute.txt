@@ -48,3 +48,7 @@ C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\bin\
 C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.sqlproj.AssemblyReference.cache
 C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.dll
 C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.pdb
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\Model.xml
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\refactor.xml
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\postdeploy.sql
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\predeploy.sql

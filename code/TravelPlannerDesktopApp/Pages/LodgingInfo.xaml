@@ -12,16 +12,17 @@
         <n:NavButton x:Name="backButton" Text="Back" Click="backButton_Click" ImageSource="/Images/Back.png"
                      NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right" Margin="0,2,2,0" />
 
-        <TextBlock x:Name="locationTextBlock" HorizontalAlignment="Left" Margin="299,170,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="locationTextBlock" HorizontalAlignment="Left" Margin="82,155,0,0" TextWrapping="Wrap"
                    Text="Location:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="startDateTextBlock" HorizontalAlignment="Left" Margin="299,215,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="startDateTextBlock" HorizontalAlignment="Left" Margin="82,202,0,0" TextWrapping="Wrap"
                    Text="Start Date:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="endDateTextBlock" HorizontalAlignment="Left" Margin="299,260,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="endDateTextBlock" HorizontalAlignment="Left" Margin="82,243,0,0" TextWrapping="Wrap"
                    Text="End Date:" VerticalAlignment="Top" Height="20" Width="196" />
         <Button x:Name="editLodgingButton" Content="Edit Lodging" HorizontalAlignment="Left" Margin="299,355,0,0"
                 VerticalAlignment="Top" Click="editLodgingButton_Click" />
         <Button x:Name="removeLodgingButton" Content="Remove Lodging" HorizontalAlignment="Left" Margin="424,355,0,0"
                 VerticalAlignment="Top" Click="removeLodgingButton_Click" />
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Lodging Info" VerticalAlignment="Top"/>
+        <WebBrowser x:Name="mapWebBrowser" Source="https://www.google.com/maps" HorizontalAlignment="Left" Height="218" Margin="378,109,0,0" VerticalAlignment="Top" Width="324"/>
     </Grid>
 </Page>
