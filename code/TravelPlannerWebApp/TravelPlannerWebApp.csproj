@@ -136,6 +136,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\LodgingsController.cs" />
+    <Compile Include="Models\AddedLodging.cs" />
     <Compile Include="Models\AddedTrip.cs" />
     <Compile Include="Models\AddedWaypoint.cs" />
     <Compile Include="Models\UserCredentials.cs" />
@@ -273,6 +275,10 @@
     <Content Include="Views\Waypoints\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Lodgings\Create.cshtml" />
+    <Content Include="Views\Lodgings\Delete.cshtml" />
+    <Content Include="Views\Lodgings\Details.cshtml" />
+    <Content Include="Views\Lodgings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

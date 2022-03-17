@@ -97,7 +97,7 @@ namespace TravelPlannerLibrary.DAL
                 StartTime = startTime,
                 EndTime = endTime,
                 TripId = tripId,
-                Id = db.Lodgings.Count()
+                Id = FindNextId()
             };
 
             db.Lodgings.Add(lodging);
@@ -134,6 +134,36 @@ namespace TravelPlannerLibrary.DAL
             var tripLodgings = this.GetLodgings(LoggedUser.SelectedTrip.Id);
 
             return tripLodgings.Where(current => TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime)).ToList();
+        }
+
+        /// <summary>
+        ///     Gets the lodging by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        ///     lodging the lodging point
+        /// </returns>
+        public Lodging GetLodgingById(int id)
+        {
+            return db.Lodgings.Find(id);
+        }
+
+        /// <summary>
+        ///     Finds the next available identifier.
+        /// </summary>
+        /// <returns>
+        ///     The next available identifier for a lodging point
+        /// </returns>
+        public int FindNextId()
+        {
+            if (!db.Lodgings.Any())
+            {
+                return 0;
+            }
+
+            var lodgingId = db.Lodgings.Max(wp => wp.Id);
+            lodgingId++;
+            return lodgingId;
         }
 
         #endregion
