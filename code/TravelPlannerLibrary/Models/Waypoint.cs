@@ -12,7 +12,7 @@ namespace TravelPlannerLibrary.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Waypoint : TripItem
+    public partial class Waypoint
     {
         public int Id { get; set; }
         public string Location { get; set; }
@@ -22,11 +22,5 @@ namespace TravelPlannerLibrary.Models
         public string Description { get; set; }
     
         public virtual Trip Trip { get; set; }
-
-        public override string ToString()
-        {
-            return "Waypoint: " + this.Location + ", Start: " + this.StartDateTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " + this.EndDateTime.ToString("MM/dd/yyyy h:mm tt");
-        }
-
     }
 }

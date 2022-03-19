@@ -40,17 +40,15 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Trip.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Trip.Name)
-        </dd>
-
     </dl>
 </div>
+<iframe width="600"
+        height="450"
+        style="border:0"
+        loading="lazy"
+        allowfullscreen
+        src='@ViewBag.url'>
+</iframe>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

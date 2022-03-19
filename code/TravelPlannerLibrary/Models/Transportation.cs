@@ -11,12 +11,8 @@ namespace TravelPlannerLibrary.Models
 {
     using System;
     using System.Collections.Generic;
-
-    /// <summary>
-    /// The transport class
-    /// </summary>
-    /// <seealso cref="TravelPlannerLibrary.Models.TripItem" />
-    public partial class Transportation : TripItem
+    
+    public partial class Transportation
     {
         public int Id { get; set; }
         public int TripId { get; set; }
@@ -25,10 +21,5 @@ namespace TravelPlannerLibrary.Models
         public string Description { get; set; }
     
         public virtual Trip Trip { get; set; }
-
-        public override string ToString()
-        {
-            return "Transportation: " + "Start: " + this.StartTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " + this.EndTime.ToString("MM/dd/yyyy h:mm tt");
-        }
     }
 }
