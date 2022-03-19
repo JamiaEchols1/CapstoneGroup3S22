@@ -23,6 +23,9 @@
         <Button x:Name="removeLodgingButton" Content="Remove Lodging" HorizontalAlignment="Left" Margin="424,355,0,0"
                 VerticalAlignment="Top" Click="removeLodgingButton_Click" />
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Lodging Info" VerticalAlignment="Top"/>
-        <WebBrowser x:Name="mapWebBrowser" Source="https://www.google.com/maps" HorizontalAlignment="Left" Height="218" Margin="378,109,0,0" VerticalAlignment="Top" Width="324"/>
+
+        <Viewbox HorizontalAlignment="Left" Height="209" Margin="424,98,0,0" VerticalAlignment="Top" Width="279">
+            <WebBrowser x:Name="mapWebBrowser" Source="https://www.google.com/maps" HorizontalAlignment="Left" Height="14476" Margin="378,109,0,0" VerticalAlignment="Top" Width="19480"/>
+        </Viewbox>
     </Grid>
 </Page>
