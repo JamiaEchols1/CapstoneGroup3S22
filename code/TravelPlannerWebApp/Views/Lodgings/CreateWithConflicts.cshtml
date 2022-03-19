@@ -1,7 +1,7 @@
 ﻿@model WebApplication4.Models.AddedLodging
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Conflicting Lodging";
 }
 
 <!DOCTYPE html>
@@ -45,9 +45,14 @@
                 </div>
             </div>
 
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <p style="color:red">@ViewBag.ErrorMessage</p>
+            }
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Confirm With Conflicts" class="btn btn-default" />
                 </div>
             </div>
 
@@ -64,11 +69,6 @@
                     );
                 });
             </script>
-
-            @if (ViewBag.ErrorMessage != null)
-            {
-                <p style="color:red">@ViewBag.ErrorMessage</p>
-            }
         </div>
     }
 
@@ -81,18 +81,3 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-<script type="text/javascript">
-    $(function () {
-        $('#StartTime').datetimepicker({
-            minDate: new moment("@ViewBag.StartDate"),
-        }).on('dp.change', function (e) {
-            $(this).data('DateTimePicker').hide();
-        });
-       $('#EndTime').datetimepicker({
-            minDate: new moment("@ViewBag.StartDate"),
-        }).on('dp.change', function (e) {
-            $(this).data('DateTimePicker').hide();
-        });
-    });
-</script>

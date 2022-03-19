@@ -71,16 +71,6 @@
             <p style="color:red">@ViewBag.ErrorMessage</p>
         }
 
-        @if (ViewBag.Overlaps != null && ViewBag.Overlaps.Count > 0)
-        {
-            <p style="color:red">The waypoint was not added because of the following conflicts: </p>
-            <ul>
-                @foreach (var conflict in ViewBag.Overlaps)
-                {
-                    <li style="color:red">@conflict.Location : @conflict.StartDateTime - @conflict.EndDateTime</li>
-                }
-            </ul>
-        }
     </div>
 }
 

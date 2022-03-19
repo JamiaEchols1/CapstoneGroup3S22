@@ -13,7 +13,7 @@ using WebApplication4.Models;
 namespace WebApplication4
 {
     /// <summary>
-    /// The travel planner lodgings controller
+    ///     The travel planner lodgings controller
     /// </summary>
     /// <seealso cref="System.Web.Mvc.Controller" />
     public class LodgingsController : Controller
@@ -22,14 +22,20 @@ namespace WebApplication4
 
         private LodgingDal _lodgingDal = new LodgingDal();
 
-        // GET: Lodgings
+        private static AddedLodging conflictingLodging;
+
+        /// <summary>
+        ///     Displays all of the users lodging for a selected trip
+        /// </summary>
+        /// <returns>
+        ///     View of all of the lodging points for a selected trip
+        /// </returns>
         public ActionResult Index()
         {
             var lodgings = _lodgingDal.GetLodgings(LoggedUser.SelectedTrip.Id);
             ViewBag.TripName = LoggedUser.SelectedTrip.Name;
             return View("Index", lodgings);
         }
-
 
         /// <summary>
         ///     Details of the lodging point by id.
@@ -57,7 +63,11 @@ namespace WebApplication4
             return View(lodging);
         }
 
-        // GET: Lodgings/Create
+        /// <summary>
+        ///     Prompts the user to create a new lodging point
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="ErrorMessage">The error message.</param>
         public ActionResult Create(int? id, string ErrorMessage)
         {
             if (id == null)
@@ -68,16 +78,14 @@ namespace WebApplication4
             ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
-            if (ErrorMessage != null)
-            {
-                ViewBag.ErrorMessage = ErrorMessage;
-            }
             return View("Create");
         }
 
-        // POST: Lodgings/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+        /// <summary>
+        ///     Creates the specified lodging point.
+        /// </summary>
+        /// <param name="lodging">The lodging.</param>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Location,StartTime,EndTime")] AddedLodging lodging)
@@ -92,7 +100,14 @@ namespace WebApplication4
                 }
                 if (ErrorMessage != null)
                 {
-                    return RedirectToAction("Create", new { ErrorMessage = ErrorMessage });
+                    conflictingLodging = new AddedLodging()
+                    {
+                        Location = lodging.Location,
+                        StartTime = lodging.StartTime,
+                        EndTime = lodging.EndTime,
+                        TripId = TripId
+                    };
+                    return RedirectToAction("CreateWithConflicts", new { ErrorMessage });
                 }
                 else
                 {
@@ -103,6 +118,52 @@ namespace WebApplication4
             return View(lodging);
         }
 
+        /// <summary>
+        ///     Prompts the user to create the lodging point after displaying conflicting lodging.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="ErrorMessage">The error message.</param>
+        public ActionResult CreateWithConflicts(int? id, string ErrorMessage)
+        {
+            if (id == null)
+            {
+                id = LoggedUser.SelectedTrip.Id;
+            }
+            AddedLodging Lodging = conflictingLodging;
+            conflictingLodging = null;
+            LoggedUser.SelectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
+            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
+            ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
+            ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
+            ViewBag.ErrorMessage = ErrorMessage;
+            return View("CreateWithConflicts", Lodging);
+        }
+
+        /// <summary>
+        ///     Creates the Lodging after displaying conflicting lodging.
+        /// </summary>
+        /// <param name="lodging">The lodging.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateWithConflicts([Bind(Include = "Location,StartTime,EndTime")] AddedLodging lodging)
+        {
+            if (ModelState.IsValid)
+            {
+                var TripId = LoggedUser.SelectedTrip.Id;
+                _lodgingDal.CreateNewLodging(lodging.Location, lodging.StartTime, lodging.EndTime, TripId);
+                return RedirectToAction("Index"); 
+            }
+            return View(lodging);
+        }
+
+        /// <summary>
+        ///     Validates the date times for a lodging point.
+        /// </summary>
+        /// <param name="lodging">The lodging.</param>
+        /// <returns>
+        ///     ErrorMessage of invalid dates
+        /// </returns>
         private string validateDateTimes(AddedLodging lodging)
         {
             string ErrorMessage = null;
@@ -117,22 +178,33 @@ namespace WebApplication4
             return ErrorMessage;
         }
 
+        /// <summary>
+        ///     Checks if there are conflicting lodgings for a given lodging point.
+        /// </summary>
+        /// <param name="lodging">The lodging.</param>
+        /// <returns>
+        ///     ErrorMessage of the conflicting lodgings
+        /// </returns>
         private string validateConflictingLodgings(AddedLodging lodging)
         {
             var overlaps = _lodgingDal.GetOverlappingLodging(lodging.StartTime, lodging.EndTime);
             string ErrorMessage = null;
             if (overlaps.Count > 0)
             {
-                ErrorMessage = "The waypoint was not added because of the following conflicts:" + "\n";
+                ErrorMessage = "The lodging was not added because of the following conflicts:" + "\n";
                 foreach (var overlap in overlaps)
                 {
                     ErrorMessage += overlap.Location + " " + overlap.StartTime + " - " + overlap.EndTime + ". ";
                 }
+                ErrorMessage += "Select \"Confirm With Conflicts\" to add the lodging anyways.";
             }
             return ErrorMessage;
         }
 
-        // GET: Lodgings/Delete/5
+        /// <summary>
+        ///     Prompts the user to delete the specified lodging.
+        /// </summary>
+        /// <param name="id">The identifier of the lodging.</param>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -148,7 +220,11 @@ namespace WebApplication4
             return View(lodging);
         }
 
-        // POST: Lodgings/Delete/5
+
+        /// <summary>
+        ///     Deletes the confirmed lodging.
+        /// </summary>
+        /// <param name="id">The identifier of the lodging.</param>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
