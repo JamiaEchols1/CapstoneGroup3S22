@@ -47,6 +47,22 @@ namespace TravelPlannerDesktopApp.Pages
             this.timeTextBlock.Text = "Start Time: " + LoggedUser.SelectedWaypoint.StartDateTime;
             this.endDateTextBlock.Text = "End Time: " + LoggedUser.SelectedWaypoint.EndDateTime;
             this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedWaypoint.Description;
+            this.wbMaps.Source = new Uri("https://www.google.com/maps/place/" + FormatLocationString());
+        }
+
+        private string FormatLocationString()
+        {
+            string output = "";
+
+            string[] locationParts = LoggedUser.SelectedWaypoint.Location.Split(' ');
+            foreach (var part in locationParts)
+            {
+                output += part + "+";
+            }
+
+            
+            output.Remove(output.Length-1);
+            return output;
         }
 
         private void EditWaypointButton_OnClick(object sender, RoutedEventArgs e)
