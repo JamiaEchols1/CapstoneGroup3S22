@@ -1,0 +1,8 @@
+View Lodging details Scenario
+
+Context - User is is logged into the system and on the home page
+
+Primary Flow
+1 - User clicks on the desired trip
+2 - User clicks on the desired lodging
+3 - User is brought to view lodging details page where they can view the lodging location on the map

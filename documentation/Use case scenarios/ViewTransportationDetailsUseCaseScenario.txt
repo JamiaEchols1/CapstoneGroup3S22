@@ -1,0 +1,8 @@
+View Transportation details Scenario
+
+Context - User is is logged into the system and on the home page
+
+Primary Flow
+1 - User clicks on the desired trip
+2 - User clicks on the desired transportation 
+3 - User is brought to view transportation details page where they can view the transportation location on the map

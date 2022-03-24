@@ -7,3 +7,4 @@ Primary Flow
 2 - View button enables
 3 - User selects view button
 5 - System navgates into the trip details page
+6 - User can view an itinerary of the trips waypoints, transportations, and lodgings
