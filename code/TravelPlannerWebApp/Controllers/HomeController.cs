@@ -17,6 +17,13 @@ namespace WebApplication4.Controllers
         public LoginDal _loginDal = new LoginDal();
 
         /// <summary>
+        ///     Default Constructor
+        /// </summary>
+        public HomeController()
+        {
+        }
+
+        /// <summary>
         ///     Initializes a new instance of the <see cref="HomeController"/> class.
         /// </summary>
         /// <param name="_loginDal">The login dal.</param>

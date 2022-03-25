@@ -175,6 +175,7 @@ namespace TravelPlannerUnitTests.Controllers
             };
             var result = controller.Login();
             Assert.IsInstanceOfType(result, typeof(ViewResult));
+            controller = new HomeController();
         }
     }
 }

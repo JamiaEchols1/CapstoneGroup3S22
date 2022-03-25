@@ -164,6 +164,21 @@ namespace TravelPlannerLibrary.DAL
             db.SaveChanges();
         }
 
+        /// <summary>
+        ///     Gets the trip by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        public Trip GetTripById(int id)
+        {
+            Trip trip = null;
+            if (id > -1)
+            {
+                trip = db.Trips.Where(u => u.Id == id)
+                                .FirstOrDefault(u => u.Id == id);
+            }
+            return trip;
+        }
+
         #endregion
     }
 }
