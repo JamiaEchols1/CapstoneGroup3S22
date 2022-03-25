@@ -64,7 +64,7 @@ namespace TravelPlannerLibrary.DAL
                 throw new ArgumentNullException(nameof(name), "Trip must have a name");
             }
 
-            if (startDate < DateTime.Today.AddDays(-1))
+            if (startDate < DateTime.Today)
             {
                 throw new ArgumentException("Start date must not be before today");
             }
@@ -115,7 +115,7 @@ namespace TravelPlannerLibrary.DAL
                 throw new ArgumentNullException(parameterName, "Trip must have a name");
             }
 
-            if (trip.StartDate < DateTime.Now)
+            if (trip.StartDate < DateTime.Today)
             {
                 throw new ArgumentException("startDate date must not be before today");
             }
