@@ -20,16 +20,18 @@ namespace WebApplication4.Controllers
 
         private TripDetailsViewModel viewmodel = new TripDetailsViewModel();
 
-        private TripDal tripDAL = new TripDal();
+        private TripDal _tripDal = new TripDal();
 
-        private WaypointDal waypointDAL = new WaypointDal();
+        private WaypointDal _waypointDal = new WaypointDal();
+
+        private LodgingDal _lodgingDal = new LodgingDal();
 
         private static string ErrorMessage;
 
         // GET: Trips
         public ActionResult Index()
         {
-            var trips = tripDAL.GetTrips(LoggedUser.User.Id);
+            var trips = _tripDal.GetTrips(LoggedUser.User.Id);
             return View(trips);
         }
 
@@ -46,7 +48,8 @@ namespace WebApplication4.Controllers
                 return HttpNotFound();
             }
             viewmodel.Trip = trip;
-            viewmodel.Waypoints = waypointDAL.GetWaypoints(trip.Id);
+            viewmodel.Waypoints = _waypointDal.GetWaypoints(trip.Id);
+            viewmodel.Lodgings = _lodgingDal.GetLodgings(trip.Id);
             LoggedUser.SelectedTrip = trip;
 
             return View(viewmodel);
@@ -85,7 +88,7 @@ namespace WebApplication4.Controllers
                     ErrorMessage = "Start datetime must be past the current datetime";
                     return RedirectToAction("Create");
                 }
-                tripDAL.CreateNewTrip(trip.Name, trip.StartDate, trip.EndDate, trip.UserId);
+                _tripDal.CreateNewTrip(trip.Name, trip.StartDate, trip.EndDate, trip.UserId);
                 return RedirectToAction("Index");
             }
 

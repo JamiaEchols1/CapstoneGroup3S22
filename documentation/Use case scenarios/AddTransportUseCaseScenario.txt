@@ -3,17 +3,18 @@ Add transportation scenario
 Context - User is logged into the system and has navigated to a selected trip's details page
 
 Primary Flow
-1 - User click the add transportation button 
-2 - User enters transportation details
-3 - User clicks add button
-4 - System adds transportation to the trip
-5 - System navgates into the trip page
+1 - User clicks the add transportation button 
+2 - User selects transportation location to generate description
+3 - User enters start and end datetime for transportation
+4 - User clicks add button
+5 - System adds transportation to the trip
+6 - System navgates into the trip page
 
 *Alternative Flow
 ** User cancels transportation creation
-a3 - User selects back button
-a4 - System navigates back to the view trip details page
+a4 - User selects back button
+a5 - System navigates back to the view trip details page
 
 ** User does not fill transportation information
-a2 - User inputs no data or only partial data
-a3 - System displays error messages on the required fields
+a3 - User inputs no data, partial data, or conflicting transportation
+a4 - System displays error messages on the required fields

@@ -4,17 +4,18 @@ Context - User is logged into the system and has navigated to a selected trip's 
 
 Primary Flow
 1 - User click the add waypoint button 
-2 - User enters waypoint location and time
-3 - User clicks add button
-4 - System adds waypoint to the trip
-5 - System navgates into the trip page
+2 - User selects a location from Google maps autocomplete options
+3 - User enters description, start and end datetime information for waypoint
+4 - User clicks add button
+5 - System adds waypoint to the trip
+6 - System navgates into the trip page
 
 *Alternative Flow
 ** User cancels waypoint creation
-a3 - User selects cancel button
-a4 - System navigates back to the view trip details page
+a4 - User selects cancel button
+a5 - System navigates back to the view trip details page
 
 ** User does not fill waypoint information
-a2 - User inputs no data or only partial data
-a3 - System displays error messages on the required fields
+a3 - User inputs no data, partial data, or conflicting waypoint
+a4 - System displays error messages on the required fields
 

@@ -11,7 +11,7 @@ namespace WebApplication4.Models
     /// <summary>
     /// The added waypoint model
     /// </summary>
-    public class AddedWaypoint
+    public class AddedLodging
     {
         public int Id { get; set; }
         /// <summary>
@@ -22,7 +22,6 @@ namespace WebApplication4.Models
         /// </value>
         [Required]
         public string Location { get; set; }
-
         /// <summary>
         /// Gets or sets the start date time.
         /// </summary>
@@ -30,20 +29,20 @@ namespace WebApplication4.Models
         /// The start date time.
         /// </value>
         [Required]
-        [TripStartDateRequirement (ErrorMessage = "The Start Date is not in range of the trip date")]
+        [TripStartDateRequirement(ErrorMessage = "The Start Date is not in range of the trip date")]
         [Display(Name = "Start Date", AutoGenerateFilter = false)]
-        public System.DateTime StartDateTime { get; set; }
+        public System.DateTime StartTime { get; set; }
 
         /// <summary>
-        /// Gets or sets the end date time.
+        /// Gets or sets the end time.
         /// </summary>
         /// <value>
-        /// The end date time.
+        /// The end time.
         /// </value>
         [Required]
-        [TripEndDateRequirement (ErrorMessage = "The End Date is not in range of the trip date")]
+        [TripEndDateRequirement(ErrorMessage = "The End Date is not in range of the trip date")]
         [Display(Name = "End Date", AutoGenerateFilter = false)]
-        public System.DateTime EndDateTime { get; set; }
+        public System.DateTime EndTime { get; set; }
 
         /// <summary>
         /// Gets or sets the trip identifier.
@@ -59,6 +58,6 @@ namespace WebApplication4.Models
         /// <value>
         /// The description.
         /// </value>
-        public  string Description { get; set; }
+        public string Description { get; set; }
     }
 }

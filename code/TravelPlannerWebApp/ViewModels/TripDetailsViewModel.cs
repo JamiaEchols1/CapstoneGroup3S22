@@ -11,19 +11,28 @@ namespace WebApplication4.ViewModels
         #region Properties
 
         /// <summary>
-        /// Gets or sets the trip.
+        ///     Gets or sets the trip.
         /// </summary>
         /// <value>
-        /// The trip.
+        ///     The trip.
         /// </value>
         public Trip Trip { get; set; }
+
         /// <summary>
-        /// Gets or sets the waypoints.
+        ///     Gets or sets the waypoints.
         /// </summary>
         /// <value>
-        /// The waypoints.
+        ///     The waypoints.
         /// </value>
         public IEnumerable<Waypoint> Waypoints { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the lodgings.
+        /// </summary>
+        /// <value>
+        ///     The lodgings.
+        /// </value>
+        public IEnumerable<Lodging> Lodgings { get; set; }
 
         #endregion
     }
