@@ -148,6 +148,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TravelPlannerDesktopApp\TravelPlannerDesktopApp.csproj">
+      <Project>{9f9b4b4e-056e-4f58-abdb-c18106311cda}</Project>
+      <Name>TravelPlannerDesktopApp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TravelPlannerLibrary\TravelPlannerLibrary.csproj">
       <Project>{9bf02284-1e39-4511-a50b-5e78f27a922a}</Project>
       <Name>TravelPlannerLibrary</Name>

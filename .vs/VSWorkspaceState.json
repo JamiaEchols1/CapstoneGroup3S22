@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\code",
-    "\\code\\TravelPlannerUnitTests",
-    "\\code\\TravelPlannerUnitTests\\WaypointDALTests",
-    "\\code\\TravelPlannerWebApp"
+    ""
   ],
-  "SelectedNode": "\\code\\TravelPlannerUnitTests\\WaypointDALTests\\GetWaypointsTests.cs",
+  "SelectedNode": "\\TravelPlannerApplication.sln",
   "PreviewInSolutionExplorer": false
 }
