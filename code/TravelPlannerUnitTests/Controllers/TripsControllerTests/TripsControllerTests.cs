@@ -16,7 +16,7 @@ namespace TravelPlannerUnitTests.Controllers
     ///     Tests for the travel planner web trip controller
     /// </summary>
     [TestClass]
-    public class TripControllerTests
+    public class TripsControllerTests
     {
         /// <summary>
         ///     Tests the GET: index of the trip controller.
@@ -451,7 +451,7 @@ namespace TravelPlannerUnitTests.Controllers
             var controller = new TripsController(service, null, null);
             controller.ModelState.AddModelError("Mega", "Error");
             var result = controller.Create(addedTrip);
-            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
     }
 }
