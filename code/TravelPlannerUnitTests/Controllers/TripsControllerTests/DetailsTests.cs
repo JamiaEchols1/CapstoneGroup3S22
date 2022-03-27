@@ -10,48 +10,14 @@ using TravelPlannerLibrary.Models;
 using WebApplication4.Controllers;
 using WebApplication4.Models;
 
-namespace TravelPlannerUnitTests.Controllers
+namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 {
     /// <summary>
-    ///     Tests for the travel planner web trip controller
+    ///     The details tests for the web trips controller
     /// </summary>
     [TestClass]
-    public class TripsControllerTests
+    public class DetailsTests
     {
-        /// <summary>
-        ///     Tests the GET: index of the trip controller.
-        /// </summary>
-        [TestMethod]
-        public void TestTripIndex()
-        {
-            LoggedUser.User = new User { Id = 0 };
-
-            var data = new List<Trip> {
-                new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0 },
-                new Trip {
-                    Name = "Trip2", StartDate = DateTime.Now.AddDays(34), EndDate = DateTime.Now.AddDays(38), UserId = 0
-                },
-                new Trip {
-                    Name = "Trip3", StartDate = DateTime.Now.AddDays(4), EndDate = DateTime.Now.AddDays(30), UserId = 0
-                }
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Trip>>();
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
-            mockContext.Setup(c => c.Trips).Returns(mockSet.Object);
-
-            var service = new TripDal(mockContext.Object);
-
-            var controller = new TripsController(service, null, null);
-            var result = controller.Index();
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-        }
-
         /// <summary>
         ///     Tests the GET: details view for a trip.
         /// </summary>
@@ -300,158 +266,6 @@ namespace TravelPlannerUnitTests.Controllers
             var result = controller.Details(-1);
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
             controller = new TripsController();
-        }
-
-        /// <summary>
-        ///     Tests the GET: Create of the trip controller.
-        /// </summary>
-        [TestMethod]
-        public void TestGETCreateTrip()
-        {
-            LoggedUser.User = new User { Id = 0 };
-
-            var data = new List<Trip> {
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Trip>>();
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
-            mockContext.Setup(c => c.Trips).Returns(mockSet.Object);
-
-            var service = new TripDal(mockContext.Object);
-
-            var controller = new TripsController(service, null, null);
-            controller.SetErrorMessage("Invalid date");
-            var result = controller.Create();
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-        }
-
-        /// <summary>
-        ///     Tests the POST: Create of the trip controller.
-        /// </summary>
-        [TestMethod]
-        public void TestPOSTCreateTripValidStartDate()
-        {
-            LoggedUser.User = new User { Id = 0 };
-
-            var startDate = DateTime.Today.AddDays(1);
-            var endDate = DateTime.Today.AddDays(7);
-            var trip = new Trip
-            { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
-            var addedTrip = new AddedTrip
-            {
-                StartDate = trip.StartDate,
-                EndDate = trip.EndDate,
-                Name = trip.Name,
-                UserId = trip.UserId,
-                Id = trip.Id
-            };
-
-            var data = new List<Trip>
-            {
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Trip>>();
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
-            mockContext.Setup(c => c.Trips).Returns(mockSet.Object);
-
-            var service = new TripDal(mockContext.Object);
-
-            var controller = new TripsController(service, null, null);
-            var result = controller.Create(addedTrip);
-            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
-        }
-
-        /// <summary>
-        ///     Tests the POST: Create of the trip controller.
-        /// </summary>
-        [TestMethod]
-        public void TestPOSTCreateTripInvalidStartDate()
-        {
-            LoggedUser.User = new User { Id = 0 };
-
-            var startDate = DateTime.Today;
-            var endDate = DateTime.Today.AddDays(7);
-            var trip = new Trip
-            { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
-            var addedTrip = new AddedTrip
-            {
-                StartDate = trip.StartDate,
-                EndDate = trip.EndDate,
-                Name = trip.Name,
-                UserId = trip.UserId,
-                Id = trip.Id
-            };
-
-            var data = new List<Trip>
-            {
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Trip>>();
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
-            mockContext.Setup(c => c.Trips).Returns(mockSet.Object);
-
-            var service = new TripDal(mockContext.Object);
-
-            var controller = new TripsController(service, null, null);
-            var result = controller.Create(addedTrip);
-            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
-        }
-
-        /// <summary>
-        ///     Tests the POST: Create of the trip controller.
-        /// </summary>
-        [TestMethod]
-        public void TestPOSTCreateTripInvalidModelState()
-        {
-            LoggedUser.User = new User { Id = 0 };
-
-            var startDate = DateTime.Today;
-            var endDate = DateTime.Today.AddDays(7);
-            var trip = new Trip
-            { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
-            var addedTrip = new AddedTrip
-            {
-                StartDate = trip.StartDate,
-                EndDate = trip.EndDate,
-                Name = trip.Name,
-                UserId = trip.UserId,
-                Id = trip.Id
-            };
-
-            var data = new List<Trip>
-            {
-            }.AsQueryable();
-
-            var mockSet = new Mock<DbSet<Trip>>();
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.Expression).Returns(data.Expression);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mockSet.As<IQueryable<Trip>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
-            mockContext.Setup(c => c.Trips).Returns(mockSet.Object);
-
-            var service = new TripDal(mockContext.Object);
-
-            var controller = new TripsController(service, null, null);
-            controller.ModelState.AddModelError("Mega", "Error");
-            var result = controller.Create(addedTrip);
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
     }
 }

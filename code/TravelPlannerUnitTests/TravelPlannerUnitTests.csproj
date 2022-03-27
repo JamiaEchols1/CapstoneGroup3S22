@@ -107,7 +107,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeControllerTests\HomeControllerTests.cs" />
-    <Compile Include="Controllers\TripsControllerTests\TripsControllerTests.cs" />
+    <Compile Include="Controllers\LodgingsControllerTests\CreateTests.cs" />
+    <Compile Include="Controllers\LodgingsControllerTests\DeleteTests.cs" />
+    <Compile Include="Controllers\LodgingsControllerTests\DetailsTests.cs" />
+    <Compile Include="Controllers\LodgingsControllerTests\IndexTests.cs" />
+    <Compile Include="Controllers\LodgingsControllerTests\CreateWithConflictsTests.cs" />
+    <Compile Include="Controllers\TripsControllerTests\CreateTests.cs" />
+    <Compile Include="Controllers\TripsControllerTests\DetailsTests.cs" />
+    <Compile Include="Controllers\TripsControllerTests\IndexTests.cs" />
     <Compile Include="Controllers\WaypointsControllerTests\IndexTests.cs" />
     <Compile Include="Controllers\WaypointsControllerTests\DetailsTests.cs" />
     <Compile Include="Controllers\WaypointsControllerTests\CreateTests.cs" />

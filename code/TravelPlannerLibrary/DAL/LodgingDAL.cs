@@ -145,7 +145,7 @@ namespace TravelPlannerLibrary.DAL
         /// </returns>
         public Lodging GetLodgingById(int id)
         {
-            return db.Lodgings.Find(id);
+            return db.Lodgings.Where(x => x.Id == id).FirstOrDefault();
         }
 
         /// <summary>
