@@ -127,6 +127,10 @@ namespace TravelPlannerLibrary.DAL
             return db.SaveChanges();
         }
 
+        /// <summary>
+        /// Finds the next identifier.
+        /// </summary>
+        /// <returns></returns>
         public int FindNextId()
         {
             if (!db.Waypoints.Any())
@@ -166,6 +170,23 @@ namespace TravelPlannerLibrary.DAL
             var tripWaypoints = this.GetWaypoints(LoggedUser.SelectedTrip.Id);
 
             return tripWaypoints.Where(current => TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartDateTime, current.EndDateTime)).ToList();
+        }
+
+        /// <summary>
+        ///     Gets the associated trip from one of its waypoint ids.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        ///     trip the associated trip
+        /// </returns>
+        public Trip GetTripFromWaypoint(int id)
+        {
+            Trip trip = null;
+            if (id >= 0)
+            {
+               trip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
+            }
+            return trip;
         }
 
         #endregion

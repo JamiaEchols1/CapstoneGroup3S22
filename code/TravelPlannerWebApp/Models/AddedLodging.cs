@@ -9,11 +9,18 @@ using WebApplication4.Common;
 namespace WebApplication4.Models
 {
     /// <summary>
-    /// The added waypoint model
+    /// The added lodging model
     /// </summary>
     public class AddedLodging
     {
+        /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>
+        /// The identifier.
+        /// </value>
         public int Id { get; set; }
+
         /// <summary>
         /// Gets or sets the location.
         /// </summary>
@@ -22,6 +29,7 @@ namespace WebApplication4.Models
         /// </value>
         [Required]
         public string Location { get; set; }
+
         /// <summary>
         /// Gets or sets the start date time.
         /// </summary>

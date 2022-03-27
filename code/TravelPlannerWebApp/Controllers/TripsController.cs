@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 using WebApplication4.Models;
@@ -14,6 +8,10 @@ using WebApplication4.ViewModels;
 
 namespace WebApplication4.Controllers
 {
+    /// <summary>
+    ///     The trips controller
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     public class TripsController : Controller
     {
         private TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
@@ -28,21 +26,50 @@ namespace WebApplication4.Controllers
 
         private static string ErrorMessage;
 
-        // GET: Trips
+        /// <summary>
+        ///     Default trips controller constructor
+        /// </summary>
+        public TripsController()
+        {
+
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="TripsController"/> class.
+        /// </summary>
+        /// <param name="tripDal">The trip dal.</param>
+        /// <param name="waypointDal">The waypoint dal.</param>
+        /// <param name="lodgingDal">The lodging dal.</param>
+        public TripsController(TripDal tripDal, WaypointDal waypointDal, LodgingDal lodgingDal)
+        {
+            _tripDal = tripDal;
+            _waypointDal = waypointDal;
+            _lodgingDal = lodgingDal;
+        }
+
+        /// <summary>
+        ///     Returns a view of the trips for a user.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var trips = _tripDal.GetTrips(LoggedUser.User.Id);
             return View(trips);
         }
 
-        // GET: Trips/Details/5
+
+        /// <summary>
+        ///     Returns a view of the details of a trip for a given trip id.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Trip trip = db.Trips.Find(id);
+            int tripId = (int)id;
+            Trip trip = _tripDal.GetTripById(tripId);
             if (trip == null)
             {
                 return HttpNotFound();
@@ -55,10 +82,12 @@ namespace WebApplication4.Controllers
             return View(viewmodel);
         }
 
-        // GET: Trips/Create
+
+        /// <summary>
+        ///     GET: Creates a new trip for a user
+        /// </summary>
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Username");
             if (ErrorMessage != null)
             {
                 ViewBag.ErrorMessage = ErrorMessage;
@@ -67,14 +96,12 @@ namespace WebApplication4.Controllers
         }
 
         // POST: Trips/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         /// <summary>
-        /// Creates the specified trip.
+        ///     Creates the specified trip.
         /// </summary>
         /// <param name="trip">The trip.</param>
         /// <returns>
-        ///  The trip view result
+        ///     The trip view result
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -103,6 +130,19 @@ namespace WebApplication4.Controllers
             return View(trip);
         }
 
+        /// <summary>
+        ///     Sets the error message for testing only
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public void SetErrorMessage(string message)
+        {
+            ErrorMessage = message;
+        }
+
+        /// <summary>
+        /// Releases unmanaged resources and optionally releases managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

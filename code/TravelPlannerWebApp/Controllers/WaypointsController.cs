@@ -1,38 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data;
 using System.Linq;
 using System.Net;
 using System.Web;
-using System.Web.ModelBinding;
 using System.Web.Mvc;
-using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
-using WebApplication4.Common;
 using WebApplication4.Models;
-using WebApplication4.ViewModels;
 
 namespace WebApplication4.Controllers
 {
+    /// <summary>
+    ///     The travel planner web waypoints controller
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     public class WaypointsController : Controller
     {
-        private TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
+        private readonly WaypointDal _waypointDal = new WaypointDal();
 
-        private readonly WaypointDal waypointDAL = new WaypointDal();
+        private readonly TripDal _tripDal = new TripDal();
 
-        private readonly TripDal tripDAL = new TripDal();
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WaypointsController"/> class.
+        /// Default Constructor
+        /// </summary>
+        public WaypointsController()
+        {            
+        }
 
-        // GET: Waypoints
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WaypointsController"/> class.
+        /// Default Constructor
+        /// </summary>
+        public WaypointsController(TripDal tripDal, WaypointDal waypointDal)
+        {
+            _waypointDal = waypointDal;
+            _tripDal = tripDal;
+        }
+
+        /// <summary>
+        ///     GET: Returns a view of the waypoints for a selected trip
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
-            var waypoints = waypointDAL.GetWaypoints(LoggedUser.SelectedTrip.Id);
+            var waypoints = _waypointDal.GetWaypoints(LoggedUser.SelectedTrip.Id);
             ViewBag.TripName = LoggedUser.SelectedTrip.Name;
             return View("Index", waypoints);
         }
 
-        // GET: Waypoints/Details/5
+        /// <summary>
+        ///     GET: Returns a view of a specific waypoint's details for a selected trip
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,7 +60,7 @@ namespace WebApplication4.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             int waypointId = (int) id;
-            Waypoint waypoint = waypointDAL.GetWaypoint(waypointId);
+            Waypoint waypoint = _waypointDal.GetWaypoint(waypointId);
             if (waypoint == null)
             {
                 return HttpNotFound();
@@ -52,14 +72,19 @@ namespace WebApplication4.Controllers
             return View("Details", waypoint);
         }
 
-        // GET: Waypoints/Create
+        /// <summary>
+        ///     GET: Returns a view for a user to create a new waypoint for a selected trip
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="ErrorMessage">The error message.</param>
         public ActionResult Create(int? id, string ErrorMessage)
         {
             if (id == null)
             {
                 id = LoggedUser.SelectedTrip.Id;
             }
-            LoggedUser.SelectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
+            var waypointId = (int)id;
+            LoggedUser.SelectedTrip = _waypointDal.GetTripFromWaypoint(waypointId);
             ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
@@ -70,16 +95,10 @@ namespace WebApplication4.Controllers
             return View("Create");
         }
 
-        // POST: Waypoints/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         /// <summary>
-        /// Creates the specified waypoint.
+        ///     POST: Waypoints/Create. Creates the specified waypoint.
         /// </summary>
         /// <param name="waypoint">The waypoint.</param>
-        /// <returns>
-        /// The waypoint view result
-        /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Location,StartDateTime,EndDateTime,Description")] AddedWaypoint waypoint)
@@ -98,7 +117,7 @@ namespace WebApplication4.Controllers
                 }
                 else
                 {
-                    waypointDAL.CreateNewWaypoint(waypoint.Location, waypoint.StartDateTime, waypoint.EndDateTime, waypoint.TripId, waypoint.Description);
+                    _waypointDal.CreateNewWaypoint(waypoint.Location, waypoint.StartDateTime, waypoint.EndDateTime, waypoint.TripId, waypoint.Description);
                     return RedirectToAction("Index");
                 }
             }
@@ -121,7 +140,7 @@ namespace WebApplication4.Controllers
 
         private string validateConflictingWaypoints(AddedWaypoint waypoint)
         {
-            var overlaps = waypointDAL.GetOverlappingWaypoints(waypoint.StartDateTime, waypoint.EndDateTime);
+            var overlaps = _waypointDal.GetOverlappingWaypoints(waypoint.StartDateTime, waypoint.EndDateTime);
             string ErrorMessage = null;
             if (overlaps.Count > 0)
             {
@@ -134,7 +153,12 @@ namespace WebApplication4.Controllers
             return ErrorMessage;
         }
 
-        // GET: Waypoints/Delete/5
+
+        /// <summary>
+        ///     GET: Returns a view of a selected waypoint so that the user can confirm the deletion
+        ///     of the waypoint
+        /// </summary>
+        /// <param name="id">The identifier.</param>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -142,7 +166,7 @@ namespace WebApplication4.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             int validatedId = (int) id;
-            Waypoint waypoint = waypointDAL.GetWaypoint(validatedId);
+            Waypoint waypoint = _waypointDal.GetWaypoint(validatedId);
             if (waypoint == null)
             {
                 return HttpNotFound();
@@ -150,9 +174,8 @@ namespace WebApplication4.Controllers
             return View("Delete", waypoint);
         }
 
-        // POST: Waypoints/Delete/5
         /// <summary>
-        /// Deletes the confirmed.
+        ///     POST: Waypoints/Delete. Deletes the confirmed waypoint
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>
@@ -162,18 +185,9 @@ namespace WebApplication4.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Waypoint waypoint = waypointDAL.GetWaypoint(id);
-            this.waypointDAL.RemoveWaypoint(waypoint);
+            Waypoint waypoint = _waypointDal.GetWaypoint(id);
+            this._waypointDal.RemoveWaypoint(waypoint);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

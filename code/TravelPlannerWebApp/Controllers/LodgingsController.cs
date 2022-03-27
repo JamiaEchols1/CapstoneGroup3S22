@@ -18,11 +18,29 @@ namespace WebApplication4
     /// <seealso cref="System.Web.Mvc.Controller" />
     public class LodgingsController : Controller
     {
-        private TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
-
         private LodgingDal _lodgingDal = new LodgingDal();
+        private TripDal _tripDal = new TripDal();
 
         private static AddedLodging conflictingLodging;
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="LodgingsController"/> class.
+        /// </summary>
+        /// <param name="tripService">The trip service.</param>
+        /// <param name="lodgingsService">The lodgings service.</param>
+        public LodgingsController(TripDal tripService, LodgingDal lodgingsService)
+        {
+            this._tripDal = tripService;
+            this._lodgingDal = lodgingsService;
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="LodgingsController"/> class.
+        ///     Default Constructor
+        /// </summary>
+        public LodgingsController()
+        {
+        }
 
         /// <summary>
         ///     Displays all of the users lodging for a selected trip
@@ -74,7 +92,8 @@ namespace WebApplication4
             {
                 id = LoggedUser.SelectedTrip.Id;
             }
-            LoggedUser.SelectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
+            int tripId = (int)id;
+            LoggedUser.SelectedTrip = _tripDal.GetTripById(tripId);
             ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
@@ -131,7 +150,8 @@ namespace WebApplication4
             }
             AddedLodging Lodging = conflictingLodging;
             conflictingLodging = null;
-            LoggedUser.SelectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
+            var tripId = (int)id;
+            LoggedUser.SelectedTrip = _tripDal.GetTripById(tripId);
             ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
@@ -233,15 +253,6 @@ namespace WebApplication4
             Lodging lodging = _lodgingDal.GetLodgingById(lodgingId);
             _lodgingDal.RemoveLodging(lodging);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

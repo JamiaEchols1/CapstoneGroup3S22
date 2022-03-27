@@ -11,6 +11,30 @@ namespace WebApplication4.Controllers
     /// <seealso cref="System.Web.Mvc.Controller" />
     public class HomeController : Controller
     {
+        /// <summary>
+        ///     The login data access layer
+        /// </summary>
+        public LoginDal _loginDal = new LoginDal();
+
+        /// <summary>
+        ///     Default Constructor
+        /// </summary>
+        public HomeController()
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="HomeController"/> class.
+        /// </summary>
+        /// <param name="_loginDal">The login dal.</param>
+        public HomeController(LoginDal _loginDal)
+        {
+            this._loginDal = _loginDal;
+        }
+
+        /// <summary>
+        ///     Returns a login page for the user.
+        /// </summary>
         public ActionResult Login()
         {
             LoggedUser.User = null;
@@ -18,7 +42,8 @@ namespace WebApplication4.Controllers
         }
 
         /// <summary>
-        ///     Authenticates the login.
+        ///     Authenticates a user's login credentials and brings them to their trip homepage
+        ///     if successful.
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>
@@ -31,8 +56,7 @@ namespace WebApplication4.Controllers
         {
             if (ModelState.IsValid)
             {
-                var loginDal = new LoginDal();
-                var loggedUser = loginDal.CheckLoginCredentials(user.Username, user.Password);
+                var loggedUser = _loginDal.CheckLoginCredentials(user.Username, user.Password);
 
                 if (loggedUser != null)
                 {
