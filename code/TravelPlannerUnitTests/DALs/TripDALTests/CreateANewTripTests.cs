@@ -56,7 +56,7 @@ namespace TravelPlannerUnitTests.DALs.TripDALTests
             var service = new TripDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateNewTrip(null, DateTime.Now, DateTime.Now.AddDays(7), 1));
+                service.CreateNewTrip(null, DateTime.Now, DateTime.Now.AddDays(7), 1, "Desc"));
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace TravelPlannerUnitTests.DALs.TripDALTests
             var service = new TripDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateNewTrip("", DateTime.Now, DateTime.Now.AddDays(7), 1));
+                service.CreateNewTrip("", DateTime.Now, DateTime.Now.AddDays(7), 1, "Desc"));
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace TravelPlannerUnitTests.DALs.TripDALTests
             var service = new TripDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateNewTrip("test", DateTime.Now.AddDays(7), DateTime.Now, 1));
+                service.CreateNewTrip("test", DateTime.Now.AddDays(7), DateTime.Now, 1, "Desc"));
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace TravelPlannerUnitTests.DALs.TripDALTests
                 var service = new TripDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateNewTrip("Trip4", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(7), 1));
+                service.CreateNewTrip("Trip4", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(7), 1, "Desc"));
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace TravelPlannerUnitTests.DALs.TripDALTests
 
             var service = new TripDal(mockContext.Object);
 
-            service.CreateNewTrip("Trip4", DateTime.Now, DateTime.Now.AddDays(7), 1);
+            service.CreateNewTrip("Trip4", DateTime.Now, DateTime.Now.AddDays(7), 1, "Desc");
 
             Assert.IsTrue(wasCalled);
         }

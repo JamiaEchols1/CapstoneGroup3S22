@@ -57,7 +57,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
             var service = new LodgingDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateNewLodging("", DateTime.Now, DateTime.Now.AddHours(1), 0));
+                service.CreateNewLodging("", DateTime.Now, DateTime.Now.AddHours(1), 0, "desc"));
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
             var service = new LodgingDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateNewLodging(null, DateTime.Now, DateTime.Now.AddHours(1), 0));
+                service.CreateNewLodging(null, DateTime.Now, DateTime.Now.AddHours(1), 0, "desc"));
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
             var service = new LodgingDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateNewLodging("location", DateTime.Now.AddMinutes(30), DateTime.Now, 0));
+                service.CreateNewLodging("location", DateTime.Now.AddMinutes(30), DateTime.Now, 0, "desc"));
             LoggedUser.SelectedWaypoint = null;
             LoggedUser.SelectedTrip = null;
         }
@@ -189,7 +189,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
             var service = new LodgingDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateNewLodging("location", DateTime.Now.AddMinutes(30), DateTime.Now.AddDays(15), 0));
+                service.CreateNewLodging("location", DateTime.Now.AddMinutes(30), DateTime.Now.AddDays(15), 0, "desc"));
             LoggedUser.SelectedWaypoint = null;
             LoggedUser.SelectedTrip = null;
         }
@@ -235,7 +235,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
             var service = new LodgingDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateNewLodging("location", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(5), 0));
+                service.CreateNewLodging("location", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(5), 0, "desc"));
             LoggedUser.SelectedWaypoint = null;
             LoggedUser.SelectedTrip = null;
         }
@@ -281,7 +281,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
 
             var service = new LodgingDal(mockContext.Object);
 
-            service.CreateNewLodging("location", DateTime.Now.AddDays(1), DateTime.Now.AddDays(5), 0);
+            service.CreateNewLodging("location", DateTime.Now.AddDays(1), DateTime.Now.AddDays(5), 0, "desc");
 
             Assert.IsTrue(wasCalled);
             LoggedUser.SelectedWaypoint = null;

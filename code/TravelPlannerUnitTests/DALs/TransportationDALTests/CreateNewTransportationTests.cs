@@ -63,7 +63,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), null));
+                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), null, "Car"));
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), ""));
+                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), "", "Car"));
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(-7), "Description"));
+                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(-7), "Description", "Car"));
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentException>(() =>
                 service.CreateANewTransportation(0, DateTime.Now.AddMinutes(-33), DateTime.Now.AddMinutes(40),
-                    "Description"));
+                    "Description", "Car"));
             LoggedUser.SelectedTrip = null;
         }
 
@@ -239,7 +239,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             var service = new TransportationDal(mockContext.Object);
 
             service.CreateANewTransportation(0, DateTime.Now.AddMinutes(40), DateTime.Now.AddMinutes(45),
-                "Description");
+                "Description", "Car");
 
             Assert.IsTrue(wasCalled);
             LoggedUser.SelectedTrip = null;
