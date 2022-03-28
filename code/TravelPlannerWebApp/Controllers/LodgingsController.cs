@@ -89,7 +89,8 @@ namespace WebApplication4.Controllers
                 id = LoggedUser.SelectedTrip.Id;
             }
 
-            LoggedUser.SelectedTrip = this.db.Trips.FirstOrDefault(x => x.Id == id);
+            var tripId = (int)id;
+            LoggedUser.SelectedTrip = this._tripDal.GetTripById(tripId);
             ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
                                   LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
@@ -148,7 +149,8 @@ namespace WebApplication4.Controllers
 
             var Lodging = conflictingLodging;
             conflictingLodging = null;
-            LoggedUser.SelectedTrip = this.db.Trips.FirstOrDefault(x => x.Id == id);
+            var tripId = (int)id;
+            LoggedUser.SelectedTrip = this._tripDal.GetTripById(tripId);
             ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
                                   LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
