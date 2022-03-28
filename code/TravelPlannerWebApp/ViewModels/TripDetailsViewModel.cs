@@ -34,6 +34,14 @@ namespace WebApplication4.ViewModels
         /// </value>
         public IEnumerable<Lodging> Lodgings { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the transportations.
+        /// </summary>
+        /// <value>
+        ///     The transportations.
+        /// </value>
+        public IEnumerable<Transportation> Transportations { get; set; }
+
         #endregion
     }
 }

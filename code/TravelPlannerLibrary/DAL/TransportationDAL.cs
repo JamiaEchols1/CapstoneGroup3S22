@@ -184,6 +184,36 @@ namespace TravelPlannerLibrary.DAL
             return tripTransportation.Where(current => TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime)).ToList();
         }
 
+
+        /// <summary>
+        /// Gets the transportation by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// The transportation with the specified id
+        /// </returns>
+        public Transportation GetTransportationById(int id)
+        {
+            return db.Transportations.FirstOrDefault(x => x.Id == id);
+        }
+
+        /// <summary>
+        ///     Gets the associated trip from one of its waypoint ids.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        ///     trip the associated trip
+        /// </returns>
+        public Trip GetTripFromTransportation(int id)
+        {
+            Trip trip = null;
+            if (id >= 0)
+            {
+                trip = db.Trips.FirstOrDefault(x => x.Id == id);
+            }
+            return trip;
+        }
+
         #endregion
     }
 }

@@ -24,6 +24,8 @@ namespace WebApplication4.Controllers
 
         private LodgingDal _lodgingDal = new LodgingDal();
 
+        private TransportationDal _transportationDal = new TransportationDal();
+
         private static string ErrorMessage;
 
         /// <summary>
@@ -77,6 +79,7 @@ namespace WebApplication4.Controllers
             viewmodel.Trip = trip;
             viewmodel.Waypoints = _waypointDal.GetWaypoints(trip.Id);
             viewmodel.Lodgings = _lodgingDal.GetLodgings(trip.Id);
+            this.viewmodel.Transportations = _transportationDal.GetTransportationsByTrip(trip.Id);
             LoggedUser.SelectedTrip = trip;
 
             return View(viewmodel);

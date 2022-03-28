@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TravelPlannerLibrary.Models.Waypoint>
+﻿@using TravelPlannerLibrary.Models
+@model IEnumerable<TravelPlannerLibrary.Models.Waypoint>
 
 @{
     ViewBag.Title = "Index";
@@ -46,5 +47,5 @@
 
 </table>
 <p>
-    @Html.ActionLink("Back to List", "../Trips/Index")
+    @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
 </p>
