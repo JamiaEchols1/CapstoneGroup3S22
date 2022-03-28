@@ -16,7 +16,6 @@ namespace TravelPlannerDesktopApp.Models
 
         public virtual ICollection<Lodging> Lodgings { get; set; }
         public virtual ICollection<Transportation> Transportations { get; set; }
-        public virtual User User { get; set; }
         public virtual ICollection<Waypoint> Waypoints { get; set; }
 
         public override string ToString()

@@ -20,7 +20,10 @@ namespace TravelPlannerUnitTests.DesktopModels
                 EndDate = trip.EndDate,
                 Name = trip.Name,
                 UserId = trip.UserId,
-                Id = trip.Id
+                Id = trip.Id,
+                Transportations = null,
+                Waypoints = null,
+                Lodgings = null
             };
             string resultToString =  desktopTrip.Name + ", Start Date:" + desktopTrip.StartDate.ToString("MM/dd/yyyy h:mm tt") + ", End Date: " + desktopTrip.EndDate.ToString("MM/dd/yyyy h:mm tt");
 
@@ -29,6 +32,9 @@ namespace TravelPlannerUnitTests.DesktopModels
             Assert.AreEqual("trip", desktopTrip.Name);
             Assert.AreEqual(1, desktopTrip.UserId);
             Assert.AreEqual(1, desktopTrip.Id);
+            Assert.IsNull(desktopTrip.Lodgings);
+            Assert.IsNull(desktopTrip.Transportations);
+            Assert.IsNull(desktopTrip.Waypoints);
             Assert.AreEqual(resultToString, desktopTrip.ToString());
         }
     }

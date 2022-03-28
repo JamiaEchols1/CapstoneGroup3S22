@@ -26,7 +26,7 @@ namespace TravelPlannerUnitTests.DesktopModels
                 StartTime = transportation.StartTime,
                 EndTime = transportation.EndTime,
                 Id = transportation.Id,
-                TripId = transportation.TripId
+                TripId = transportation.TripId,
             };
             string resultToString = "Transportation: " + "Start: " + desktopTransportation.StartTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " + desktopTransportation.EndTime.ToString("MM/dd/yyyy h:mm tt");
             Assert.AreEqual("transportation",desktopTransportation.Description);
