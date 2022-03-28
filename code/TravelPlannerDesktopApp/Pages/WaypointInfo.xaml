@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
       mc:Ignorable="d"
-      d:DesignHeight="450"
-      Title="WaypointInfo" Width="816.89">
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="WaypointInfo">
 
-    <Grid Background="White" Margin="0,0,52.667,0">
+    <Grid Background="White">
 
         <n:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/Back.png"
                      NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right" Margin="0,2,2,0" />
@@ -20,20 +20,23 @@
                    Text="Location:" VerticalAlignment="Top" Height="20" Width="196" />
         <TextBlock x:Name="timeTextBlock" HorizontalAlignment="Left" Margin="124,250,0,0" TextWrapping="Wrap"
                    Text="Start Date:" VerticalAlignment="Top" Height="20" Width="196" />
-        <Button x:Name="editWaypointButton" Content="Edit Waypoint" HorizontalAlignment="Left" Margin="180,363,0,0" Click="EditWaypointButton_OnClick" Height="17" VerticalAlignment="Top" />
+        <Button x:Name="editWaypointButton" Content="Edit Waypoint" HorizontalAlignment="Left" Margin="180,363,0,0"
+                Click="EditWaypointButton_OnClick" Height="17" VerticalAlignment="Top" />
         <Button x:Name="removeWaypointButton" Content="Remove Waypoint" HorizontalAlignment="Left" Margin="483,363,0,0"
                 VerticalAlignment="Top" Click="RemoveWaypointButton_OnClick" />
         <TextBlock x:Name="endDateTextBlock" HorizontalAlignment="Left" Margin="124,310,0,0" TextWrapping="Wrap"
                    Text="End Date:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Waypoint Info" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Waypoint Info"
+                   VerticalAlignment="Top" />
         <Viewbox HorizontalAlignment="Left" Height="286" Margin="356,44,0,0" VerticalAlignment="Top" Width="351">
-            <WebBrowser x:Name="wbMaps" Source="https://www.google.com/maps" HorizontalAlignment="Left" Height="22188" VerticalAlignment="Top" Width="27055" Margin="364,58,0,0" RenderTransformOrigin="0.5,0.5">
+            <WebBrowser x:Name="wbMaps" Source="https://www.google.com/maps" HorizontalAlignment="Left" Height="22188"
+                        VerticalAlignment="Top" Width="27055" Margin="364,58,0,0" RenderTransformOrigin="0.5,0.5">
                 <WebBrowser.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform ScaleX="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
+                        <ScaleTransform ScaleX="-1" />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
                     </TransformGroup>
                 </WebBrowser.RenderTransform>
             </WebBrowser>

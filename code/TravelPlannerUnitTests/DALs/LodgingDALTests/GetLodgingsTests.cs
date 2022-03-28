@@ -11,7 +11,7 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerUnitTests.DALs.LodgingDALTests
 {
     /// <summary>
-    /// Tests get lodgings
+    ///     Tests get lodgings
     /// </summary>
     [TestClass]
     public class GetLodgingsTests
@@ -19,7 +19,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
         #region Methods
 
         /// <summary>
-        /// Tests the get lodgings.
+        ///     Tests the get lodgings.
         /// </summary>
         [TestMethod]
         public void TestGetLodgings()

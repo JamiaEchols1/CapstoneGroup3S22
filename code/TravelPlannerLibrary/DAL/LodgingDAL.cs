@@ -7,7 +7,7 @@ using TravelPlannerLibrary.Util;
 namespace TravelPlannerLibrary.DAL
 {
     /// <summary>
-    /// The lodging data access layer
+    ///     The lodging data access layer
     /// </summary>
     public class LodgingDal
     {
@@ -58,6 +58,7 @@ namespace TravelPlannerLibrary.DAL
         /// <param name="startTime">The start time.</param>
         /// <param name="endTime">The end time.</param>
         /// <param name="tripId">The trip identifier.</param>
+        /// <param name="description">The description.</param>
         /// <returns>
         ///     The newly created lodging
         /// </returns>
@@ -69,7 +70,8 @@ namespace TravelPlannerLibrary.DAL
         ///     or
         ///     End date must be on or after selected start date
         /// </exception>
-        public Lodging CreateNewLodging(string location, DateTime startTime, DateTime endTime, int tripId)
+        public Lodging CreateNewLodging(string location, DateTime startTime, DateTime endTime, int tripId,
+            string description)
         {
             if (string.IsNullOrEmpty(location))
             {
@@ -97,7 +99,8 @@ namespace TravelPlannerLibrary.DAL
                 StartTime = startTime,
                 EndTime = endTime,
                 TripId = tripId,
-                Id = FindNextId()
+                Id = this.FindNextId(),
+                Description = description
             };
 
             db.Lodgings.Add(lodging);
@@ -133,7 +136,8 @@ namespace TravelPlannerLibrary.DAL
         {
             var tripLodgings = this.GetLodgings(LoggedUser.SelectedTrip.Id);
 
-            return tripLodgings.Where(current => TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime)).ToList();
+            return tripLodgings.Where(current =>
+                TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime)).ToList();
         }
 
         /// <summary>
@@ -145,7 +149,7 @@ namespace TravelPlannerLibrary.DAL
         /// </returns>
         public Lodging GetLodgingById(int id)
         {
-            return db.Lodgings.Where(x => x.Id == id).FirstOrDefault();
+            return db.Lodgings.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>

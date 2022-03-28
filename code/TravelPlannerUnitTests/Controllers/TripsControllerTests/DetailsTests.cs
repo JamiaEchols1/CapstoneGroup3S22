@@ -1,14 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 using WebApplication4.Controllers;
-using WebApplication4.Models;
 
 namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 {
@@ -18,6 +18,8 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
     [TestClass]
     public class DetailsTests
     {
+        #region Methods
+
         /// <summary>
         ///     Tests the GET: details view for a trip.
         /// </summary>
@@ -27,7 +29,9 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
             LoggedUser.User = new User { Id = 0 };
 
             var tripData = new List<Trip> {
-                new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 }
+                new Trip {
+                    Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0
+                }
             }.AsQueryable();
 
             var tripMockSet = new Mock<DbSet<Trip>>();
@@ -59,8 +63,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             mockContext.Setup(c => c.Waypoints).Returns(waypointMockSet.Object);
 
-            var lodging = new Lodging
-            {
+            var lodging = new Lodging {
                 Location = "Lodging",
                 StartTime = DateTime.Now.AddMinutes(45),
                 EndTime = DateTime.Now.AddMinutes(50),
@@ -91,12 +94,40 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             mockContext.Setup(c => c.Lodgings).Returns(lodgingMockSet.Object);
 
+            var data = new List<Transportation> {
+                new Transportation {
+                    Description = "test transportation", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
+                    Id = 0
+                },
+                new Transportation {
+                    Description = "test transportation 1", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
+                    Id = 1
+                },
+                new Transportation {
+                    Description = "test transportation 2", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
+                    Id = 2
+                }
+            }.AsQueryable();
+
+            var mockSet = new Mock<DbSet<Transportation>>();
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
+
             var tripService = new TripDal(mockContext.Object);
             var waypointService = new WaypointDal(mockContext.Object);
             var lodgingService = new LodgingDal(mockContext.Object);
-            LoggedUser.SelectedTrip = new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 };
+            var transportationService = new TransportationDal(mockContext.Object);
+            LoggedUser.SelectedTrip = new Trip
+                { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 };
 
-            var controller = new TripsController(tripService, waypointService, lodgingService);
+            var controller = new TripsController(tripService, waypointService, lodgingService, transportationService);
             var result = controller.Details(0);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
@@ -110,7 +141,9 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
             LoggedUser.User = new User { Id = 0 };
 
             var tripData = new List<Trip> {
-                new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 }
+                new Trip {
+                    Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0
+                }
             }.AsQueryable();
 
             var tripMockSet = new Mock<DbSet<Trip>>();
@@ -142,8 +175,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             mockContext.Setup(c => c.Waypoints).Returns(waypointMockSet.Object);
 
-            var lodging = new Lodging
-            {
+            var lodging = new Lodging {
                 Location = "Lodging",
                 StartTime = DateTime.Now.AddMinutes(45),
                 EndTime = DateTime.Now.AddMinutes(50),
@@ -174,12 +206,40 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             mockContext.Setup(c => c.Lodgings).Returns(lodgingMockSet.Object);
 
+            var data = new List<Transportation> {
+                new Transportation {
+                    Description = "test transportation", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
+                    Id = 0
+                },
+                new Transportation {
+                    Description = "test transportation 1", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
+                    Id = 1
+                },
+                new Transportation {
+                    Description = "test transportation 2", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
+                    Id = 2
+                }
+            }.AsQueryable();
+
+            var mockSet = new Mock<DbSet<Transportation>>();
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
+
             var tripService = new TripDal(mockContext.Object);
             var waypointService = new WaypointDal(mockContext.Object);
             var lodgingService = new LodgingDal(mockContext.Object);
-            LoggedUser.SelectedTrip = new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 };
+            var transportationService = new TransportationDal(mockContext.Object);
+            LoggedUser.SelectedTrip = new Trip
+                { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 };
 
-            var controller = new TripsController(tripService, waypointService, lodgingService);
+            var controller = new TripsController(tripService, waypointService, lodgingService, transportationService);
             var result = controller.Details(null);
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
         }
@@ -193,7 +253,9 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
             LoggedUser.User = new User { Id = 0 };
 
             var tripData = new List<Trip> {
-                new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 }
+                new Trip {
+                    Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0
+                }
             }.AsQueryable();
 
             var tripMockSet = new Mock<DbSet<Trip>>();
@@ -225,8 +287,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             mockContext.Setup(c => c.Waypoints).Returns(waypointMockSet.Object);
 
-            var lodging = new Lodging
-            {
+            var lodging = new Lodging {
                 Location = "Lodging",
                 StartTime = DateTime.Now.AddMinutes(45),
                 EndTime = DateTime.Now.AddMinutes(50),
@@ -257,15 +318,44 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             mockContext.Setup(c => c.Lodgings).Returns(lodgingMockSet.Object);
 
+            var data = new List<Transportation> {
+                new Transportation {
+                    Description = "test transportation", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
+                    Id = 0
+                },
+                new Transportation {
+                    Description = "test transportation 1", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 1,
+                    Id = 1
+                },
+                new Transportation {
+                    Description = "test transportation 2", StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 3,
+                    Id = 2
+                }
+            }.AsQueryable();
+
+            var mockSet = new Mock<DbSet<Transportation>>();
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
+
             var tripService = new TripDal(mockContext.Object);
             var waypointService = new WaypointDal(mockContext.Object);
             var lodgingService = new LodgingDal(mockContext.Object);
-            LoggedUser.SelectedTrip = new Trip { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 };
+            var transportationService = new TransportationDal(mockContext.Object);
+            LoggedUser.SelectedTrip = new Trip
+                { Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0 };
 
-            var controller = new TripsController(tripService, waypointService, lodgingService);
+            var controller = new TripsController(tripService, waypointService, lodgingService, transportationService);
             var result = controller.Details(-1);
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
             controller = new TripsController();
         }
+        #endregion
     }
 }

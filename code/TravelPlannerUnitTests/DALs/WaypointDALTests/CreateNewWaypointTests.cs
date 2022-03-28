@@ -199,7 +199,8 @@ namespace TravelPlannerUnitTests.DALs.WaypointDALTests
             var waypointService = new WaypointDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentException>(() =>
-                waypointService.CreateNewWaypoint("there", DateTime.Now.AddHours(-1), DateTime.Now.AddHours(2), 1, "No"));
+                waypointService.CreateNewWaypoint("there", DateTime.Now.AddHours(-1), DateTime.Now.AddHours(2), 1,
+                    "No"));
             LoggedUser.SelectedTrip = null;
         }
 
@@ -248,7 +249,8 @@ namespace TravelPlannerUnitTests.DALs.WaypointDALTests
             var waypointService = new WaypointDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentException>(() =>
-                waypointService.CreateNewWaypoint("there", DateTime.Now.AddDays(12), DateTime.Now.AddDays(16), 1, "No"));
+                waypointService.CreateNewWaypoint("there", DateTime.Now.AddDays(12), DateTime.Now.AddDays(16), 1,
+                    "No"));
             LoggedUser.SelectedTrip = null;
         }
 

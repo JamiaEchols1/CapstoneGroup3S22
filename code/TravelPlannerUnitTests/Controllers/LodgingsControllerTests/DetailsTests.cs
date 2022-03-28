@@ -1,13 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
-using WebApplication4;
+using WebApplication4.Controllers;
 
 namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
 {
@@ -17,6 +18,8 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
     [TestClass]
     public class DetailsTests
     {
+        #region Methods
+
         /// <summary>
         ///     Tests the GET: Details for when a lodging id does not exist.
         /// </summary>
@@ -48,7 +51,8 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
             mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.Provider).Returns(lodgingsData.Provider);
             mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.Expression).Returns(lodgingsData.Expression);
             mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.ElementType).Returns(lodgingsData.ElementType);
-            mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.GetEnumerator()).Returns(lodgingsData.GetEnumerator());
+            mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.GetEnumerator())
+                           .Returns(lodgingsData.GetEnumerator());
 
             var mockSetTrip = new Mock<DbSet<Trip>>();
             mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(tripData.Provider);
@@ -64,8 +68,7 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
             var tripService = new TripDal(mockContext.Object);
 
             var controller = new LodgingsController(tripService, lodgingsService);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -74,6 +77,7 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
             };
             var result = controller.Details(-1);
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
+            controller = new LodgingsController();
         }
 
         /// <summary>
@@ -107,7 +111,8 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
             mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.Provider).Returns(lodgingsData.Provider);
             mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.Expression).Returns(lodgingsData.Expression);
             mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.ElementType).Returns(lodgingsData.ElementType);
-            mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.GetEnumerator()).Returns(lodgingsData.GetEnumerator());
+            mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.GetEnumerator())
+                           .Returns(lodgingsData.GetEnumerator());
 
             var mockSetTrip = new Mock<DbSet<Trip>>();
             mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(tripData.Provider);
@@ -123,8 +128,7 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
             var tripService = new TripDal(mockContext.Object);
 
             var controller = new LodgingsController(tripService, lodgingsService);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -166,7 +170,8 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
             mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.Provider).Returns(lodgingsData.Provider);
             mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.Expression).Returns(lodgingsData.Expression);
             mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.ElementType).Returns(lodgingsData.ElementType);
-            mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.GetEnumerator()).Returns(lodgingsData.GetEnumerator());
+            mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.GetEnumerator())
+                           .Returns(lodgingsData.GetEnumerator());
 
             var mockSetTrip = new Mock<DbSet<Trip>>();
             mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(tripData.Provider);
@@ -182,8 +187,7 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
             var tripService = new TripDal(mockContext.Object);
 
             var controller = new LodgingsController(tripService, lodgingsService);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -194,5 +198,6 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
+        #endregion
     }
 }

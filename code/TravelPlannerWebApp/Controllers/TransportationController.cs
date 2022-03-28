@@ -1,0 +1,202 @@
+﻿using System.Collections.Generic;
+using System.Net;
+using System.Web.Mvc;
+using TravelPlannerLibrary.DAL;
+using TravelPlannerLibrary.Models;
+using WebApplication4.Models;
+
+namespace WebApplication4.Controllers
+{
+    /// <summary>
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
+    public class TransportationController : Controller
+    {
+        #region Data members
+
+        private readonly TransportationDal _transportationDal = new TransportationDal();
+        private readonly WaypointDal _waypointDal = new WaypointDal();
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="TransportationController" /> class.
+        /// </summary>
+        public TransportationController()
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="TransportationController" /> class.
+        /// </summary>
+        /// <param name="transportationDal">The transportation dal.</param>
+        public TransportationController(TransportationDal transportationDal)
+        {
+            this._transportationDal = transportationDal;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        ///     Detailses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var transportationId = (int)id;
+            var transportation = this._transportationDal.GetTransportationById(transportationId);
+            if (transportation == null)
+            {
+                return HttpNotFound();
+            }
+
+            LoggedUser.SelectedTransportation = transportation;
+            return View("Details", transportation);
+        }
+
+        /// <summary>
+        ///     Deletes the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var validatedId = (int)id;
+            var transportation = this._transportationDal.GetTransportationById(validatedId);
+            if (transportation == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View("Delete", transportation);
+        }
+
+        /// <summary>
+        ///     Deletes the confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var transportation = this._transportationDal.GetTransportationById(id);
+            this._transportationDal.DeleteTransportation(transportation);
+            return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
+        }
+
+        /// <summary>
+        ///     GET: Returns a view for a user to create a new transportation for a selected trip
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="ErrorMessage">The error message.</param>
+        public ActionResult Create(int? id, string ErrorMessage)
+        {
+            if (id == null)
+            {
+                id = LoggedUser.SelectedTrip.Id;
+            }
+
+            var transportationId = (int)id;
+            LoggedUser.SelectedTrip = this._transportationDal.GetTripFromTransportation(transportationId);
+            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
+                                  LoggedUser.SelectedTrip.EndDate;
+            ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
+            ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
+            if (ErrorMessage != null)
+            {
+                ViewBag.ErrorMessage = ErrorMessage;
+            }
+
+            return View("Create");
+        }
+
+        /// <summary>
+        ///     Creates the specified transportation.
+        /// </summary>
+        /// <param name="transportation">The transportation.</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(
+            [Bind(Include = "StartTime,EndTime,Description,Type")]
+            AddedTransportation transportation)
+        {
+            if (ModelState.IsValid)
+            {
+                transportation.TripId = LoggedUser.SelectedTrip.Id;
+                var ErrorMessage = this.validateDateTimes(transportation);
+                if (ErrorMessage == null)
+                {
+                    ErrorMessage = this.validateConflictingTransportAndWaypoints(transportation);
+                }
+
+                if (ErrorMessage != null)
+                {
+                    return RedirectToAction("Create", new { ErrorMessage });
+                }
+
+                this._transportationDal.CreateANewTransportation(transportation.TripId, transportation.StartTime,
+                    transportation.EndTime, transportation.Description, transportation.Type);
+                return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
+            }
+
+            return View(transportation);
+        }
+
+        private string validateDateTimes(AddedTransportation transportation)
+        {
+            string ErrorMessage = null;
+            if (transportation.StartTime.CompareTo(transportation.EndTime) > 0)
+            {
+                ErrorMessage = "The start date must be before the end date";
+            }
+
+            if (transportation.EndTime.CompareTo(transportation.StartTime) < 0)
+            {
+                ErrorMessage = "The end date must be after the start date";
+            }
+
+            return ErrorMessage;
+        }
+
+        private string validateConflictingTransportAndWaypoints(AddedTransportation transportation)
+        {
+            string ErrorMessage = null;
+            var startDate = transportation.StartTime;
+            var endDate = transportation.EndTime;
+            var waypointsAndTransportation = new List<object>();
+            waypointsAndTransportation.AddRange(this._waypointDal.GetOverlappingWaypoints(startDate, endDate));
+            waypointsAndTransportation.AddRange(
+                this._transportationDal.GetOverlappingTransportation(startDate, endDate));
+            if (waypointsAndTransportation.Count > 0)
+            {
+                ErrorMessage = "The transportation was not added because of the following conflicts:" + "\n";
+                foreach (var overlap in waypointsAndTransportation)
+                {
+                    ErrorMessage += overlap.ToString();
+                }
+            }
+
+            return ErrorMessage;
+        }
+
+        #endregion
+    }
+}

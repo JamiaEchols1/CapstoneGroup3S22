@@ -131,6 +131,7 @@
     <Compile Include="Common\TripEndDateRequirement.cs" />
     <Compile Include="Common\TripStartDateRequirement.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TransportationController.cs" />
     <Compile Include="Controllers\TripsController.cs" />
     <Compile Include="Controllers\WaypointsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -138,6 +139,7 @@
     </Compile>
     <Compile Include="Controllers\LodgingsController.cs" />
     <Compile Include="Models\AddedLodging.cs" />
+    <Compile Include="Models\AddedTransportation.cs" />
     <Compile Include="Models\AddedTrip.cs" />
     <Compile Include="Models\AddedWaypoint.cs" />
     <Compile Include="Models\UserCredentials.cs" />
@@ -267,19 +269,19 @@
     <Content Include="Views\Trips\Create.cshtml" />
     <Content Include="Views\Trips\Delete.cshtml" />
     <Content Include="Views\Trips\Details.cshtml" />
-    <Content Include="Views\Trips\Index.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Waypoints\Create.cshtml" />
     <Content Include="Views\Waypoints\Delete.cshtml" />
     <Content Include="Views\Waypoints\Details.cshtml" />
-    <Content Include="Views\Waypoints\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Lodgings\Create.cshtml" />
     <Content Include="Views\Lodgings\Delete.cshtml" />
     <Content Include="Views\Lodgings\Details.cshtml" />
-    <Content Include="Views\Lodgings\Index.cshtml" />
     <Content Include="Views\Lodgings\CreateWithConflicts.cshtml" />
+    <Content Include="Views\Transportation\Details.cshtml" />
+    <Content Include="Views\Transportation\Delete.cshtml" />
+    <Content Include="Views\Transportation\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

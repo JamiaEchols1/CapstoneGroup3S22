@@ -21,19 +21,24 @@ namespace TravelPlannerDesktopApp.Pages
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddLodging"/> class.
+        ///     Initializes a new instance of the <see cref="AddLodging" /> class.
         /// </summary>
         public AddLodging()
         {
             this.lodgingDal = new LodgingDal();
             this.InitializeComponent();
-            this.addLodgingTitle.Content = "Add New Lodging: " + LoggedUser.SelectedTrip.ToString();
+            this.addLodgingTitle.Content = "Add New Lodging: " + LoggedUser.SelectedTrip;
         }
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        ///     Handles the Click event of the NavButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void NavButton_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;
@@ -41,6 +46,16 @@ namespace TravelPlannerDesktopApp.Pages
             NavigationService?.Navigate(clickedButton.NavUri);
         }
 
+        /// <summary>
+        ///     Handles the Click event of the createLodgingButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
+        /// <exception cref="System.Exception">
+        ///     Must enter a start date!
+        ///     or
+        ///     Must enter an end date!
+        /// </exception>
         private void createLodgingButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -54,9 +69,10 @@ namespace TravelPlannerDesktopApp.Pages
                 {
                     throw new Exception("Must enter an end date!");
                 }
+
                 var newLodging = this.lodgingDal.CreateNewLodging(this.locationTextBox.Text,
                     DateTime.Parse(this.startDatePicker.Text), DateTime.Parse(this.endDatePicker.Text),
-                    LoggedUser.SelectedTrip.Id);
+                    LoggedUser.SelectedTrip.Id, this.descriptionTextBox.Text);
 
                 MessageBox.Show("Lodging creation was Successful!");
 
@@ -69,6 +85,11 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
+        /// <summary>
+        ///     Handles the ValueChanged event of the datePicker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="object" /> instance containing the event data.</param>
         private void datePicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (this.startDatePicker.Value != null && this.endDatePicker.Value != null)

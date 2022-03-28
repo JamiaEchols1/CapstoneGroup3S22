@@ -4,6 +4,7 @@
 	[StartDate] date not null,
 	[EndDate] date not null,
 	[UserId] int not null,
-	CONSTRAINT [FK_dbo.Trip_dbo.User_Id] FOREIGN KEY ([UserId]) 
+	[Description] VARCHAR(250) NULL, 
+    CONSTRAINT [FK_dbo.Trip_dbo.User_Id] FOREIGN KEY ([UserId]) 
         REFERENCES [dbo].[Users] ([Id]) ON DELETE CASCADE
 	)

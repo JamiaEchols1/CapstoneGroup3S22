@@ -11,7 +11,7 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerUnitTests.DALs.LodgingDALTests
 {
     /// <summary>
-    /// Tests get overlapping lodgings
+    ///     Tests get overlapping lodgings
     /// </summary>
     [TestClass]
     public class GetOverlappingLodgingsTests
@@ -19,7 +19,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
         #region Methods
 
         /// <summary>
-        /// Tests the get overlapping lodgings.
+        ///     Tests the get overlapping lodgings.
         /// </summary>
         [TestMethod]
         public void TestGetOverlappingLodgings()

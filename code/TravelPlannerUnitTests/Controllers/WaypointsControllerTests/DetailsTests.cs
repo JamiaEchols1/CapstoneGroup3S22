@@ -1,10 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 using WebApplication4.Controllers;
@@ -17,6 +18,8 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
     [TestClass]
     public class DetailsTests
     {
+        #region Methods
+
         /// <summary>
         ///     Tests finding a non existent waypoint request.
         /// </summary>
@@ -61,8 +64,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             var tripService = new TripDal(mockContext.Object);
 
             var controller = new WaypointsController(tripService, waypointService);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -71,6 +73,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             };
             var result = controller.Details(-1);
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
+            controller = new WaypointsController();
         }
 
         /// <summary>
@@ -117,8 +120,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             var tripService = new TripDal(mockContext.Object);
 
             var controller = new WaypointsController(tripService, waypointService);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -173,16 +175,17 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             var tripService = new TripDal(mockContext.Object);
 
             var controller = new WaypointsController(tripService, waypointService);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
                 UserId = 0,
                 Id = 0
-            };      
+            };
             var result = controller.Details(0);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        #endregion
     }
 }

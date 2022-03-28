@@ -1,17 +1,18 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 using WebApplication4.Controllers;
 using WebApplication4.Models;
 
-namespace TravelPlannerUnitTests.Controllers
+namespace TravelPlannerUnitTests.Controllers.HomeControllerTests
 {
     /// <summary>
     ///     Tests for the home controller in the travel planner web application
@@ -19,6 +20,8 @@ namespace TravelPlannerUnitTests.Controllers
     [TestClass]
     public class HomeControllerTests
     {
+        #region Methods
+
         /// <summary>
         ///     Tests a successful login page transition.
         /// </summary>
@@ -44,8 +47,7 @@ namespace TravelPlannerUnitTests.Controllers
 
             var service = new LoginDal(mockContext.Object);
             var controller = new HomeController(service);
-            var userCredentials = new UserCredentials()
-            {
+            var userCredentials = new UserCredentials {
                 Password = decryptedPassword,
                 Username = expectedUsername
             };
@@ -78,8 +80,7 @@ namespace TravelPlannerUnitTests.Controllers
 
             var service = new LoginDal(mockContext.Object);
             var controller = new HomeController(service);
-            var userCredentials = new UserCredentials()
-            {
+            var userCredentials = new UserCredentials {
                 Password = encryptedPassword,
                 Username = unexpectedUsername
             };
@@ -94,14 +95,15 @@ namespace TravelPlannerUnitTests.Controllers
         [TestMethod]
         public void TestInvalidModelState()
         {
-            var userCredentials = new UserCredentials()
-            {
+            var userCredentials = new UserCredentials {
                 Password = "",
                 Username = ""
             };
             var context = new ValidationContext(userCredentials, null, null);
             var results = new List<ValidationResult>();
-            TypeDescriptor.AddProviderTransparent(new AssociatedMetadataTypeTypeDescriptionProvider(typeof(UserCredentials), typeof(UserCredentials)), typeof(UserCredentials));
+            TypeDescriptor.AddProviderTransparent(
+                new AssociatedMetadataTypeTypeDescriptionProvider(typeof(UserCredentials), typeof(UserCredentials)),
+                typeof(UserCredentials));
 
             var isModelStateValid = Validator.TryValidateObject(userCredentials, context, results, true);
             Assert.AreEqual(false, isModelStateValid);
@@ -132,8 +134,7 @@ namespace TravelPlannerUnitTests.Controllers
 
             var service = new LoginDal(mockContext.Object);
             var controller = new HomeController(service);
-            var userCredentials = new UserCredentials()
-            {
+            var userCredentials = new UserCredentials {
                 Password = decryptedPassword,
                 Username = expectedUsername
             };
@@ -167,14 +168,11 @@ namespace TravelPlannerUnitTests.Controllers
 
             var service = new LoginDal(mockContext.Object);
             var controller = new HomeController(service);
-            var userCredentials = new UserCredentials()
-            {
-                Password = decryptedPassword,
-                Username = expectedUsername
-            };
             var result = controller.Login();
             Assert.IsInstanceOfType(result, typeof(ViewResult));
             controller = new HomeController();
         }
+
+        #endregion
     }
 }

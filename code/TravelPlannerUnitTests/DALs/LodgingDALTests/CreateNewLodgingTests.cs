@@ -11,7 +11,7 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerUnitTests.DALs.LodgingDALTests
 {
     /// <summary>
-    /// Test create new lodging
+    ///     Test create new lodging
     /// </summary>
     [TestClass]
     public class CreateNewLodgingTests
@@ -19,7 +19,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
         #region Methods
 
         /// <summary>
-        /// Tests the empty location.
+        ///     Tests the empty location.
         /// </summary>
         [TestMethod]
         public void TestEmptyLocation()
@@ -57,11 +57,11 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
             var service = new LodgingDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateNewLodging("", DateTime.Now, DateTime.Now.AddHours(1), 0));
+                service.CreateNewLodging("", DateTime.Now, DateTime.Now.AddHours(1), 0, "desc"));
         }
 
         /// <summary>
-        /// Tests the null location.
+        ///     Tests the null location.
         /// </summary>
         [TestMethod]
         public void TestNullLocation()
@@ -99,11 +99,11 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
             var service = new LodgingDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateNewLodging(null, DateTime.Now, DateTime.Now.AddHours(1), 0));
+                service.CreateNewLodging(null, DateTime.Now, DateTime.Now.AddHours(1), 0, "desc"));
         }
 
         /// <summary>
-        /// Tests the start date after end date.
+        ///     Tests the start date after end date.
         /// </summary>
         [TestMethod]
         public void TestStartDateAfterEndDate()
@@ -143,13 +143,13 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
             var service = new LodgingDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateNewLodging("location", DateTime.Now.AddMinutes(30), DateTime.Now, 0));
+                service.CreateNewLodging("location", DateTime.Now.AddMinutes(30), DateTime.Now, 0, "desc"));
             LoggedUser.SelectedWaypoint = null;
             LoggedUser.SelectedTrip = null;
         }
 
         /// <summary>
-        /// Tests the end date after trip end date.
+        ///     Tests the end date after trip end date.
         /// </summary>
         [TestMethod]
         public void TestEndDateAfterTripEndDate()
@@ -189,13 +189,13 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
             var service = new LodgingDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateNewLodging("location", DateTime.Now.AddMinutes(30), DateTime.Now.AddDays(15), 0));
+                service.CreateNewLodging("location", DateTime.Now.AddMinutes(30), DateTime.Now.AddDays(15), 0, "desc"));
             LoggedUser.SelectedWaypoint = null;
             LoggedUser.SelectedTrip = null;
         }
 
         /// <summary>
-        /// Tests the start date before trip start date.
+        ///     Tests the start date before trip start date.
         /// </summary>
         [TestMethod]
         public void TestStartDateBeforeTripStartDate()
@@ -235,13 +235,13 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
             var service = new LodgingDal(mockContext.Object);
 
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateNewLodging("location", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(5), 0));
+                service.CreateNewLodging("location", DateTime.Now.AddDays(-1), DateTime.Now.AddDays(5), 0, "desc"));
             LoggedUser.SelectedWaypoint = null;
             LoggedUser.SelectedTrip = null;
         }
 
         /// <summary>
-        /// Tests the add valid lodging.
+        ///     Tests the add valid lodging.
         /// </summary>
         [TestMethod]
         public void TestAddValidLodging()
@@ -281,7 +281,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
 
             var service = new LodgingDal(mockContext.Object);
 
-            service.CreateNewLodging("location", DateTime.Now.AddDays(1), DateTime.Now.AddDays(5), 0);
+            service.CreateNewLodging("location", DateTime.Now.AddDays(1), DateTime.Now.AddDays(5), 0, "desc");
 
             Assert.IsTrue(wasCalled);
             LoggedUser.SelectedWaypoint = null;

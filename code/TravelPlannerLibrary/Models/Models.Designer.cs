@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\cupid\Desktop\CapstoneGroup3S22\code\TravelPlannerLibrary\Models\Models.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\benev\Desktop\CS\Spring 2022\Capstone\Sprint2\code\TravelPlannerLibrary\Models\Models.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TravelPlannerLibrary.Models;
 using WebApplication4.ViewModels;
 
@@ -12,14 +12,15 @@ namespace TravelPlannerUnitTests.WebModels
     [TestClass]
     public class TripDetailsViewModelTests
     {
+        #region Methods
+
         /// <summary>
         ///     Tests the trip details view model.
         /// </summary>
         [TestMethod]
         public void TestTripDetailsViewModel()
         {
-            var trip = new Trip
-            {
+            var trip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -51,17 +52,17 @@ namespace TravelPlannerUnitTests.WebModels
                 }
             };
 
-            TripDetailsViewModel viewmodel = new TripDetailsViewModel()
-            {
+            var viewmodel = new TripDetailsViewModel {
                 Trip = trip,
                 Lodgings = lodgings,
                 Waypoints = waypoints
-
-        };
+            };
 
             Assert.AreEqual(waypoints, viewmodel.Waypoints);
             Assert.AreEqual(lodgings, viewmodel.Lodgings);
             Assert.AreEqual(trip, viewmodel.Trip);
         }
+
+        #endregion
     }
 }

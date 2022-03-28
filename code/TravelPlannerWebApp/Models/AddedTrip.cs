@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using WebApplication4.Common;
 
 namespace WebApplication4.Models
 {
@@ -51,6 +50,14 @@ namespace WebApplication4.Models
         ///     The user identifier.
         /// </value>
         public int UserId { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the description.
+        /// </summary>
+        /// <value>
+        ///     The description.
+        /// </value>
+        public string Description { get; set; }
 
         #endregion
     }

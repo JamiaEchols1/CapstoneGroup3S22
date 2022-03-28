@@ -25,7 +25,7 @@ namespace TravelPlannerDesktopApp.Pages
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TripInfo"/> class.
+        ///     Initializes a new instance of the <see cref="TripInfo" /> class.
         /// </summary>
         public TripInfo()
         {
@@ -42,24 +42,25 @@ namespace TravelPlannerDesktopApp.Pages
         #region Methods
 
         /// <summary>
-        /// Sets the trip info text
-        /// @precondition - LoggedUser != null
-        /// @postcondition - SelectedTripTextBlock.Text = "Selected Trip : " + LoggedUser.selectedTrip.Name;
-        ///                  TripStartDateTextBlock.Text = "Start Date: " + LoggedUser.selectedTrip.StartDate.ToString("D");
-        ///                  TripEndDateTextBlock.Text = "End Date: " + LoggedUser.selectedTrip.EndDate.ToString("D");
+        ///     Sets the trip info text
+        ///     @precondition - LoggedUser != null
+        ///     @postcondition - SelectedTripTextBlock.Text = "Selected Trip : " + LoggedUser.selectedTrip.Name;
+        ///     TripStartDateTextBlock.Text = "Start Date: " + LoggedUser.selectedTrip.StartDate.ToString("D");
+        ///     TripEndDateTextBlock.Text = "End Date: " + LoggedUser.selectedTrip.EndDate.ToString("D");
         /// </summary>
         public void SetSelectedTripText()
         {
             this.selectedTripTextBlock.Text = "Selected Trip : " + LoggedUser.SelectedTrip.Name;
             this.tripStartDateTextBlock.Text = "Start Date: " + LoggedUser.SelectedTrip.StartDate.ToString("D");
             this.tripEndDateTextBlock.Text = "End Date: " + LoggedUser.SelectedTrip.EndDate.ToString("D");
+            this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTrip.Description;
         }
 
         /// <summary>
-        /// Sets the waypoint transport source.
-        /// @precondition - LoggedUser.SelectedTrip != null
-        /// @postcondition - waypointsAndTransportListBox contains all waypoints and transportation for the selected trip
-        ///                  lodgingListBox contains all lodging for the selected trip
+        ///     Sets the waypoint transport source.
+        ///     @precondition - LoggedUser.SelectedTrip != null
+        ///     @postcondition - waypointsAndTransportListBox contains all waypoints and transportation for the selected trip
+        ///     lodgingListBox contains all lodging for the selected trip
         /// </summary>
         public void SetListSources()
         {
@@ -71,16 +72,23 @@ namespace TravelPlannerDesktopApp.Pages
             {
                 item.StartDate = item.StartDateTime;
             }
+
             foreach (var item in transport)
             {
                 item.StartDate = item.StartTime;
             }
+
             waypointsAndTransportation.AddRange(waypoints);
             waypointsAndTransportation.AddRange(transport);
             this.waypointsAndTransportListBox.ItemsSource = waypointsAndTransportation.OrderBy(x => x.StartDate);
             this.lodgingListBox.ItemsSource = this.lodgingDal.GetLodgings(LoggedUser.SelectedTrip.Id);
         }
 
+        /// <summary>
+        ///     Handles the Click event of the Grid control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;
@@ -88,9 +96,15 @@ namespace TravelPlannerDesktopApp.Pages
             NavigationService?.Navigate(clickedButton.NavUri);
         }
 
+        /// <summary>
+        ///     Handles the OnSelectionChanged event of the WaypointsListBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs" /> instance containing the event data.</param>
         private void WaypointsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedItemType = ObjectContext.GetObjectType(this.waypointsAndTransportListBox.SelectedItem.GetType());
+            var selectedItemType =
+                ObjectContext.GetObjectType(this.waypointsAndTransportListBox.SelectedItem.GetType());
 
             if (selectedItemType == typeof(Waypoint))
             {
@@ -112,6 +126,11 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
+        /// <summary>
+        ///     Handles the OnSelectionChanged event of the LodgingListBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs" /> instance containing the event data.</param>
         private void LodgingListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             LoggedUser.SelectedLodging = this.lodgingListBox.SelectedItem as Lodging;

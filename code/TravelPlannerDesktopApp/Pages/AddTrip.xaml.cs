@@ -32,12 +32,17 @@ namespace TravelPlannerDesktopApp.Pages
 
         #region Methods
 
+        /// <summary>
+        ///     Handles the Click event of the createTripButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void createTripButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 this.tripDal.CreateNewTrip(this.nameTextBox.Text, DateTime.Parse(this.startDatePicker.Text),
-                    DateTime.Parse(this.endDatePicker.Text), LoggedUser.User.Id);
+                    DateTime.Parse(this.endDatePicker.Text), LoggedUser.User.Id, this.descriptionTextBox.Text);
 
                 MessageBox.Show("Trip creation was Successful!");
 
@@ -49,6 +54,11 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
+        /// <summary>
+        ///     Handles the Click event of the NavButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void NavButton_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;

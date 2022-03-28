@@ -32,29 +32,35 @@ namespace TravelPlannerDesktopApp.Pages
             this.SetSelectedTransportText();
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
-        /// Sets the selected transportation text
-        /// @precondition - LoggedUser.SelectedTransportation != null
-        /// @postcondition -  this.startTimeTextBlock.Text = "Start Time: " + LoggedUser.SelectedTransportation.StartTime;
-        ///                   this.endTimeTextBlock.Text = "End Time: " + LoggedUser.SelectedTransportation.EndTime;
-        ///                   this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTransportation.Description;
+        ///     Sets the selected transportation text
+        ///     @precondition - LoggedUser.SelectedTransportation != null
+        ///     @postcondition -  this.startTimeTextBlock.Text = "Start Time: " + LoggedUser.SelectedTransportation.StartTime;
+        ///     this.endTimeTextBlock.Text = "End Time: " + LoggedUser.SelectedTransportation.EndTime;
+        ///     this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTransportation.Description;
         /// </summary>
         public void SetSelectedTransportText()
         {
             this.startTimeTextBlock.Text = "Start Time: " + LoggedUser.SelectedTransportation.StartTime;
             this.endTimeTextBlock.Text = "End Time: " + LoggedUser.SelectedTransportation.EndTime;
             this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTransportation.Description;
+            this.typeTextBlock.Text = "Type: " + LoggedUser.SelectedTransportation.Type;
         }
-
-        #endregion
-
-        #region Methods
 
         private void editTransportationButton_Click(object sender, RoutedEventArgs e)
         {
             //TODO
         }
 
+        /// <summary>
+        ///     Handles the Click event of the removeTransportationButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void removeTransportationButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -71,6 +77,11 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
+        /// <summary>
+        ///     Handles the OnClick event of the BackButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;

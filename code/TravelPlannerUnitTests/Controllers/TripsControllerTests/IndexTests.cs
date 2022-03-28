@@ -1,14 +1,14 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 using WebApplication4.Controllers;
-using WebApplication4.Models;
 
 namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 {
@@ -18,6 +18,8 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
     [TestClass]
     public class IndexTests
     {
+        #region Methods
+
         /// <summary>
         ///     Tests the GET: index of the trip controller.
         /// </summary>
@@ -47,9 +49,11 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             var service = new TripDal(mockContext.Object);
 
-            var controller = new TripsController(service, null, null);
+            var controller = new TripsController(service, null, null, null);
             var result = controller.Index();
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        #endregion
     }
 }
