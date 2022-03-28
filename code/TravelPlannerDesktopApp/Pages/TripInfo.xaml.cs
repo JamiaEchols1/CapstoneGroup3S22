@@ -82,6 +82,11 @@ namespace TravelPlannerDesktopApp.Pages
             this.lodgingListBox.ItemsSource = this.lodgingDal.GetLodgings(LoggedUser.SelectedTrip.Id);
         }
 
+        /// <summary>
+        /// Handles the Click event of the Grid control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;
@@ -89,6 +94,11 @@ namespace TravelPlannerDesktopApp.Pages
             NavigationService?.Navigate(clickedButton.NavUri);
         }
 
+        /// <summary>
+        /// Handles the OnSelectionChanged event of the WaypointsListBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void WaypointsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedItemType = ObjectContext.GetObjectType(this.waypointsAndTransportListBox.SelectedItem.GetType());
@@ -113,6 +123,11 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
+        /// <summary>
+        /// Handles the OnSelectionChanged event of the LodgingListBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void LodgingListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             LoggedUser.SelectedLodging = this.lodgingListBox.SelectedItem as Lodging;

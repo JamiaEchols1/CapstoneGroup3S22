@@ -70,6 +70,11 @@ namespace TravelPlannerDesktopApp.Pages
             //TODO
         }
 
+        /// <summary>
+        /// Handles the Click event of the removeLodgingButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void removeLodgingButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -86,6 +91,11 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the backButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;

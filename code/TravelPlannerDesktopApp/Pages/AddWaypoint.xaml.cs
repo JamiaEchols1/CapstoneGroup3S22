@@ -38,6 +38,11 @@ namespace TravelPlannerDesktopApp.Pages
 
         #region Methods
 
+        /// <summary>
+        /// Handles the Click event of the BackButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;
@@ -45,6 +50,18 @@ namespace TravelPlannerDesktopApp.Pages
             NavigationService?.Navigate(clickedButton.NavUri);
         }
 
+        /// <summary>
+        /// Handles the OnClick event of the CreateWaypointButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <exception cref="System.Exception">
+        /// Must enter a start date!
+        /// or
+        /// Must enter an end date!
+        /// or
+        /// or
+        /// </exception>
         private void CreateWaypointButton_OnClick(object sender, RoutedEventArgs e)
         {
             try
@@ -94,6 +111,11 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the datePicker control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{System.Object}"/> instance containing the event data.</param>
         private void datePicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (this.startDateTimePicker.Value != null && this.endDateTimePicker.Value != null)

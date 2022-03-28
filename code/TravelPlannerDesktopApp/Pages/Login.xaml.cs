@@ -24,6 +24,11 @@ namespace TravelPlannerDesktopApp.Pages
 
         #region Methods
 
+        /// <summary>
+        /// Handles the login.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void handleLogin(object sender, RoutedEventArgs e)
         {
             var loginDal = new LoginDal();
@@ -43,6 +48,11 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the Grid control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
             var loginDal = new LoginDal();

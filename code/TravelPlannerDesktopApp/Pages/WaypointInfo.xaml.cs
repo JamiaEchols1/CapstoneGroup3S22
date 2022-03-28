@@ -70,6 +70,11 @@ namespace TravelPlannerDesktopApp.Pages
             //TODO
         }
 
+        /// <summary>
+        /// Handles the OnClick event of the RemoveWaypointButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void RemoveWaypointButton_OnClick(object sender, RoutedEventArgs e)
         {
             try
@@ -86,14 +91,12 @@ namespace TravelPlannerDesktopApp.Pages
             }
         }
 
+        /// <summary>
+        /// Handles the OnClick event of the BackButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var clickedButton = e.OriginalSource as NavButton;
-
-            NavigationService.Navigate(clickedButton.NavUri);
-        }
-
-        private void NavButton_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;
 

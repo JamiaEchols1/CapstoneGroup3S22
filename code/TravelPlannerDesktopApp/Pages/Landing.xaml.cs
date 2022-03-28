@@ -44,6 +44,11 @@ namespace TravelPlannerDesktopApp.Pages
             this.welcomeTextBlock.Text = "Welcome: " + LoggedUser.User.Username;
         }
 
+        /// <summary>
+        /// Handles the Click event of the Grid control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;
@@ -51,6 +56,11 @@ namespace TravelPlannerDesktopApp.Pages
             NavigationService?.Navigate(clickedButton.NavUri);
         }
 
+        /// <summary>
+        /// Handles the OnSelectionChanged event of the TripsListBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void TripsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             LoggedUser.SelectedTrip = this.tripsListBox.SelectedItem as Trip;
