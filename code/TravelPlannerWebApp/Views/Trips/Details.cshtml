@@ -65,7 +65,6 @@
             @Html.DisplayFor(modelItem => item.EndDateTime)
         </td>
         <td>
-            @Html.ActionLink("Edit", "../Waypoints/Create", new { id = item.Id }) |
             @Html.ActionLink("Details", "../Waypoints/Details", new { id = item.Id }) |
             @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = item.Id })
         </td>
@@ -104,7 +103,6 @@
             @Html.DisplayFor(modelItem => item.EndTime)
         </td>
         <td>
-            @Html.ActionLink("Edit", "../Lodgings/Create", new { id = item.Id }) |
             @Html.ActionLink("Details", "../Lodgings/Details", new { id = item.Id }) |
             @Html.ActionLink("Delete", "../Lodgings/Delete", new { id = item.Id })
         </td>
@@ -113,6 +111,5 @@
     </table> 
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Trip.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
