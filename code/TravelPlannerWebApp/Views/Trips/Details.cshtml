@@ -1,4 +1,6 @@
-﻿@model WebApplication4.ViewModels.TripDetailsViewModel
+﻿@using System.Data.Entity.Core.Objects
+@using TravelPlannerLibrary.Models
+@model WebApplication4.ViewModels.TripDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -53,7 +55,10 @@
     <table class="table">
         <tr>
             <th>
-                Waypoints
+                Waypoints and Transportation
+            </th>
+            <th>
+                Type
             </th>
             <th>
                 Start Date
@@ -66,23 +71,51 @@
             </th>
         </tr>
 
-        @foreach (var item in Model.Waypoints)
+        @foreach (var item in Model.WaypointsAndTransportation)
         {
+            if (ObjectContext.GetObjectType(item.GetType()) == typeof(Waypoint))
+            {
+                var waypointItem = (Waypoint)item;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => waypointItem.Location)
+                    </td>
+                    <td>
+                        Waypoint
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => waypointItem.StartDateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => waypointItem.EndDateTime)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "../Waypoints/Details", new { id = waypointItem.Id }) |
+                        @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = waypointItem.Id })
+                    </td>
+                </tr>
+            } else if (ObjectContext.GetObjectType(item.GetType()) == typeof(Transportation))
+            {
+                var transportationItem = (Transportation)item;
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Location)
+            @Html.DisplayFor(modelItem => transportationItem.Type)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StartDateTime)
+            Transportation
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EndDateTime)
+            @Html.DisplayFor(modelItem => transportationItem.StartTime)
         </td>
         <td>
-            @Html.ActionLink("Details", "../Waypoints/Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = item.Id })
+            @Html.DisplayFor(modelItem => transportationItem.EndTime)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "../Transportation/Details", new { id = transportationItem.Id }) |
+            @Html.ActionLink("Delete", "../Transportation/Delete", new { id = transportationItem.Id })
         </td>
     </tr>
+            }
         }
     </table> 
 </div>
@@ -122,44 +155,7 @@
         </td>
     </tr>
         }
-    </table> 
-<div>
-    <table class="table">
-        <tr>
-            <th>
-                Transportations
-            </th>
-            <th>
-                Start Date
-            </th>
-            <th>
-                End Date
-            </th>
-            <th>
-                Options
-            </th>
-        </tr>
-
-        @foreach (var item in Model.Transportations)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "../Transportation/Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "../Transportation/Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-    </table> 
-</div>
+    </table>
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>

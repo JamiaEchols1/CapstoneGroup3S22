@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using TravelPlannerLibrary;
@@ -78,10 +80,24 @@ namespace WebApplication4.Controllers
             {
                 return HttpNotFound();
             }
+            var waypointsAndTransportation = new List<TripItem>();
+            var waypoints = this._waypointDal.GetWaypoints(trip.Id);
+            var transport = this._transportationDal.GetTransportationsByTrip(trip.Id);
+            foreach (var item in waypoints)
+            {
+                item.StartDate = item.StartDateTime;
+            }
+            foreach (var item in transport)
+            {
+                item.StartDate = item.StartTime;
+            }
+            waypointsAndTransportation.AddRange(waypoints);
+            waypointsAndTransportation.AddRange(transport);
+            this.viewmodel.WaypointsAndTransportation = waypointsAndTransportation.OrderBy(x => x.StartDate);
             viewmodel.Trip = trip;
-            viewmodel.Waypoints = _waypointDal.GetWaypoints(trip.Id);
+            viewmodel.Waypoints = waypoints;
             viewmodel.Lodgings = _lodgingDal.GetLodgings(trip.Id);
-            this.viewmodel.Transportations = _transportationDal.GetTransportationsByTrip(trip.Id);
+            this.viewmodel.Transportations = transport;
             LoggedUser.SelectedTrip = trip;
 
             return View(viewmodel);
