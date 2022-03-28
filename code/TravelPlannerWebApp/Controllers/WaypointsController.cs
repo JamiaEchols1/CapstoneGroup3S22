@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -16,6 +17,7 @@ namespace WebApplication4.Controllers
     public class WaypointsController : Controller
     {
         private readonly WaypointDal _waypointDal = new WaypointDal();
+        private readonly TransportationDal _transportationDal = new TransportationDal();
 
         private readonly TripDal _tripDal = new TripDal();
 
@@ -109,7 +111,7 @@ namespace WebApplication4.Controllers
                 string ErrorMessage = validateDateTimes(waypoint);
                 if (ErrorMessage == null)
                 {
-                    ErrorMessage = validateConflictingWaypoints(waypoint);
+                    ErrorMessage = validateConflictingTransportAndWaypoints(waypoint);
                 }
                 if (ErrorMessage != null)
                 {
@@ -137,17 +139,20 @@ namespace WebApplication4.Controllers
             }
             return ErrorMessage;
         }
-
-        private string validateConflictingWaypoints(AddedWaypoint waypoint)
+        private string validateConflictingTransportAndWaypoints(AddedWaypoint waypoint)
         {
-            var overlaps = _waypointDal.GetOverlappingWaypoints(waypoint.StartDateTime, waypoint.EndDateTime);
             string ErrorMessage = null;
-            if (overlaps.Count > 0)
+            var startDate = waypoint.StartDateTime;
+            var endDate = waypoint.EndDateTime;
+            var waypointsAndTransportation = new List<object>();
+            waypointsAndTransportation.AddRange(this._waypointDal.GetOverlappingWaypoints(startDate, endDate));
+            waypointsAndTransportation.AddRange(this._transportationDal.GetOverlappingTransportation(startDate, endDate));
+            if (waypointsAndTransportation.Count > 0)
             {
-                ErrorMessage = "The waypoint was not added because of the following conflicts:" + "\n";
-                foreach (var overlap in overlaps)
+                ErrorMessage = "The transportation was not added because of the following conflicts:" + "\n";
+                foreach (var overlap in waypointsAndTransportation)
                 {
-                    ErrorMessage += overlap.Location + " " + overlap.StartDateTime + " - " + overlap.EndDateTime + ". ";
+                    ErrorMessage += overlap.ToString();
                 }
             }
             return ErrorMessage;

@@ -17,6 +17,7 @@ namespace WebApplication4.Controllers
     public class TransportationController : Controller
     {
         private readonly TransportationDal _transportationDal = new TransportationDal();
+        private readonly WaypointDal _waypointDal = new WaypointDal();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TransportationController"/> class.
@@ -141,7 +142,7 @@ namespace WebApplication4.Controllers
                 string ErrorMessage = validateDateTimes(transportation);
                 if (ErrorMessage == null)
                 {
-                    ErrorMessage = validateConflictingTransportation(transportation);
+                    ErrorMessage = validateConflictingTransportAndWaypoints(transportation);
                 }
                 if (ErrorMessage != null)
                 {
@@ -170,17 +171,20 @@ namespace WebApplication4.Controllers
             return ErrorMessage;
         }
 
-        private string validateConflictingTransportation(AddedTransportation transportation)
+        private string validateConflictingTransportAndWaypoints(AddedTransportation transportation)
         {
-            var overlaps =
-                this._transportationDal.GetOverlappingTransportation(transportation.StartTime, transportation.EndTime);
             string ErrorMessage = null;
-            if (overlaps.Count > 0)
+            var startDate = transportation.StartTime;
+            var endDate = transportation.EndTime;
+            var waypointsAndTransportation = new List<object>();
+            waypointsAndTransportation.AddRange(this._waypointDal.GetOverlappingWaypoints(startDate, endDate));
+            waypointsAndTransportation.AddRange(this._transportationDal.GetOverlappingTransportation(startDate, endDate));
+            if (waypointsAndTransportation.Count > 0)
             {
                 ErrorMessage = "The transportation was not added because of the following conflicts:" + "\n";
-                foreach (var overlap in overlaps)
+                foreach (var overlap in waypointsAndTransportation)
                 {
-                    ErrorMessage += overlap.Description + " " + overlap.StartTime + " - " + overlap.EndTime + ". ";
+                    ErrorMessage += overlap.ToString();
                 }
             }
             return ErrorMessage;

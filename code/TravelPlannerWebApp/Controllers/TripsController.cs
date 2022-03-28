@@ -155,5 +155,40 @@ namespace WebApplication4.Controllers
             }
             base.Dispose(disposing);
         }
+
+        /// <summary>
+        ///     GET: Returns a view of a selected trip so that the user can confirm the deletion
+        ///     of the trip
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            int validatedId = (int)id;
+            Trip trip = _tripDal.GetTripById(validatedId);
+            if (trip == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Delete", trip);
+        }
+
+        /// <summary>
+        ///     POST: Trip/Delete. Deletes the confirmed trip
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        ///  The index action
+        /// </returns>
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            this._tripDal.RemoveTrip(id);
+            return RedirectToAction("Index");
+        }
     }
 }

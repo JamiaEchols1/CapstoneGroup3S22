@@ -7,5 +7,5 @@
     [TripId] int not null,
      [Description] VARCHAR(250) NULL, 
     CONSTRAINT [FK_dbo.Waypoint_dbo.Trip_Id] FOREIGN KEY ([TripId]) 
-        REFERENCES [dbo].[Trips] ([Id]) ON DELETE no action
+        REFERENCES [dbo].[Trips] ([Id]) ON DELETE CASCADE
 )
