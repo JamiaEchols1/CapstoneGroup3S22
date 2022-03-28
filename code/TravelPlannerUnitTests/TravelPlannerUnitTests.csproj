@@ -112,6 +112,10 @@
     <Compile Include="Controllers\LodgingsControllerTests\DetailsTests.cs" />
     <Compile Include="Controllers\LodgingsControllerTests\IndexTests.cs" />
     <Compile Include="Controllers\LodgingsControllerTests\CreateWithConflictsTests.cs" />
+    <Compile Include="Controllers\TransportationConrtollerTests\IndexTests.cs" />
+    <Compile Include="Controllers\TransportationConrtollerTests\CreateTests.cs" />
+    <Compile Include="Controllers\TransportationConrtollerTests\DeleteTests.cs" />
+    <Compile Include="Controllers\TransportationConrtollerTests\DetailsTests.cs" />
     <Compile Include="Controllers\TripsControllerTests\CreateTests.cs" />
     <Compile Include="Controllers\TripsControllerTests\DetailsTests.cs" />
     <Compile Include="Controllers\TripsControllerTests\IndexTests.cs" />
@@ -153,6 +157,7 @@
     <Compile Include="WebModels\AddedWaypointTests.cs" />
     <Compile Include="WebModels\AddWaypointViewModelTests.cs" />
     <Compile Include="WebModels\TripDetailsViewModelTests.cs" />
+    <Compile Include="WebModels\AddedTransportationTests.cs" />
     <Compile Include="WebModels\UserCredentialsTests.cs" />
   </ItemGroup>
   <ItemGroup>

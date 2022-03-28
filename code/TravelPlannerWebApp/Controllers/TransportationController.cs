@@ -25,6 +25,15 @@ namespace WebApplication4.Controllers
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransportationController"/> class.
+        /// </summary>
+        /// <param name="transportationDal">The transportation dal.</param>
+        public TransportationController(TransportationDal transportationDal)
+        {
+            _transportationDal = transportationDal;
+        }
+
 
         /// <summary>
         /// Indexes this instance.
@@ -118,9 +127,10 @@ namespace WebApplication4.Controllers
         }
 
         /// <summary>
-        ///     POST: Waypoints/Create. Creates the specified waypoint.
+        /// Creates the specified transportation.
         /// </summary>
-        /// <param name="waypoint">The waypoint.</param>
+        /// <param name="transportation">The transportation.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StartTime,EndTime,Description")] AddedTransportation transportation)
