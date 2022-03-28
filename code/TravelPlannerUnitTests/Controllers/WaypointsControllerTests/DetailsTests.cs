@@ -73,6 +73,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             };
             var result = controller.Details(-1);
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
+            controller = new WaypointsController();
         }
 
         /// <summary>

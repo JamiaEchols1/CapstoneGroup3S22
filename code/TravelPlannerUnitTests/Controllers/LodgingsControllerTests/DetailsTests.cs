@@ -77,6 +77,7 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
             };
             var result = controller.Details(-1);
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
+            controller = new LodgingsController();
         }
 
         /// <summary>

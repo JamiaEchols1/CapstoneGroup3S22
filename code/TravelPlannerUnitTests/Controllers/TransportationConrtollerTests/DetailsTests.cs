@@ -142,6 +142,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
 
             var result = controller.Details(-1);
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
+            controller = new TransportationController();
         }
 
         /// <summary>

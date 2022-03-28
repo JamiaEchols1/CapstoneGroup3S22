@@ -170,6 +170,7 @@ namespace TravelPlannerUnitTests.Controllers.HomeControllerTests
             var controller = new HomeController(service);
             var result = controller.Login();
             Assert.IsInstanceOfType(result, typeof(ViewResult));
+            controller = new HomeController();
         }
 
         #endregion

@@ -117,6 +117,7 @@
     <Compile Include="Controllers\TripsControllerTests\CreateTests.cs" />
     <Compile Include="Controllers\TripsControllerTests\DetailsTests.cs" />
     <Compile Include="Controllers\TripsControllerTests\IndexTests.cs" />
+    <Compile Include="Controllers\TripsControllerTests\DeleteTests.cs" />
     <Compile Include="Controllers\WaypointsControllerTests\DetailsTests.cs" />
     <Compile Include="Controllers\WaypointsControllerTests\CreateTests.cs" />
     <Compile Include="Controllers\WaypointsControllerTests\DeleteTests.cs" />

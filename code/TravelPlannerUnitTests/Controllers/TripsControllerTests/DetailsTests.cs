@@ -356,7 +356,6 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
             controller = new TripsController();
         }
-
         #endregion
     }
 }
