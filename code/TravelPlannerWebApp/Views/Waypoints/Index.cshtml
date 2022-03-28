@@ -34,7 +34,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.StartDateTime)
             </td>
-               <td>
+            <td>
                 @Html.DisplayFor(modelItem => item.EndDateTime)
             </td>
             <td>
@@ -45,3 +45,6 @@
     }
 
 </table>
+<p>
+    @Html.ActionLink("Back to List", "../Trips/Index")
+</p>
