@@ -139,6 +139,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Lodging.cs" />
+    <Compile Include="Models\Transportation.cs" />
+    <Compile Include="Models\Trip.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Waypoint.cs" />
     <Compile Include="Pages\AddLodging.xaml.cs">
       <DependentUpon>AddLodging.xaml</DependentUpon>
     </Compile>
@@ -228,6 +233,7 @@
   <ItemGroup>
     <Resource Include="Images\transportation.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -124,6 +124,11 @@
     <Compile Include="DALs\LodgingDALTests\GetLodgingsTests.cs" />
     <Compile Include="DALs\LodgingDALTests\RemoveLodgingsTests.cs" />
     <Compile Include="DALs\LoginDALTests\TestLogin.cs" />
+    <Compile Include="DesktopModels\LodgingTests.cs" />
+    <Compile Include="DesktopModels\TransportationTests.cs" />
+    <Compile Include="DesktopModels\TripTests.cs" />
+    <Compile Include="DesktopModels\UserTests.cs" />
+    <Compile Include="DesktopModels\WaypointTests.cs" />
     <Compile Include="Models\LodgingTests.cs" />
     <Compile Include="Models\TripTests.cs" />
     <Compile Include="Models\TransportationTests.cs" />
@@ -155,6 +160,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TravelPlannerDesktopApp\TravelPlannerDesktopApp.csproj">
+      <Project>{9f9b4b4e-056e-4f58-abdb-c18106311cda}</Project>
+      <Name>TravelPlannerDesktopApp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TravelPlannerLibrary\TravelPlannerLibrary.csproj">
       <Project>{9bf02284-1e39-4511-a50b-5e78f27a922a}</Project>
       <Name>TravelPlannerLibrary</Name>
