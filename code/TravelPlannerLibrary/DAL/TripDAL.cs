@@ -39,7 +39,7 @@ namespace TravelPlannerLibrary.DAL
         #region Methods
 
         /// <summary>
-        /// Creates a new trip with the specified values.
+        ///     Creates a new trip with the specified values.
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="startDate">The start date.</param>
@@ -47,12 +47,14 @@ namespace TravelPlannerLibrary.DAL
         /// <param name="userId">The user identifier.</param>
         /// <param name="description">The description.</param>
         /// <returns>
-        /// 1 if creation success, 0 otherwise
+        ///     1 if creation success, 0 otherwise
         /// </returns>
         /// <exception cref="System.ArgumentNullException">name - Trip must have a name</exception>
-        /// <exception cref="System.ArgumentException">startDate date must not be before today
-        /// or
-        /// endDate date must be after start date</exception>
+        /// <exception cref="System.ArgumentException">
+        ///     startDate date must not be before today
+        ///     or
+        ///     endDate date must be after start date
+        /// </exception>
         /// @precondition - name != null
         /// startDate != null, startDate &gt;= DateTime.Now;
         /// endDate != null, endDate &gt;= startDate
@@ -174,8 +176,9 @@ namespace TravelPlannerLibrary.DAL
             if (id > -1)
             {
                 trip = db.Trips.Where(u => u.Id == id)
-                                .FirstOrDefault(u => u.Id == id);
+                         .FirstOrDefault(u => u.Id == id);
             }
+
             return trip;
         }
 

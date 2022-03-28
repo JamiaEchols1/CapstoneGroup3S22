@@ -15,7 +15,7 @@
 </p>
 
 <div>
-    <hr />
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
             Destination
@@ -40,7 +40,7 @@
         <dd>
             @Html.DisplayFor(model => model.Trip.EndDate)
         </dd>
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.Trip.Description)
         </dt>
@@ -94,68 +94,69 @@
                         @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = waypointItem.Id })
                     </td>
                 </tr>
-            } else if (ObjectContext.GetObjectType(item.GetType()) == typeof(Transportation))
+            }
+            else if (ObjectContext.GetObjectType(item.GetType()) == typeof(Transportation))
             {
                 var transportationItem = (Transportation)item;
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => transportationItem.Type)
-        </td>
-        <td>
-            Transportation
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => transportationItem.StartTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => transportationItem.EndTime)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "../Transportation/Details", new { id = transportationItem.Id }) |
-            @Html.ActionLink("Delete", "../Transportation/Delete", new { id = transportationItem.Id })
-        </td>
-    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => transportationItem.Type)
+                    </td>
+                    <td>
+                        Transportation
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => transportationItem.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => transportationItem.EndTime)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "../Transportation/Details", new { id = transportationItem.Id }) |
+                        @Html.ActionLink("Delete", "../Transportation/Delete", new { id = transportationItem.Id })
+                    </td>
+                </tr>
             }
         }
-    </table> 
+    </table>
 </div>
 
 <div>
-    <table class="table">
-        <tr>
-            <th>
-                Lodgings
-            </th>
-            <th>
-                Start Date
-            </th>
-            <th>
-                End Date
-            </th>
-            <th>
-                Options
-            </th>
-        </tr>
-
-        @foreach (var item in Model.Lodgings)
-        {
+<table class="table">
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndTime)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "../Lodgings/Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "../Lodgings/Delete", new { id = item.Id })
-        </td>
+        <th>
+            Lodgings
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            End Date
+        </th>
+        <th>
+            Options
+        </th>
     </tr>
-        }
-    </table>
+
+    @foreach (var item in Model.Lodgings)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "../Lodgings/Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "../Lodgings/Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>

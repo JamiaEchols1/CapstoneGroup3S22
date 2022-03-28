@@ -74,12 +74,14 @@ namespace TravelPlannerLibrary.DAL
         ///     or
         ///     End date must be on or before trip end date
         /// </exception>
-        public Waypoint CreateNewWaypoint(string location, DateTime startTime, DateTime endTime, int tripId, string description)
+        public Waypoint CreateNewWaypoint(string location, DateTime startTime, DateTime endTime, int tripId,
+            string description)
         {
             if (string.IsNullOrEmpty(description))
             {
                 throw new ArgumentException("Must enter a description!");
             }
+
             if (string.IsNullOrEmpty(location))
             {
                 throw new ArgumentNullException("Must enter a location!");
@@ -128,7 +130,7 @@ namespace TravelPlannerLibrary.DAL
         }
 
         /// <summary>
-        /// Finds the next identifier.
+        ///     Finds the next identifier.
         /// </summary>
         /// <returns></returns>
         public int FindNextId()
@@ -148,7 +150,7 @@ namespace TravelPlannerLibrary.DAL
         /// </summary>
         /// <param name="waypointId">The waypoint identifier.</param>
         /// <returns>
-        /// The specifeid waypoint if found, or null otherwise
+        ///     The specifeid waypoint if found, or null otherwise
         /// </returns>
         public Waypoint GetWaypoint(int waypointId)
         {
@@ -169,7 +171,10 @@ namespace TravelPlannerLibrary.DAL
         {
             var tripWaypoints = this.GetWaypoints(LoggedUser.SelectedTrip.Id);
 
-            return tripWaypoints.Where(current => TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartDateTime, current.EndDateTime)).ToList();
+            return tripWaypoints.Where(current =>
+                                    TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartDateTime,
+                                        current.EndDateTime))
+                                .ToList();
         }
 
         /// <summary>
@@ -184,8 +189,9 @@ namespace TravelPlannerLibrary.DAL
             Trip trip = null;
             if (id >= 0)
             {
-               trip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
+                trip = db.Trips.FirstOrDefault(x => x.Id == id);
             }
+
             return trip;
         }
 

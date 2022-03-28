@@ -1,10 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
@@ -19,6 +19,8 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
     [TestClass]
     public class CreateTests
     {
+        #region Methods
+
         /// <summary>
         ///     Tests the GET: Create of the trip controller.
         /// </summary>
@@ -27,9 +29,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
         {
             LoggedUser.User = new User { Id = 0 };
 
-            var data = new List<Trip>
-            {
-            }.AsQueryable();
+            var data = new List<Trip>().AsQueryable();
 
             var mockSet = new Mock<DbSet<Trip>>();
             mockSet.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
@@ -59,9 +59,8 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
             var startDate = DateTime.Today.AddDays(1);
             var endDate = DateTime.Today.AddDays(7);
             var trip = new Trip
-            { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
-            var addedTrip = new AddedTrip
-            {
+                { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
+            var addedTrip = new AddedTrip {
                 StartDate = trip.StartDate,
                 EndDate = trip.EndDate,
                 Name = trip.Name,
@@ -69,9 +68,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
                 Id = trip.Id
             };
 
-            var data = new List<Trip>
-            {
-            }.AsQueryable();
+            var data = new List<Trip>().AsQueryable();
 
             var mockSet = new Mock<DbSet<Trip>>();
             mockSet.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
@@ -100,9 +97,8 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
             var startDate = DateTime.Today;
             var endDate = DateTime.Today.AddDays(7);
             var trip = new Trip
-            { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
-            var addedTrip = new AddedTrip
-            {
+                { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
+            var addedTrip = new AddedTrip {
                 StartDate = trip.StartDate,
                 EndDate = trip.EndDate,
                 Name = trip.Name,
@@ -110,9 +106,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
                 Id = trip.Id
             };
 
-            var data = new List<Trip>
-            {
-            }.AsQueryable();
+            var data = new List<Trip>().AsQueryable();
 
             var mockSet = new Mock<DbSet<Trip>>();
             mockSet.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
@@ -141,9 +135,8 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
             var startDate = DateTime.Today;
             var endDate = DateTime.Today.AddDays(7);
             var trip = new Trip
-            { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
-            var addedTrip = new AddedTrip
-            {
+                { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
+            var addedTrip = new AddedTrip {
                 StartDate = trip.StartDate,
                 EndDate = trip.EndDate,
                 Name = trip.Name,
@@ -151,9 +144,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
                 Id = trip.Id
             };
 
-            var data = new List<Trip>
-            {
-            }.AsQueryable();
+            var data = new List<Trip>().AsQueryable();
 
             var mockSet = new Mock<DbSet<Trip>>();
             mockSet.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(data.Provider);
@@ -171,5 +162,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
             var result = controller.Create(addedTrip);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        #endregion
     }
 }

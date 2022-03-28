@@ -52,7 +52,7 @@ namespace TravelPlannerLibrary.DAL
         {
             var encryptedPassword = Encrypt(password);
             var loggedUser = db.Users.Where(u => u.Username == username)
-                                .FirstOrDefault(u => u.Password == encryptedPassword);
+                               .FirstOrDefault(u => u.Password == encryptedPassword);
             return loggedUser;
         }
 

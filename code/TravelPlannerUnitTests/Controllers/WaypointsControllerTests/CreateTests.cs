@@ -1,10 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
@@ -19,6 +19,8 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
     [TestClass]
     public class CreateTests
     {
+        #region Methods
+
         /// <summary>
         ///     Tests the GET: create waypoint with null trip identifier.
         /// </summary>
@@ -63,16 +65,15 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             var tripService = new TripDal(mockContext.Object);
 
             var controller = new WaypointsController(tripService, waypointService);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
                 UserId = 0,
                 Id = 0
             };
-            var ErrorMessage = "Serious overlap issues";
-            var result = controller.Create(null, ErrorMessage);
+            const string errorMessage = "Serious overlap issues";
+            var result = controller.Create(null, errorMessage);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
@@ -88,7 +89,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
                 }
             }.AsQueryable();
 
-            var waypointData = new List<Waypoint> {               
+            var waypointData = new List<Waypoint> {
                 new Waypoint {
                     Location = "Out here", StartDateTime = DateTime.Now, EndDateTime = DateTime.Now.AddMinutes(120),
                     TripId = 0, Id = 2
@@ -120,8 +121,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             var tripService = new TripDal(mockContext.Object);
 
             var controller = new WaypointsController(tripService, waypointService);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -131,16 +131,14 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
 
             var startDate = DateTime.Today;
             var endDate = DateTime.Today.AddDays(1);
-            var conflictingWaypoint = new Waypoint
-            {
+            var conflictingWaypoint = new Waypoint {
                 Location = "Nowhere",
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now.AddMinutes(120),
                 TripId = 0,
                 Id = 0
             };
-            var addedWaypoint = new AddedWaypoint
-            {
+            var addedWaypoint = new AddedWaypoint {
                 Id = conflictingWaypoint.Id,
                 StartDateTime = conflictingWaypoint.StartDateTime,
                 EndDateTime = conflictingWaypoint.EndDateTime,
@@ -164,8 +162,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
                 }
             }.AsQueryable();
 
-            var waypoint = new Waypoint
-            {
+            var waypoint = new Waypoint {
                 Location = "Nowhere",
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now.AddMinutes(120),
@@ -183,7 +180,6 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
                     EndDateTime = DateTime.Now.AddDays(1).AddMinutes(120), TripId = 0, Id = 1
                 }
             }.AsQueryable();
-
 
             var mockSetTrip = new Mock<DbSet<Trip>>();
             mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(tripData.Provider);
@@ -206,8 +202,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             var tripService = new TripDal(mockContext.Object);
 
             var controller = new WaypointsController(tripService, waypointService);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -218,16 +213,14 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             var startDate = DateTime.Today;
             var endDate = DateTime.Today.AddDays(1);
 
-            var newWaypoint = new Waypoint
-            {
+            var newWaypoint = new Waypoint {
                 Location = "there",
                 StartDateTime = DateTime.Now.AddDays(5),
                 EndDateTime = DateTime.Now.AddDays(10),
                 TripId = 0,
                 Description = "No"
             };
-            var addedWaypoint = new AddedWaypoint
-            {
+            var addedWaypoint = new AddedWaypoint {
                 Id = newWaypoint.Id,
                 StartDateTime = newWaypoint.StartDateTime,
                 EndDateTime = newWaypoint.EndDateTime,
@@ -252,8 +245,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
                 }
             }.AsQueryable();
 
-            var waypoint = new Waypoint
-            {
+            var waypoint = new Waypoint {
                 Location = "Nowhere",
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now.AddMinutes(120),
@@ -271,7 +263,6 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
                     EndDateTime = DateTime.Now.AddDays(1).AddMinutes(120), TripId = 0, Id = 1
                 }
             }.AsQueryable();
-
 
             var mockSetTrip = new Mock<DbSet<Trip>>();
             mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(tripData.Provider);
@@ -294,8 +285,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             var tripService = new TripDal(mockContext.Object);
 
             var controller = new WaypointsController(tripService, waypointService);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -306,16 +296,14 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             var startDate = DateTime.Today;
             var endDate = DateTime.Today.AddDays(1);
 
-            var newWaypoint = new Waypoint
-            {
+            var newWaypoint = new Waypoint {
                 Location = "there",
                 StartDateTime = DateTime.Now.AddDays(5),
                 EndDateTime = DateTime.Now.AddDays(10),
                 TripId = 0,
                 Description = "No"
             };
-            var addedWaypoint = new AddedWaypoint
-            {
+            var addedWaypoint = new AddedWaypoint {
                 Id = newWaypoint.Id,
                 StartDateTime = newWaypoint.StartDateTime,
                 EndDateTime = newWaypoint.EndDateTime,
@@ -324,8 +312,10 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
                 Description = newWaypoint.Description
             };
             controller.ModelState.AddModelError("Mega", "Error");
-            var result = controller.Create(addedWaypoint);              
+            var result = controller.Create(addedWaypoint);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        #endregion
     }
 }

@@ -9,67 +9,67 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
     <title>Details</title>
 </head>
 <body>
-    <div>
-        <h4>Lodging</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Location)
-            </dt>
+<div>
+    <h4>Lodging</h4>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Location)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.StartTime)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.EndTime)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.EndTime)
-            </dd>
-            
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
 
-            <dt>
-                Trip Name
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Trip.Name)
-            </dd>
+        <dt>
+            Trip Name
+        </dt>
 
-        </dl>
-    </div>
+        <dd>
+            @Html.DisplayFor(model => model.Trip.Name)
+        </dd>
 
-    <iframe width="600"
-            height="450"
-            style="border:0"
-            loading="lazy"
-            allowfullscreen
-            src='@ViewBag.url'>
-    </iframe>
+    </dl>
+</div>
 
-    <p>
-        @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
-    </p>
+<iframe width="600"
+        height="450"
+        style="border: 0"
+        loading="lazy"
+        allowfullscreen
+        src="@ViewBag.url">
+</iframe>
+
+<p>
+    @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
+</p>
 </body>
 </html>

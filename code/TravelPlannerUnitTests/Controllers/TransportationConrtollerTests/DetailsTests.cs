@@ -1,27 +1,27 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 using WebApplication4.Controllers;
-using WebApplication4.Models;
 
 namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
 {
     /// <summary>
-    /// Testing the transport details
+    ///     Testing the transport details
     /// </summary>
     [TestClass]
     public class DetailsTests
     {
+        #region Methods
 
         /// <summary>
-        /// Tests the find null transportation request.
+        ///     Tests the find null transportation request.
         /// </summary>
         [TestMethod]
         public void TestFindNullTransportationRequest()
@@ -70,8 +70,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -83,9 +82,8 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
         }
 
-
         /// <summary>
-        /// Tests the find nonexisting transportation request.
+        ///     Tests the find nonexisting transportation request.
         /// </summary>
         [TestMethod]
         public void TestFindNonexistingTransportationRequest()
@@ -134,8 +132,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -148,7 +145,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
         }
 
         /// <summary>
-        /// Tests the find existing transportation request.
+        ///     Tests the find existing transportation request.
         /// </summary>
         [TestMethod]
         public void TestFindExistingTransportationRequest()
@@ -197,8 +194,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -209,5 +205,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var result = controller.Details(0);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        #endregion
     }
 }

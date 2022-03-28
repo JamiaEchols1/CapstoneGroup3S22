@@ -11,7 +11,7 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerUnitTests.DALs.WaypointDALTests
 {
     /// <summary>
-    /// Tests get waypoints
+    ///     Tests get waypoints
     /// </summary>
     [TestClass]
     public class GetWaypointTests
@@ -19,7 +19,7 @@ namespace TravelPlannerUnitTests.DALs.WaypointDALTests
         #region Methods
 
         /// <summary>
-        /// Tests the get waypoint.
+        ///     Tests the get waypoint.
         /// </summary>
         [TestMethod]
         public void TestGetWaypoint()

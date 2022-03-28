@@ -47,21 +47,20 @@ namespace TravelPlannerDesktopApp.Pages
             this.timeTextBlock.Text = "Start Time: " + LoggedUser.SelectedWaypoint.StartDateTime;
             this.endDateTextBlock.Text = "End Time: " + LoggedUser.SelectedWaypoint.EndDateTime;
             this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedWaypoint.Description;
-            this.wbMaps.Source = new Uri("https://www.google.com/maps/place/" + FormatLocationString());
+            this.wbMaps.Source = new Uri("https://www.google.com/maps/place/" + this.FormatLocationString());
         }
 
         private string FormatLocationString()
         {
-            string output = "";
+            var output = "";
 
-            string[] locationParts = LoggedUser.SelectedWaypoint.Location.Split(' ');
+            var locationParts = LoggedUser.SelectedWaypoint.Location.Split(' ');
             foreach (var part in locationParts)
             {
                 output += part + "+";
             }
 
-            
-            output.Remove(output.Length-1);
+            output.Remove(output.Length - 1);
             return output;
         }
 
@@ -71,10 +70,10 @@ namespace TravelPlannerDesktopApp.Pages
         }
 
         /// <summary>
-        /// Handles the OnClick event of the RemoveWaypointButton control.
+        ///     Handles the OnClick event of the RemoveWaypointButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void RemoveWaypointButton_OnClick(object sender, RoutedEventArgs e)
         {
             try
@@ -92,10 +91,10 @@ namespace TravelPlannerDesktopApp.Pages
         }
 
         /// <summary>
-        /// Handles the OnClick event of the BackButton control.
+        ///     Handles the OnClick event of the BackButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;

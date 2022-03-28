@@ -1,12 +1,20 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TravelPlannerLibrary.Models;
 
 namespace TravelPlannerUnitTests.DesktopModels
 {
+    /// <summary>
+    ///     Trip tests
+    /// </summary>
     [TestClass]
     public class TripTests
     {
+        #region Methods
+
+        /// <summary>
+        ///     Tests the create trip.
+        /// </summary>
         [TestMethod]
         public void TestCreateTrip()
         {
@@ -14,8 +22,7 @@ namespace TravelPlannerUnitTests.DesktopModels
             var endDate = DateTime.Today.AddDays(7);
             var trip = new Trip
                 { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
-            var desktopTrip = new TravelPlannerDesktopApp.Models.Trip
-            {
+            var desktopTrip = new TravelPlannerDesktopApp.Models.Trip {
                 StartDate = trip.StartDate,
                 EndDate = trip.EndDate,
                 Name = trip.Name,
@@ -25,7 +32,9 @@ namespace TravelPlannerUnitTests.DesktopModels
                 Waypoints = null,
                 Lodgings = null
             };
-            string resultToString =  desktopTrip.Name + ", Start Date:" + desktopTrip.StartDate.ToString("MM/dd/yyyy h:mm tt") + ", End Date: " + desktopTrip.EndDate.ToString("MM/dd/yyyy h:mm tt");
+            var resultToString = desktopTrip.Name + ", Start Date:" +
+                                 desktopTrip.StartDate.ToString("MM/dd/yyyy h:mm tt") + ", End Date: " +
+                                 desktopTrip.EndDate.ToString("MM/dd/yyyy h:mm tt");
 
             Assert.AreEqual(startDate, desktopTrip.StartDate);
             Assert.AreEqual(endDate, desktopTrip.EndDate);
@@ -37,5 +46,7 @@ namespace TravelPlannerUnitTests.DesktopModels
             Assert.IsNull(desktopTrip.Waypoints);
             Assert.AreEqual(resultToString, desktopTrip.ToString());
         }
+
+        #endregion
     }
 }

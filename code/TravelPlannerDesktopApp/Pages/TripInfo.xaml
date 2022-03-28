@@ -14,7 +14,8 @@
                          Width="83" />
             <n:NavButton Text="Create Lodging" ImageSource="/Images/lodging.png" NavUri="Pages/AddLodging.xaml"
                          Width="83" />
-            <n:NavButton Text="Create Transportation" ImageSource="/Images/transportation.png" NavUri="Pages/AddTransportationPage.xaml"
+            <n:NavButton Text="Create Transportation" ImageSource="/Images/transportation.png"
+                         NavUri="Pages/AddTransportationPage.xaml"
                          Width="83" />
         </WrapPanel>
 

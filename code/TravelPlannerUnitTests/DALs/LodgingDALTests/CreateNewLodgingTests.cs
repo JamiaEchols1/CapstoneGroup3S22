@@ -11,7 +11,7 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerUnitTests.DALs.LodgingDALTests
 {
     /// <summary>
-    /// Test create new lodging
+    ///     Test create new lodging
     /// </summary>
     [TestClass]
     public class CreateNewLodgingTests
@@ -19,7 +19,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
         #region Methods
 
         /// <summary>
-        /// Tests the empty location.
+        ///     Tests the empty location.
         /// </summary>
         [TestMethod]
         public void TestEmptyLocation()
@@ -61,7 +61,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
         }
 
         /// <summary>
-        /// Tests the null location.
+        ///     Tests the null location.
         /// </summary>
         [TestMethod]
         public void TestNullLocation()
@@ -103,7 +103,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
         }
 
         /// <summary>
-        /// Tests the start date after end date.
+        ///     Tests the start date after end date.
         /// </summary>
         [TestMethod]
         public void TestStartDateAfterEndDate()
@@ -149,7 +149,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
         }
 
         /// <summary>
-        /// Tests the end date after trip end date.
+        ///     Tests the end date after trip end date.
         /// </summary>
         [TestMethod]
         public void TestEndDateAfterTripEndDate()
@@ -195,7 +195,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
         }
 
         /// <summary>
-        /// Tests the start date before trip start date.
+        ///     Tests the start date before trip start date.
         /// </summary>
         [TestMethod]
         public void TestStartDateBeforeTripStartDate()
@@ -241,7 +241,7 @@ namespace TravelPlannerUnitTests.DALs.LodgingDALTests
         }
 
         /// <summary>
-        /// Tests the add valid lodging.
+        ///     Tests the add valid lodging.
         /// </summary>
         [TestMethod]
         public void TestAddValidLodging()

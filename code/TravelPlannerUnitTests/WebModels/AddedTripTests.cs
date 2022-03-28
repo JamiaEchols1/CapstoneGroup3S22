@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TravelPlannerLibrary.Models;
 using WebApplication4.Models;
 
@@ -11,6 +11,8 @@ namespace TravelPlannerUnitTests.WebModels
     [TestClass]
     public class AddedTripTests
     {
+        #region Methods
+
         /// <summary>
         ///     Tests the web trip created from library trip.
         /// </summary>
@@ -20,9 +22,8 @@ namespace TravelPlannerUnitTests.WebModels
             var startDate = DateTime.Today;
             var endDate = DateTime.Today.AddDays(7);
             var trip = new Trip
-            { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
-            var addedTrip = new AddedTrip
-            {
+                { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
+            var addedTrip = new AddedTrip {
                 StartDate = trip.StartDate,
                 EndDate = trip.EndDate,
                 Name = trip.Name,
@@ -35,5 +36,7 @@ namespace TravelPlannerUnitTests.WebModels
             Assert.AreEqual(1, addedTrip.UserId);
             Assert.AreEqual(1, addedTrip.Id);
         }
+
+        #endregion
     }
 }

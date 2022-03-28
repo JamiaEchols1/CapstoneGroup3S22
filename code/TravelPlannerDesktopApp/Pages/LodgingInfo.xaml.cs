@@ -47,19 +47,18 @@ namespace TravelPlannerDesktopApp.Pages
             this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedLodging.Description;
             this.startDateTextBlock.Text = "Start Date: " + LoggedUser.SelectedLodging.StartTime;
             this.endDateTextBlock.Text = "End Date: " + LoggedUser.SelectedLodging.EndTime;
-            this.mapWebBrowser.Source = new Uri("https://www.google.com/maps/place/" + FormatLocationString());
+            this.mapWebBrowser.Source = new Uri("https://www.google.com/maps/place/" + this.FormatLocationString());
         }
 
         private string FormatLocationString()
         {
-            string output = "";
+            var output = "";
 
-            string[] locationParts = LoggedUser.SelectedLodging.Location.Split(' ');
+            var locationParts = LoggedUser.SelectedLodging.Location.Split(' ');
             foreach (var part in locationParts)
             {
                 output += part + "+";
             }
-
 
             output.Remove(output.Length - 1);
             return output;
@@ -71,10 +70,10 @@ namespace TravelPlannerDesktopApp.Pages
         }
 
         /// <summary>
-        /// Handles the Click event of the removeLodgingButton control.
+        ///     Handles the Click event of the removeLodgingButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void removeLodgingButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -92,10 +91,10 @@ namespace TravelPlannerDesktopApp.Pages
         }
 
         /// <summary>
-        /// Handles the Click event of the backButton control.
+        ///     Handles the Click event of the backButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;

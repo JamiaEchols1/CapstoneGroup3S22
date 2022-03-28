@@ -14,22 +14,22 @@
                      NavUri="Pages/Landing.xaml" HorizontalAlignment="Right" />
         <Label Content="Add A New Trip" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
                Width="292" />
-        <Label Content="Name:" Margin="160,61,534,0" VerticalAlignment="Top"  />
+        <Label Content="Name:" Margin="160,61,534,0" VerticalAlignment="Top" />
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="271,68,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Trip name" />
         <Label Content="Description:" Margin="150,101,534,0" VerticalAlignment="Top" />
         <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Margin="271,106,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Description Name"/>
+                 VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Description Name" />
 
         <Label Content="Start Date:" Margin="150,141,534,0" VerticalAlignment="Top" />
         <DatePicker x:Name="startDatePicker" DisplayDateStart="{x:Static sys:DateTime.Today}"
-                    HorizontalAlignment="Left"  Margin="271,146,0,0" Width="270" VerticalAlignment="Top" />
+                    HorizontalAlignment="Left" Margin="271,146,0,0" Width="270" VerticalAlignment="Top" />
 
         <Label Content="End Date:" Margin="150,181,534,0" VerticalAlignment="Top" />
         <DatePicker x:Name="endDatePicker" DisplayDateStart="{x:Static sys:DateTime.Today}" HorizontalAlignment="Left"
                     Margin="271,186,0,0"
                     VerticalAlignment="Top" Width="270" RenderTransformOrigin="-1.181,-0.208" />
         <Button x:Name="createTripButton" Content="Create Trip" HorizontalAlignment="Left" Margin="265,338,0,0"
-                VerticalAlignment="Top" Click="createTripButton_Click"  Width="270"/>
+                VerticalAlignment="Top" Click="createTripButton_Click" Width="270" />
     </Grid>
 </Page>

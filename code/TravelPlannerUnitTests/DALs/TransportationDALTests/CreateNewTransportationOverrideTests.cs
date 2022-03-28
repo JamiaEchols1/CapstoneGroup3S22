@@ -112,8 +112,6 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             Assert.ThrowsException<ArgumentNullException>(() => service.CreateANewTransportation(transportation));
         }
 
-       
-
         /// <summary>
         ///     Tests the start time after end time.
         /// </summary>
@@ -167,8 +165,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         [TestMethod]
         public void TestStartTimeAfterTripEndTime()
         {
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -218,8 +215,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         [TestMethod]
         public void TestValidTransportation()
         {
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),

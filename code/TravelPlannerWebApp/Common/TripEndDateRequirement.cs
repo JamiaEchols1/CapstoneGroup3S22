@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using TravelPlannerLibrary.Models;
 
 namespace WebApplication4.Common
@@ -15,17 +12,21 @@ namespace WebApplication4.Common
     /// <seealso cref="System.ComponentModel.DataAnnotations.ValidationAttribute" />
     public class TripEndDateRequirement : ValidationAttribute
     {
+        #region Methods
+
         /// <summary>
-        /// Returns true if point of interests end date is valid.
+        ///     Returns true if point of interests end date is valid.
         /// </summary>
         /// <param name="value">The value of the object to validate.</param>
         /// <returns>
-        ///   <see langword="true" /> if the specified value is valid; otherwise, <see langword="false" />.
+        ///     <see langword="true" /> if the specified value is valid; otherwise, <see langword="false" />.
         /// </returns>
         public override bool IsValid(object value)
         {
-            DateTime dateTime = Convert.ToDateTime(value);
+            var dateTime = Convert.ToDateTime(value);
             return dateTime.CompareTo(LoggedUser.SelectedTrip.EndDate) < 0;
         }
+
+        #endregion
     }
 }

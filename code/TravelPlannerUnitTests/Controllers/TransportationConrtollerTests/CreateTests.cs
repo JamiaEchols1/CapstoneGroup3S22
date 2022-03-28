@@ -1,10 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
@@ -13,11 +13,16 @@ using WebApplication4.Models;
 
 namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
 {
+    /// <summary>
+    ///     Create tests class for transport
+    /// </summary>
     [TestClass]
     public class CreateTests
     {
+        #region Methods
+
         /// <summary>
-        /// Tests the get create transport including null trip identifier.
+        ///     Tests the get create transport including null trip identifier.
         /// </summary>
         [TestMethod]
         public void TestPOSTCreateTransportWithConflicts()
@@ -54,8 +59,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -63,8 +67,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
                 Id = 0
             };
 
-            var transportation = new Transportation
-            {
+            var transportation = new Transportation {
                 Description = "transportation",
                 StartTime = startDate,
                 EndTime = endDate,
@@ -72,8 +75,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
                 TripId = 1
             };
 
-            var addedTransportation = new AddedTransportation
-            {
+            var addedTransportation = new AddedTransportation {
                 Id = 1,
                 StartTime = transportation.StartTime,
                 EndTime = transportation.EndTime,
@@ -85,9 +87,8 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
 
-
         /// <summary>
-        /// Tests the post create transport without conflicts.
+        ///     Tests the post create transport without conflicts.
         /// </summary>
         [TestMethod]
         public void TestPOSTCreateTransportWithoutConflicts()
@@ -124,8 +125,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -133,8 +133,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
                 Id = 0
             };
 
-            var transportation = new Transportation
-            {
+            var transportation = new Transportation {
                 Description = "transportation",
                 StartTime = startDate,
                 EndTime = endDate,
@@ -142,8 +141,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
                 TripId = 1
             };
 
-            var addedTransportation = new AddedTransportation
-            {
+            var addedTransportation = new AddedTransportation {
                 Id = 1,
                 StartTime = transportation.StartTime,
                 EndTime = transportation.EndTime,
@@ -155,9 +153,8 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
 
-
         /// <summary>
-        /// Tests the state of the post create transport with invalid model.
+        ///     Tests the state of the post create transport with invalid model.
         /// </summary>
         [TestMethod]
         public void TestPOSTCreateTransportWithInvalidModelState()
@@ -194,8 +191,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -203,8 +199,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
                 Id = 0
             };
 
-            var transportation = new Transportation
-            {
+            var transportation = new Transportation {
                 Description = "transportation",
                 StartTime = startDate,
                 EndTime = endDate,
@@ -212,8 +207,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
                 TripId = 1
             };
 
-            var addedTransportation = new AddedTransportation
-            {
+            var addedTransportation = new AddedTransportation {
                 Id = 1,
                 StartTime = transportation.StartTime,
                 EndTime = transportation.EndTime,
@@ -226,7 +220,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
         }
 
         /// <summary>
-        /// Tests the get create transport.
+        ///     Tests the get create transport.
         /// </summary>
         [TestMethod]
         public void TestGETCreateTransport()
@@ -275,8 +269,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -284,14 +277,13 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
                 Id = 0
             };
 
-            var ErrorMessage = "Serious overlap issues";
-            var result = controller.Create(0, ErrorMessage);
+            const string errorMessage = "Serious overlap issues";
+            var result = controller.Create(0, errorMessage);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
-
         /// <summary>
-        /// Tests the get create transport with null identifier.
+        ///     Tests the get create transport with null identifier.
         /// </summary>
         [TestMethod]
         public void TestGETCreateTransportWithNullId()
@@ -340,8 +332,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -349,9 +340,11 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
                 Id = 0
             };
 
-            var ErrorMessage = "Serious overlap issues";
-            var result = controller.Create(null, ErrorMessage);
+            const string errorMessage = "Serious overlap issues";
+            var result = controller.Create(null, errorMessage);
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        #endregion
     }
 }

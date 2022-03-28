@@ -72,7 +72,6 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         [TestMethod]
         public void TestEmptyDescription()
         {
-
             var data = new List<Transportation> {
                 new Transportation {
                     Description = "test transportation", StartTime = DateTime.Now,
@@ -111,7 +110,6 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         [TestMethod]
         public void TestStartTimeAfterEndTime()
         {
-
             var data = new List<Transportation> {
                 new Transportation {
                     Description = "test transportation", StartTime = DateTime.Now,
@@ -150,8 +148,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         [TestMethod]
         public void TestStartTimeBeforeTripStartTime()
         {
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -198,8 +195,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         [TestMethod]
         public void TestValidTransportation()
         {
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),

@@ -7,7 +7,7 @@ using TravelPlannerLibrary.Util;
 namespace TravelPlannerLibrary.DAL
 {
     /// <summary>
-    /// The lodging data access layer
+    ///     The lodging data access layer
     /// </summary>
     public class LodgingDal
     {
@@ -52,7 +52,7 @@ namespace TravelPlannerLibrary.DAL
         }
 
         /// <summary>
-        /// Creates a new lodging.
+        ///     Creates a new lodging.
         /// </summary>
         /// <param name="location">The location.</param>
         /// <param name="startTime">The start time.</param>
@@ -60,15 +60,18 @@ namespace TravelPlannerLibrary.DAL
         /// <param name="tripId">The trip identifier.</param>
         /// <param name="description">The description.</param>
         /// <returns>
-        /// The newly created lodging
+        ///     The newly created lodging
         /// </returns>
         /// <exception cref="System.ArgumentNullException">Must enter a location!</exception>
-        /// <exception cref="System.ArgumentException">Start date must be on or after trip start date
-        /// or
-        /// End date must be on or before trip end date
-        /// or
-        /// End date must be on or after selected start date</exception>
-        public Lodging CreateNewLodging(string location, DateTime startTime, DateTime endTime, int tripId, string description)
+        /// <exception cref="System.ArgumentException">
+        ///     Start date must be on or after trip start date
+        ///     or
+        ///     End date must be on or before trip end date
+        ///     or
+        ///     End date must be on or after selected start date
+        /// </exception>
+        public Lodging CreateNewLodging(string location, DateTime startTime, DateTime endTime, int tripId,
+            string description)
         {
             if (string.IsNullOrEmpty(location))
             {
@@ -96,7 +99,7 @@ namespace TravelPlannerLibrary.DAL
                 StartTime = startTime,
                 EndTime = endTime,
                 TripId = tripId,
-                Id = FindNextId(),
+                Id = this.FindNextId(),
                 Description = description
             };
 
@@ -133,7 +136,8 @@ namespace TravelPlannerLibrary.DAL
         {
             var tripLodgings = this.GetLodgings(LoggedUser.SelectedTrip.Id);
 
-            return tripLodgings.Where(current => TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime)).ToList();
+            return tripLodgings.Where(current =>
+                TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime)).ToList();
         }
 
         /// <summary>
@@ -145,7 +149,7 @@ namespace TravelPlannerLibrary.DAL
         /// </returns>
         public Lodging GetLodgingById(int id)
         {
-            return db.Lodgings.Where(x => x.Id == id).FirstOrDefault();
+            return db.Lodgings.FirstOrDefault(x => x.Id == id);
         }
 
         /// <summary>

@@ -1,10 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
@@ -13,14 +13,15 @@ using WebApplication4.Controllers;
 namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
 {
     /// <summary>
-    /// Tests the transport delete methods
+    ///     Tests the transport delete methods
     /// </summary>
     [TestClass]
     public class DeleteTests
     {
+        #region Methods
 
         /// <summary>
-        /// Tests the delete with nonexisting identifier.
+        ///     Tests the delete with nonexisting identifier.
         /// </summary>
         [TestMethod]
         public void TestDeleteWithNonexistingId()
@@ -69,8 +70,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -83,10 +83,10 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
         }
 
         /// <summary>
-        /// Tests the delete with null identifier.
+        ///     Tests the delete with null identifier.
         /// </summary>
         [TestMethod]
-        public void TestDeleteWithNullID()
+        public void TestDeleteWithNullId()
         {
             var tripData = new List<Trip> {
                 new Trip {
@@ -132,8 +132,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -145,9 +144,8 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
         }
 
-
         /// <summary>
-        /// Tests the delete existing.
+        ///     Tests the delete existing.
         /// </summary>
         [TestMethod]
         public void TestDeleteExisting()
@@ -196,8 +194,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -209,9 +206,8 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
-
         /// <summary>
-        /// Tests the delete confimed.
+        ///     Tests the delete confimed.
         /// </summary>
         [TestMethod]
         public void TestDeleteConfimed()
@@ -260,8 +256,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var service = new TransportationDal(mockContext.Object);
 
             var controller = new TransportationController(service);
-            LoggedUser.SelectedTrip = new Trip
-            {
+            LoggedUser.SelectedTrip = new Trip {
                 Name = "Trip1",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(14),
@@ -272,5 +267,7 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var result = controller.DeleteConfirmed(0);
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
+
+        #endregion
     }
 }

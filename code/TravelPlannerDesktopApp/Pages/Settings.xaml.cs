@@ -12,7 +12,7 @@ namespace TravelPlannerDesktopApp.Pages
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Settings"/> class.
+        ///     Initializes a new instance of the <see cref="Settings" /> class.
         /// </summary>
         public Settings()
         {
@@ -24,10 +24,10 @@ namespace TravelPlannerDesktopApp.Pages
         #region Methods
 
         /// <summary>
-        /// Handles the Click event of the Grid control.
+        ///     Handles the Click event of the Grid control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
             var clickedButton = e.OriginalSource as NavButton;

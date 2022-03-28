@@ -4,7 +4,7 @@ using TravelPlannerLibrary.Models;
 namespace WebApplication4.ViewModels
 {
     /// <summary>
-    /// The trip details view model
+    ///     The trip details view model
     /// </summary>
     public class TripDetailsViewModel
     {
@@ -42,12 +42,11 @@ namespace WebApplication4.ViewModels
         /// </value>
         public IEnumerable<Transportation> Transportations { get; set; }
 
-
         /// <summary>
-        /// Gets or sets the waypoints and transportation.
+        ///     Gets or sets the waypoints and transportation.
         /// </summary>
         /// <value>
-        /// The waypoints and transportation.
+        ///     The waypoints and transportation.
         /// </value>
         public IEnumerable<TripItem> WaypointsAndTransportation { get; set; }
 

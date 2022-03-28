@@ -54,15 +54,11 @@ namespace TravelPlannerLibrary.DAL
         /// <summary>
         ///     Creates a new transportation.
         /// </summary>
-        /// @precondition - !string.IsNullOrEmpty(description);
-        /// startTime.CompareTo(endTime) &lt;= 0;
-        /// arrivalWaypointId != departingWaypointId;
-        /// selectedWaypoint.EndDateTime.CompareTo(startTime) &lt;= 0;
-        /// @postcondition - transportation is added to the db with the specified values
         /// <param name="tripId">The trip identifier.</param>
         /// <param name="startTime">The start time.</param>
         /// <param name="endTime">The end time.</param>
         /// <param name="description">The description.</param>
+        /// <param name="type">The type.</param>
         /// <returns>
         ///     The number of entries written to the database, 0 if transport not created, 1 if creation was successful
         /// </returns>
@@ -74,6 +70,11 @@ namespace TravelPlannerLibrary.DAL
         ///     or
         ///     Start date must be on or after waypoint end date
         /// </exception>
+        /// @precondition - !string.IsNullOrEmpty(description);
+        /// startTime.CompareTo(endTime) &lt;= 0;
+        /// arrivalWaypointId != departingWaypointId;
+        /// selectedWaypoint.EndDateTime.CompareTo(startTime) &lt;= 0;
+        /// @postcondition - transportation is added to the db with the specified values
         public Transportation CreateANewTransportation(int tripId,
             DateTime startTime, DateTime endTime, string description, string type)
         {
@@ -182,16 +183,16 @@ namespace TravelPlannerLibrary.DAL
         {
             var tripTransportation = this.GetTransportationsByTrip(LoggedUser.SelectedTrip.Id);
 
-            return tripTransportation.Where(current => TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime)).ToList();
+            return tripTransportation.Where(current =>
+                TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime, current.EndTime)).ToList();
         }
 
-
         /// <summary>
-        /// Gets the transportation by identifier.
+        ///     Gets the transportation by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>
-        /// The transportation with the specified id
+        ///     The transportation with the specified id
         /// </returns>
         public Transportation GetTransportationById(int id)
         {
@@ -212,6 +213,7 @@ namespace TravelPlannerLibrary.DAL
             {
                 trip = db.Trips.FirstOrDefault(x => x.Id == id);
             }
+
             return trip;
         }
 

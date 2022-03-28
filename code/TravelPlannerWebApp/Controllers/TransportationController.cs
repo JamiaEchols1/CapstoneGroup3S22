@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
@@ -11,32 +8,41 @@ using WebApplication4.Models;
 namespace WebApplication4.Controllers
 {
     /// <summary>
-    /// 
     /// </summary>
     /// <seealso cref="System.Web.Mvc.Controller" />
     public class TransportationController : Controller
     {
+        #region Data members
+
         private readonly TransportationDal _transportationDal = new TransportationDal();
         private readonly WaypointDal _waypointDal = new WaypointDal();
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransportationController"/> class.
+        ///     Initializes a new instance of the <see cref="TransportationController" /> class.
         /// </summary>
         public TransportationController()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransportationController"/> class.
+        ///     Initializes a new instance of the <see cref="TransportationController" /> class.
         /// </summary>
         /// <param name="transportationDal">The transportation dal.</param>
         public TransportationController(TransportationDal transportationDal)
         {
-            _transportationDal = transportationDal;
+            this._transportationDal = transportationDal;
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
-        /// Detailses the specified identifier.
+        ///     Detailses the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
@@ -46,19 +52,20 @@ namespace WebApplication4.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            int transportationId = (int)id;
-            Transportation transportation = _transportationDal.GetTransportationById(transportationId);
+
+            var transportationId = (int)id;
+            var transportation = this._transportationDal.GetTransportationById(transportationId);
             if (transportation == null)
             {
                 return HttpNotFound();
             }
+
             LoggedUser.SelectedTransportation = transportation;
             return View("Details", transportation);
         }
 
-
         /// <summary>
-        /// Deletes the specified identifier.
+        ///     Deletes the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
@@ -68,26 +75,28 @@ namespace WebApplication4.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            int validatedId = (int)id;
-            Transportation transportation = _transportationDal.GetTransportationById(validatedId);
+
+            var validatedId = (int)id;
+            var transportation = this._transportationDal.GetTransportationById(validatedId);
             if (transportation == null)
             {
                 return HttpNotFound();
             }
+
             return View("Delete", transportation);
         }
 
-
         /// <summary>
-        /// Deletes the confirmed.
+        ///     Deletes the confirmed.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Transportation transportation = _transportationDal.GetTransportationById(id);
+            var transportation = this._transportationDal.GetTransportationById(id);
             this._transportationDal.DeleteTransportation(transportation);
             return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
         }
@@ -103,48 +112,54 @@ namespace WebApplication4.Controllers
             {
                 id = LoggedUser.SelectedTrip.Id;
             }
+
             var transportationId = (int)id;
-            LoggedUser.SelectedTrip = _transportationDal.GetTripFromTransportation(transportationId);
-            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
+            LoggedUser.SelectedTrip = this._transportationDal.GetTripFromTransportation(transportationId);
+            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
+                                  LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
             if (ErrorMessage != null)
             {
                 ViewBag.ErrorMessage = ErrorMessage;
             }
+
             return View("Create");
         }
 
         /// <summary>
-        /// Creates the specified transportation.
+        ///     Creates the specified transportation.
         /// </summary>
         /// <param name="transportation">The transportation.</param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StartTime,EndTime,Description,Type")] AddedTransportation transportation)
+        public ActionResult Create(
+            [Bind(Include = "StartTime,EndTime,Description,Type")]
+            AddedTransportation transportation)
         {
             if (ModelState.IsValid)
             {
                 transportation.TripId = LoggedUser.SelectedTrip.Id;
-                string ErrorMessage = validateDateTimes(transportation);
+                var ErrorMessage = this.validateDateTimes(transportation);
                 if (ErrorMessage == null)
                 {
-                    ErrorMessage = validateConflictingTransportAndWaypoints(transportation);
+                    ErrorMessage = this.validateConflictingTransportAndWaypoints(transportation);
                 }
+
                 if (ErrorMessage != null)
                 {
-                    return RedirectToAction("Create", new { ErrorMessage = ErrorMessage });
+                    return RedirectToAction("Create", new { ErrorMessage });
                 }
-                else
-                {
-                    this._transportationDal.CreateANewTransportation(transportation.TripId, transportation.StartTime,
-                        transportation.EndTime, transportation.Description, transportation.Type);
-                    return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
-                }
+
+                this._transportationDal.CreateANewTransportation(transportation.TripId, transportation.StartTime,
+                    transportation.EndTime, transportation.Description, transportation.Type);
+                return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
             }
+
             return View(transportation);
         }
+
         private string validateDateTimes(AddedTransportation transportation)
         {
             string ErrorMessage = null;
@@ -152,10 +167,12 @@ namespace WebApplication4.Controllers
             {
                 ErrorMessage = "The start date must be before the end date";
             }
+
             if (transportation.EndTime.CompareTo(transportation.StartTime) < 0)
             {
                 ErrorMessage = "The end date must be after the start date";
             }
+
             return ErrorMessage;
         }
 
@@ -166,7 +183,8 @@ namespace WebApplication4.Controllers
             var endDate = transportation.EndTime;
             var waypointsAndTransportation = new List<object>();
             waypointsAndTransportation.AddRange(this._waypointDal.GetOverlappingWaypoints(startDate, endDate));
-            waypointsAndTransportation.AddRange(this._transportationDal.GetOverlappingTransportation(startDate, endDate));
+            waypointsAndTransportation.AddRange(
+                this._transportationDal.GetOverlappingTransportation(startDate, endDate));
             if (waypointsAndTransportation.Count > 0)
             {
                 ErrorMessage = "The transportation was not added because of the following conflicts:" + "\n";
@@ -175,7 +193,10 @@ namespace WebApplication4.Controllers
                     ErrorMessage += overlap.ToString();
                 }
             }
+
             return ErrorMessage;
         }
+
+        #endregion
     }
 }

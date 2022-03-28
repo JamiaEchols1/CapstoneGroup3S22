@@ -11,7 +11,7 @@ using TravelPlannerLibrary.Models;
 namespace TravelPlannerUnitTests.DALs.WaypointDALTests
 {
     /// <summary>
-    /// Tests remove waypoints
+    ///     Tests remove waypoints
     /// </summary>
     [TestClass]
     public class RemoveWaypointsTests
@@ -19,7 +19,7 @@ namespace TravelPlannerUnitTests.DALs.WaypointDALTests
         #region Methods
 
         /// <summary>
-        /// Tests the remove waypoint.
+        ///     Tests the remove waypoint.
         /// </summary>
         [TestMethod]
         public void TestRemoveWaypoint()

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -11,7 +7,7 @@ using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 using WebApplication4.Models;
 
-namespace WebApplication4
+namespace WebApplication4.Controllers
 {
     /// <summary>
     ///     The travel planner lodgings controller
@@ -19,22 +15,27 @@ namespace WebApplication4
     /// <seealso cref="System.Web.Mvc.Controller" />
     public class LodgingsController : Controller
     {
-        private TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
-
-        private LodgingDal _lodgingDal = new LodgingDal();
-        private TripDal _tripDal = new TripDal();
+        #region Data members
 
         private static AddedLodging conflictingLodging;
+        private readonly TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
+
+        private readonly LodgingDal _lodgingDal = new LodgingDal();
+        private TripDal _tripDal = new TripDal();
+
+        #endregion
+
+        #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LodgingsController"/> class.
+        ///     Initializes a new instance of the <see cref="LodgingsController" /> class.
         /// </summary>
         public LodgingsController()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LodgingsController"/> class.
+        ///     Initializes a new instance of the <see cref="LodgingsController" /> class.
         /// </summary>
         /// <param name="tripDal">The trip dal.</param>
         /// <param name="lodgingDal">The lodging dal.</param>
@@ -43,6 +44,10 @@ namespace WebApplication4
             this._lodgingDal = lodgingDal;
             this._tripDal = tripDal;
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         ///     Details of the lodging point by id.
@@ -57,15 +62,17 @@ namespace WebApplication4
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            int lodgingId = (int)id;
-            Lodging lodging = _lodgingDal.GetLodgingById(lodgingId);
+
+            var lodgingId = (int)id;
+            var lodging = this._lodgingDal.GetLodgingById(lodgingId);
             if (lodging == null)
             {
                 return HttpNotFound();
             }
+
             LoggedUser.SelectedLodging = lodging;
-            string mapURL = "https://www.google.com/maps/embed/v1/place?key=AIzaSyDJEezkTFgj0PAnzJQJVVEhfZbpUmH27s0";
-            string waypointLocation = HttpUtility.UrlEncode(lodging.Location);
+            var mapURL = "https://www.google.com/maps/embed/v1/place?key=AIzaSyDJEezkTFgj0PAnzJQJVVEhfZbpUmH27s0";
+            var waypointLocation = HttpUtility.UrlEncode(lodging.Location);
             ViewBag.url = mapURL + "&q=" + waypointLocation;
             return View(lodging);
         }
@@ -81,13 +88,14 @@ namespace WebApplication4
             {
                 id = LoggedUser.SelectedTrip.Id;
             }
-            LoggedUser.SelectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
-            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
+
+            LoggedUser.SelectedTrip = this.db.Trips.FirstOrDefault(x => x.Id == id);
+            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
+                                  LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
             return View("Create");
         }
-
 
         /// <summary>
         ///     Creates the specified lodging point.
@@ -100,15 +108,15 @@ namespace WebApplication4
             if (ModelState.IsValid)
             {
                 var TripId = LoggedUser.SelectedTrip.Id;
-                string ErrorMessage = validateDateTimes(lodging);
+                var ErrorMessage = this.validateDateTimes(lodging);
                 if (ErrorMessage == null)
                 {
-                    ErrorMessage = validateConflictingLodgings(lodging);
+                    ErrorMessage = this.validateConflictingLodgings(lodging);
                 }
+
                 if (ErrorMessage != null)
                 {
-                    conflictingLodging = new AddedLodging()
-                    {
+                    conflictingLodging = new AddedLodging {
                         Location = lodging.Location,
                         StartTime = lodging.StartTime,
                         EndTime = lodging.EndTime,
@@ -117,12 +125,12 @@ namespace WebApplication4
                     };
                     return RedirectToAction("CreateWithConflicts", new { ErrorMessage });
                 }
-                else
-                {
-                    _lodgingDal.CreateNewLodging(lodging.Location, lodging.StartTime, lodging.EndTime, TripId, lodging.Description);
-                    return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
-                }
+
+                this._lodgingDal.CreateNewLodging(lodging.Location, lodging.StartTime, lodging.EndTime, TripId,
+                    lodging.Description);
+                return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
             }
+
             return View(lodging);
         }
 
@@ -137,10 +145,12 @@ namespace WebApplication4
             {
                 id = LoggedUser.SelectedTrip.Id;
             }
-            AddedLodging Lodging = conflictingLodging;
+
+            var Lodging = conflictingLodging;
             conflictingLodging = null;
-            LoggedUser.SelectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
-            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
+            LoggedUser.SelectedTrip = this.db.Trips.FirstOrDefault(x => x.Id == id);
+            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
+                                  LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
             ViewBag.ErrorMessage = ErrorMessage;
@@ -154,14 +164,18 @@ namespace WebApplication4
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateWithConflicts([Bind(Include = "Location,StartTime,EndTime,Description")] AddedLodging lodging)
+        public ActionResult CreateWithConflicts(
+            [Bind(Include = "Location,StartTime,EndTime,Description")]
+            AddedLodging lodging)
         {
             if (ModelState.IsValid)
             {
                 var TripId = LoggedUser.SelectedTrip.Id;
-                _lodgingDal.CreateNewLodging(lodging.Location, lodging.StartTime, lodging.EndTime, TripId, lodging.Description);
+                this._lodgingDal.CreateNewLodging(lodging.Location, lodging.StartTime, lodging.EndTime, TripId,
+                    lodging.Description);
                 return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
             }
+
             return View(lodging);
         }
 
@@ -179,10 +193,12 @@ namespace WebApplication4
             {
                 ErrorMessage = "The start date must be before the end date";
             }
+
             if (lodging.EndTime.CompareTo(lodging.StartTime) < 0)
             {
                 ErrorMessage = "The end date must be after the start date";
             }
+
             return ErrorMessage;
         }
 
@@ -195,7 +211,7 @@ namespace WebApplication4
         /// </returns>
         private string validateConflictingLodgings(AddedLodging lodging)
         {
-            var overlaps = _lodgingDal.GetOverlappingLodging(lodging.StartTime, lodging.EndTime);
+            var overlaps = this._lodgingDal.GetOverlappingLodging(lodging.StartTime, lodging.EndTime);
             string ErrorMessage = null;
             if (overlaps.Count > 0)
             {
@@ -204,8 +220,10 @@ namespace WebApplication4
                 {
                     ErrorMessage += overlap.Location + " " + overlap.StartTime + " - " + overlap.EndTime + ". ";
                 }
+
                 ErrorMessage += "Select \"Confirm With Conflicts\" to add the lodging anyways.";
             }
+
             return ErrorMessage;
         }
 
@@ -219,37 +237,49 @@ namespace WebApplication4
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            int lodgingId = (int)id;
-            Lodging lodging = _lodgingDal.GetLodgingById(lodgingId);
+
+            var lodgingId = (int)id;
+            var lodging = this._lodgingDal.GetLodgingById(lodgingId);
             if (lodging == null)
             {
                 return HttpNotFound();
             }
+
             return View(lodging);
         }
-
 
         /// <summary>
         ///     Deletes the confirmed lodging.
         /// </summary>
         /// <param name="id">The identifier of the lodging.</param>
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            int lodgingId = (int)id;
-            Lodging lodging = _lodgingDal.GetLodgingById(lodgingId);
-            _lodgingDal.RemoveLodging(lodging);
+            var lodgingId = id;
+            var lodging = this._lodgingDal.GetLodgingById(lodgingId);
+            this._lodgingDal.RemoveLodging(lodging);
             return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
         }
 
+        /// <summary>
+        ///     Releases unmanaged resources and optionally releases managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        ///     true to release both managed and unmanaged resources; false to release only unmanaged
+        ///     resources.
+        /// </param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                this.db.Dispose();
             }
+
             base.Dispose(disposing);
         }
+
+        #endregion
     }
 }

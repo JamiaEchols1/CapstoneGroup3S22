@@ -16,10 +16,6 @@ namespace TravelPlannerUnitTests.DALs.WaypointDALTests
     [TestClass]
     public class TestWaypoint
     {
-        #region Data members
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -30,14 +26,10 @@ namespace TravelPlannerUnitTests.DALs.WaypointDALTests
 
         #endregion
 
-        #region Constructors
-
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// Tests the get waypoints.
+        ///     Tests the get waypoints.
         /// </summary>
         [TestMethod]
         public void TestGetWaypoints()
