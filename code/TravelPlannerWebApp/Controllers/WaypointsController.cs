@@ -40,17 +40,6 @@ namespace WebApplication4.Controllers
         }
 
         /// <summary>
-        ///     GET: Returns a view of the waypoints for a selected trip
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Index()
-        {
-            var waypoints = _waypointDal.GetWaypoints(LoggedUser.SelectedTrip.Id);
-            ViewBag.TripName = LoggedUser.SelectedTrip.Name;
-            return View("Index", waypoints);
-        }
-
-        /// <summary>
         ///     GET: Returns a view of a specific waypoint's details for a selected trip
         /// </summary>
         /// <param name="id">The identifier.</param>
@@ -120,7 +109,7 @@ namespace WebApplication4.Controllers
                 else
                 {
                     _waypointDal.CreateNewWaypoint(waypoint.Location, waypoint.StartDateTime, waypoint.EndDateTime, waypoint.TripId, waypoint.Description);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
                 }
             }
             return View(waypoint);
@@ -192,7 +181,7 @@ namespace WebApplication4.Controllers
         {
             Waypoint waypoint = _waypointDal.GetWaypoint(id);
             this._waypointDal.RemoveWaypoint(waypoint);
-            return RedirectToAction("Index");
+            return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
         }
     }
 }

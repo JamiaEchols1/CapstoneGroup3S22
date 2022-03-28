@@ -110,7 +110,7 @@ namespace WebApplication4.Controllers
         /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate")] AddedTrip trip)
+        public ActionResult Create([Bind(Include = "Name,StartDate,EndDate,Description")] AddedTrip trip)
         {
             if (ModelState.IsValid)
             {
@@ -120,7 +120,7 @@ namespace WebApplication4.Controllers
                     ErrorMessage = "Start datetime must be past the current datetime";
                     return RedirectToAction("Create");
                 }
-                _tripDal.CreateNewTrip(trip.Name, trip.StartDate, trip.EndDate, trip.UserId);
+                _tripDal.CreateNewTrip(trip.Name, trip.StartDate, trip.EndDate, trip.UserId, trip.Description);
                 return RedirectToAction("Index");
             }
 
@@ -130,7 +130,8 @@ namespace WebApplication4.Controllers
                 UserId = trip.UserId,
                 Id = trip.Id,
                 EndDate = trip.EndDate,
-                StartDate = trip.StartDate
+                StartDate = trip.StartDate,
+                Description = trip.Description
             };
             return View(trip);
         }

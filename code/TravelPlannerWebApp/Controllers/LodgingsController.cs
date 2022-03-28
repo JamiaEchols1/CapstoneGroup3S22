@@ -45,19 +45,6 @@ namespace WebApplication4
         }
 
         /// <summary>
-        ///     Displays all of the users lodging for a selected trip
-        /// </summary>
-        /// <returns>
-        ///     View of all of the lodging points for a selected trip
-        /// </returns>
-        public ActionResult Index()
-        {
-            var lodgings = _lodgingDal.GetLodgings(LoggedUser.SelectedTrip.Id);
-            ViewBag.TripName = LoggedUser.SelectedTrip.Name;
-            return View("Index", lodgings);
-        }
-
-        /// <summary>
         ///     Details of the lodging point by id.
         /// </summary>
         /// <param name="id">The identifier.</param>
@@ -108,7 +95,7 @@ namespace WebApplication4
         /// <param name="lodging">The lodging.</param>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Location,StartTime,EndTime")] AddedLodging lodging)
+        public ActionResult Create([Bind(Include = "Location,StartTime,EndTime,Description")] AddedLodging lodging)
         {
             if (ModelState.IsValid)
             {
@@ -125,14 +112,15 @@ namespace WebApplication4
                         Location = lodging.Location,
                         StartTime = lodging.StartTime,
                         EndTime = lodging.EndTime,
-                        TripId = TripId
+                        TripId = TripId,
+                        Description = lodging.Description
                     };
                     return RedirectToAction("CreateWithConflicts", new { ErrorMessage });
                 }
                 else
                 {
-                    _lodgingDal.CreateNewLodging(lodging.Location, lodging.StartTime, lodging.EndTime, TripId);
-                    return RedirectToAction("Index");
+                    _lodgingDal.CreateNewLodging(lodging.Location, lodging.StartTime, lodging.EndTime, TripId, lodging.Description);
+                    return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
                 }
             }
             return View(lodging);
@@ -166,13 +154,13 @@ namespace WebApplication4
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateWithConflicts([Bind(Include = "Location,StartTime,EndTime")] AddedLodging lodging)
+        public ActionResult CreateWithConflicts([Bind(Include = "Location,StartTime,EndTime,Description")] AddedLodging lodging)
         {
             if (ModelState.IsValid)
             {
                 var TripId = LoggedUser.SelectedTrip.Id;
-                _lodgingDal.CreateNewLodging(lodging.Location, lodging.StartTime, lodging.EndTime, TripId);
-                return RedirectToAction("Index"); 
+                _lodgingDal.CreateNewLodging(lodging.Location, lodging.StartTime, lodging.EndTime, TripId, lodging.Description);
+                return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
             }
             return View(lodging);
         }
@@ -252,7 +240,7 @@ namespace WebApplication4
             int lodgingId = (int)id;
             Lodging lodging = _lodgingDal.GetLodgingById(lodgingId);
             _lodgingDal.RemoveLodging(lodging);
-            return RedirectToAction("Index");
+            return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
         }
 
         protected override void Dispose(bool disposing)

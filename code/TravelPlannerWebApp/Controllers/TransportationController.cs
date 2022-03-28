@@ -35,18 +35,6 @@ namespace WebApplication4.Controllers
             _transportationDal = transportationDal;
         }
 
-
-        /// <summary>
-        /// Indexes this instance.
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Index()
-        {
-            var transportation = this._transportationDal.GetTransportationsByTrip(LoggedUser.SelectedTrip.Id);
-            ViewBag.TripName = LoggedUser.SelectedTrip.Name;
-            return View("Index", transportation);
-        }
-
         /// <summary>
         /// Detailses the specified identifier.
         /// </summary>
@@ -101,7 +89,7 @@ namespace WebApplication4.Controllers
         {
             Transportation transportation = _transportationDal.GetTransportationById(id);
             this._transportationDal.DeleteTransportation(transportation);
-            return RedirectToAction("Index");
+            return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
         }
 
         /// <summary>
@@ -134,7 +122,7 @@ namespace WebApplication4.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StartTime,EndTime,Description")] AddedTransportation transportation)
+        public ActionResult Create([Bind(Include = "StartTime,EndTime,Description,Type")] AddedTransportation transportation)
         {
             if (ModelState.IsValid)
             {
@@ -151,8 +139,8 @@ namespace WebApplication4.Controllers
                 else
                 {
                     this._transportationDal.CreateANewTransportation(transportation.TripId, transportation.StartTime,
-                        transportation.EndTime, transportation.Description);
-                    return RedirectToAction("Index");
+                        transportation.EndTime, transportation.Description, transportation.Type);
+                    return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
                 }
             }
             return View(transportation);

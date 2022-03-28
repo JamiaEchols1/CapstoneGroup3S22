@@ -21,12 +21,20 @@ namespace WebApplication4.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
+        [Required]
+        public string Type { get; set; }
+
+        /// <summary>
         /// Gets or sets the description.
         /// </summary>
         /// <value>
         /// The description.
         /// </value>
-        [Required]
         public string Description { get; set; }
 
         /// <summary>

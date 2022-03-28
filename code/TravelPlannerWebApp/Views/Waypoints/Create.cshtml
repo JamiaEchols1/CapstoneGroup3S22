@@ -1,4 +1,5 @@
-﻿@model WebApplication4.Models.AddedWaypoint
+﻿@using TravelPlannerLibrary.Models
+@model WebApplication4.Models.AddedWaypoint
 
 @{
     ViewBag.Title = "Create";
@@ -74,7 +75,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
 </div>
 
 @section Scripts {

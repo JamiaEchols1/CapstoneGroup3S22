@@ -39,24 +39,23 @@ namespace TravelPlannerLibrary.DAL
         #region Methods
 
         /// <summary>
-        ///     Creates a new trip with the specified values.
+        /// Creates a new trip with the specified values.
         /// </summary>
-        /// @precondition - name != null
-        /// startDate != null, startDate &gt;= DateTime.Now;
-        /// endDate != null, endDate &gt;= startDate
         /// <param name="name">The name.</param>
         /// <param name="startDate">The start date.</param>
         /// <param name="endDate">The end date.</param>
         /// <param name="userId">The user identifier.</param>
+        /// <param name="description">The description.</param>
         /// <returns>
-        ///     1 if creation success, 0 otherwise
+        /// 1 if creation success, 0 otherwise
         /// </returns>
         /// <exception cref="System.ArgumentNullException">name - Trip must have a name</exception>
-        /// <exception cref="System.ArgumentException">
-        ///     startDate date must not be before today
-        ///     or
-        ///     endDate date must be after start date
-        /// </exception>
+        /// <exception cref="System.ArgumentException">startDate date must not be before today
+        /// or
+        /// endDate date must be after start date</exception>
+        /// @precondition - name != null
+        /// startDate != null, startDate &gt;= DateTime.Now;
+        /// endDate != null, endDate &gt;= startDate
         public int CreateNewTrip(string name, DateTime startDate, DateTime endDate, int userId, string description)
         {
             if (string.IsNullOrEmpty(name))
