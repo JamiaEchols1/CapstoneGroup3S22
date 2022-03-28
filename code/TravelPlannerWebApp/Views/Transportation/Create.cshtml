@@ -4,14 +4,13 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Transportation</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    <h4>Trip Details : @ViewBag.TripDetails</h4>
     <div class="form-horizontal">
-        <h4>Transportation</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -63,23 +62,15 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#StartDate').datetimepicker({
-            minDate: new Date(),
+        $('#StartTime').datetimepicker({
+            minDate: new moment("@ViewBag.StartDate"),
         }).on('dp.change', function (e) {
             $(this).data('DateTimePicker').hide();
         });
-
-        $('#EndDate').datetimepicker({
-            minDate: new Date()
+        $('#EndTime').datetimepicker({
+            minDate: new moment("@ViewBag.StartDate"),
         }).on('dp.change', function (e) {
             $(this).data('DateTimePicker').hide();
-        });
-
-        $("#StartDate").on("dp.change", function (e) {
-            $('#EndDate').data("DateTimePicker").minDate(e.date);
-        });
-        $("#EndDate").on("dp.change", function (e) {
-            $('#StartDate').data("DateTimePicker").maxDate(e.date);
         });
     });
 </script>

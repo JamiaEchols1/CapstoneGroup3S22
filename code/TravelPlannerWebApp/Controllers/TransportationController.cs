@@ -123,7 +123,7 @@ namespace WebApplication4.Controllers
         /// <param name="waypoint">The waypoint.</param>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Location,StartDateTime,EndDateTime,Description")] AddedTransportation transportation)
+        public ActionResult Create([Bind(Include = "StartTime,EndTime,Description")] AddedTransportation transportation)
         {
             if (ModelState.IsValid)
             {

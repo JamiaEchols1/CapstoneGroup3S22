@@ -42,11 +42,12 @@ namespace WebApplication4.Controllers
         /// <param name="tripDal">The trip dal.</param>
         /// <param name="waypointDal">The waypoint dal.</param>
         /// <param name="lodgingDal">The lodging dal.</param>
-        public TripsController(TripDal tripDal, WaypointDal waypointDal, LodgingDal lodgingDal)
+        public TripsController(TripDal tripDal, WaypointDal waypointDal, LodgingDal lodgingDal, TransportationDal transportationDal)
         {
             _tripDal = tripDal;
             _waypointDal = waypointDal;
             _lodgingDal = lodgingDal;
+            _transportationDal = transportationDal;
         }
 
         /// <summary>

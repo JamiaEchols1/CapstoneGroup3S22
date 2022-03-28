@@ -41,7 +41,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             var service = new TripDal(mockContext.Object);
 
-            var controller = new TripsController(service, null, null);
+            var controller = new TripsController(service, null, null, null);
             controller.SetErrorMessage("Invalid date");
             var result = controller.Create();
             Assert.IsInstanceOfType(result, typeof(ViewResult));
@@ -83,7 +83,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             var service = new TripDal(mockContext.Object);
 
-            var controller = new TripsController(service, null, null);
+            var controller = new TripsController(service, null, null, null);
             var result = controller.Create(addedTrip);
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
@@ -124,7 +124,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             var service = new TripDal(mockContext.Object);
 
-            var controller = new TripsController(service, null, null);
+            var controller = new TripsController(service, null, null, null);
             var result = controller.Create(addedTrip);
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
@@ -165,7 +165,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             var service = new TripDal(mockContext.Object);
 
-            var controller = new TripsController(service, null, null);
+            var controller = new TripsController(service, null, null, null);
             controller.ModelState.AddModelError("Mega", "Error");
             var result = controller.Create(addedTrip);
             Assert.IsInstanceOfType(result, typeof(ViewResult));

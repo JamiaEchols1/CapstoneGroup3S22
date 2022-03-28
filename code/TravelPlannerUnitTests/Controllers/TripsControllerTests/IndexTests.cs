@@ -47,7 +47,7 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
 
             var service = new TripDal(mockContext.Object);
 
-            var controller = new TripsController(service, null, null);
+            var controller = new TripsController(service, null, null, null);
             var result = controller.Index();
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
