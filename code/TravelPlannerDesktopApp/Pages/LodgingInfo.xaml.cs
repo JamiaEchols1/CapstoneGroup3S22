@@ -44,6 +44,7 @@ namespace TravelPlannerDesktopApp.Pages
         public void SetSelectedLodgingText()
         {
             this.locationTextBlock.Text = "Location: " + LoggedUser.SelectedLodging.Location;
+            this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedLodging.Description;
             this.startDateTextBlock.Text = "Start Date: " + LoggedUser.SelectedLodging.StartTime;
             this.endDateTextBlock.Text = "End Date: " + LoggedUser.SelectedLodging.EndTime;
             this.mapWebBrowser.Source = new Uri("https://www.google.com/maps/place/" + FormatLocationString());

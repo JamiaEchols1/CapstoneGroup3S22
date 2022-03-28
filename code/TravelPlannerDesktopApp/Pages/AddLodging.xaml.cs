@@ -56,7 +56,7 @@ namespace TravelPlannerDesktopApp.Pages
                 }
                 var newLodging = this.lodgingDal.CreateNewLodging(this.locationTextBox.Text,
                     DateTime.Parse(this.startDatePicker.Text), DateTime.Parse(this.endDatePicker.Text),
-                    LoggedUser.SelectedTrip.Id);
+                    LoggedUser.SelectedTrip.Id, this.descriptionTextBox.Text);
 
                 MessageBox.Show("Lodging creation was Successful!");
 

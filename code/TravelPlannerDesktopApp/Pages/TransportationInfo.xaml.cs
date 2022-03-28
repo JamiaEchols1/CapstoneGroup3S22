@@ -44,6 +44,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.startTimeTextBlock.Text = "Start Time: " + LoggedUser.SelectedTransportation.StartTime;
             this.endTimeTextBlock.Text = "End Time: " + LoggedUser.SelectedTransportation.EndTime;
             this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTransportation.Description;
+            this.typeTextBlock.Text = "Type: " + LoggedUser.SelectedTransportation.Type;
         }
 
         #endregion

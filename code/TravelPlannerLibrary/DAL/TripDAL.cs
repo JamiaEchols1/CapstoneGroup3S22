@@ -57,7 +57,7 @@ namespace TravelPlannerLibrary.DAL
         ///     or
         ///     endDate date must be after start date
         /// </exception>
-        public int CreateNewTrip(string name, DateTime startDate, DateTime endDate, int userId)
+        public int CreateNewTrip(string name, DateTime startDate, DateTime endDate, int userId, string description)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -79,7 +79,8 @@ namespace TravelPlannerLibrary.DAL
                 Name = name,
                 StartDate = startDate,
                 EndDate = endDate,
-                UserId = userId
+                UserId = userId,
+                Description = description
             };
             db.Trips.Add(trip);
             return db.SaveChanges();

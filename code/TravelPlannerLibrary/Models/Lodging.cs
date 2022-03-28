@@ -19,6 +19,7 @@ namespace TravelPlannerLibrary.Models
         public string Location { get; set; }
         public System.DateTime StartTime { get; set; }
         public System.DateTime EndTime { get; set; }
+        public string Description { get; set; }
     
         public virtual Trip Trip { get; set; }
 

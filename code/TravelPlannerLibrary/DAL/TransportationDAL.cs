@@ -75,7 +75,7 @@ namespace TravelPlannerLibrary.DAL
         ///     Start date must be on or after waypoint end date
         /// </exception>
         public Transportation CreateANewTransportation(int tripId,
-            DateTime startTime, DateTime endTime, string description)
+            DateTime startTime, DateTime endTime, string description, string type)
         {
             if (string.IsNullOrEmpty(description))
             {
@@ -103,7 +103,8 @@ namespace TravelPlannerLibrary.DAL
                 TripId = tripId,
                 StartTime = startTime,
                 EndTime = endTime,
-                Description = description
+                Description = description,
+                Type = type
             };
             db.Transportations.Add(transportation);
             db.SaveChanges();

@@ -53,6 +53,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.selectedTripTextBlock.Text = "Selected Trip : " + LoggedUser.SelectedTrip.Name;
             this.tripStartDateTextBlock.Text = "Start Date: " + LoggedUser.SelectedTrip.StartDate.ToString("D");
             this.tripEndDateTextBlock.Text = "End Date: " + LoggedUser.SelectedTrip.EndDate.ToString("D");
+            this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTrip.Description;
         }
 
         /// <summary>

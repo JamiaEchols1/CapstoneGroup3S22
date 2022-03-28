@@ -52,24 +52,23 @@ namespace TravelPlannerLibrary.DAL
         }
 
         /// <summary>
-        ///     Creates a new lodging.
+        /// Creates a new lodging.
         /// </summary>
         /// <param name="location">The location.</param>
         /// <param name="startTime">The start time.</param>
         /// <param name="endTime">The end time.</param>
         /// <param name="tripId">The trip identifier.</param>
+        /// <param name="description">The description.</param>
         /// <returns>
-        ///     The newly created lodging
+        /// The newly created lodging
         /// </returns>
         /// <exception cref="System.ArgumentNullException">Must enter a location!</exception>
-        /// <exception cref="System.ArgumentException">
-        ///     Start date must be on or after trip start date
-        ///     or
-        ///     End date must be on or before trip end date
-        ///     or
-        ///     End date must be on or after selected start date
-        /// </exception>
-        public Lodging CreateNewLodging(string location, DateTime startTime, DateTime endTime, int tripId)
+        /// <exception cref="System.ArgumentException">Start date must be on or after trip start date
+        /// or
+        /// End date must be on or before trip end date
+        /// or
+        /// End date must be on or after selected start date</exception>
+        public Lodging CreateNewLodging(string location, DateTime startTime, DateTime endTime, int tripId, string description)
         {
             if (string.IsNullOrEmpty(location))
             {
@@ -97,7 +96,8 @@ namespace TravelPlannerLibrary.DAL
                 StartTime = startTime,
                 EndTime = endTime,
                 TripId = tripId,
-                Id = FindNextId()
+                Id = FindNextId(),
+                Description = description
             };
 
             db.Lodgings.Add(lodging);

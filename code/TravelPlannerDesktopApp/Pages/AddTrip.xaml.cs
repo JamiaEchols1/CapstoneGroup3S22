@@ -37,7 +37,7 @@ namespace TravelPlannerDesktopApp.Pages
             try
             {
                 this.tripDal.CreateNewTrip(this.nameTextBox.Text, DateTime.Parse(this.startDatePicker.Text),
-                    DateTime.Parse(this.endDatePicker.Text), LoggedUser.User.Id);
+                    DateTime.Parse(this.endDatePicker.Text), LoggedUser.User.Id, this.descriptionTextBox.Text);
 
                 MessageBox.Show("Trip creation was Successful!");
 

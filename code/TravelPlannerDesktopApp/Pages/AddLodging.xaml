@@ -14,9 +14,13 @@
                             NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right" />
         <Label x:Name="addLodgingTitle"  Content="Add New Lodging" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="705" />
 
-        <Label Content="Location:" Margin="156,101,564,0" VerticalAlignment="Top" />
-        <TextBox x:Name="locationTextBox" HorizontalAlignment="Left" Margin="271,106,0,0" TextWrapping="Wrap"
+        <Label Content="Location:" Margin="160,61,534,0" VerticalAlignment="Top" />
+        <TextBox x:Name="locationTextBox" HorizontalAlignment="Left"  Margin="271,68,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Location Name" />
+
+        <Label Content="Description:" Margin="150,101,534,0" VerticalAlignment="Top" />
+        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Margin="271,106,0,0" TextWrapping="Wrap"
+                 VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Description Name"/>
 
         <Label Content="Start Time:" Margin="156,141,534,0" VerticalAlignment="Top" />
         <wpfTool:DateTimePicker x:Name="startDatePicker" HorizontalAlignment="Left" Margin="271,146,0,0"

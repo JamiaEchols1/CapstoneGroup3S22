@@ -74,7 +74,7 @@ namespace TravelPlannerDesktopApp.Pages
                     throw new Exception(message + "Transportation must not overlap with transportations");
                 }
 
-                var newTransportation = this.transportationDal.CreateANewTransportation(LoggedUser.SelectedTrip.Id, startDate, endDate, this.descriptionTextBox.Text);
+                var newTransportation = this.transportationDal.CreateANewTransportation(LoggedUser.SelectedTrip.Id, startDate, endDate, this.descriptionTextBox.Text, this.typeTextBox.Text);
 
                 MessageBox.Show("Transportation creation was Successful!");
                 LoggedUser.SelectedTransportation = newTransportation;

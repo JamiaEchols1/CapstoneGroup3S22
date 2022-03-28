@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using TravelPlannerLibrary;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 using WebApplication4.Models;
@@ -18,28 +19,29 @@ namespace WebApplication4
     /// <seealso cref="System.Web.Mvc.Controller" />
     public class LodgingsController : Controller
     {
+        private TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
+
         private LodgingDal _lodgingDal = new LodgingDal();
         private TripDal _tripDal = new TripDal();
 
         private static AddedLodging conflictingLodging;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="LodgingsController"/> class.
-        /// </summary>
-        /// <param name="tripService">The trip service.</param>
-        /// <param name="lodgingsService">The lodgings service.</param>
-        public LodgingsController(TripDal tripService, LodgingDal lodgingsService)
-        {
-            this._tripDal = tripService;
-            this._lodgingDal = lodgingsService;
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="LodgingsController"/> class.
-        ///     Default Constructor
+        /// Initializes a new instance of the <see cref="LodgingsController"/> class.
         /// </summary>
         public LodgingsController()
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LodgingsController"/> class.
+        /// </summary>
+        /// <param name="tripDal">The trip dal.</param>
+        /// <param name="lodgingDal">The lodging dal.</param>
+        public LodgingsController(TripDal tripDal, LodgingDal lodgingDal)
+        {
+            this._lodgingDal = lodgingDal;
+            this._tripDal = tripDal;
         }
 
         /// <summary>
@@ -92,8 +94,7 @@ namespace WebApplication4
             {
                 id = LoggedUser.SelectedTrip.Id;
             }
-            int tripId = (int)id;
-            LoggedUser.SelectedTrip = _tripDal.GetTripById(tripId);
+            LoggedUser.SelectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
             ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
@@ -150,8 +151,7 @@ namespace WebApplication4
             }
             AddedLodging Lodging = conflictingLodging;
             conflictingLodging = null;
-            var tripId = (int)id;
-            LoggedUser.SelectedTrip = _tripDal.GetTripById(tripId);
+            LoggedUser.SelectedTrip = db.Trips.Where(x => x.Id == id).FirstOrDefault();
             ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " + LoggedUser.SelectedTrip.EndDate;
             ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
             ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
@@ -253,6 +253,15 @@ namespace WebApplication4
             Lodging lodging = _lodgingDal.GetLodgingById(lodgingId);
             _lodgingDal.RemoveLodging(lodging);
             return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
