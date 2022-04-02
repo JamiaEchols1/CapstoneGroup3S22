@@ -52,31 +52,31 @@ namespace TravelPlannerLibrary.DAL
         }
 
         /// <summary>
-        ///     Creates a new transportation.
+        /// Creates a new transportation.
         /// </summary>
         /// <param name="tripId">The trip identifier.</param>
         /// <param name="startTime">The start time.</param>
         /// <param name="endTime">The end time.</param>
         /// <param name="description">The description.</param>
         /// <param name="type">The type.</param>
+        /// <param name="origin">The origin.</param>
+        /// <param name="destination">The destination.</param>
         /// <returns>
-        ///     The number of entries written to the database, 0 if transport not created, 1 if creation was successful
+        /// The number of entries written to the database, 0 if transport not created, 1 if creation was successful
         /// </returns>
         /// <exception cref="System.ArgumentNullException">Description cannot be null</exception>
-        /// <exception cref="System.ArgumentException">
-        ///     End date must be on or after selected start date
-        ///     or
-        ///     Departure waypoint cannot be the same as arrival waypoint
-        ///     or
-        ///     Start date must be on or after waypoint end date
-        /// </exception>
+        /// <exception cref="System.ArgumentException">End date must be on or after selected start date
+        /// or
+        /// Departure waypoint cannot be the same as arrival waypoint
+        /// or
+        /// Start date must be on or after waypoint end date</exception>
         /// @precondition - !string.IsNullOrEmpty(description);
         /// startTime.CompareTo(endTime) &lt;= 0;
         /// arrivalWaypointId != departingWaypointId;
         /// selectedWaypoint.EndDateTime.CompareTo(startTime) &lt;= 0;
         /// @postcondition - transportation is added to the db with the specified values
         public Transportation CreateANewTransportation(int tripId,
-            DateTime startTime, DateTime endTime, string description, string type)
+            DateTime startTime, DateTime endTime, string description, string type, string origin, string destination)
         {
             if (string.IsNullOrEmpty(description))
             {
@@ -100,12 +100,14 @@ namespace TravelPlannerLibrary.DAL
             }
 
             var transportation = new Transportation {
-                Id = db.Transportations.Count(),
+                Id = FindNextId(),
                 TripId = tripId,
                 StartTime = startTime,
                 EndTime = endTime,
                 Description = description,
-                Type = type
+                Type = type,
+                Origin = origin,
+                Destination = destination
             };
             db.Transportations.Add(transportation);
             db.SaveChanges();
@@ -215,6 +217,24 @@ namespace TravelPlannerLibrary.DAL
             }
 
             return trip;
+        }
+
+        /// <summary>
+        ///     Finds the next available identifier.
+        /// </summary>
+        /// <returns>
+        ///     The next available identifier for a transport
+        /// </returns>
+        public int FindNextId()
+        {
+            if (!db.Transportations.Any())
+            {
+                return 0;
+            }
+
+            var transId = db.Transportations.Max(wp => wp.Id);
+            transId++;
+            return transId;
         }
 
         #endregion

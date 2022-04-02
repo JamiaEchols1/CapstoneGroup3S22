@@ -9,58 +9,174 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <title>Details</title>
 </head>
 <body>
-<div>
-    <h4>Transportation</h4>
-    <hr/>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
+    <div>
+        <h4>Transportation</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartTime)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartTime)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.StartTime)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EndTime)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EndTime)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.EndTime)
+            </dd>
 
-        <dt>
-            Trip Name
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Origin)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Trip.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Origin)
+            </dd>
 
-    </dl>
-</div>
+            <dt>
+                @Html.DisplayNameFor(model => model.Destination)
+            </dt>
 
-<p>
-    @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
-</p>
+            <dd>
+                @Html.DisplayFor(model => model.Destination)
+            </dd>
+
+            <dt>
+                Trip Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Trip.Name)
+            </dd>
+
+        </dl>
+    </div>
+
+    <div id="container">
+        <div id="map"></div>
+        <div id="sidebar">
+            <h3 style="flex-grow: 0">Request</h3>
+            <pre style="flex-grow: 1" id="request"></pre>
+            <h3 style="flex-grow: 0">Response</h3>
+            <pre style="flex-grow: 1" id="response"></pre>
+        </div>
+    </div>
+
+    <p>
+        @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
+    </p>
+
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJEezkTFgj0PAnzJQJVVEhfZbpUmH27s0&callback=initMap&v=weekly"
+            async></script>
 </body>
 </html>
+
+<script>
+    //source : https://developers.google.com/maps/documentation/javascript/examples/distance-matrix#maps_distance_matrix-javascript
+    function initMap() {
+        const bounds = new google.maps.LatLngBounds();
+        const markersArray = [];
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 55.53, lng: 9.4 },
+            zoom: 10,
+        });
+        // initialize services
+        const geocoder = new google.maps.Geocoder();
+        const service = new google.maps.DistanceMatrixService();
+        // build request
+        const origin2 = @Html.Raw(Json.Encode(Model.Origin));
+        const destinationA = @Html.Raw(Json.Encode(Model.Destination));
+        const request = {
+            origins: [origin2],
+            destinations: [destinationA],
+            travelMode: google.maps.TravelMode.DRIVING,
+            unitSystem: google.maps.UnitSystem.METRIC,
+            avoidHighways: false,
+            avoidTolls: false,
+        };
+
+        // put request on page
+        document.getElementById("request").innerText = JSON.stringify(
+            request,
+            null,
+            2
+        );
+        // get distance matrix response
+        service.getDistanceMatrix(request).then((response) => {
+            // put response
+            document.getElementById("response").innerText = JSON.stringify(
+                response,
+                null,
+                2
+            );
+
+            // show on map
+            const originList = response.originAddresses;
+            const destinationList = response.destinationAddresses;
+
+            deleteMarkers(markersArray);
+
+            const showGeocodedAddressOnMap = (asDestination) => {
+                const handler = ({ results }) => {
+                    map.fitBounds(bounds.extend(results[0].geometry.location));
+                    markersArray.push(
+                        new google.maps.Marker({
+                            map,
+                            position: results[0].geometry.location,
+                            label: asDestination ? "D" : "O",
+                        })
+                    );
+                };
+                return handler;
+            };
+
+            for (let i = 0; i < originList.length; i++) {
+                const results = response.rows[i].elements;
+
+                geocoder
+                    .geocode({ address: originList[i] })
+                    .then(showGeocodedAddressOnMap(false));
+
+                for (let j = 0; j < results.length; j++) {
+                    geocoder
+                        .geocode({ address: destinationList[j] })
+                        .then(showGeocodedAddressOnMap(true));
+                }
+            }
+        });
+    }
+
+    function deleteMarkers(markersArray) {
+        for (let i = 0; i < markersArray.length; i++) {
+            markersArray[i].setMap(null);
+        }
+
+        markersArray = [];
+    }
+</script>

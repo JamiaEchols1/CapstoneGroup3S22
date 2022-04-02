@@ -20,12 +20,9 @@ namespace TravelPlannerLibrary.Models
         public System.DateTime EndTime { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
+        public string Origin { get; set; }
+        public string Destination { get; set; }
     
         public virtual Trip Trip { get; set; }
-
-        public override string ToString()
-        {
-            return "Transportation: " + "Start: " + this.StartTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " + this.EndTime.ToString("MM/dd/yyyy h:mm tt");
-        }
     }
 }
