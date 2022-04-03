@@ -98,24 +98,24 @@
             else if (ObjectContext.GetObjectType(item.GetType()) == typeof(Transportation))
             {
                 var transportationItem = (Transportation)item;
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => transportationItem.Type)
-                    </td>
-                    <td>
-                        Transportation
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => transportationItem.StartTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => transportationItem.EndTime)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Details", "../Transportation/Details", new { id = transportationItem.Id }) |
-                        @Html.ActionLink("Delete", "../Transportation/Delete", new { id = transportationItem.Id })
-                    </td>
-                </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => transportationItem.Type)
+        </td>
+        <td>
+            Transportation
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => transportationItem.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => transportationItem.EndTime)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "../Transportation/Details", new { id = transportationItem.Id }) |
+            @Html.ActionLink("Delete", "../Transportation/Delete", new { id = transportationItem.Id })
+        </td>
+    </tr>
             }
         }
     </table>

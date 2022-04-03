@@ -66,6 +66,30 @@ namespace WebApplication4.Models
         /// </value>
         public int TripId { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the origin.
+        /// </summary>
+        /// <value>
+        /// The origin.
+        /// </value>
+        public string Origin { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the destination.
+        /// </summary>
+        /// <value>
+        /// The destination.
+        /// </value>
+        public string Destination { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the travel time.
+        /// </summary>
+        /// <value>
+        /// The travel time.
+        /// </value>
+        public string TravelTime { get; set; }
+
         #endregion
     }
 }
