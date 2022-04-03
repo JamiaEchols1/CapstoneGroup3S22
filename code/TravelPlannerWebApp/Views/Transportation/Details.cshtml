@@ -115,7 +115,7 @@
         const request = {
             origins: [origin2],
             destinations: [destinationA],
-            travelMode: google.maps.TravelMode.DRIVING,
+            travelMode: @Html.Raw(Json.Encode(Model.Type)),
             unitSystem: google.maps.UnitSystem.METRIC,
             avoidHighways: false,
             avoidTolls: false,
