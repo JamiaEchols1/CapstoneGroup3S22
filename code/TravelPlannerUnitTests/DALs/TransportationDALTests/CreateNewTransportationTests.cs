@@ -63,7 +63,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), null, "Car"));
+                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), null, "Car", null, null));
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentNullException>(() =>
-                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), "", "Car"));
+                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), "", "Car", null, null));
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
 
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentException>(() =>
-                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(-7), "Description", "Car"));
+                service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(-7), "Description", "Car", null, null));
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             var service = new TransportationDal(mockContext.Object);
             Assert.ThrowsException<ArgumentException>(() =>
                 service.CreateANewTransportation(0, DateTime.Now.AddMinutes(-33), DateTime.Now.AddMinutes(40),
-                    "Description", "Car"));
+                    "Description", "Car", null, null));
             LoggedUser.SelectedTrip = null;
         }
 
@@ -235,7 +235,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             var service = new TransportationDal(mockContext.Object);
 
             service.CreateANewTransportation(0, DateTime.Now.AddMinutes(40), DateTime.Now.AddMinutes(45),
-                "Description", "Car");
+                "Description", "Car", null, null);
 
             Assert.IsTrue(wasCalled);
             LoggedUser.SelectedTrip = null;

@@ -88,7 +88,7 @@ namespace TravelPlannerDesktopApp.Pages
                 }
 
                 var newTransportation = this.transportationDal.CreateANewTransportation(LoggedUser.SelectedTrip.Id,
-                    startDate, endDate, this.descriptionTextBox.Text, this.typeTextBox.Text);
+                    startDate, endDate, this.descriptionTextBox.Text, this.typeTextBox.Text, null, null);
 
                 MessageBox.Show("Transportation creation was Successful!");
                 LoggedUser.SelectedTransportation = newTransportation;
