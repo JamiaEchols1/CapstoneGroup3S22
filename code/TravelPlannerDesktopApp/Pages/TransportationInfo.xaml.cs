@@ -49,11 +49,37 @@ namespace TravelPlannerDesktopApp.Pages
             this.endTimeTextBlock.Text = "End Time: " + LoggedUser.SelectedTransportation.EndTime;
             this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTransportation.Description;
             this.typeTextBlock.Text = "Type: " + LoggedUser.SelectedTransportation.Type;
+            this.wbMaps.Source = new Uri("https://www.google.com/maps/dir/" + this.FormatLocationString());
         }
 
         private void editTransportationButton_Click(object sender, RoutedEventArgs e)
         {
             //TODO
+        }
+
+        private string FormatLocationString()
+        {
+            var output = "";
+
+            var originLocationParts = LoggedUser.SelectedTransportation.Origin.Split(' ');
+            foreach (var part in originLocationParts)
+            {
+                output += part + "+";
+            }
+
+            output.Remove(output.Length - 1);
+
+            output += "/";
+
+            var destinationLocationParts = LoggedUser.SelectedTransportation.Destination.Split(' ');
+            foreach (var part in destinationLocationParts)
+            {
+                output += part + "+";
+            }
+
+            output.Remove(output.Length - 1);
+
+            return output;
         }
 
         /// <summary>

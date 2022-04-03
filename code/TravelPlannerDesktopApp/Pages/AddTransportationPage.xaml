@@ -34,6 +34,10 @@
         <TextBlock x:Name="overlappingLabel" Margin="100,255,496,114" TextWrapping="Wrap" Visibility="Collapsed"
                    Text="Overlapping Transportation and Waypoints: " />
         <ListBox x:Name="overlappingListBox" Margin="271,220,242,87" Visibility="Collapsed" />
+        <TextBox x:Name="orginLocationTextBox" HorizontalAlignment="Left" Height="36" Margin="271,255,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="270"/>
+        <TextBox x:Name="destinationLocationTextBox" HorizontalAlignment="Left" Height="45" Margin="266,291,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="275"/>
+        <Label x:Name="OriginLabel" Content="Origin" HorizontalAlignment="Left" Margin="160,255,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="destinationLabel" Content="Destination" HorizontalAlignment="Left" Height="45" Margin="95,291,0,0" VerticalAlignment="Top" Width="108"/>
 
     </Grid>
 </Page>

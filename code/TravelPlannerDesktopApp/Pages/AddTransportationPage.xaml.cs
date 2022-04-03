@@ -12,7 +12,7 @@ namespace TravelPlannerDesktopApp.Pages
     /// <summary>
     ///     Interaction logic for AddTransportationPage.xaml
     /// </summary>
-    public partial class AddTransportationPage : Page
+     public partial class AddTransportationPage : Page
     {
         #region Data members
 
@@ -88,7 +88,7 @@ namespace TravelPlannerDesktopApp.Pages
                 }
 
                 var newTransportation = this.transportationDal.CreateANewTransportation(LoggedUser.SelectedTrip.Id,
-                    startDate, endDate, this.descriptionTextBox.Text, this.typeTextBox.Text);
+                    startDate, endDate, this.descriptionTextBox.Text, this.typeTextBox.Text, this.orginLocationTextBox.Text, this.destinationLocationTextBox.Text);
 
                 MessageBox.Show("Transportation creation was Successful!");
                 LoggedUser.SelectedTransportation = newTransportation;

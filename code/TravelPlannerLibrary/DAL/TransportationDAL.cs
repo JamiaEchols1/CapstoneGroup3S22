@@ -59,6 +59,8 @@ namespace TravelPlannerLibrary.DAL
         /// <param name="endTime">The end time.</param>
         /// <param name="description">The description.</param>
         /// <param name="type">The type.</param>
+        /// <param name="origin">The Origin location</param>
+        /// <param name="destination">The destination location</param>
         /// <returns>
         ///     The number of entries written to the database, 0 if transport not created, 1 if creation was successful
         /// </returns>
@@ -76,7 +78,7 @@ namespace TravelPlannerLibrary.DAL
         /// selectedWaypoint.EndDateTime.CompareTo(startTime) &lt;= 0;
         /// @postcondition - transportation is added to the db with the specified values
         public Transportation CreateANewTransportation(int tripId,
-            DateTime startTime, DateTime endTime, string description, string type)
+            DateTime startTime, DateTime endTime, string description, string type, string origin, string destination)
         {
             if (string.IsNullOrEmpty(description))
             {
@@ -99,13 +101,26 @@ namespace TravelPlannerLibrary.DAL
                 throw new ArgumentException("End date must be on or before trip end date");
             }
 
+            if (string.IsNullOrEmpty(origin))
+            {
+                string parameterName = "Origin";
+                throw new ArgumentNullException(parameterName, "Origin cannot be null or empty");
+            }
+
+            if (string.IsNullOrEmpty(destination))
+            {
+                string parameterName = "Destination";
+                throw new ArgumentNullException(parameterName, "Destination cannot be null or empty");
+            }
             var transportation = new Transportation {
                 Id = db.Transportations.Count(),
                 TripId = tripId,
                 StartTime = startTime,
                 EndTime = endTime,
                 Description = description,
-                Type = type
+                Type = type,
+                Origin = origin,
+                Destination = destination
             };
             db.Transportations.Add(transportation);
             db.SaveChanges();
