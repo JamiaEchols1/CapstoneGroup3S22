@@ -5,6 +5,8 @@
 	[StartTime] DATETIME not null,
 	[EndTime] DATETIME not null,
 	[Description] varchar(250) null,
+	[Origin] varchar(250) null,
+	[Destination] varchar(250) null,
 	[Type] varchar(250) not null, 
     CONSTRAINT [FK_dbo.Transportation_dbo.Trip_Id] FOREIGN KEY ([TripId])
 		REFERENCES [dbo].[Trips] ([Id]) On delete cascade

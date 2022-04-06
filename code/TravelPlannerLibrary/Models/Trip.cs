@@ -28,7 +28,12 @@ namespace TravelPlannerLibrary.Models
         public System.DateTime EndDate { get; set; }
         public int UserId { get; set; }
         public string Description { get; set; }
-    
+
+        public override string ToString()
+        {
+            return this.Name + ", Start Date:" + this.StartDate.ToString("MM/dd/yyyy h:mm tt") + ", End Date: " + this.EndDate.ToString("MM/dd/yyyy h:mm tt");
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lodging> Lodgings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -36,10 +41,5 @@ namespace TravelPlannerLibrary.Models
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Waypoint> Waypoints { get; set; }
-
-        public override string ToString()
-        {
-            return this.Name + ", Start Date:" + this.StartDate.ToString("MM/dd/yyyy h:mm tt") + ", End Date: " + this.EndDate.ToString("MM/dd/yyyy h:mm tt");
-        }
     }
 }

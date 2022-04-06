@@ -135,7 +135,7 @@ namespace WebApplication4.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(
-            [Bind(Include = "StartTime,EndTime,Description,Type")]
+            [Bind(Include = "StartTime,EndTime,Description,Type,Origin,Destination")]
             AddedTransportation transportation)
         {
             if (ModelState.IsValid)
@@ -153,7 +153,7 @@ namespace WebApplication4.Controllers
                 }
 
                 this._transportationDal.CreateANewTransportation(transportation.TripId, transportation.StartTime,
-                    transportation.EndTime, transportation.Description, transportation.Type);
+                    transportation.EndTime, transportation.Description, transportation.Type, transportation.Origin, transportation.Destination);
                 return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
             }
 
