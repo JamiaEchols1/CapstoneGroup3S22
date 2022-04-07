@@ -14,3 +14,10 @@ Run the application
 To login as a user:
 In the username field, enter 'user'
 In the password field, enter 'password'
+
+To view code coverage for a sprint:
+Navigate to the sprints directory
+Select the sprint#
+Open the TestCoverageReport directory
+Scroll down and open index.html
+
