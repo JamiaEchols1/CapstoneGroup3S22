@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TravelPlannerLibrary.Models;
 using WebApplication4.ViewModels;
@@ -55,9 +56,12 @@ namespace TravelPlannerUnitTests.WebModels
             var viewmodel = new TripDetailsViewModel {
                 Trip = trip,
                 Lodgings = lodgings,
-                Waypoints = waypoints
+                Waypoints = waypoints,
+                WaypointsAndTransportation = new List<TripItem>()
             };
-
+            var sample_waypoints = viewmodel.Waypoints;
+            var sample_transports = viewmodel.Transportations;
+            var waypointsandtransports = viewmodel.WaypointsAndTransportation;
             Assert.AreEqual(waypoints, viewmodel.Waypoints);
             Assert.AreEqual(lodgings, viewmodel.Lodgings);
             Assert.AreEqual(trip, viewmodel.Trip);
