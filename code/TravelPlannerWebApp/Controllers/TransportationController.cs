@@ -42,7 +42,7 @@ namespace WebApplication4.Controllers
         #region Methods
 
         /// <summary>
-        ///     Detailses the specified identifier.
+        ///     Details the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
@@ -128,10 +128,11 @@ namespace WebApplication4.Controllers
         }
 
         /// <summary>
-        ///     Creates the specified transportation.
+        ///     Creates the specified transportation. If there are conflicting transportations,
+        ///     an error message with the conflicts will be returned with a new create transportation
+        ///     view.
         /// </summary>
         /// <param name="transportation">The transportation.</param>
-        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(
@@ -167,12 +168,6 @@ namespace WebApplication4.Controllers
             {
                 ErrorMessage = "The start date must be before the end date";
             }
-
-            if (transportation.EndTime.CompareTo(transportation.StartTime) < 0)
-            {
-                ErrorMessage = "The end date must be after the start date";
-            }
-
             return ErrorMessage;
         }
 
