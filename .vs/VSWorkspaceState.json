@@ -2,9 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\code",
-    "\\code\\TravelPlannerUnitTests",
-    "\\code\\TravelPlannerWebApp"
+    "\\code\\TravelPlannerDesktopApp",
+    "\\code\\TravelPlannerDesktopApp\\Pages"
   ],
-  "SelectedNode": "\\code\\TravelPlannerApplication.sln",
+  "SelectedNode": "\\code\\TravelPlannerDesktopApp\\Pages\\TransportationInfo.xaml",
   "PreviewInSolutionExplorer": false
 }

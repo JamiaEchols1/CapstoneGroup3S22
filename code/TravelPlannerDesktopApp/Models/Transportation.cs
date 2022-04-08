@@ -49,6 +49,10 @@ namespace TravelPlannerDesktopApp.Models
         /// </value>
         public string Description { get; set; }
 
+        public string Origin { get; set; }
+
+        public string Destination { get; set; }
+
         #endregion
 
         #region Methods
@@ -62,7 +66,7 @@ namespace TravelPlannerDesktopApp.Models
         public override string ToString()
         {
             return "Transportation: " + "Start: " + this.StartTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " +
-                   this.EndTime.ToString("MM/dd/yyyy h:mm tt");
+                   this.EndTime.ToString("MM/dd/yyyy h:mm tt") + " Origin:" + Origin + " Destination: " + Destination; ;
         }
 
         #endregion

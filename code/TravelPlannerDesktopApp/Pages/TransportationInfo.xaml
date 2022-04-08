@@ -9,13 +9,13 @@
       Title="TransportationInfo">
 
     <Grid Background="White">
-        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="299,115,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="65,102,0,0" TextWrapping="Wrap"
                    Text="Description:" VerticalAlignment="Top" Height="85" Width="196" />
-        <TextBlock x:Name="typeTextBlock" HorizontalAlignment="Left" Margin="299,180,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="typeTextBlock" HorizontalAlignment="Left" Margin="65,192,0,0" TextWrapping="Wrap"
                    Text="Type:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="startTimeTextBlock" HorizontalAlignment="Left" Margin="299,250,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="startTimeTextBlock" HorizontalAlignment="Left" Margin="65,252,0,0" TextWrapping="Wrap"
                    Text="Start Date:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="endTimeTextBlock"  HorizontalAlignment="Left" Margin="299,310,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="endTimeTextBlock"  HorizontalAlignment="Left" Margin="65,307,0,0" TextWrapping="Wrap"
                    Text="End Date:" VerticalAlignment="Top" Height="20" Width="196" />
         <Button x:Name="editTransportationButton" Content="Edit Transportation" HorizontalAlignment="Left" Margin="299,355,0,0"
                 VerticalAlignment="Top" Click="editTransportationButton_Click" />
@@ -27,5 +27,6 @@
                          NavUri="Pages/TripInfo.xaml" Width="70" />
         </WrapPanel>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Transportation Info" VerticalAlignment="Top"/>
+        <WebBrowser x:Name="wbMaps" Margin="299,102,0,0" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="386"/>
     </Grid>
 </Page>

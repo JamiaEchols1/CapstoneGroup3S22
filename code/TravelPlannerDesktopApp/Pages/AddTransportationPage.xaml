@@ -21,8 +21,6 @@
         <Label x:Name="descriptionLabel" Content="Description:" Margin="150,101,534,0" VerticalAlignment="Top" />
 
         <Label Content="Type:" Margin="160,61,534,0" VerticalAlignment="Top" />
-        <TextBox x:Name="typeTextBox" HorizontalAlignment="Left" Margin="271,68,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Location Name" />
         <Label Content="Start Time:" Margin="156,141,534,0" VerticalAlignment="Top" />
         <Label Content="End Time:" Margin="156,181,534,0" VerticalAlignment="Top" />
         <Button x:Name="saveButton" Content="Create Transportation" HorizontalAlignment="Left" Margin="271,368,0,0"
@@ -34,6 +32,11 @@
         <TextBlock x:Name="overlappingLabel" Margin="100,255,496,114" TextWrapping="Wrap" Visibility="Collapsed"
                    Text="Overlapping Transportation and Waypoints: " />
         <ListBox x:Name="overlappingListBox" Margin="271,220,242,87" Visibility="Collapsed" />
+        <TextBox x:Name="orginLocationTextBox" HorizontalAlignment="Left" Height="20" Margin="271,255,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270"/>
+        <TextBox x:Name="destinationLocationTextBox" HorizontalAlignment="Left" Height="19" Margin="274,300,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266"/>
+        <Label x:Name="OriginLabel" Content="Origin" HorizontalAlignment="Left" Margin="160,255,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="destinationLabel" Content="Destination" Height="29" Margin="163,291,560,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="275,65,0,0" VerticalAlignment="Top" Width="265" />
 
     </Grid>
 </Page>

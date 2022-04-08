@@ -16,7 +16,7 @@ namespace TravelPlannerDesktopApp.Pages
 
         private readonly WaypointDal waypointDal;
         private readonly TransportationDal transportationDal;
-
+        private bool isReady;
         #endregion
 
         #region Constructors
@@ -28,6 +28,7 @@ namespace TravelPlannerDesktopApp.Pages
         {
             this.waypointDal = new WaypointDal();
             this.transportationDal = new TransportationDal();
+            this.isReady = false;
             this.InitializeComponent();
             this.SetSelectedTransportText();
         }
@@ -49,11 +50,43 @@ namespace TravelPlannerDesktopApp.Pages
             this.endTimeTextBlock.Text = "End Time: " + LoggedUser.SelectedTransportation.EndTime;
             this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTransportation.Description;
             this.typeTextBlock.Text = "Type: " + LoggedUser.SelectedTransportation.Type;
+            this.wbMaps.Source = new Uri("https://www.google.com/maps/dir/?api=1&" + this.FormatLocationString());
         }
 
         private void editTransportationButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+          //  MessageBox.Show(this.wbMaps.Source.AbsoluteUri);
+        }
+
+        private int findType(String type)
+        {
+            return 1;
+        }
+        private string FormatLocationString()
+        {
+            var output = "origin=";
+
+            var originLocationParts = LoggedUser.SelectedTransportation.Origin.Split(' ');
+            foreach (var part in originLocationParts)
+            {
+                output += part + "+";
+            }
+
+            output.Remove(output.Length - 1);
+
+            output += "&destination=";
+
+            var destinationLocationParts = LoggedUser.SelectedTransportation.Destination.Split(' ');
+            foreach (var part in destinationLocationParts)
+            {
+                output += part + "+";
+            }
+
+            output.Remove(output.Length - 1);
+
+            output += "&travelmode=" + LoggedUser.SelectedTransportation.Type.ToLower();
+
+            return output;
         }
 
         /// <summary>
@@ -88,7 +121,7 @@ namespace TravelPlannerDesktopApp.Pages
 
             NavigationService?.Navigate(clickedButton.NavUri);
         }
-
         #endregion
+
     }
 }

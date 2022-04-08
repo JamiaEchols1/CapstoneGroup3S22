@@ -7,12 +7,13 @@ using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
+
 namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
     ///     Interaction logic for AddTransportationPage.xaml
     /// </summary>
-    public partial class AddTransportationPage : Page
+     public partial class AddTransportationPage : Page
     {
         #region Data members
 
@@ -31,6 +32,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.waypointDal = new WaypointDal();
             this.transportationDal = new TransportationDal();
             this.InitializeComponent();
+            this.typeComboBox.ItemsSource = TransportationTypes.GetTypes();
             this.addTransportTitle.Content = "Add New Lodging: " + LoggedUser.SelectedTrip;
         }
 
@@ -83,12 +85,12 @@ namespace TravelPlannerDesktopApp.Pages
                     var message = overlappingTransportations.Aggregate(
                         "The following overlapping transportation(s) were found.\n",
                         (current, transportation) => current + (transportation + "\n"));
-
+     
                     throw new Exception(message + "Transportation must not overlap with transportations");
                 }
 
                 var newTransportation = this.transportationDal.CreateANewTransportation(LoggedUser.SelectedTrip.Id,
-                    startDate, endDate, this.descriptionTextBox.Text, this.typeTextBox.Text, null, null);
+                    startDate, endDate, this.descriptionTextBox.Text, this.typeComboBox.SelectedItem.ToString(), this.orginLocationTextBox.Text, this.destinationLocationTextBox.Text);
 
                 MessageBox.Show("Transportation creation was Successful!");
                 LoggedUser.SelectedTransportation = newTransportation;
@@ -143,5 +145,6 @@ namespace TravelPlannerDesktopApp.Pages
         }
 
         #endregion
+
     }
 }
