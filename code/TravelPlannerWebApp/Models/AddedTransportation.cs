@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TravelPlannerLibrary.Models;
 using WebApplication4.Common;
 
 namespace WebApplication4.Models
@@ -88,7 +90,16 @@ namespace WebApplication4.Models
         /// <value>
         /// The travel time.
         /// </value>
+        [Display(Name = "Estimated Travel Time", AutoGenerateFilter = false)]
         public string TravelTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the types.
+        /// </summary>
+        /// <value>
+        /// The types.
+        /// </value>
+        public List<string> Types { get; set; }
 
         #endregion
     }

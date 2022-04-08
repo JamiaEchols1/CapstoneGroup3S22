@@ -70,7 +70,7 @@
             </dt>
 
             <dd>
-                @Html.TextBoxFor(model => model.EndTime, new { id = "travelTime" })
+                @Html.TextBoxFor(model => model.EndTime, new { id = "travelTime", @readonly = "readonly"  })
             </dd>
 
             <dt>
@@ -132,5 +132,22 @@
                 directionsRenderer.setDirections(response);
             })
             .catch((e) => window.alert("Directions request failed due to " + status));
+
+        const distanceService = new google.maps.DistanceMatrixService();
+
+        const request = {
+            origins: [@Html.Raw(Json.Encode(Model.Origin))],
+            destinations: [@Html.Raw(Json.Encode(Model.Destination))],
+            travelMode: [@Html.Raw(Json.Encode(Model.Type))],
+            unitSystem: google.maps.UnitSystem.METRIC,
+            avoidHighways: false,
+            avoidTolls: false,
+        };
+
+        distanceService.getDistanceMatrix(request).then((response) => {
+            // put response
+            var duration = response.rows[0].elements[0].duration;
+            document.getElementById('travelTime').value = duration.text;
+        });
     }
 </script>
