@@ -84,6 +84,7 @@
     <Compile Include="Models\Transportation.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TransportationTypes.cs" />
     <Compile Include="Models\Trip.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>

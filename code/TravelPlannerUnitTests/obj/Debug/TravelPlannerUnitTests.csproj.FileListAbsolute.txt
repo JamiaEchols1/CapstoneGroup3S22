@@ -193,3 +193,5 @@ C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlanner
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerUnitTests\bin\Debug\TravelPlannerDesktopApp.pdb
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerUnitTests\bin\Debug\TravelPlannerDesktopApp.xml
 C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerUnitTests\bin\Debug\TravelPlannerDesktopApp.exe.config
+C:\Users\jamia\source\repos\Capstone\CapstoneGroup3S22\code\TravelPlannerUnitTests\obj\Debug\TravelPlannerUnitTests.csproj.AssemblyReference.cache
+C:\Users\jamia\source\repos\Capstone\CapstoneGroup3S22\code\TravelPlannerUnitTests\obj\Debug\TravelPlannerUnitTests.csproj.CoreCompileInputs.cache
