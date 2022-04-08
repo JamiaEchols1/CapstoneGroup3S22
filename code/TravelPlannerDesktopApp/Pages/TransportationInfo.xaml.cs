@@ -50,12 +50,12 @@ namespace TravelPlannerDesktopApp.Pages
             this.endTimeTextBlock.Text = "End Time: " + LoggedUser.SelectedTransportation.EndTime;
             this.descriptionTextBlock.Text = "Description: " + LoggedUser.SelectedTransportation.Description;
             this.typeTextBlock.Text = "Type: " + LoggedUser.SelectedTransportation.Type;
-            this.wbMaps.Source = new Uri("https://www.google.com/maps/dir/" + this.FormatLocationString());
+            this.wbMaps.Source = new Uri("https://www.google.com/maps/dir/?api=1&" + this.FormatLocationString());
         }
 
         private void editTransportationButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this.wbMaps.Source.AbsoluteUri);
+          //  MessageBox.Show(this.wbMaps.Source.AbsoluteUri);
         }
 
         private int findType(String type)
@@ -64,7 +64,7 @@ namespace TravelPlannerDesktopApp.Pages
         }
         private string FormatLocationString()
         {
-            var output = "";
+            var output = "origin=";
 
             var originLocationParts = LoggedUser.SelectedTransportation.Origin.Split(' ');
             foreach (var part in originLocationParts)
@@ -74,7 +74,7 @@ namespace TravelPlannerDesktopApp.Pages
 
             output.Remove(output.Length - 1);
 
-            output += "/";
+            output += "&destination=";
 
             var destinationLocationParts = LoggedUser.SelectedTransportation.Destination.Split(' ');
             foreach (var part in destinationLocationParts)
@@ -83,6 +83,8 @@ namespace TravelPlannerDesktopApp.Pages
             }
 
             output.Remove(output.Length - 1);
+
+            output += "&travelmode=" + LoggedUser.SelectedTransportation.Type.ToLower();
 
             return output;
         }
