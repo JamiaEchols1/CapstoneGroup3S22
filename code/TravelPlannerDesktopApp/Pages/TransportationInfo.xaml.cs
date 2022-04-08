@@ -16,7 +16,7 @@ namespace TravelPlannerDesktopApp.Pages
 
         private readonly WaypointDal waypointDal;
         private readonly TransportationDal transportationDal;
-
+        private bool isReady;
         #endregion
 
         #region Constructors
@@ -28,6 +28,7 @@ namespace TravelPlannerDesktopApp.Pages
         {
             this.waypointDal = new WaypointDal();
             this.transportationDal = new TransportationDal();
+            this.isReady = false;
             this.InitializeComponent();
             this.SetSelectedTransportText();
         }
@@ -54,9 +55,13 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void editTransportationButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            MessageBox.Show(this.wbMaps.Source.AbsoluteUri);
         }
 
+        private int findType(String type)
+        {
+            return 1;
+        }
         private string FormatLocationString()
         {
             var output = "";
@@ -114,7 +119,7 @@ namespace TravelPlannerDesktopApp.Pages
 
             NavigationService?.Navigate(clickedButton.NavUri);
         }
-
         #endregion
+
     }
 }
