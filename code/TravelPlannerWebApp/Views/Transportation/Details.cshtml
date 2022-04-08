@@ -84,11 +84,15 @@
         </dl>
     </div>
 
-    <div id="container">
-        <div id="map"></div>
-    </div>
+<div id="container">
+    <div id="map"></div>
+</div>
 
-    <p>
+<div id="sidebar">
+    <div id="panel"></div>
+</div>
+
+<p>
         @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
     </p>
 
@@ -102,10 +106,14 @@
 <script>
     function initMap() {
         const directionsService = new google.maps.DirectionsService();
-        const directionsRenderer = new google.maps.DirectionsRenderer();
         const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 7,
             center: { lat: 41.85, lng: -87.65 },
+        });
+        const directionsRenderer = new google.maps.DirectionsRenderer({
+            draggable: true,
+            map,
+            panel: document.getElementById("panel"),
         });
 
         directionsRenderer.setMap(map);
