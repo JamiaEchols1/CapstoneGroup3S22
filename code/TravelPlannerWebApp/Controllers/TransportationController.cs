@@ -123,8 +123,16 @@ namespace WebApplication4.Controllers
             {
                 ViewBag.ErrorMessage = ErrorMessage;
             }
+            AddedTransportation transport = new AddedTransportation();
+            transport.Types = new List<string>()
+            {
+                "WALKING",
+                "DRIVING",
+                "TRANSIT",
+                "BICYCLING"
+            };
 
-            return View("Create");
+            return View("Create", transport);
         }
 
         /// <summary>
