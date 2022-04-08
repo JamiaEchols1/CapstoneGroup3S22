@@ -99,7 +99,9 @@ namespace WebApplication4.Controllers
         }
 
         /// <summary>
-        ///     Creates the specified lodging point.
+        ///     Creates the specified lodging point. If the new lodging point conflicts with
+        ///     another lodging point, the user will be directed to a view with the conflicting
+        ///     points where they must confirm the conflicts.
         /// </summary>
         /// <param name="lodging">The lodging.</param>
         [HttpPost]
@@ -195,12 +197,6 @@ namespace WebApplication4.Controllers
             {
                 ErrorMessage = "The start date must be before the end date";
             }
-
-            if (lodging.EndTime.CompareTo(lodging.StartTime) < 0)
-            {
-                ErrorMessage = "The end date must be after the start date";
-            }
-
             return ErrorMessage;
         }
 
@@ -263,23 +259,6 @@ namespace WebApplication4.Controllers
             var lodging = this._lodgingDal.GetLodgingById(lodgingId);
             this._lodgingDal.RemoveLodging(lodging);
             return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
-        }
-
-        /// <summary>
-        ///     Releases unmanaged resources and optionally releases managed resources.
-        /// </summary>
-        /// <param name="disposing">
-        ///     true to release both managed and unmanaged resources; false to release only unmanaged
-        ///     resources.
-        /// </param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this.db.Dispose();
-            }
-
-            base.Dispose(disposing);
         }
 
         #endregion

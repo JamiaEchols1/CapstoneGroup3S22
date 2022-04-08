@@ -59,13 +59,14 @@ namespace TravelPlannerUnitTests.Controllers.TripsControllerTests
             var startDate = DateTime.Today.AddDays(1);
             var endDate = DateTime.Today.AddDays(7);
             var trip = new Trip
-                { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1 };
+                { Id = 1, StartDate = startDate, EndDate = endDate, Name = "trip", UserId = 1, Description = "Description"};
             var addedTrip = new AddedTrip {
                 StartDate = trip.StartDate,
                 EndDate = trip.EndDate,
                 Name = trip.Name,
                 UserId = trip.UserId,
-                Id = trip.Id
+                Id = trip.Id,
+                Description = trip.Description
             };
 
             var data = new List<Trip>().AsQueryable();

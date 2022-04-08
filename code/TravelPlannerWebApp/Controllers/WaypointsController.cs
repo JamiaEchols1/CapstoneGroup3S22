@@ -100,7 +100,9 @@ namespace WebApplication4.Controllers
         }
 
         /// <summary>
-        ///     POST: Waypoints/Create. Creates the specified waypoint.
+        ///     POST: Waypoints/Create. Creates the specified waypoint. If there are conflicting
+        ///     waypoints with the one being created, a new create waypoint view will be returned
+        ///     with an error message of the conflicting waypoints.
         /// </summary>
         /// <param name="waypoint">The waypoint.</param>
         [HttpPost]
@@ -138,12 +140,6 @@ namespace WebApplication4.Controllers
             {
                 ErrorMessage = "The start date must be before the end date";
             }
-
-            if (waypoint.EndDateTime.CompareTo(waypoint.StartDateTime) < 0)
-            {
-                ErrorMessage = "The end date must be after the start date";
-            }
-
             return ErrorMessage;
         }
 

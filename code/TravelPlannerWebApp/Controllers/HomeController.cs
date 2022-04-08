@@ -53,11 +53,12 @@ namespace WebApplication4.Controllers
 
         /// <summary>
         ///     Authenticates a user's login credentials and brings them to their trip homepage
-        ///     if successful.
+        ///     if successful. If unsuccessful, an error message of incorrect username or password is displayed
+        ///     and the user is redirected back to the login page.
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns>
-        ///     login action
+        ///     login action or trip index based on credentials
         /// </returns>
         [HttpPost]
         [ActionName("Login")]

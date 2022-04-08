@@ -158,6 +158,86 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
         }
 
         /// <summary>
+        ///     Tests the POST: Create lodging with an overlapping issue.
+        /// </summary>
+        [TestMethod]
+        public void TestPOSTCreateLodgingInvalidStartEndDateTimes()
+        {
+            var tripData = new List<Trip> {
+                new Trip {
+                    Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0
+                }
+            }.AsQueryable();
+
+            var lodgingsData = new List<Lodging> {
+                new Lodging {
+                    Location = "test lodging", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 0
+                },
+                new Lodging {
+                    Location = "test lodging 1", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 1
+                },
+                new Lodging {
+                    Location = "test lodging 2", StartTime = DateTime.Now.AddMinutes(10),
+                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 2
+                }
+            }.AsQueryable();
+
+            var mockSetLodgings = new Mock<DbSet<Lodging>>();
+            mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.Provider).Returns(lodgingsData.Provider);
+            mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.Expression).Returns(lodgingsData.Expression);
+            mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.ElementType).Returns(lodgingsData.ElementType);
+            mockSetLodgings.As<IQueryable<Lodging>>().Setup(m => m.GetEnumerator())
+                           .Returns(lodgingsData.GetEnumerator());
+
+            var mockSetTrip = new Mock<DbSet<Trip>>();
+            mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(tripData.Provider);
+            mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.Expression).Returns(tripData.Expression);
+            mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.ElementType).Returns(tripData.ElementType);
+            mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.GetEnumerator()).Returns(tripData.GetEnumerator());
+
+            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
+            mockContext.Setup(c => c.Lodgings).Returns(mockSetLodgings.Object);
+            mockContext.Setup(c => c.Trips).Returns(mockSetTrip.Object);
+
+            var lodgingsService = new LodgingDal(mockContext.Object);
+            var tripService = new TripDal(mockContext.Object);
+
+            var controller = new LodgingsController(tripService, lodgingsService);
+            LoggedUser.SelectedTrip = new Trip
+            {
+                Name = "Trip1",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(14),
+                UserId = 0,
+                Id = 0
+            };
+
+            var conflictingLodging = new Lodging
+            {
+                Location = "test lodging",
+                StartTime = DateTime.Now.AddMinutes(14),
+                EndTime = DateTime.Now.AddMinutes(10),
+                TripId = 0,
+                Id = 0
+            };
+
+            var addedLodging = new AddedLodging
+            {
+                Location = conflictingLodging.Location,
+                StartTime = conflictingLodging.StartTime,
+                EndTime = conflictingLodging.EndTime,
+                TripId = conflictingLodging.TripId,
+                Description = "description",
+                Id = 0
+            };
+
+            var result = controller.Create(addedLodging);
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+        }
+
+        /// <summary>
         ///     Tests the POST: Create with non overlapping lodging.
         /// </summary>
         [TestMethod]
