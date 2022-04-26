@@ -9,7 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddTransportationPage">
 
-    <Grid Background="White">
+    <Grid Background="White" Margin="0,0,0,-268">
         <Label x:Name="addTransportTitle" Content="Add New Transportation" HorizontalAlignment="Left"
                Margin="10,10,0,0" VerticalAlignment="Top"
                Width="702" />
@@ -29,9 +29,9 @@
                                 VerticalAlignment="Top" Width="270" ValueChanged="datePicker_ValueChanged" />
         <wpfTool:DateTimePicker x:Name="endDateTimePicker" HorizontalAlignment="Left" Margin="271,186,0,0"
                                 VerticalAlignment="Top" Width="270" ValueChanged="datePicker_ValueChanged" />
-        <TextBlock x:Name="overlappingLabel" Margin="100,255,496,114" TextWrapping="Wrap" Visibility="Collapsed"
+        <TextBlock x:Name="overlappingLabel" Margin="275,480,321,212" TextWrapping="Wrap" Visibility="Collapsed"
                    Text="Overlapping Transportation and Waypoints: " />
-        <ListBox x:Name="overlappingListBox" Margin="271,220,242,87" Visibility="Collapsed" />
+        <ListBox x:Name="overlappingListBox" Margin="254,511,259,64" Visibility="Collapsed" />
         <TextBox x:Name="orginLocationTextBox" HorizontalAlignment="Left" Height="20" Margin="271,255,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270"/>
         <TextBox x:Name="destinationLocationTextBox" HorizontalAlignment="Left" Height="19" Margin="274,300,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266"/>
         <Label x:Name="OriginLabel" Content="Origin" HorizontalAlignment="Left" Margin="160,255,0,0" VerticalAlignment="Top"/>

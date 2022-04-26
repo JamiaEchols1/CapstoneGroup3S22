@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\jamia\source\repos\Capstone\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\
 TravelPlannerDesktopApp
 none
 false
 DEBUG;TRACE
-C:\Users\jamia\source\repos\Capstone\CapstoneGroup3S22\code\TravelPlannerDesktopApp\App.xaml
-14-134191216
+C:\Users\jechols5\Source\Repos\CapstoneGroup3S22\code\TravelPlannerDesktopApp\App.xaml
+141319922914
 
-24-1512955371
-18973539312
+24-367184142
+18217581676
 Controls\TimeControl.xaml;MainWindow.xaml;Pages\AddLodging.xaml;Pages\AddTransportationPage.xaml;Pages\AddTrip.xaml;Pages\AddWaypoint.xaml;Pages\Landing.xaml;Pages\LodgingInfo.xaml;Pages\Login.xaml;Pages\Settings.xaml;Pages\TransportationInfo.xaml;Pages\TripInfo.xaml;Pages\WaypointInfo.xaml;Themes\Generic.xaml;
 
 True
