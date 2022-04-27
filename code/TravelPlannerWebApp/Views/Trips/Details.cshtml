@@ -91,7 +91,8 @@
                     </td>
                     <td>
                         @Html.ActionLink("Details", "../Waypoints/Details", new { id = waypointItem.Id }) |
-                        @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = waypointItem.Id })
+                        @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = waypointItem.Id }) |
+                        @Html.ActionLink("Edit", "../Waypoints/Edit", new { id = waypointItem.Id })
                     </td>
                 </tr>
             }

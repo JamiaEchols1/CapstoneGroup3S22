@@ -283,6 +283,7 @@
     <Content Include="Views\Transportation\Details.cshtml" />
     <Content Include="Views\Transportation\Delete.cshtml" />
     <Content Include="Views\Transportation\Create.cshtml" />
+    <Content Include="Views\Waypoints\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

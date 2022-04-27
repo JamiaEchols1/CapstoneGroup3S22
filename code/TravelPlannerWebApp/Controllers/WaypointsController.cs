@@ -164,6 +164,27 @@ namespace WebApplication4.Controllers
             return ErrorMessage;
         }
 
+        private string validateConflictingTransportAndWaypointsForEditedWaypoint(Waypoint waypoint)
+        {
+            string ErrorMessage = null;
+            var startDate = waypoint.StartDateTime;
+            var endDate = waypoint.EndDateTime;
+            var waypointsAndTransportation = new List<object>();
+            waypointsAndTransportation.AddRange(this._waypointDal.GetOverlappingWaypointsForUpdatedWaypoint(startDate, endDate, waypoint));
+            waypointsAndTransportation.AddRange(
+                this._transportationDal.GetOverlappingTransportation(startDate, endDate));
+            if (waypointsAndTransportation.Count > 0)
+            {
+                ErrorMessage = "The transportation was not added because of the following conflicts:" + "\n";
+                foreach (var overlap in waypointsAndTransportation)
+                {
+                    ErrorMessage += overlap.ToString();
+                }
+            }
+
+            return ErrorMessage;
+        }
+
         /// <summary>
         ///     GET: Returns a view of a selected waypoint so that the user can confirm the deletion
         ///     of the waypoint
@@ -201,6 +222,63 @@ namespace WebApplication4.Controllers
             var waypoint = this._waypointDal.GetWaypoint(id);
             this._waypointDal.RemoveWaypoint(waypoint);
             return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
+        }
+
+        /// <summary>
+        /// GET: Edits the specified waypoint by id.
+        /// </summary>
+        /// <param name="id">The waypoint identifier.</param>
+        /// <param name="ErrorMessage">The error message.</param>
+        /// <returns>
+        /// View of waypoint details if found, HttpNotFound else
+        /// </returns>
+        public ActionResult Edit(int? id, string ErrorMessage)
+        {
+            int waypointId = (int)id;
+            Waypoint waypoint = this._waypointDal.GetWaypoint(waypointId);
+            LoggedUser.SelectedTrip = this._waypointDal.GetTripFromWaypoint(waypoint.TripId);
+            AddedWaypoint editedWaypoint = AddedWaypoint.ConvertWaypointToAddedWaypoint(waypoint);
+            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
+                                  LoggedUser.SelectedTrip.EndDate;
+            ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
+            ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
+            if (ErrorMessage != null)
+            {
+                ViewBag.ErrorMessage = ErrorMessage;
+            }
+            return View(editedWaypoint);
+        }
+
+        /// <summary>
+        ///     POST: Edits the specified waypoint.
+        /// </summary>
+        /// <param name="waypoint">The waypoint.</param>
+        /// <returns>
+        ///     Trips details if successful, edit view else
+        /// </returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Location,StartDateTime,EndDateTime,TripId,Description")] AddedWaypoint waypoint)
+        {
+            if (ModelState.IsValid)
+            {
+                Waypoint editedWaypoint = AddedWaypoint.ConvertAddedWaypointToWaypoint(waypoint);
+                var ErrorMessage = this.validateDateTimes(waypoint);
+                if (ErrorMessage == null)
+                {
+                    ErrorMessage = this.validateConflictingTransportAndWaypointsForEditedWaypoint(editedWaypoint);
+                }
+
+                if (ErrorMessage != null)
+                {
+                    return RedirectToAction("Edit", new { ErrorMessage });
+                }
+                int tripID = LoggedUser.SelectedTrip.Id;
+                waypoint.TripId = tripID;
+                this._waypointDal.UpdateWaypoint(editedWaypoint);
+                return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
+            }
+            return View(waypoint);
         }
 
         #endregion

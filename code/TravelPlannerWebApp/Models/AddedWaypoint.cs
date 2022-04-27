@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using TravelPlannerLibrary.Models;
 using WebApplication4.Common;
 
 namespace WebApplication4.Models
@@ -65,6 +66,48 @@ namespace WebApplication4.Models
         ///     The description.
         /// </value>
         public string Description { get; set; }
+
+        /// <summary>
+        ///     Converts the waypoint to added waypoint.
+        /// </summary>
+        /// <param name="waypoint">The waypoint.</param>
+        /// <returns>
+        ///     addedWaypoint the converted waypoint
+        /// </returns>
+        public static AddedWaypoint ConvertWaypointToAddedWaypoint(Waypoint waypoint)
+        {
+            AddedWaypoint addedWaypoint = new AddedWaypoint()
+            {
+                Id = waypoint.Id,
+                Location = waypoint.Location,
+                StartDateTime = waypoint.StartDateTime,
+                EndDateTime = waypoint.EndDateTime,
+                TripId = waypoint.TripId,
+                Description = waypoint.Description
+
+            };
+        return addedWaypoint;
+        }
+
+        /// <summary>
+        /// Converts the added waypoint to waypoint.
+        /// </summary>
+        /// <param name="addedWaypoint">The added waypoint.</param>
+        /// <returns></returns>
+        public static Waypoint ConvertAddedWaypointToWaypoint(AddedWaypoint addedWaypoint)
+        {
+            Waypoint waypoint = new Waypoint()
+            {
+                Id = addedWaypoint.Id,
+                Location = addedWaypoint.Location,
+                StartDateTime = addedWaypoint.StartDateTime,
+                EndDateTime = addedWaypoint.EndDateTime,
+                TripId = addedWaypoint.TripId,
+                Description = addedWaypoint.Description
+
+            };
+            return waypoint;
+        }
 
         #endregion
     }

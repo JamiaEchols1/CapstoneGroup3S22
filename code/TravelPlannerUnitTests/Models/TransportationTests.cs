@@ -105,8 +105,8 @@ namespace TravelPlannerUnitTests.Models
                 Id = 1,
                 TripId = 1
             };
-            var result = "Transportation: " + "Start: " + transportation.StartTime.ToString("MM/dd/yyyy h:mm tt") +
-                         ", End: " + transportation.EndTime.ToString("MM/dd/yyyy h:mm tt");
+            var result = "Transportation: " + "Start: " + transportation.StartTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " +
+                   transportation.EndTime.ToString("MM/dd/yyyy h:mm tt") + " Origin:" + transportation.Origin + " Destination: " + transportation.Destination;
 
             Assert.AreEqual(result, transportation.ToString());
         }
