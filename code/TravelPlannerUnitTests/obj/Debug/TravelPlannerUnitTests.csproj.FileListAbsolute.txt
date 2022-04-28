@@ -301,3 +301,4 @@ C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerUnitTests\obj
 C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerUnitTests\obj\Debug\TravelPlannerUnitTests.csproj.CopyComplete
 C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerUnitTests\obj\Debug\TravelPlannerUnitTests.dll
 C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerUnitTests\obj\Debug\TravelPlannerUnitTests.pdb
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerUnitTests\obj\Debug\TravelPlannerUnitTests.csproj.SuggestedBindingRedirects.cache
