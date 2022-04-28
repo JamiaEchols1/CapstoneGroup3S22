@@ -67,6 +67,9 @@ namespace WebApplication4.Models
         /// </value>
         public string Description { get; set; }
 
+        #endregion
+        #region Conversions
+
         /// <summary>
         ///     Converts the waypoint to added waypoint.
         /// </summary>

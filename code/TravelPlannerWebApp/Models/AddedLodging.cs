@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using TravelPlannerLibrary.Models;
 using WebApplication4.Common;
 
 namespace WebApplication4.Models
@@ -65,6 +66,54 @@ namespace WebApplication4.Models
         ///     The description.
         /// </value>
         public string Description { get; set; }
+
+        #endregion
+
+        #region Conversions
+
+        /// <summary>
+        ///     Converts the lodging to added lodging.
+        /// </summary>
+        /// <param name="lodging">The lodging.</param>
+        /// <returns>
+        ///     The converted lodging to added lodging object
+        /// </returns>
+        public static AddedLodging ConvertLodgingToAddedLodging(Lodging lodging)
+        {
+            AddedLodging addedLodging = new AddedLodging()
+            {
+                Id = lodging.Id,
+                Location = lodging.Location,
+                StartTime = lodging.StartTime,
+                EndTime = lodging.EndTime,
+                TripId = lodging.TripId,
+                Description = lodging.Description
+
+            };
+            return addedLodging;
+        }
+
+        /// <summary>
+        ///     Converts the added lodging to lodging.
+        /// </summary>
+        /// <param name="addedLodging">The added lodging.</param>
+        /// <returns>
+        ///     The converted addedlodging to lodging object
+        /// </returns>
+        public static Lodging ConvertAddedLodgingToLodging(AddedLodging addedLodging)
+        {
+            Lodging lodging = new Lodging()
+            {
+                Id = addedLodging.Id,
+                Location = addedLodging.Location,
+                StartTime = addedLodging.StartTime,
+                EndTime = addedLodging.EndTime,
+                TripId = addedLodging.TripId,
+                Description = addedLodging.Description
+
+            };
+            return lodging;
+        }
 
         #endregion
     }

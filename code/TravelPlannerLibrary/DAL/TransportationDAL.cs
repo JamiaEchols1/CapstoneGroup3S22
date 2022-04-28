@@ -272,9 +272,9 @@ namespace TravelPlannerLibrary.DAL
         /// </returns>
         public List<Transportation> GetOverlappingTransportationsForUpdatedTransportation(DateTime newStartTime, DateTime newEndTime, Transportation transportation)
         {
-            var tripWaypoints = this.GetTransportationsByTrip(LoggedUser.SelectedTrip.Id);
+            var tripTransportations = this.GetTransportationsByTrip(LoggedUser.SelectedTrip.Id);
 
-            return tripWaypoints.Where(current =>
+            return tripTransportations.Where(current =>
                                     TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime,
                                         current.EndTime)).Where(current => current.Id != transportation.Id)
                                 .ToList();
