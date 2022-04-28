@@ -1,4 +1,5 @@
 ﻿@model WebApplication4.Models.AddedLodging
+@using TravelPlannerLibrary.Models
 
 @{
     ViewBag.Title = "Edit Conflicting Lodging";
@@ -25,7 +26,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -33,7 +34,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.StartTime, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -41,7 +42,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.EndTime, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -49,7 +50,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -64,48 +65,11 @@
                     <input type="submit" value="Edit With Conflicts" class="btn btn-default" />
                 </div>
             </div>
-
-            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDJEezkTFgj0PAnzJQJVVEhfZbpUmH27s0"></script>
-            <script type="text/javascript">
-                google.maps.event.addDomListener(window,
-                    'load',
-                    function () {
-                        var places = new google.maps.places.Autocomplete(document.getElementById('Location'),
-                            {
-                                types: ['establishment'],
-                                componentRestrictions: { 'country': ['AU', 'USA', 'UK'] },
-
-                                fields: ['place_id', 'geometry', 'name']
-                            }
-                        );
-                    });
-            </script>
         </div>
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
     </div>
 </body>
 </html>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-
-<script type="text/javascript">
-    $(function() {
-        $('#StartTime').datetimepicker({
-            minDate: new moment("@ViewBag.StartDate"),
-        }).on('dp.change',
-            function(e) {
-                $(this).data('DateTimePicker').hide();
-            });
-        $('#EndTime').datetimepicker({
-            minDate: new moment("@ViewBag.StartDate"),
-        }).on('dp.change',
-            function(e) {
-                $(this).data('DateTimePicker').hide();
-            });
-    });
-</script>
