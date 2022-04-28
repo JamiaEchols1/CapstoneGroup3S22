@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using TravelPlannerLibrary.Models;
 using TravelPlannerLibrary.Util;
@@ -107,6 +108,45 @@ namespace TravelPlannerLibrary.DAL
             db.SaveChanges();
             return lodging;
         }
+
+        public int EditLodging(string location, DateTime startTime, DateTime endTime, string description)
+        {
+            if (string.IsNullOrEmpty(location))
+            {
+                const string parameterName = "location";
+                throw new ArgumentNullException(parameterName, "Must enter a location!");
+            }
+
+            if (LoggedUser.SelectedTrip.StartDate.CompareTo(startTime) > 0)
+            {
+                throw new ArgumentException("Start date must be on or after trip start date");
+            }
+
+            if (endTime.CompareTo(LoggedUser.SelectedTrip.EndDate) > 0)
+            {
+                throw new ArgumentException("End date must be on or before trip end date");
+            }
+
+            if (startTime.CompareTo(endTime) > 0)
+            {
+                throw new ArgumentException("End date must be on or after selected start date");
+            }
+            int id = LoggedUser.SelectedLodging.Id;
+            var lodging = new Lodging
+            {
+                Location = location,
+                StartTime = startTime,
+                EndTime = endTime,
+                TripId = LoggedUser.SelectedTrip.Id,
+                Id = id,
+                Description = description
+            };
+            db.Lodgings.Remove(db.Lodgings.Find(id));
+            db.Lodgings.Add(lodging);
+            LoggedUser.SelectedLodging = lodging;
+            return db.SaveChanges();
+        }
+
 
         /// <summary>
         ///     Removes the specified lodging.

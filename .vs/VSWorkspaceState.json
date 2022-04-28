@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\code",
-    "\\code\\TravelPlannerDesktopApp",
-    "\\code\\TravelPlannerDesktopApp\\Pages"
+    ""
   ],
-  "SelectedNode": "\\code\\TravelPlannerDesktopApp\\Pages\\TransportationInfo.xaml",
+  "SelectedNode": "\\TravelPlannerApplication.sln",
   "PreviewInSolutionExplorer": false
 }
