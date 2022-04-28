@@ -237,6 +237,49 @@ namespace TravelPlannerLibrary.DAL
             return transId;
         }
 
+        /// <summary>
+        ///     Updates the transportation.
+        /// </summary>
+        /// <param name="transportation">The transportation.</param>
+        /// <returns>
+        ///     Updated transportation if found, null otherwise
+        /// </returns>
+        public Transportation UpdateTransportation(Transportation transportation)
+        {
+            if (transportation != null)
+            {
+                var editedTransportation = db.Transportations.First(a => a.Id == transportation.Id);
+                editedTransportation.Origin = transportation.Origin;
+                editedTransportation.Destination = transportation.Destination;
+                editedTransportation.StartTime = transportation.StartTime;
+                editedTransportation.EndTime = transportation.EndTime;
+                editedTransportation.Description = transportation.Description;
+                editedTransportation.Type = transportation.Type;
+                db.SaveChanges();
+                return editedTransportation;
+            }
+            return null;
+        }
+
+        /// <summary>
+        ///     Gets the overlapping transportations for updated transportation.
+        /// </summary>
+        /// <param name="newStartTime">The new start time.</param>
+        /// <param name="newEndTime">The new end time.</param>
+        /// <param name="transportation">The transportation.</param>
+        /// <returns>
+        ///     List of the overlapping transportations
+        /// </returns>
+        public List<Transportation> GetOverlappingTransportationsForUpdatedTransportation(DateTime newStartTime, DateTime newEndTime, Transportation transportation)
+        {
+            var tripWaypoints = this.GetTransportationsByTrip(LoggedUser.SelectedTrip.Id);
+
+            return tripWaypoints.Where(current =>
+                                    TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime,
+                                        current.EndTime)).Where(current => current.Id != transportation.Id)
+                                .ToList();
+        }
+
         #endregion
     }
 }

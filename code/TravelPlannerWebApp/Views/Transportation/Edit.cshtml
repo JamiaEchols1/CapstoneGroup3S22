@@ -1,0 +1,161 @@
+﻿@using TravelPlannerLibrary.Models
+@model WebApplication4.Models.AddedTransportation
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Transportation</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Type, new SelectList(Model.Types, "Types"), "Select", new { onchange = "OnChangeEvent()" })
+                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Origin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Origin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Origin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TravelTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.TravelTime, new { @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <p style="color: red">@ViewBag.ErrorMessage</p>
+        }
+    </div>
+    }
+
+<div>
+    @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
+</div>
+</body>
+</html>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDJEezkTFgj0PAnzJQJVVEhfZbpUmH27s0"></script>
+<script type="text/javascript">
+    google.maps.event.addDomListener(window,
+        'load',
+        function () {
+            var origin = new google.maps.places.Autocomplete(document.getElementById('Origin'),
+                {
+                    types: ['establishment'],
+                    componentRestrictions: { 'country': ['AU', 'USA', 'UK'] },
+                    fields: ['place_id', 'geometry', 'name']
+                }
+            );
+            var destination = new google.maps.places.Autocomplete(document.getElementById('Destination'),
+                {
+                    types: ['establishment'],
+                    componentRestrictions: { 'country': ['AU', 'USA', 'UK'] },
+                    fields: ['place_id', 'geometry', 'name']
+                }
+            );
+        });
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $('#StartTime').datetimepicker({
+            minDate: new moment("@ViewBag.StartDate"),
+        }).on('dp.change',
+            function(e) {
+                $(this).data('DateTimePicker').hide();
+            });
+        $('#EndTime').datetimepicker({
+            minDate: new moment("@ViewBag.StartDate"),
+        }).on('dp.change',
+            function(e) {
+                $(this).data('DateTimePicker').hide();
+            });
+    });
+</script>
+
+<script type="text/javascript">
+    function OnChangeEvent() {
+        var origin = document.getElementById('Origin').value;
+        var destination = document.getElementById('Destination').value;
+        var type = document.getElementById('Type').value;
+        if (origin !== "" && destination !== "" && type !== "") {
+            const service = new google.maps.DistanceMatrixService();
+            // build request
+
+            const request = {
+                origins: [origin],
+                destinations: [destination],
+                travelMode: document.getElementById("Type").value,
+                unitSystem: google.maps.UnitSystem.METRIC,
+                avoidHighways: false,
+                avoidTolls: false,
+            };
+
+            // get distance matrix response
+            service.getDistanceMatrix(request).then((response) => {
+                // put response
+                var duration = response.rows[0].elements[0].duration;
+                document.getElementById('TravelTime').value = duration.text;
+            });
+        }
+    }
+</script>

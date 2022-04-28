@@ -284,6 +284,7 @@
     <Content Include="Views\Transportation\Delete.cshtml" />
     <Content Include="Views\Transportation\Create.cshtml" />
     <Content Include="Views\Waypoints\Edit.cshtml" />
+    <Content Include="Views\Transportation\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
