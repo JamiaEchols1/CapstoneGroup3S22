@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\App.xaml
-15-1429805418
+17-2081636285
 
-251024413711
+27460699450
 181538337702
-Controls\TimeControl.xaml;MainWindow.xaml;Pages\EditLodging.xaml;Pages\AddLodging.xaml;Pages\AddTransportationPage.xaml;Pages\AddTrip.xaml;Pages\AddWaypoint.xaml;Pages\Landing.xaml;Pages\LodgingInfo.xaml;Pages\Login.xaml;Pages\Settings.xaml;Pages\TransportationInfo.xaml;Pages\TripInfo.xaml;Pages\WaypointInfo.xaml;Themes\Generic.xaml;
+Controls\TimeControl.xaml;MainWindow.xaml;Pages\EditTransportation.xaml;Pages\EditWaypoint.xaml;Pages\EditLodging.xaml;Pages\AddLodging.xaml;Pages\AddTransportationPage.xaml;Pages\AddTrip.xaml;Pages\AddWaypoint.xaml;Pages\Landing.xaml;Pages\LodgingInfo.xaml;Pages\Login.xaml;Pages\Settings.xaml;Pages\TransportationInfo.xaml;Pages\TripInfo.xaml;Pages\WaypointInfo.xaml;Themes\Generic.xaml;
 
-True
+False
 

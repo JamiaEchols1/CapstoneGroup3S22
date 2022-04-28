@@ -89,6 +89,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\EditTransportation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EditWaypoint.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\EditLodging.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -148,6 +156,12 @@
     <Compile Include="Models\Trip.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Waypoint.cs" />
+    <Compile Include="Pages\EditTransportation.xaml.cs">
+      <DependentUpon>EditTransportation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditWaypoint.xaml.cs">
+      <DependentUpon>EditWaypoint.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EditLodging.xaml.cs">
       <DependentUpon>EditLodging.xaml</DependentUpon>
     </Compile>

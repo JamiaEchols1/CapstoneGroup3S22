@@ -109,7 +109,7 @@ namespace TravelPlannerLibrary.DAL
             return lodging;
         }
 
-        public int EditLodging(string location, DateTime startTime, DateTime endTime, string description)
+        public Lodging EditLodging(string location, DateTime startTime, DateTime endTime, string description)
         {
             if (string.IsNullOrEmpty(location))
             {
@@ -143,8 +143,8 @@ namespace TravelPlannerLibrary.DAL
             };
             db.Lodgings.Remove(db.Lodgings.Find(id));
             db.Lodgings.Add(lodging);
-            LoggedUser.SelectedLodging = lodging;
-            return db.SaveChanges();
+            db.SaveChanges();
+            return lodging;
         }
 
 

@@ -55,7 +55,7 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void editTransportationButton_Click(object sender, RoutedEventArgs e)
         {
-          //  MessageBox.Show(this.wbMaps.Source.AbsoluteUri);
+            NavigationService?.Navigate(new EditTransportation());
         }
 
         private int findType(String type)

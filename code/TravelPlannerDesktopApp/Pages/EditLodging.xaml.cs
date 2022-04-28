@@ -74,24 +74,16 @@ namespace TravelPlannerDesktopApp.Pages
                     throw new Exception("Must enter an end date!");
                 }
 
-                var result = this.lodgingDal.EditLodging(this.locationTextBox.Text,
-                    DateTime.Parse(this.startDatePicker.Text), DateTime.Parse(this.endDatePicker.Text),
-                     this.descriptionTextBox.Text);
-
-                if (result != 0)
-                {
-                    MessageBox.Show("Lodging edit was Successful!");
-                }
-                else
-                {
-                    MessageBox.Show("Lodging edit was not Successful!");
-                }
+                LoggedUser.SelectedLodging = this.lodgingDal.EditLodging(this.locationTextBox.Text,
+                     DateTime.Parse(this.startDatePicker.Text), DateTime.Parse(this.endDatePicker.Text),
+                      this.descriptionTextBox.Text);
+                MessageBox.Show("Lodging edit was Successful!");
                 
                 NavigationService?.Navigate(new LodgingInfo());
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Error Edit Logging. " + exception.Message);
+                MessageBox.Show("Error editing Logging. " + exception.Message);
             }
         }
 
