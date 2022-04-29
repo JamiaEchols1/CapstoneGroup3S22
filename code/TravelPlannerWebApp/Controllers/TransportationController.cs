@@ -280,7 +280,7 @@ namespace WebApplication4.Controllers
                 int tripID = LoggedUser.SelectedTrip.Id;
                 transportation.TripId = tripID;
                 this._transportationDal.UpdateTransportation(editedTransportation);
-                return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
+                return RedirectToAction("Details", new { id = editedTransportation.Id });
             }
             return View(transportation);
         }

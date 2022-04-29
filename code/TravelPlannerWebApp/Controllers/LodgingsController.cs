@@ -329,6 +329,10 @@ namespace WebApplication4.Controllers
                 int tripID = LoggedUser.SelectedTrip.Id;
                 Lodging editedLodging = AddedLodging.ConvertAddedLodgingToLodging(lodging);
                 var ErrorMessage = this.validateDateTimes(lodging);
+                if (ErrorMessage != null)
+                {
+                    return RedirectToAction("Edit", new { ErrorMessage });
+                }
                 if (ErrorMessage == null)
                 {
                     ErrorMessage = this.validateConflictingLodgingsForEditedLodging(editedLodging);
@@ -350,7 +354,7 @@ namespace WebApplication4.Controllers
             
                 lodging.TripId = tripID;
                 this._lodgingDal.UpdateLodging(editedLodging);
-                return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
+                return RedirectToAction("Details", new { id = editedLodging.Id });
             }
             return View(lodging);
         }
@@ -379,7 +383,6 @@ namespace WebApplication4.Controllers
                 EndTime = editedConflictingLodging.EndTime,
                 Description = editedConflictingLodging.Description
             };
-            editedConflictingLodging = null;
             var tripId = (int)id;
             LoggedUser.SelectedTrip = this._tripDal.GetTripById(tripId);
             ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
@@ -405,8 +408,9 @@ namespace WebApplication4.Controllers
         {
             if (ModelState.IsValid)
             {
-                Lodging editedLodging = AddedLodging.ConvertAddedLodgingToLodging(lodging);
+                Lodging editedLodging = AddedLodging.ConvertAddedLodgingToLodging(lodging);                
                 editedLodging.TripId = LoggedUser.SelectedTrip.Id;
+
                 this._lodgingDal.UpdateLodging(editedLodging);
                 editedConflictingLodging = null;
                 return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
