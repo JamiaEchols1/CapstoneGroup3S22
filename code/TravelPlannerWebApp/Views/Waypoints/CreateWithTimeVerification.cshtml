@@ -1,0 +1,84 @@
+﻿@using System.Data.Entity.Core.Objects
+@using TravelPlannerLibrary.Models
+@model WebApplication4.ViewModels.VerifyTimeViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Waypoint: Time Verification</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.waypoint)
+    @Html.AntiForgeryToken()
+    if (@Model.otherIsBefore)
+    {
+        <div>
+            The estimated travel time from
+        </div>
+
+        if (ObjectContext.GetObjectType(@Model.otherLocation.GetType()) == typeof(Waypoint))
+        {
+            var waypointItem = (Waypoint)@Model.otherLocation;
+            <div>
+                @waypointItem.Location
+            </div>
+        }
+        else if (ObjectContext.GetObjectType(@Model.otherLocation.GetType()) == typeof(Transportation))
+        {
+            var transportationItem = (Transportation)@Model.otherLocation;
+            <div>
+                @transportationItem.Destination
+            </div>
+        }
+<div>
+    to <br/>
+    @Model.waypoint.Location <br/>
+    is <br/>
+    @Model.ToReadableString(@Model.estimatedTime), <br/>
+    but you have only given yourself @Model.ToReadableString(@Model.actualTime)
+</div>
+    }
+    else
+    {
+        <div>
+            The estimated travel time from <br/>
+            @Model.waypoint.Location <br/>
+            to <br/>
+        </div>
+        if (ObjectContext.GetObjectType(@Model.otherLocation.GetType()) == typeof(Waypoint))
+        {
+            var waypointItem = (Waypoint)@Model.otherLocation;
+            <div>
+                @waypointItem.Location
+            </div>
+        }
+        else if (ObjectContext.GetObjectType(@Model.otherLocation.GetType()) == typeof(Transportation))
+        {
+            var transportationItem = (Transportation)@Model.otherLocation;
+            <div>
+                @transportationItem.Origin
+            </div>
+        }
+        <div>
+            is <br/>
+            @Model.ToReadableString(@Model.estimatedTime), <br/>
+            but you have only given yourself @Model.ToReadableString(@Model.actualTime)
+        </div>
+    }
+
+    <div>
+        <br/>
+        Are you sure you would like to proceed?
+        <br/>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <br/>
+            <input type="submit" formaction="CreateWithTimeVerification" value="Add Waypoint" class="btn btn-default"/>
+            <input type="submit" formaction="RedirectToCreate" value="Go Back" class="btn btn-default"/>
+        </div>
+    </div>
+}

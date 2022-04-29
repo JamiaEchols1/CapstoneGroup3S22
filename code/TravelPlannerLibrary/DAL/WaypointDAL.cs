@@ -78,10 +78,6 @@ namespace TravelPlannerLibrary.DAL
         public Waypoint CreateNewWaypoint(string location, DateTime startTime, DateTime endTime, int tripId,
             string description)
         {
-            if (string.IsNullOrEmpty(description))
-            {
-                throw new ArgumentException("Must enter a description!");
-            }
 
             if (string.IsNullOrEmpty(location))
             {
