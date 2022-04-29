@@ -90,7 +90,7 @@ namespace TravelPlannerDesktopApp.Pages
                 }
 
               
-                LocationDialog dialog = new LocationDialog(this.originLocationTextBox.Text, this.destinationLocationTextBox.Text);
+                LocationDialog dialog = new LocationDialog(this.originLocationTextBox.Text, this.destinationLocationTextBox.Text, this.typeComboBox.SelectedItem.ToString());
                 if (dialog.ShowDialog() == true)
                 {
                     
