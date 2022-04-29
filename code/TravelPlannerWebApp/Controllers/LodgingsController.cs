@@ -353,7 +353,7 @@ namespace WebApplication4.Controllers
                 }
             
                 lodging.TripId = tripID;
-                this._lodgingDal.UpdateLodging(editedLodging);
+                this._lodgingDal.WebUpdateLodging(editedLodging);
                 return RedirectToAction("Details", new { id = editedLodging.Id });
             }
             return View(lodging);
@@ -411,7 +411,7 @@ namespace WebApplication4.Controllers
                 Lodging editedLodging = AddedLodging.ConvertAddedLodgingToLodging(lodging);                
                 editedLodging.TripId = LoggedUser.SelectedTrip.Id;
 
-                this._lodgingDal.UpdateLodging(editedLodging);
+                this._lodgingDal.WebUpdateLodging(editedLodging);
                 editedConflictingLodging = null;
                 return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
             }

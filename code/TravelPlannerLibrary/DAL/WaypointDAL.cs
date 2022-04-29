@@ -203,7 +203,7 @@ namespace TravelPlannerLibrary.DAL
         /// <returns>
         ///     waypoint if updated, null otherwise
         /// </returns>
-        public Waypoint UpdateWaypoint(Waypoint waypoint)
+        public Waypoint WebUpdateWaypoint(Waypoint waypoint)
         {
             if (waypoint != null)
             {

@@ -166,7 +166,7 @@ namespace TravelPlannerLibrary.DAL
         /// <returns>
         ///     the updated lodging item if exists, null otherwise
         /// </returns>
-        public Lodging UpdateLodging(Lodging lodging)
+        public Lodging WebUpdateLodging(Lodging lodging)
         {
             if (lodging != null)
             {

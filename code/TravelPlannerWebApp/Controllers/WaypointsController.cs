@@ -275,7 +275,7 @@ namespace WebApplication4.Controllers
                 }
                 int tripID = LoggedUser.SelectedTrip.Id;
                 waypoint.TripId = tripID;
-                this._waypointDal.UpdateWaypoint(editedWaypoint);
+                this._waypointDal.WebUpdateWaypoint(editedWaypoint);
                 return RedirectToAction("Details", new { id = editedWaypoint.Id });
             }
             return View(waypoint);
