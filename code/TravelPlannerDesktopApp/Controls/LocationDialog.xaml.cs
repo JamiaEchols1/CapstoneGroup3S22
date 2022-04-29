@@ -23,15 +23,15 @@ namespace TravelPlannerDesktopApp.Controls
     {
         private Transportation transportation;
 
-        public LocationDialog(String origin, string detination)
+        public LocationDialog(String origin, string detination, string type)
         {
             this.transportation = transportation;
             InitializeComponent();
-            this.wbMaps.Source = new Uri("https://www.google.com/maps/dir/?api=1&" + this.FormatLocationString(origin,detination));
+            this.wbMaps.Source = new Uri("https://www.google.com/maps/dir/?api=1&" + this.FormatLocationString(origin,detination,type));
         }
 
         
-        private string FormatLocationString(string origin, string destination)
+        private string FormatLocationString(string origin, string destination, string type)
         {
             var output = "origin=";
 
@@ -53,7 +53,7 @@ namespace TravelPlannerDesktopApp.Controls
 
             output.Remove(output.Length - 1);
 
-            output += "&travelmode=" + transportation.Type.ToLower();
+            output += "&travelmode=" + type.ToLower();
 
             return output;
         }
