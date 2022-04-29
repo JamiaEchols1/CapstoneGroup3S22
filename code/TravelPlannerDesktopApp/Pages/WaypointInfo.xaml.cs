@@ -66,7 +66,7 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void EditWaypointButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //TODO
+            NavigationService?.Navigate(new EditWaypoint());
         }
 
         /// <summary>

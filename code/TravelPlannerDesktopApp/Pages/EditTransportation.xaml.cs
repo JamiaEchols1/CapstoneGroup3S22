@@ -13,7 +13,7 @@ namespace TravelPlannerDesktopApp.Pages
     /// <summary>
     ///     Interaction logic for AddTransportationPage.xaml
     /// </summary>
-     public partial class AddTransportationPage : Page
+     public partial class EditTransportation : Page
     {
         #region Data members
 
@@ -25,15 +25,21 @@ namespace TravelPlannerDesktopApp.Pages
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AddTransportationPage" /> class.
+        ///     Initializes a new instance of the <see cref="EditTransportation" /> class.
         /// </summary>
-        public AddTransportationPage()
+        public EditTransportation()
         {
             this.waypointDal = new WaypointDal();
             this.transportationDal = new TransportationDal();
             this.InitializeComponent();
             this.typeComboBox.ItemsSource = TransportationTypes.GetTypes();
-            this.addTransportTitle.Content = "Add New Lodging: " + LoggedUser.SelectedTrip;
+            this.editTransportTitle.Content = "Edit Transportation: " + LoggedUser.SelectedTransportation;
+            this.descriptionTextBox.Text = LoggedUser.SelectedTransportation.Description;
+            this.destinationLocationTextBox.Text = LoggedUser.SelectedTransportation.Destination;
+            this.originLocationTextBox.Text = LoggedUser.SelectedTransportation.Origin;
+            this.endDateTimePicker.Value = LoggedUser.SelectedTransportation.EndTime;
+            this.startDateTimePicker.Value = LoggedUser.SelectedTransportation.StartTime;
+            this.typeComboBox.SelectedItem = LoggedUser.SelectedTransportation.Type;
         }
 
         #endregion
@@ -52,7 +58,7 @@ namespace TravelPlannerDesktopApp.Pages
         ///     or
         ///     or
         /// </exception>
-        private void createTransportationButton_Click(object sender, RoutedEventArgs e)
+        private void editTransportationButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -80,6 +86,8 @@ namespace TravelPlannerDesktopApp.Pages
 
                 var overlappingTransportations =
                     this.transportationDal.GetOverlappingTransportation(startDate, endDate);
+                overlappingTransportations.RemoveAll(x => x.Id == LoggedUser.SelectedTransportation.Id);
+
                 if (overlappingTransportations.Count != 0)
                 {
                     var message = overlappingTransportations.Aggregate(
@@ -89,20 +97,17 @@ namespace TravelPlannerDesktopApp.Pages
                     throw new Exception(message + "Transportation must not overlap with transportations");
                 }
 
-              
                 LocationDialog dialog = new LocationDialog(this.originLocationTextBox.Text, this.destinationLocationTextBox.Text);
                 if (dialog.ShowDialog() == true)
                 {
-                    
-                    LoggedUser.SelectedTransportation = this.transportationDal.CreateANewTransportation(LoggedUser.SelectedTrip.Id,
-                    startDate, endDate, this.descriptionTextBox.Text, this.typeComboBox.SelectedItem.ToString(), this.originLocationTextBox.Text, this.destinationLocationTextBox.Text);
+                    LoggedUser.SelectedTransportation = this.transportationDal.EditTransportation(startDate, endDate, this.descriptionTextBox.Text, this.typeComboBox.SelectedItem.ToString(), this.originLocationTextBox.Text, this.destinationLocationTextBox.Text);
                     MessageBox.Show("Transportation creation was Successful!");
                     NavigationService?.Navigate(new TransportationInfo());
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error creating transportation. " + ex.Message);
+                MessageBox.Show("Error editing transportation. " + ex.Message);
             }
         }
 
@@ -131,8 +136,11 @@ namespace TravelPlannerDesktopApp.Pages
                 var endDate = DateTime.Parse(this.endDateTimePicker.Text);
                 var waypointsAndTransportation = new List<object>();
                 waypointsAndTransportation.AddRange(this.waypointDal.GetOverlappingWaypoints(startDate, endDate));
-                waypointsAndTransportation.AddRange(
-                    this.transportationDal.GetOverlappingTransportation(startDate, endDate));
+                var overlappingTransportations = transportationDal.GetOverlappingTransportation(startDate, endDate);
+                    overlappingTransportations.RemoveAll(x => x.Id == LoggedUser.SelectedTransportation.Id);
+
+                waypointsAndTransportation.AddRange(overlappingTransportations);
+                
                 this.overlappingListBox.ItemsSource = waypointsAndTransportation;
             }
 

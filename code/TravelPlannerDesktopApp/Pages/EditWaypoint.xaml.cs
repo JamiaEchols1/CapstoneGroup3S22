@@ -7,13 +7,12 @@ using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
 using TravelPlannerLibrary.Models;
 
-
 namespace TravelPlannerDesktopApp.Pages
 {
     /// <summary>
-    ///     Interaction logic for AddTransportationPage.xaml
+    ///     Interaction logic for EditWaypoint.xaml
     /// </summary>
-     public partial class AddTransportationPage : Page
+    public partial class EditWaypoint : Page
     {
         #region Data members
 
@@ -25,15 +24,18 @@ namespace TravelPlannerDesktopApp.Pages
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AddTransportationPage" /> class.
+        ///     Initializes a new instance of the <see cref="EditWaypoint" /> class.
         /// </summary>
-        public AddTransportationPage()
+        public EditWaypoint()
         {
             this.waypointDal = new WaypointDal();
             this.transportationDal = new TransportationDal();
             this.InitializeComponent();
-            this.typeComboBox.ItemsSource = TransportationTypes.GetTypes();
-            this.addTransportTitle.Content = "Add New Lodging: " + LoggedUser.SelectedTrip;
+            this.editWaypointTitle.Content = "Edit A New Waypoint: " + LoggedUser.SelectedTrip;
+            this.descriptionTextBox.Text = LoggedUser.SelectedWaypoint.Description;
+            this.locationTextBox.Text = LoggedUser.SelectedWaypoint.Location;
+            this.startDateTimePicker.Value = LoggedUser.SelectedWaypoint.StartDate;
+            this.endDateTimePicker.Value = LoggedUser.SelectedWaypoint.EndDateTime;
         }
 
         #endregion
@@ -41,7 +43,19 @@ namespace TravelPlannerDesktopApp.Pages
         #region Methods
 
         /// <summary>
-        ///     Handles the Click event of the createTransportationButton control.
+        ///     Handles the Click event of the BackButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            var clickedButton = e.OriginalSource as NavButton;
+
+            NavigationService?.Navigate(clickedButton.NavUri);
+        }
+
+        /// <summary>
+        ///     Handles the OnClick event of the CreateWaypointButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
@@ -52,7 +66,7 @@ namespace TravelPlannerDesktopApp.Pages
         ///     or
         ///     or
         /// </exception>
-        private void createTransportationButton_Click(object sender, RoutedEventArgs e)
+        private void EditWaypointButton_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -68,14 +82,15 @@ namespace TravelPlannerDesktopApp.Pages
 
                 var startDate = DateTime.Parse(this.startDateTimePicker.Text);
                 var endDate = DateTime.Parse(this.endDateTimePicker.Text);
-
                 var overlappingWaypoints = this.waypointDal.GetOverlappingWaypoints(startDate, endDate);
+                overlappingWaypoints.RemoveAll(x => x.Id == LoggedUser.SelectedWaypoint.Id);
+
                 if (overlappingWaypoints.Count != 0)
                 {
                     var message = overlappingWaypoints.Aggregate("The following overlapping waypoint(s) were found.\n",
-                        (current, overlappedWaypoint) => current + (overlappedWaypoint + "\n"));
+                        (current, waypoint) => current + (waypoint + "\n"));
 
-                    throw new Exception(message + "Transportation must not overlap with other waypoints");
+                    throw new Exception(message + "Waypoint must not overlap with other waypoints");
                 }
 
                 var overlappingTransportations =
@@ -85,37 +100,21 @@ namespace TravelPlannerDesktopApp.Pages
                     var message = overlappingTransportations.Aggregate(
                         "The following overlapping transportation(s) were found.\n",
                         (current, transportation) => current + (transportation + "\n"));
-     
-                    throw new Exception(message + "Transportation must not overlap with transportations");
+
+                    throw new Exception(message + "Waypoint must not overlap with transportations");
                 }
 
-              
-                LocationDialog dialog = new LocationDialog(this.originLocationTextBox.Text, this.destinationLocationTextBox.Text);
-                if (dialog.ShowDialog() == true)
-                {
-                    
-                    LoggedUser.SelectedTransportation = this.transportationDal.CreateANewTransportation(LoggedUser.SelectedTrip.Id,
-                    startDate, endDate, this.descriptionTextBox.Text, this.typeComboBox.SelectedItem.ToString(), this.originLocationTextBox.Text, this.destinationLocationTextBox.Text);
-                    MessageBox.Show("Transportation creation was Successful!");
-                    NavigationService?.Navigate(new TransportationInfo());
-                }
+                LoggedUser.SelectedWaypoint = this.waypointDal.EditWaypoint(this.locationTextBox.Text, startDate, endDate,
+                    this.descriptionTextBox.Text);
+
+                MessageBox.Show("Waypoint edit was Successful!");
+
+                NavigationService?.Navigate(new WaypointInfo());
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show("Error creating transportation. " + ex.Message);
+                MessageBox.Show("Error editing Waypoint. " + exception.Message);
             }
-        }
-
-        /// <summary>
-        ///     Handles the OnClick event of the BackButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var clickedButton = e.OriginalSource as NavButton;
-
-            NavigationService?.Navigate(clickedButton.NavUri);
         }
 
         /// <summary>
@@ -130,9 +129,12 @@ namespace TravelPlannerDesktopApp.Pages
                 var startDate = DateTime.Parse(this.startDateTimePicker.Text);
                 var endDate = DateTime.Parse(this.endDateTimePicker.Text);
                 var waypointsAndTransportation = new List<object>();
-                waypointsAndTransportation.AddRange(this.waypointDal.GetOverlappingWaypoints(startDate, endDate));
-                waypointsAndTransportation.AddRange(
-                    this.transportationDal.GetOverlappingTransportation(startDate, endDate));
+                waypointsAndTransportation.AddRange(this.transportationDal.GetOverlappingTransportation(startDate, endDate));
+                var overlappingWaypoints = this.waypointDal.GetOverlappingWaypoints(startDate, endDate);
+                overlappingWaypoints.RemoveAll(x => x.Id == LoggedUser.SelectedWaypoint.Id);
+
+
+                waypointsAndTransportation.AddRange(overlappingWaypoints);
                 this.overlappingListBox.ItemsSource = waypointsAndTransportation;
             }
 
@@ -146,9 +148,8 @@ namespace TravelPlannerDesktopApp.Pages
                 this.overlappingListBox.Visibility = Visibility.Collapsed;
                 this.overlappingLabel.Visibility = Visibility.Collapsed;
             }
+
+            #endregion
         }
-
-        #endregion
-
     }
 }

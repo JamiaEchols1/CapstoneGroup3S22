@@ -114,6 +114,72 @@ namespace TravelPlannerLibrary.DAL
         }
 
         /// <summary>
+        ///     Edit a waypoint with the specified values.
+        /// </summary>
+        /// @precondition - !string.IsNullOrEmpty(location);
+        /// startTime.CompareTo(endTime) &lt; 0;
+        /// endTime.CompareTo(LoggedUser.selectedTrip.EndDate) &lt; 0;
+        /// @postcondition - if input valid new waypoint is created, else none
+        /// <param name="location">The location.</param>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The end time.</param>
+        /// <param name="description"> The trips description </param>
+        /// <returns>
+        ///     The newly created waypoint
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">Must enter a location!</exception>
+        /// <exception cref="System.ArgumentException">
+        ///     Start date must be before end date
+        ///     or
+        ///     Start date must be on or after trip start date
+        ///     or
+        ///     End date must be on or before trip end date
+        /// </exception>
+        public Waypoint EditWaypoint(string location, DateTime startTime, DateTime endTime,
+            string description)
+        {
+            if (string.IsNullOrEmpty(description))
+            {
+                throw new ArgumentException("Must enter a description!");
+            }
+
+            if (string.IsNullOrEmpty(location))
+            {
+                throw new ArgumentNullException("Must enter a location!");
+            }
+
+            if (startTime.CompareTo(endTime) >= 0)
+            {
+                throw new ArgumentException("Start date must be before end date");
+            }
+
+            if (LoggedUser.SelectedTrip.StartDate.CompareTo(startTime) > 0)
+            {
+                throw new ArgumentException("Start date must be on or after trip start date");
+            }
+
+            if (endTime.CompareTo(LoggedUser.SelectedTrip.EndDate) >= 0)
+            {
+                throw new ArgumentException("End date must be on or before trip end date");
+            }
+
+            var waypoint = new Waypoint
+            {
+                Location = location,
+                StartDateTime = startTime,
+                EndDateTime = endTime,
+                TripId = LoggedUser.SelectedTrip.Id,
+                Description = description,
+                Id = LoggedUser.SelectedWaypoint.Id
+            };
+
+            db.Waypoints.Remove(db.Waypoints.Find(LoggedUser.SelectedWaypoint.Id));
+            db.Waypoints.Add(waypoint);
+            db.SaveChanges();
+            return waypoint;
+        }
+
+        /// <summary>
         ///     Removes the specified waypoint.
         /// </summary>
         /// <param name="waypoint">The waypoint.</param>

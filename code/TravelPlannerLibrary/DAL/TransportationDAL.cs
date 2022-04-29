@@ -114,6 +114,71 @@ namespace TravelPlannerLibrary.DAL
             return transportation;
         }
 
+
+        /// <summary>
+        /// Edit transportation.
+        /// </summary>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The end time.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="type">The type.</param>
+        /// <param name="origin">The origin.</param>
+        /// <param name="destination">The destination.</param>
+        /// <returns>
+        /// The number of entries written to the database, 0 if transport not created, 1 if creation was successful
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">Description cannot be null</exception>
+        /// <exception cref="System.ArgumentException">End date must be on or after selected start date
+        /// or
+        /// Departure waypoint cannot be the same as arrival waypoint
+        /// or
+        /// Start date must be on or after waypoint end date</exception>
+        /// @precondition - !string.IsNullOrEmpty(description);
+        /// startTime.CompareTo(endTime) &lt;= 0;
+        /// arrivalWaypointId != departingWaypointId;
+        /// selectedWaypoint.EndDateTime.CompareTo(startTime) &lt;= 0;
+        /// @postcondition - transportation is edited with the specified values
+
+        public Transportation EditTransportation(DateTime startTime, DateTime endTime, string description, string type, string origin, string destination)
+        {
+            if (string.IsNullOrEmpty(description))
+            {
+                const string parameterName = "description";
+                throw new ArgumentNullException(parameterName, "Description cannot be null");
+            }
+
+            if (startTime.CompareTo(endTime) > 0)
+            {
+                throw new ArgumentException("End date must be on or after selected start date");
+            }
+
+            if (LoggedUser.SelectedTrip.StartDate.CompareTo(startTime) >= 0)
+            {
+                throw new ArgumentException("Start date must be on or after trip start date");
+            }
+
+            if (endTime.CompareTo(LoggedUser.SelectedTrip.EndDate) >= 0)
+            {
+                throw new ArgumentException("End date must be on or before trip end date");
+            }
+
+            var transportation = new Transportation
+            {
+                Id = LoggedUser.SelectedTransportation.Id,
+                TripId = LoggedUser.SelectedTrip.Id,
+                StartTime = startTime,
+                EndTime = endTime,
+                Description = description,
+                Type = type,
+                Origin = origin,
+                Destination = destination
+            };
+            db.Transportations.Remove(db.Transportations.Find(LoggedUser.SelectedTransportation.Id));
+            db.Transportations.Add(transportation);
+            db.SaveChanges();
+            return transportation;
+        }
+
         /// <summary>
         ///     Creates a new transportation based off of the input transportation.
         /// </summary>

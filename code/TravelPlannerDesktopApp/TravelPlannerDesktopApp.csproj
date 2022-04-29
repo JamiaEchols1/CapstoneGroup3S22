@@ -48,6 +48,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -69,6 +71,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\LocationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TimeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -81,6 +87,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\LocationDialog.xaml.cs">
+      <DependentUpon>LocationDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NavButton.cs" />
     <Compile Include="Controls\TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
@@ -89,6 +98,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\EditTransportation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EditWaypoint.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\EditLodging.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\AddLodging.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +165,15 @@
     <Compile Include="Models\Trip.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Waypoint.cs" />
+    <Compile Include="Pages\EditTransportation.xaml.cs">
+      <DependentUpon>EditTransportation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditWaypoint.xaml.cs">
+      <DependentUpon>EditWaypoint.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EditLodging.xaml.cs">
+      <DependentUpon>EditLodging.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddLodging.xaml.cs">
       <DependentUpon>AddLodging.xaml</DependentUpon>
     </Compile>
