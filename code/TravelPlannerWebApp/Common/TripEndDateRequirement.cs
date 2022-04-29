@@ -24,7 +24,7 @@ namespace WebApplication4.Common
         public override bool IsValid(object value)
         {
             var dateTime = Convert.ToDateTime(value);
-            return dateTime.CompareTo(LoggedUser.SelectedTrip.EndDate) < 0;
+            return dateTime.CompareTo(LoggedUser.SelectedTrip.EndDate) <= 0;
         }
 
         #endregion

@@ -33,6 +33,7 @@ namespace WebApplication4.Models
         /// <value>
         ///     The start date.
         /// </value>
+        [Display(Name = "Start Date", AutoGenerateFilter = false)]
         public DateTime StartDate { get; set; }
 
         /// <summary>
@@ -41,6 +42,7 @@ namespace WebApplication4.Models
         /// <value>
         ///     The end date.
         /// </value>
+        [Display(Name = "End Date", AutoGenerateFilter = false)]
         public DateTime EndDate { get; set; }
 
         /// <summary>

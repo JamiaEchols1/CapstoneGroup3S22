@@ -244,7 +244,7 @@ namespace TravelPlannerLibrary.DAL
         /// <returns>
         ///     Updated transportation if found, null otherwise
         /// </returns>
-        public Transportation UpdateTransportation(Transportation transportation)
+        public Transportation WebUpdateTransportation(Transportation transportation)
         {
             if (transportation != null)
             {

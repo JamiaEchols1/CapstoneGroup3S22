@@ -147,6 +147,13 @@ namespace WebApplication4.Controllers
             [Bind(Include = "StartTime,EndTime,Description,Type,Origin,Destination")]
             AddedTransportation transportation)
         {
+            transportation.Types = new List<string>()
+            {
+                "WALKING",
+                "DRIVING",
+                "TRANSIT",
+                "BICYCLING"
+            };
             if (ModelState.IsValid)
             {
                 transportation.TripId = LoggedUser.SelectedTrip.Id;
@@ -264,6 +271,13 @@ namespace WebApplication4.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Origin,Destination,StartTime,EndTime,TripId,Description,Type,TravelTime")] AddedTransportation transportation)
         {
+            transportation.Types = new List<string>()
+            {
+                "WALKING",
+                "DRIVING",
+                "TRANSIT",
+                "BICYCLING"
+            };
             if (ModelState.IsValid)
             {
                 Transportation editedTransportation = AddedTransportation.ConvertAddedTransportationToTransportation(transportation);
@@ -279,8 +293,8 @@ namespace WebApplication4.Controllers
                 }
                 int tripID = LoggedUser.SelectedTrip.Id;
                 transportation.TripId = tripID;
-                this._transportationDal.UpdateTransportation(editedTransportation);
-                return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
+                this._transportationDal.WebUpdateTransportation(editedTransportation);
+                return RedirectToAction("Details", new { id = editedTransportation.Id });
             }
             return View(transportation);
         }
