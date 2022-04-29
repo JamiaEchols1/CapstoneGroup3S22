@@ -39,7 +39,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.originLocationTextBox.Text = LoggedUser.SelectedTransportation.Origin;
             this.endDateTimePicker.Value = LoggedUser.SelectedTransportation.EndTime;
             this.startDateTimePicker.Value = LoggedUser.SelectedTransportation.StartTime;
-            this.typeComboBox.SelectedItem = LoggedUser.SelectedTransportation.Type;
+            this.typeComboBox.Text = LoggedUser.SelectedTransportation.Type;
         }
 
         #endregion

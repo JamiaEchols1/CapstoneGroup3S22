@@ -8,9 +8,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White" Margin="0,0,0,-36">
 
-        <WebBrowser Name="wbMaps" Margin="65,69,60,86"/>
-        <Button Content="Yes" HorizontalAlignment="Left" Margin="509,414,0,0" VerticalAlignment="Top" Click="YesButton_Click" Height="36" Width="111"/>
-        <Button Content="No" HorizontalAlignment="Left" Margin="175,413,0,0" VerticalAlignment="Top" Click="NoButton_Click" Height="36" Width="120"/>
+        <WebBrowser Name="wbMaps" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="100,100,100,100"/>
+        <Button Content="Yes" HorizontalAlignment="right" Margin="0,0,100,50" VerticalAlignment="Bottom" Click="YesButton_Click" Height="36" Width="111"/>
+        <Button Content="No" HorizontalAlignment="Left" Margin="100,0,0,50" VerticalAlignment="Bottom" Click="NoButton_Click" Height="36" Width="120"/>
         <Label Content="Confirm selected transportation route" HorizontalAlignment="Left" Margin="55,18,0,0" VerticalAlignment="Top"/>
 
     </Grid>
