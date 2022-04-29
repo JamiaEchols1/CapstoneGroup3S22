@@ -426,3 +426,5 @@ C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\ob
 C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\obj\Debug\Pages\EditWaypoint.baml
 C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\obj\Debug\Pages\EditTransportation.g.cs
 C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\obj\Debug\Pages\EditTransportation.baml
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\obj\Debug\Controls\LocationDialog.g.cs
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\obj\Debug\Controls\LocationDialog.baml

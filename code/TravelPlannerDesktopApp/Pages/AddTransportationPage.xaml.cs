@@ -89,12 +89,16 @@ namespace TravelPlannerDesktopApp.Pages
                     throw new Exception(message + "Transportation must not overlap with transportations");
                 }
 
-                var newTransportation = this.transportationDal.CreateANewTransportation(LoggedUser.SelectedTrip.Id,
-                    startDate, endDate, this.descriptionTextBox.Text, this.typeComboBox.SelectedItem.ToString(), this.orginLocationTextBox.Text, this.destinationLocationTextBox.Text);
-
-                MessageBox.Show("Transportation creation was Successful!");
-                LoggedUser.SelectedTransportation = newTransportation;
-                NavigationService?.Navigate(new TransportationInfo());
+              
+                LocationDialog dialog = new LocationDialog(this.originLocationTextBox.Text, this.destinationLocationTextBox.Text);
+                if (dialog.ShowDialog() == true)
+                {
+                    
+                    LoggedUser.SelectedTransportation = this.transportationDal.CreateANewTransportation(LoggedUser.SelectedTrip.Id,
+                    startDate, endDate, this.descriptionTextBox.Text, this.typeComboBox.SelectedItem.ToString(), this.originLocationTextBox.Text, this.destinationLocationTextBox.Text);
+                    MessageBox.Show("Transportation creation was Successful!");
+                    NavigationService?.Navigate(new TransportationInfo());
+                }
             }
             catch (Exception ex)
             {
