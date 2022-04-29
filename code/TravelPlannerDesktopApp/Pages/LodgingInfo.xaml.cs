@@ -66,7 +66,7 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void editLodgingButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            NavigationService?.Navigate(new EditLodging());
         }
 
         /// <summary>

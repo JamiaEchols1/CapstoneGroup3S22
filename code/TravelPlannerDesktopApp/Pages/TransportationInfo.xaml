@@ -8,25 +8,25 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TransportationInfo">
 
-    <Grid Background="White">
-        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="65,102,0,0" TextWrapping="Wrap"
-                   Text="Description:" VerticalAlignment="Top" Height="85" Width="196" />
-        <TextBlock x:Name="typeTextBlock" HorizontalAlignment="Left" Margin="65,192,0,0" TextWrapping="Wrap"
+    <Grid Background="White" Margin="0,0,0,-70">
+        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="64,57,0,0" TextWrapping="Wrap"
+                   Text="Description:" VerticalAlignment="Top" Height="23" Width="196" />
+        <TextBlock x:Name="typeTextBlock" HorizontalAlignment="Left" Margin="65,85,0,0" TextWrapping="Wrap"
                    Text="Type:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="startTimeTextBlock" HorizontalAlignment="Left" Margin="65,252,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="startTimeTextBlock" HorizontalAlignment="Left" Margin="64,110,0,0" TextWrapping="Wrap"
                    Text="Start Date:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="endTimeTextBlock"  HorizontalAlignment="Left" Margin="65,307,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="endTimeTextBlock"  HorizontalAlignment="Left" Margin="64,130,0,0" TextWrapping="Wrap"
                    Text="End Date:" VerticalAlignment="Top" Height="20" Width="196" />
-        <Button x:Name="editTransportationButton" Content="Edit Transportation" HorizontalAlignment="Left" Margin="299,355,0,0"
-                VerticalAlignment="Top" Click="editTransportationButton_Click" />
-        <Button x:Name="removeTransportationButton" Content="Remove Transportation" HorizontalAlignment="Left" Margin="424,355,0,0"
-                VerticalAlignment="Top" Click="removeTransportationButton_Click" />
+        <Button x:Name="editTransportationButton" Content="Edit Transportation" HorizontalAlignment="Left" Margin="100,0,0,100"
+                VerticalAlignment="Bottom" Click="editTransportationButton_Click" />
+        <Button x:Name="removeTransportationButton" Content="Remove Transportation" HorizontalAlignment="Right" Margin="0,0,100,100"
+                VerticalAlignment="Bottom" Click="removeTransportationButton_Click" />
 
-        <WrapPanel Margin="713,5,5,335">
+        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Right">
             <n:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/Back.png"
                          NavUri="Pages/TripInfo.xaml" Width="70" />
         </WrapPanel>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Transportation Info" VerticalAlignment="Top"/>
-        <WebBrowser x:Name="wbMaps" Margin="299,102,0,0" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="386"/>
+        <WebBrowser x:Name="wbMaps" Margin="100,200,100,200" HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </Page>

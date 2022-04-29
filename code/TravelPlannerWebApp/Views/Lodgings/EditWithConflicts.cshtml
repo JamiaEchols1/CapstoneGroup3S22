@@ -2,7 +2,7 @@
 @using TravelPlannerLibrary.Models
 
 @{
-    ViewBag.Title = "Conflicting Lodging";
+    ViewBag.Title = "Edit Conflicting Lodging";
 }
 
 <!DOCTYPE html>
@@ -19,39 +19,40 @@
         <h4>Trip Details : @ViewBag.TripDetails</h4>
         <div class="form-horizontal">
             <h4>Lodging</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.StartTime)
             @Html.HiddenFor(model => model.EndTime)
             @Html.HiddenFor(model => model.Location)
             @Html.HiddenFor(model => model.Description)
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Location, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Model.Location
+                    @Model.Location                    
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.StartTime, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Model.StartTime
+                    @Model.StartTime                    
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.EndTime, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Model.EndTime
+                    @Model.EndTime                    
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Model.Description
+                    @Model.Description                    
                 </div>
             </div>
 
@@ -62,7 +63,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Confirm With Conflicts" class="btn btn-default" />
+                    <input type="submit" value="Edit With Conflicts" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -73,7 +74,3 @@
     </div>
 </body>
 </html>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

@@ -5,11 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
       mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="Waypoints">
 
-    <Grid Background="White" ButtonBase.Click="Grid_Click">
-        <WrapPanel Margin="5,5,685,126">
+    <Grid Background="White" ButtonBase.Click="Grid_Click" Height="405" Width="710">
+        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="90">
             <n:NavButton Text="Create Waypoint" ImageSource="/Images/CreateTrip.png" NavUri="Pages/AddWaypoint.xaml"
                          Width="83" />
             <n:NavButton Text="Create Lodging" ImageSource="/Images/lodging.png" NavUri="Pages/AddLodging.xaml"
@@ -19,14 +18,15 @@
                          Width="83" />
         </WrapPanel>
 
-        <WrapPanel Margin="713,5,5,335">
+        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Right">
             <n:NavButton Text="Back" ImageSource="/Images/Back.png" NavUri="Pages/Landing.xaml" Width="70" />
         </WrapPanel>
 
 
-        <ListBox x:Name="waypointsAndTransportListBox" Margin="95,140,435,40"
+        <ListBox x:Name="waypointsAndTransportListBox" Margin="120,175,0,0"
+                 VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Height="180"
                  SelectionChanged="WaypointsListBox_OnSelectionChanged" />
-        <ListBox x:Name="lodgingListBox" Margin="435,140,95,40" SelectionChanged="LodgingListBox_OnSelectionChanged" />
+        <ListBox x:Name="lodgingListBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255" Height="184" Margin="385,175,0,0"  SelectionChanged="LodgingListBox_OnSelectionChanged" />
 
         <TextBlock x:Name="selectedTripTextBlock" HorizontalAlignment="Left" Margin="99,10,0,0" TextWrapping="Wrap"
                    Text="Selected Trip:" VerticalAlignment="Top" Height="20" Width="446" />
@@ -36,8 +36,8 @@
                    Text="End Date:" VerticalAlignment="Top" Height="20" Width="408" />
         <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="99,70,0,0" TextWrapping="Wrap"
                    Text="Description:" VerticalAlignment="Top" Height="20" Width="606" />
-        <Label Content="Waypoints and Transportation" HorizontalAlignment="Left" Margin="141,109,0,0"
+        <Label Content="Waypoints and Transportation" HorizontalAlignment="Left" Margin="120,134,0,0"
                VerticalAlignment="Top" />
-        <Label Content="Lodging" HorizontalAlignment="Left" Margin="545,109,0,0" VerticalAlignment="Top" />
+        <Label Content="Lodging" HorizontalAlignment="Left" Margin="391,125,0,0" VerticalAlignment="Top" />
     </Grid>
 </Page>

@@ -66,7 +66,7 @@ namespace TravelPlannerDesktopApp.Models
         public override string ToString()
         {
             return "Transportation: " + "Start: " + this.StartTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " +
-                   this.EndTime.ToString("MM/dd/yyyy h:mm tt") + " Origin:" + Origin + " Destination: " + Destination; ;
+                   this.EndTime.ToString("MM/dd/yyyy h:mm tt") + " Origin:" + Origin + " Destination: " + Destination;
         }
 
         #endregion

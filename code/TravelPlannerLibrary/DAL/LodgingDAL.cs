@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using TravelPlannerLibrary.Models;
 using TravelPlannerLibrary.Util;
@@ -108,6 +109,45 @@ namespace TravelPlannerLibrary.DAL
             return lodging;
         }
 
+        public Lodging EditLodging(string location, DateTime startTime, DateTime endTime, string description)
+        {
+            if (string.IsNullOrEmpty(location))
+            {
+                const string parameterName = "location";
+                throw new ArgumentNullException(parameterName, "Must enter a location!");
+            }
+
+            if (LoggedUser.SelectedTrip.StartDate.CompareTo(startTime) > 0)
+            {
+                throw new ArgumentException("Start date must be on or after trip start date");
+            }
+
+            if (endTime.CompareTo(LoggedUser.SelectedTrip.EndDate) > 0)
+            {
+                throw new ArgumentException("End date must be on or before trip end date");
+            }
+
+            if (startTime.CompareTo(endTime) > 0)
+            {
+                throw new ArgumentException("End date must be on or after selected start date");
+            }
+            int id = LoggedUser.SelectedLodging.Id;
+            var lodging = new Lodging
+            {
+                Location = location,
+                StartTime = startTime,
+                EndTime = endTime,
+                TripId = LoggedUser.SelectedTrip.Id,
+                Id = id,
+                Description = description
+            };
+            db.Lodgings.Remove(db.Lodgings.Find(id));
+            db.Lodgings.Add(lodging);
+            db.SaveChanges();
+            return lodging;
+        }
+
+
         /// <summary>
         ///     Removes the specified lodging.
         /// </summary>
@@ -141,6 +181,47 @@ namespace TravelPlannerLibrary.DAL
         }
 
         /// <summary>
+        ///     Gets the overlapping lodgings for updated lodging.
+        /// </summary>
+        /// <param name="newStartTime">The new start time.</param>
+        /// <param name="newEndTime">The new end time.</param>
+        /// <param name="lodging">The lodging.</param>
+        /// <returns>
+        ///     List of overlapping lodgings excluding the lodging parameter
+        /// </returns>
+        public List<Lodging> GetOverlappingLodgingsForUpdatedLodging(DateTime newStartTime, DateTime newEndTime, Lodging lodging)
+        {
+            var tripLodgings = this.GetLodgings(LoggedUser.SelectedTrip.Id);
+
+            return tripLodgings.Where(current =>
+                                    TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime,
+                                        current.EndTime)).Where(current => current.Id != lodging.Id)
+                                .ToList();
+        }
+
+        /// <summary>
+        ///     Updates the lodging.
+        /// </summary>
+        /// <param name="lodging">The lodging.</param>
+        /// <returns>
+        ///     the updated lodging item if exists, null otherwise
+        /// </returns>
+        public Lodging WebUpdateLodging(Lodging lodging)
+        {
+            if (lodging != null)
+            {
+                var editedLodging = db.Lodgings.First(a => a.Id == lodging.Id);
+                editedLodging.Location = lodging.Location;
+                editedLodging.StartTime = lodging.StartTime;
+                editedLodging.EndTime = lodging.EndTime;
+                editedLodging.Description = lodging.Description;
+                db.SaveChanges();
+                return editedLodging;
+            }
+            return null;
+        }
+
+        /// <summary>
         ///     Gets the lodging by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
@@ -149,7 +230,7 @@ namespace TravelPlannerLibrary.DAL
         /// </returns>
         public Lodging GetLodgingById(int id)
         {
-            return db.Lodgings.FirstOrDefault(x => x.Id == id);
+            return db.Lodgings.First(x => x.Id == id);
         }
 
         /// <summary>

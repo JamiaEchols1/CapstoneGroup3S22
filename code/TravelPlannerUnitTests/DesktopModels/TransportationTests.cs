@@ -25,18 +25,21 @@ namespace TravelPlannerUnitTests.DesktopModels
                 StartTime = startTime,
                 EndTime = endTime,
                 Id = 1,
-                TripId = 1
+                TripId = 1,
+                Origin = "Origin",
+                Destination = "Destination"
             };
             var desktopTransportation = new TravelPlannerDesktopApp.Models.Transportation {
                 Description = transportation.Description,
                 StartTime = transportation.StartTime,
                 EndTime = transportation.EndTime,
                 Id = transportation.Id,
-                TripId = transportation.TripId
+                TripId = transportation.TripId,
+                Origin = transportation.Origin,
+                Destination = transportation.Destination
             };
-            var resultToString = "Transportation: " + "Start: " +
-                                 desktopTransportation.StartTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " +
-                                 desktopTransportation.EndTime.ToString("MM/dd/yyyy h:mm tt");
+            var resultToString = "Transportation: " + "Start: " + desktopTransportation.StartTime.ToString("MM/dd/yyyy h:mm tt") + ", End: " +
+                   desktopTransportation.EndTime.ToString("MM/dd/yyyy h:mm tt") + " Origin:" + desktopTransportation.Origin + " Destination: " + desktopTransportation.Destination;
             Assert.AreEqual("transportation", desktopTransportation.Description);
             Assert.AreEqual(startTime, desktopTransportation.StartTime);
             Assert.AreEqual(endTime, desktopTransportation.EndTime);

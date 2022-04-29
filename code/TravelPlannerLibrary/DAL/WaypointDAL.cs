@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using TravelPlannerLibrary.Models;
 using TravelPlannerLibrary.Util;
@@ -77,10 +78,6 @@ namespace TravelPlannerLibrary.DAL
         public Waypoint CreateNewWaypoint(string location, DateTime startTime, DateTime endTime, int tripId,
             string description)
         {
-            if (string.IsNullOrEmpty(description))
-            {
-                throw new ArgumentException("Must enter a description!");
-            }
 
             if (string.IsNullOrEmpty(location))
             {
@@ -111,6 +108,72 @@ namespace TravelPlannerLibrary.DAL
                 Id = this.FindNextId()
             };
 
+            db.Waypoints.Add(waypoint);
+            db.SaveChanges();
+            return waypoint;
+        }
+
+        /// <summary>
+        ///     Edit a waypoint with the specified values.
+        /// </summary>
+        /// @precondition - !string.IsNullOrEmpty(location);
+        /// startTime.CompareTo(endTime) &lt; 0;
+        /// endTime.CompareTo(LoggedUser.selectedTrip.EndDate) &lt; 0;
+        /// @postcondition - if input valid new waypoint is created, else none
+        /// <param name="location">The location.</param>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The end time.</param>
+        /// <param name="description"> The trips description </param>
+        /// <returns>
+        ///     The newly created waypoint
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">Must enter a location!</exception>
+        /// <exception cref="System.ArgumentException">
+        ///     Start date must be before end date
+        ///     or
+        ///     Start date must be on or after trip start date
+        ///     or
+        ///     End date must be on or before trip end date
+        /// </exception>
+        public Waypoint EditWaypoint(string location, DateTime startTime, DateTime endTime,
+            string description)
+        {
+            if (string.IsNullOrEmpty(description))
+            {
+                throw new ArgumentException("Must enter a description!");
+            }
+
+            if (string.IsNullOrEmpty(location))
+            {
+                throw new ArgumentNullException("Must enter a location!");
+            }
+
+            if (startTime.CompareTo(endTime) >= 0)
+            {
+                throw new ArgumentException("Start date must be before end date");
+            }
+
+            if (LoggedUser.SelectedTrip.StartDate.CompareTo(startTime) > 0)
+            {
+                throw new ArgumentException("Start date must be on or after trip start date");
+            }
+
+            if (endTime.CompareTo(LoggedUser.SelectedTrip.EndDate) >= 0)
+            {
+                throw new ArgumentException("End date must be on or before trip end date");
+            }
+
+            var waypoint = new Waypoint
+            {
+                Location = location,
+                StartDateTime = startTime,
+                EndDateTime = endTime,
+                TripId = LoggedUser.SelectedTrip.Id,
+                Description = description,
+                Id = LoggedUser.SelectedWaypoint.Id
+            };
+
+            db.Waypoints.Remove(db.Waypoints.Find(LoggedUser.SelectedWaypoint.Id));
             db.Waypoints.Add(waypoint);
             db.SaveChanges();
             return waypoint;
@@ -189,10 +252,51 @@ namespace TravelPlannerLibrary.DAL
             Trip trip = null;
             if (id >= 0)
             {
-                trip = db.Trips.FirstOrDefault(x => x.Id == id);
+                trip = db.Trips.First(x => x.Id == id);
             }
 
             return trip;
+        }
+
+        /// <summary>
+        ///     Updates the waypoint.
+        /// </summary>
+        /// <param name="waypoint">The waypoint.</param>
+        /// <returns>
+        ///     waypoint if updated, null otherwise
+        /// </returns>
+        public Waypoint WebUpdateWaypoint(Waypoint waypoint)
+        {
+            if (waypoint != null)
+            {
+                var editedWaypoint = db.Waypoints.First(a => a.Id == waypoint.Id);
+                editedWaypoint.Location = waypoint.Location;
+                editedWaypoint.StartDateTime = waypoint.StartDateTime;
+                editedWaypoint.EndDateTime = waypoint.EndDateTime;
+                editedWaypoint.Description = waypoint.Description;
+                db.SaveChanges();
+                return editedWaypoint;
+            }
+            return null;
+        }
+
+        /// <summary>
+        ///     Gets the overlapping waypoints for updated waypoint.
+        /// </summary>
+        /// <param name="newStartTime">The new start time.</param>
+        /// <param name="newEndTime">The new end time.</param>
+        /// <param name="waypoint">The waypoint.</param>
+        /// <returns>
+        ///     List of overlapping waypoints excluding the updated waypoint
+        /// </returns>
+        public List<Waypoint> GetOverlappingWaypointsForUpdatedWaypoint(DateTime newStartTime, DateTime newEndTime, Waypoint waypoint)
+        {
+            var tripWaypoints = this.GetWaypoints(LoggedUser.SelectedTrip.Id);
+
+            return tripWaypoints.Where(current =>
+                                    TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartDateTime,
+                                        current.EndDateTime)).Where(current => current.Id != waypoint.Id)
+                                .ToList();
         }
 
         #endregion
