@@ -14,6 +14,11 @@ namespace TravelPlannerLibrary.Models
         /// </summary>
         public DateTime StartDate;
 
+        /// <summary>
+        /// The end date
+        /// </summary>
+        public DateTime EndDate;
+
         #endregion
     }
 }

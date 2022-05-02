@@ -91,7 +91,8 @@
                     </td>
                     <td>
                         @Html.ActionLink("Details", "../Waypoints/Details", new { id = waypointItem.Id }) |
-                        @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = waypointItem.Id })
+                        @Html.ActionLink("Delete", "../Waypoints/Delete", new { id = waypointItem.Id }) |
+                        @Html.ActionLink("Edit", "../Waypoints/Edit", new { id = waypointItem.Id })
                     </td>
                 </tr>
             }
@@ -113,7 +114,8 @@
         </td>
         <td>
             @Html.ActionLink("Details", "../Transportation/Details", new { id = transportationItem.Id }) |
-            @Html.ActionLink("Delete", "../Transportation/Delete", new { id = transportationItem.Id })
+            @Html.ActionLink("Delete", "../Transportation/Delete", new { id = transportationItem.Id }) |
+            @Html.ActionLink("Edit", "../Transportation/Edit", new { id = transportationItem.Id })
         </td>
     </tr>
             }
@@ -152,7 +154,8 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "../Lodgings/Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "../Lodgings/Delete", new { id = item.Id })
+                @Html.ActionLink("Delete", "../Lodgings/Delete", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "../Lodgings/Edit", new { id = item.Id })
             </td>
         </tr>
     }

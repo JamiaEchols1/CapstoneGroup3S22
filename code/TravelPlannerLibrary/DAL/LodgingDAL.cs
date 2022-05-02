@@ -181,6 +181,47 @@ namespace TravelPlannerLibrary.DAL
         }
 
         /// <summary>
+        ///     Gets the overlapping lodgings for updated lodging.
+        /// </summary>
+        /// <param name="newStartTime">The new start time.</param>
+        /// <param name="newEndTime">The new end time.</param>
+        /// <param name="lodging">The lodging.</param>
+        /// <returns>
+        ///     List of overlapping lodgings excluding the lodging parameter
+        /// </returns>
+        public List<Lodging> GetOverlappingLodgingsForUpdatedLodging(DateTime newStartTime, DateTime newEndTime, Lodging lodging)
+        {
+            var tripLodgings = this.GetLodgings(LoggedUser.SelectedTrip.Id);
+
+            return tripLodgings.Where(current =>
+                                    TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartTime,
+                                        current.EndTime)).Where(current => current.Id != lodging.Id)
+                                .ToList();
+        }
+
+        /// <summary>
+        ///     Updates the lodging.
+        /// </summary>
+        /// <param name="lodging">The lodging.</param>
+        /// <returns>
+        ///     the updated lodging item if exists, null otherwise
+        /// </returns>
+        public Lodging WebUpdateLodging(Lodging lodging)
+        {
+            if (lodging != null)
+            {
+                var editedLodging = db.Lodgings.First(a => a.Id == lodging.Id);
+                editedLodging.Location = lodging.Location;
+                editedLodging.StartTime = lodging.StartTime;
+                editedLodging.EndTime = lodging.EndTime;
+                editedLodging.Description = lodging.Description;
+                db.SaveChanges();
+                return editedLodging;
+            }
+            return null;
+        }
+
+        /// <summary>
         ///     Gets the lodging by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
@@ -189,7 +230,7 @@ namespace TravelPlannerLibrary.DAL
         /// </returns>
         public Lodging GetLodgingById(int id)
         {
-            return db.Lodgings.FirstOrDefault(x => x.Id == id);
+            return db.Lodgings.First(x => x.Id == id);
         }
 
         /// <summary>

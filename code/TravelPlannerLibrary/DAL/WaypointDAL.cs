@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using TravelPlannerLibrary.Models;
 using TravelPlannerLibrary.Util;
@@ -77,10 +78,6 @@ namespace TravelPlannerLibrary.DAL
         public Waypoint CreateNewWaypoint(string location, DateTime startTime, DateTime endTime, int tripId,
             string description)
         {
-            if (string.IsNullOrEmpty(description))
-            {
-                throw new ArgumentException("Must enter a description!");
-            }
 
             if (string.IsNullOrEmpty(location))
             {
@@ -255,10 +252,51 @@ namespace TravelPlannerLibrary.DAL
             Trip trip = null;
             if (id >= 0)
             {
-                trip = db.Trips.FirstOrDefault(x => x.Id == id);
+                trip = db.Trips.First(x => x.Id == id);
             }
 
             return trip;
+        }
+
+        /// <summary>
+        ///     Updates the waypoint.
+        /// </summary>
+        /// <param name="waypoint">The waypoint.</param>
+        /// <returns>
+        ///     waypoint if updated, null otherwise
+        /// </returns>
+        public Waypoint WebUpdateWaypoint(Waypoint waypoint)
+        {
+            if (waypoint != null)
+            {
+                var editedWaypoint = db.Waypoints.First(a => a.Id == waypoint.Id);
+                editedWaypoint.Location = waypoint.Location;
+                editedWaypoint.StartDateTime = waypoint.StartDateTime;
+                editedWaypoint.EndDateTime = waypoint.EndDateTime;
+                editedWaypoint.Description = waypoint.Description;
+                db.SaveChanges();
+                return editedWaypoint;
+            }
+            return null;
+        }
+
+        /// <summary>
+        ///     Gets the overlapping waypoints for updated waypoint.
+        /// </summary>
+        /// <param name="newStartTime">The new start time.</param>
+        /// <param name="newEndTime">The new end time.</param>
+        /// <param name="waypoint">The waypoint.</param>
+        /// <returns>
+        ///     List of overlapping waypoints excluding the updated waypoint
+        /// </returns>
+        public List<Waypoint> GetOverlappingWaypointsForUpdatedWaypoint(DateTime newStartTime, DateTime newEndTime, Waypoint waypoint)
+        {
+            var tripWaypoints = this.GetWaypoints(LoggedUser.SelectedTrip.Id);
+
+            return tripWaypoints.Where(current =>
+                                    TimeChecker.TimesOverlapping(newStartTime, newEndTime, current.StartDateTime,
+                                        current.EndDateTime)).Where(current => current.Id != waypoint.Id)
+                                .ToList();
         }
 
         #endregion

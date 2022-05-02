@@ -102,5 +102,55 @@ namespace WebApplication4.Models
         public List<string> Types { get; set; }
 
         #endregion
+
+        #region Conversions
+        /// <summary>
+        ///     Converts the transportation to added transportation.
+        /// </summary>
+        /// <param name="transportation">The transportation.</param>
+        /// <returns>
+        ///     the converted transportation item 
+        /// </returns>
+        public static AddedTransportation ConvertTransportationToAddedTransportation(Transportation transportation)
+        {
+            AddedTransportation addedTransportation = new AddedTransportation()
+            {
+                Id = transportation.Id,
+                Origin = transportation.Origin,
+                Destination = transportation.Destination,
+                StartTime = transportation.StartTime,
+                EndTime = transportation.EndTime,
+                TripId = transportation.TripId,
+                Description = transportation.Description,
+                Type = transportation.Type
+
+            };
+            return addedTransportation;
+        }
+
+        /// <summary>
+        ///     Converts the added transportation to transportation.
+        /// </summary>
+        /// <param name="addedTransportation">The added transportation.</param>
+        /// <returns>
+        ///     The converted transportation
+        /// </returns>
+        public static Transportation ConvertAddedTransportationToTransportation(AddedTransportation addedTransportation)
+        {
+            Transportation transportation = new Transportation()
+            {
+                Id = addedTransportation.Id,
+                Origin = addedTransportation.Origin,
+                Destination = addedTransportation.Destination,
+                StartTime = addedTransportation.StartTime,
+                EndTime = addedTransportation.EndTime,
+                TripId = addedTransportation.TripId,
+                Description = addedTransportation.Description,
+                Type = addedTransportation.Type
+
+            };
+            return transportation;
+        }
+        #endregion
     }
 }

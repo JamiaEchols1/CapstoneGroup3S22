@@ -18,6 +18,7 @@ namespace WebApplication4.Controllers
         #region Data members
 
         private static AddedLodging conflictingLodging;
+        private static AddedLodging editedConflictingLodging;
         private readonly TravelPlannerDatabaseEntities db = new TravelPlannerDatabaseEntities();
 
         private readonly LodgingDal _lodgingDal = new LodgingDal();
@@ -226,6 +227,31 @@ namespace WebApplication4.Controllers
         }
 
         /// <summary>
+        ///     Validates the conflicting lodgings for edited lodging.
+        /// </summary>
+        /// <param name="lodging">The lodging.</param>
+        /// returns>
+        ///     String of conflicting lodgings excluding the edited lodging
+        /// </returns>
+        private string validateConflictingLodgingsForEditedLodging(Lodging lodging)
+        {
+            var overlaps = this._lodgingDal.GetOverlappingLodgingsForUpdatedLodging(lodging.StartTime, lodging.EndTime, lodging);
+            string ErrorMessage = null;
+            if (overlaps.Count > 0)
+            {
+                ErrorMessage = "The lodging was not edited because of the following conflicts:" + "\n";
+                foreach (var overlap in overlaps)
+                {
+                    ErrorMessage += overlap.Location + " " + overlap.StartTime + " - " + overlap.EndTime + ". ";
+                }
+
+                ErrorMessage += "Select \"Edit With Conflicts\" to edit the lodging anyways.";
+            }
+
+            return ErrorMessage;
+        }
+
+        /// <summary>
         ///     Prompts the user to delete the specified lodging.
         /// </summary>
         /// <param name="id">The identifier of the lodging.</param>
@@ -259,6 +285,138 @@ namespace WebApplication4.Controllers
             var lodging = this._lodgingDal.GetLodgingById(lodgingId);
             this._lodgingDal.RemoveLodging(lodging);
             return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
+        }
+
+        /// <summary>
+        ///     GET: Edits the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="ErrorMessage">The error message.</param>
+        /// <returns>
+        ///  View of the lodging to be edited
+        /// </returns>
+        public ActionResult Edit(int? id, string ErrorMessage)
+        {
+            int lodgingId = (int)id;          
+            Lodging lodging = this._lodgingDal.GetLodgingById(lodgingId);
+            var TripId = LoggedUser.SelectedTrip.Id;
+            LoggedUser.SelectedTrip = this._tripDal.GetTripById(TripId);
+            AddedLodging editedLodging = AddedLodging.ConvertLodgingToAddedLodging(lodging);
+            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
+                                  LoggedUser.SelectedTrip.EndDate;
+            ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
+            ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
+            if (ErrorMessage != null)
+            {
+                ViewBag.ErrorMessage = ErrorMessage;
+            }
+            return View(editedLodging);
+        }
+
+        /// <summary>
+        ///     Edits the specified lodging.
+        /// </summary>
+        /// <param name="lodging">The lodging.</param>
+        /// <returns>
+        /// 
+        /// </returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Location,StartTime,EndTime,Description")] AddedLodging lodging)
+        {
+            if (ModelState.IsValid)
+            {
+                int tripID = LoggedUser.SelectedTrip.Id;
+                Lodging editedLodging = AddedLodging.ConvertAddedLodgingToLodging(lodging);
+                var ErrorMessage = this.validateDateTimes(lodging);
+                if (ErrorMessage != null)
+                {
+                    return RedirectToAction("Edit", new { ErrorMessage });
+                }
+                if (ErrorMessage == null)
+                {
+                    ErrorMessage = this.validateConflictingLodgingsForEditedLodging(editedLodging);
+                }
+
+                if (ErrorMessage != null)
+                {
+                    editedConflictingLodging = new AddedLodging
+                    {
+                        Location = lodging.Location,
+                        StartTime = lodging.StartTime,
+                        EndTime = lodging.EndTime,
+                        TripId = tripID,
+                        Id = lodging.Id,
+                        Description = lodging.Description
+                    };
+                    return RedirectToAction("EditWithConflicts", new { ErrorMessage });
+                }
+            
+                lodging.TripId = tripID;
+                this._lodgingDal.WebUpdateLodging(editedLodging);
+                return RedirectToAction("Details", new { id = editedLodging.Id });
+            }
+            return View(lodging);
+        }
+
+        /// <summary>
+        ///     GET: Edits the lodging with conflicts.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="ErrorMessage">The error message.</param>
+        /// <returns>
+        ///     View of edited lodging with error message of conflicts
+        /// </returns>
+        public ActionResult EditWithConflicts(int? id, string ErrorMessage)
+        {
+            if (id == null)
+            {
+                id = LoggedUser.SelectedTrip.Id;
+            }
+
+            var Lodging = new AddedLodging()
+            {
+                Id = editedConflictingLodging.Id,
+                TripId = editedConflictingLodging.TripId,
+                Location = editedConflictingLodging.Location,
+                StartTime = editedConflictingLodging.StartTime,
+                EndTime = editedConflictingLodging.EndTime,
+                Description = editedConflictingLodging.Description
+            };
+            var tripId = (int)id;
+            LoggedUser.SelectedTrip = this._tripDal.GetTripById(tripId);
+            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
+                                  LoggedUser.SelectedTrip.EndDate;
+            ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
+            ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
+            ViewBag.ErrorMessage = ErrorMessage;
+            return View("EditWithConflicts", Lodging);
+        }
+
+        /// <summary>
+        ///     POST: Edits the lodging with conflicts.
+        /// </summary>
+        /// <param name="lodging">The lodging.</param>
+        /// <returns>
+        ///     View of trip details if successful, lodging edit view otherwise
+        /// </returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditWithConflicts(
+            [Bind(Include = "Location,StartTime,EndTime,Description,Id")]
+            AddedLodging lodging)
+        {
+            if (ModelState.IsValid)
+            {
+                Lodging editedLodging = AddedLodging.ConvertAddedLodgingToLodging(lodging);                
+                editedLodging.TripId = LoggedUser.SelectedTrip.Id;
+
+                this._lodgingDal.WebUpdateLodging(editedLodging);
+                editedConflictingLodging = null;
+                return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
+            }
+
+            return View(lodging);
         }
 
         #endregion

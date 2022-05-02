@@ -1,47 +1,43 @@
-﻿@using Microsoft.Ajax.Utilities
-@using TravelPlannerLibrary.Models
+﻿@using TravelPlannerLibrary.Models
 @model WebApplication4.Models.AddedTransportation
 
-@{
-    ViewBag.Title = "Create";
-}
+<!DOCTYPE html>
 
-<h2>Create Transportation</h2>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <h4>Trip Details : @ViewBag.TripDetails</h4>
     <div class="form-horizontal">
+        <h4>Edit Transportation</h4>
+        <h4>Trip Details : @ViewBag.TripDetails</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Type, new SelectList(Model.Types, "Types"), "Select", new { onchange = "OnChangeEvent()" })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Origin, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Origin, new { htmlAttributes = new { @class = "form-control", onfocusout = "OnChangeEvent()" } })
-                @Html.ValidationMessageFor(model => model.Origin, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Destination, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { onfocusout = "OnChangeEvent()", @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -49,18 +45,26 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StartTime, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Type, new SelectList(Model.Types, "Types"), new { onchange = "OnChangeEvent()" })
+                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EndTime, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Origin, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Origin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Origin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -71,27 +75,24 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
         @if (ViewBag.ErrorMessage != null)
         {
             <p style="color: red">@ViewBag.ErrorMessage</p>
         }
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
+    }
 
 <div>
     @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
 </div>
-@Html.EditorFor(model => model.Type, new { htmlAttributes = new { style = "display:none" }})
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+</body>
+</html>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDJEezkTFgj0PAnzJQJVVEhfZbpUmH27s0"></script>
 <script type="text/javascript">
