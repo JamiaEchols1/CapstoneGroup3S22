@@ -34,7 +34,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.editWaypointTitle.Content = "Edit A New Waypoint: " + LoggedUser.SelectedTrip;
             this.descriptionTextBox.Text = LoggedUser.SelectedWaypoint.Description;
             this.locationTextBox.Text = LoggedUser.SelectedWaypoint.Location;
-            this.startDateTimePicker.Value = LoggedUser.SelectedWaypoint.StartDate;
+            this.startDateTimePicker.Value = LoggedUser.SelectedWaypoint.StartDateTime;
             this.endDateTimePicker.Value = LoggedUser.SelectedWaypoint.EndDateTime;
         }
 

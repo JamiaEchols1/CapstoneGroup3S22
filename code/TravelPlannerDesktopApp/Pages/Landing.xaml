@@ -11,17 +11,18 @@
 
         <WrapPanel Margin="5,5,659,0">
             <n:NavButton Text="Create Trip" ImageSource="/Images/CreateTrip.png" NavUri="Pages/AddTrip.xaml" />
+            <n:NavButton Text="Delete Trip" ImageSource="/Images/Delete.png" Click="DeleteButton_Click" NavUri="Pages/Landing.xaml"/>
+            <n:NavButton Text="Trip Details" ImageSource="/Images/Details.png" Click="DetailsButton_Click" NavUri="Pages/TripInfo.xaml"/>
         </WrapPanel>
 
         <WrapPanel Margin="900,-5,-224,15">
             <n:NavButton Text="Settings" ImageSource="/Images/Settings.png" NavUri="Pages/Settings.xaml" />
-            <n:NavButton Text="Logout" ImageSource="/Images/Logout.png" NavUri="Pages/Login.xaml" />
+            <n:NavButton  Text="Logout" ImageSource="/Images/Logout.png" NavUri="Pages/Login.xaml" />
         </WrapPanel>
 
 
-        <ListBox x:Name="tripsListBox" Margin="70,120,40,40"
-                 SelectionChanged="TripsListBox_OnSelectionChanged" />
-        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" Margin="178,30,0,0" TextWrapping="Wrap"
+        <ListBox x:Name="tripsListBox" Margin="70,120,40,40" />
+        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" Margin="244,30,0,0" TextWrapping="Wrap"
                    Text="Welcome" VerticalAlignment="Top" Height="20" Width="196" />
     </Grid>
 </Page>

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\jamia\source\repos\Capstone\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\obj\Debug\
 TravelPlannerDesktopApp
 none
 false
 DEBUG;TRACE
-C:\Users\jamia\source\repos\Capstone\CapstoneGroup3S22\code\TravelPlannerDesktopApp\App.xaml
-14-134191216
+C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\App.xaml
+18645959570
 
-24-1512955371
-18973539312
-Controls\TimeControl.xaml;MainWindow.xaml;Pages\AddLodging.xaml;Pages\AddTransportationPage.xaml;Pages\AddTrip.xaml;Pages\AddWaypoint.xaml;Pages\Landing.xaml;Pages\LodgingInfo.xaml;Pages\Login.xaml;Pages\Settings.xaml;Pages\TransportationInfo.xaml;Pages\TripInfo.xaml;Pages\WaypointInfo.xaml;Themes\Generic.xaml;
+28940375887
+20491149620
+Controls\LocationDialog.xaml;Controls\TimeControl.xaml;MainWindow.xaml;Pages\EditTransportation.xaml;Pages\EditWaypoint.xaml;Pages\EditLodging.xaml;Pages\AddLodging.xaml;Pages\AddTransportationPage.xaml;Pages\AddTrip.xaml;Pages\AddWaypoint.xaml;Pages\Landing.xaml;Pages\LodgingInfo.xaml;Pages\Login.xaml;Pages\Settings.xaml;Pages\TransportationInfo.xaml;Pages\TripInfo.xaml;Pages\WaypointInfo.xaml;Themes\Generic.xaml;
 
-True
+False
 
