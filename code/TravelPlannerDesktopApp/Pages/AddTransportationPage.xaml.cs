@@ -65,6 +65,14 @@ namespace TravelPlannerDesktopApp.Pages
                 {
                     throw new Exception("Must enter an end date!");
                 }
+                if (String.IsNullOrEmpty(this.destinationLocationTextBox.Text))
+                {
+                    throw new Exception("Must enter a destination location!");
+                }
+                if (String.IsNullOrEmpty(this.originLocationTextBox.Text))
+                {
+                    throw new Exception("Must enter a origin location!");
+                }
 
                 var startDate = DateTime.Parse(this.startDateTimePicker.Text);
                 var endDate = DateTime.Parse(this.endDateTimePicker.Text);
