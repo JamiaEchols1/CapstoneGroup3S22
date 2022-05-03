@@ -70,7 +70,7 @@
             </dt>
 
             <dd>
-                @Html.TextBoxFor(model => model.EndTime, new { id = "travelTime", @readonly = "readonly"  })
+                @Html.TextBoxFor(model => model.EndTime, new { id = "travelTime", @readonly = "readonly" })
             </dd>
 
             <dt>
@@ -84,15 +84,19 @@
         </dl>
     </div>
 
-<div id="container">
-    <div id="map"></div>
-</div>
+    <div id="container">
+        <div id="map"></div>
+    </div>
 
-<div id="sidebar">
-    <div id="panel"></div>
-</div>
+    <p>
+        @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
+    </p>
 
-<p>
+    <div id="sidebar">
+        <div id="panel"></div>
+    </div>
+
+    <p>
         @Html.ActionLink("Back to List", "../Trips/Details", new { id = LoggedUser.SelectedTrip.Id })
     </p>
 

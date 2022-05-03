@@ -258,7 +258,7 @@ namespace WebApplication4.Controllers
                 this._transportationDal.GetOverlappingTransportation(startDate, endDate));
             if (waypointsAndTransportation.Count > 0)
             {
-                ErrorMessage = "The transportation was not added because of the following conflicts:" + "\n";
+                ErrorMessage = "The waypoint was not added because of the following conflicts:" + "\n";
                 foreach (var overlap in waypointsAndTransportation)
                 {
                     ErrorMessage += overlap.ToString();
@@ -279,7 +279,7 @@ namespace WebApplication4.Controllers
                 this._transportationDal.GetOverlappingTransportation(startDate, endDate));
             if (waypointsAndTransportation.Count > 0)
             {
-                ErrorMessage = "The transportation was not added because of the following conflicts:" + "\n";
+                ErrorMessage = "The waypoint was not added because of the following conflicts:" + "\n";
                 foreach (var overlap in waypointsAndTransportation)
                 {
                     ErrorMessage += overlap.ToString();
