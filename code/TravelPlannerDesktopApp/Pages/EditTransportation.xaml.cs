@@ -130,29 +130,35 @@ namespace TravelPlannerDesktopApp.Pages
         /// <param name="e">The <see cref="object" /> instance containing the event data.</param>
         private void datePicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (this.startDateTimePicker.Value != null && this.endDateTimePicker.Value != null)
+            try
             {
-                var startDate = DateTime.Parse(this.startDateTimePicker.Text);
-                var endDate = DateTime.Parse(this.endDateTimePicker.Text);
-                var waypointsAndTransportation = new List<object>();
-                waypointsAndTransportation.AddRange(this.waypointDal.GetOverlappingWaypoints(startDate, endDate));
-                var overlappingTransportations = transportationDal.GetOverlappingTransportation(startDate, endDate);
+                if (this.startDateTimePicker.Value != null && this.endDateTimePicker.Value != null)
+                {
+                    var startDate = DateTime.Parse(this.startDateTimePicker.Text);
+                    var endDate = DateTime.Parse(this.endDateTimePicker.Text);
+                    var waypointsAndTransportation = new List<object>();
+                    waypointsAndTransportation.AddRange(this.waypointDal.GetOverlappingWaypoints(startDate, endDate));
+                    var overlappingTransportations = transportationDal.GetOverlappingTransportation(startDate, endDate);
                     overlappingTransportations.RemoveAll(x => x.Id == LoggedUser.SelectedTransportation.Id);
 
-                waypointsAndTransportation.AddRange(overlappingTransportations);
-                
-                this.overlappingListBox.ItemsSource = waypointsAndTransportation;
-            }
+                    waypointsAndTransportation.AddRange(overlappingTransportations);
 
-            if (this.overlappingListBox.Items.Count > 0)
+                    this.overlappingListBox.ItemsSource = waypointsAndTransportation;
+                }
+
+                if (this.overlappingListBox.Items.Count > 0)
+                {
+                    this.overlappingListBox.Visibility = Visibility.Visible;
+                    this.overlappingLabel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.overlappingListBox.Visibility = Visibility.Collapsed;
+                    this.overlappingLabel.Visibility = Visibility.Collapsed;
+                }
+            } catch (Exception ex)
             {
-                this.overlappingListBox.Visibility = Visibility.Visible;
-                this.overlappingLabel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                this.overlappingListBox.Visibility = Visibility.Collapsed;
-                this.overlappingLabel.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Error updating date!");
             }
         }
 
