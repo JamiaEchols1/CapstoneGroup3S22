@@ -33,7 +33,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.transportationDal = new TransportationDal();
             this.InitializeComponent();
             this.typeComboBox.ItemsSource = TransportationTypes.GetTypes();
-            this.addTransportTitle.Content = "Add New Lodging: " + LoggedUser.SelectedTrip;
+            this.addTransportTitle.Content = "Add New Transportation: " + LoggedUser.SelectedTrip;
         }
 
         #endregion
