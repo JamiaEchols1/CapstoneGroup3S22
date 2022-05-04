@@ -50,6 +50,17 @@ namespace WebApplication4.Controllers
             this._tripDal = tripDal;
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="WaypointsController" /> class.
+        ///     Default Constructor
+        /// </summary>
+        public WaypointsController(TripDal tripDal, WaypointDal waypointDal, TransportationDal transportDal)
+        {
+            this._waypointDal = waypointDal;
+            this._tripDal = tripDal;
+            this._transportationDal = transportDal;
+        }
+
         #endregion
 
         #region Methods
@@ -164,7 +175,7 @@ namespace WebApplication4.Controllers
                 if (next != null)
                 {
                     var timeDiffNext = next.StartDate - waypoint.EndDateTime;
-                    var estimatedTimeNext = this.calcEstimatedTime(waypoint, next);
+                    var estimatedTimeNext = this.calcEstimatedTimeNext(waypoint, next);
                     if (estimatedTimeNext > timeDiffNext)
                     {
                         VerifyTimeViewModel model = new VerifyTimeViewModel(estimatedTimeNext, timeDiffNext, waypoint, next, false);
@@ -218,6 +229,38 @@ namespace WebApplication4.Controllers
             {
                 Transportation prev = (Transportation)tripItem;
                 destinationLocation = HttpUtility.UrlEncode(prev.Destination);
+            }
+
+            string url = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" +
+                         originLocation +
+                         "&destinations=" +
+                         destinationLocation +
+                         "&key=AIzaSyDJEezkTFgj0PAnzJQJVVEhfZbpUmH27s0";
+            WebRequest request = WebRequest.Create(url);
+            using (WebResponse response = (HttpWebResponse)request.GetResponse())
+            {
+                using (StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
+                {
+                    DataSet dsResult = new DataSet();
+                    dsResult.ReadXml(reader);
+                    return TimeSpan.FromSeconds(Int32.Parse(dsResult.Tables["duration"].Rows[0]["value"].ToString()));
+                }
+            }
+        }
+
+        private TimeSpan calcEstimatedTimeNext(AddedWaypoint waypoint, TripItem tripItem)
+        {
+            var originLocation = HttpUtility.UrlEncode(waypoint.Location);
+            string destinationLocation;
+            if (tripItem.GetType() == typeof(Waypoint))
+            {
+                Waypoint prev = (Waypoint)tripItem;
+                destinationLocation = HttpUtility.UrlEncode(prev.Location);
+            }
+            else
+            {
+                Transportation prev = (Transportation)tripItem;
+                destinationLocation = HttpUtility.UrlEncode(prev.Origin);
             }
 
             string url = "https://maps.googleapis.com/maps/api/distancematrix/xml?origins=" +
@@ -409,54 +452,11 @@ namespace WebApplication4.Controllers
         {
             model = verifyTimeViewModel;
             model.waypoint.TripId = LoggedUser.SelectedTrip.Id;
-            var ErrorMessage = this.validateDateTimes(model.waypoint);
-            if (ErrorMessage == null)
-            {
-                ErrorMessage = this.validateConflictingTransportAndWaypoints(model.waypoint);
-            }
-
-            if (ErrorMessage != null)
-            {
-                return RedirectToAction("Create", new { ErrorMessage });
-            }
-
-
             this._waypointDal.CreateNewWaypoint(model.waypoint.Location, model.waypoint.StartDateTime, model.waypoint.EndDateTime, 
                 model.waypoint.TripId, model.waypoint.Description);
             return RedirectToAction("../Trips/Details", new { id = LoggedUser.SelectedTrip.Id });
             
 
-        }
-
-        /// <summary>
-        /// Redirects to create.
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult RedirectToCreate()
-        {
-
-            ViewBag.TripDetails = LoggedUser.SelectedTrip.Name + " " + LoggedUser.SelectedTrip.StartDate + " - " +
-                                  LoggedUser.SelectedTrip.EndDate;
-            ViewBag.StartDate = LoggedUser.SelectedTrip.StartDate;
-            ViewBag.EndDate = LoggedUser.SelectedTrip.EndDate;
-
-            AddedWaypoint waypoint = WaypointsController.verifyTimeViewModel.waypoint;
-            return RedirectToAction("Create", waypoint);
-        }
-
-        /// <summary>
-        /// Redirects to create.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns></returns>
-        [HttpPost]
-        [ActionName("RedirectToCreate")]
-        [ValidateAntiForgeryToken]
-        public ActionResult RedirectToCreatePost([Bind(Include = "waypoint")]
-            VerifyTimeViewModel model)
-        {
-            AddedWaypoint waypoint = WaypointsController.verifyTimeViewModel.waypoint;
-            return RedirectToAction("Create", waypoint);
         }
 
         #endregion

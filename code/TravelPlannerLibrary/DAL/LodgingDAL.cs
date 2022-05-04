@@ -230,6 +230,10 @@ namespace TravelPlannerLibrary.DAL
         /// </returns>
         public Lodging GetLodgingById(int id)
         {
+            if (id < 0)
+            {
+                return null;
+            }
             return db.Lodgings.First(x => x.Id == id);
         }
 
