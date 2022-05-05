@@ -252,10 +252,10 @@ namespace WebApplication4.Controllers
         {
             var originLocation = HttpUtility.UrlEncode(waypoint.Location);
             string destinationLocation;
-            if (tripItem.GetType() == typeof(Waypoint))
+            
+            if (tripItem is Waypoint item)
             {
-                Waypoint prev = (Waypoint)tripItem;
-                destinationLocation = HttpUtility.UrlEncode(prev.Location);
+                destinationLocation = HttpUtility.UrlEncode(item.Location);
             }
             else
             {
