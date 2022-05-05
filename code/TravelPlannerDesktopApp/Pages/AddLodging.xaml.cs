@@ -27,12 +27,32 @@ namespace TravelPlannerDesktopApp.Pages
         {
             this.lodgingDal = new LodgingDal();
             this.InitializeComponent();
-            this.addLodgingTitle.Content = "Add New Lodging: " + LoggedUser.SelectedTrip;
+            this.setPageSize();
+            this.setTripInfo();
         }
 
         #endregion
 
         #region Methods
+
+        private void setPageSize()
+        {
+            this.pageGrid.Width = this.Width;
+            this.pageGrid.Height = this.Height;
+            Application.Current.MainWindow.Height = this.Height;
+            Application.Current.MainWindow.Width = this.Width;
+            Application.Current.MainWindow.MinWidth = this.MinWidth;
+            Application.Current.MainWindow.MinHeight = this.MinHeight;
+            Application.Current.MainWindow.MaxHeight = this.MaxHeight;
+            Application.Current.MainWindow.MaxWidth = this.MaxWidth;
+        }
+
+        private void setTripInfo()
+        {
+            this.tripName.Content = LoggedUser.SelectedTrip.Name;
+            this.tripStart.Content = LoggedUser.SelectedTrip.StartDate;
+            this.tripEnd.Content = LoggedUser.SelectedTrip.EndDate;
+        }
 
         /// <summary>
         ///     Handles the Click event of the NavButton control.
