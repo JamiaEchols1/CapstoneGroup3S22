@@ -51,12 +51,13 @@ namespace TravelPlannerDesktopApp.Pages
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
+            
             var clickedButton = e.OriginalSource as NavButton;
 
             NavigationService?.Navigate(clickedButton.NavUri);
         }
 
-        /// <summary>
+/*        /// <summary>
         ///     Handles the OnSelectionChanged event of the TripsListBox control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -69,8 +70,53 @@ namespace TravelPlannerDesktopApp.Pages
                 var tripInfo = new TripInfo();
                 NavigationService?.Navigate(tripInfo);
             }
-        }
+        }*/
 
         #endregion
+
+        /// <summary>
+        /// Deletes the selected trip
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoggedUser.SelectedTrip = this.tripsListBox.SelectedItem as Trip;
+
+            if (LoggedUser.SelectedTrip != null)
+            {
+                MessageBoxButton buttons = MessageBoxButton.YesNo;
+
+                string message = "Are you sure you want to delete this trip?";
+                string caption = LoggedUser.SelectedTrip.Name;
+
+                var result = MessageBox.Show(message, caption, buttons);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    this.tripDal.RemoveTrip(LoggedUser.SelectedTrip.Id);
+                    this.tripsListBox.ItemsSource = this.tripDal.GetTrips(LoggedUser.User.Id);
+
+                    var clickedButton = e.OriginalSource as NavButton;
+
+                    NavigationService?.Navigate(clickedButton.NavUri);
+                }
+            } else
+            {
+                MessageBox.Show("Must select a trip to delete");
+            }
+        }
+
+        private void DetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoggedUser.SelectedTrip = this.tripsListBox.SelectedItem as Trip;
+
+            if (LoggedUser.SelectedTrip != null)
+            {
+                var clickedButton = e.OriginalSource as NavButton;
+
+                NavigationService?.Navigate(clickedButton.NavUri);
+            }
+        }
     }
 }

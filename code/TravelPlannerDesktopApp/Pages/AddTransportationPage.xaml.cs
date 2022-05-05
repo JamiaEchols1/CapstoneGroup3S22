@@ -33,7 +33,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.transportationDal = new TransportationDal();
             this.InitializeComponent();
             this.typeComboBox.ItemsSource = TransportationTypes.GetTypes();
-            this.addTransportTitle.Content = "Add New Lodging: " + LoggedUser.SelectedTrip;
+            this.addTransportTitle.Content = "Add New Transportation: " + LoggedUser.SelectedTrip;
         }
 
         #endregion
@@ -64,6 +64,18 @@ namespace TravelPlannerDesktopApp.Pages
                 if (this.endDateTimePicker.Text == null)
                 {
                     throw new Exception("Must enter an end date!");
+                }
+                if (String.IsNullOrEmpty(this.destinationLocationTextBox.Text))
+                {
+                    throw new Exception("Must enter a destination location!");
+                }
+                if (String.IsNullOrEmpty(this.originLocationTextBox.Text))
+                {
+                    throw new Exception("Must enter a origin location!");
+                }
+                if (this.typeComboBox.SelectedItem == null)
+                {
+                    throw new Exception("Must select a transportation type");
                 }
 
                 var startDate = DateTime.Parse(this.startDateTimePicker.Text);

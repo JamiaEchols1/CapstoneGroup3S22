@@ -34,7 +34,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.editWaypointTitle.Content = "Edit A New Waypoint: " + LoggedUser.SelectedTrip;
             this.descriptionTextBox.Text = LoggedUser.SelectedWaypoint.Description;
             this.locationTextBox.Text = LoggedUser.SelectedWaypoint.Location;
-            this.startDateTimePicker.Value = LoggedUser.SelectedWaypoint.StartDate;
+            this.startDateTimePicker.Value = LoggedUser.SelectedWaypoint.StartDateTime;
             this.endDateTimePicker.Value = LoggedUser.SelectedWaypoint.EndDateTime;
         }
 
@@ -124,31 +124,36 @@ namespace TravelPlannerDesktopApp.Pages
         /// <param name="e">The <see cref="object" /> instance containing the event data.</param>
         private void datePicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (this.startDateTimePicker.Value != null && this.endDateTimePicker.Value != null)
+            try
             {
-                var startDate = DateTime.Parse(this.startDateTimePicker.Text);
-                var endDate = DateTime.Parse(this.endDateTimePicker.Text);
-                var waypointsAndTransportation = new List<object>();
-                waypointsAndTransportation.AddRange(this.transportationDal.GetOverlappingTransportation(startDate, endDate));
-                var overlappingWaypoints = this.waypointDal.GetOverlappingWaypoints(startDate, endDate);
-                overlappingWaypoints.RemoveAll(x => x.Id == LoggedUser.SelectedWaypoint.Id);
+                if (this.startDateTimePicker.Value != null && this.endDateTimePicker.Value != null)
+                {
+                    var startDate = DateTime.Parse(this.startDateTimePicker.Text);
+                    var endDate = DateTime.Parse(this.endDateTimePicker.Text);
+                    var waypointsAndTransportation = new List<object>();
+                    waypointsAndTransportation.AddRange(this.transportationDal.GetOverlappingTransportation(startDate, endDate));
+                    var overlappingWaypoints = this.waypointDal.GetOverlappingWaypoints(startDate, endDate);
+                    overlappingWaypoints.RemoveAll(x => x.Id == LoggedUser.SelectedWaypoint.Id);
 
 
-                waypointsAndTransportation.AddRange(overlappingWaypoints);
-                this.overlappingListBox.ItemsSource = waypointsAndTransportation;
-            }
+                    waypointsAndTransportation.AddRange(overlappingWaypoints);
+                    this.overlappingListBox.ItemsSource = waypointsAndTransportation;
+                }
 
-            if (this.overlappingListBox.Items.Count > 0)
+                if (this.overlappingListBox.Items.Count > 0)
+                {
+                    this.overlappingListBox.Visibility = Visibility.Visible;
+                    this.overlappingLabel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.overlappingListBox.Visibility = Visibility.Collapsed;
+                    this.overlappingLabel.Visibility = Visibility.Collapsed;
+                }
+            } catch (Exception ex)
             {
-                this.overlappingListBox.Visibility = Visibility.Visible;
-                this.overlappingLabel.Visibility = Visibility.Visible;
+                MessageBox.Show("Error updating the date");
             }
-            else
-            {
-                this.overlappingListBox.Visibility = Visibility.Collapsed;
-                this.overlappingLabel.Visibility = Visibility.Collapsed;
-            }
-
             #endregion
         }
     }
