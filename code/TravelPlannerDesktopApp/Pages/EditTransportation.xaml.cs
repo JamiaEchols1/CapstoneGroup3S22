@@ -72,6 +72,19 @@ namespace TravelPlannerDesktopApp.Pages
                     throw new Exception("Must enter an end date!");
                 }
 
+                if (String.IsNullOrEmpty(this.destinationLocationTextBox.Text))
+                {
+                    throw new Exception("Must enter a destination location!");
+                }
+                if (String.IsNullOrEmpty(this.originLocationTextBox.Text))
+                {
+                    throw new Exception("Must enter a origin location!");
+                }
+                if (this.typeComboBox.SelectedItem == null)
+                {
+                    throw new Exception("Must select a transportation type");
+                }
+
                 var startDate = DateTime.Parse(this.startDateTimePicker.Text);
                 var endDate = DateTime.Parse(this.endDateTimePicker.Text);
 
@@ -101,7 +114,7 @@ namespace TravelPlannerDesktopApp.Pages
                 if (dialog.ShowDialog() == true)
                 {
                     LoggedUser.SelectedTransportation = this.transportationDal.EditTransportation(startDate, endDate, this.descriptionTextBox.Text, this.typeComboBox.SelectedItem.ToString(), this.originLocationTextBox.Text, this.destinationLocationTextBox.Text);
-                    MessageBox.Show("Transportation creation was Successful!");
+                    MessageBox.Show("Transportation edit was Successful!");
                     NavigationService?.Navigate(new TransportationInfo());
                 }
             }

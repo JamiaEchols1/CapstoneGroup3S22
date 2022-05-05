@@ -73,6 +73,10 @@ namespace TravelPlannerDesktopApp.Pages
                 {
                     throw new Exception("Must enter a origin location!");
                 }
+                if (this.typeComboBox.SelectedItem == null)
+                {
+                    throw new Exception("Must select a transportation type");
+                }
 
                 var startDate = DateTime.Parse(this.startDateTimePicker.Text);
                 var endDate = DateTime.Parse(this.endDateTimePicker.Text);

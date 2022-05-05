@@ -7,17 +7,16 @@
       mc:Ignorable="d"
       Title="Landing" Height="795" Width="1025">
 
-    <Grid Background="White" ButtonBase.Click="Grid_Click">
+    <Grid Background="White">
 
         <WrapPanel Margin="5,5,659,0">
-            <n:NavButton Text="Create Trip" ImageSource="/Images/CreateTrip.png" NavUri="Pages/AddTrip.xaml" />
+            <n:NavButton Text="Create Trip" ImageSource="/Images/CreateTrip.png" Click="Grid_Click" NavUri="Pages/AddTrip.xaml" />
             <n:NavButton Text="Delete Trip" ImageSource="/Images/Delete.png" Click="DeleteButton_Click" NavUri="Pages/Landing.xaml"/>
             <n:NavButton Text="Trip Details" ImageSource="/Images/Details.png" Click="DetailsButton_Click" NavUri="Pages/TripInfo.xaml"/>
         </WrapPanel>
 
         <WrapPanel Margin="900,-5,-224,15">
-            <n:NavButton Text="Settings" ImageSource="/Images/Settings.png" NavUri="Pages/Settings.xaml" />
-            <n:NavButton  Text="Logout" ImageSource="/Images/Logout.png" NavUri="Pages/Login.xaml" />
+            <n:NavButton  Text="Logout" Click="Grid_Click" ImageSource="/Images/Logout.png" NavUri="Pages/Login.xaml" />
         </WrapPanel>
 
 

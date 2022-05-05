@@ -51,6 +51,7 @@ namespace TravelPlannerDesktopApp.Pages
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         private void Grid_Click(object sender, RoutedEventArgs e)
         {
+            
             var clickedButton = e.OriginalSource as NavButton;
 
             NavigationService?.Navigate(clickedButton.NavUri);
@@ -95,6 +96,10 @@ namespace TravelPlannerDesktopApp.Pages
                 {
                     this.tripDal.RemoveTrip(LoggedUser.SelectedTrip.Id);
                     this.tripsListBox.ItemsSource = this.tripDal.GetTrips(LoggedUser.User.Id);
+
+                    var clickedButton = e.OriginalSource as NavButton;
+
+                    NavigationService?.Navigate(clickedButton.NavUri);
                 }
             } else
             {
@@ -105,6 +110,13 @@ namespace TravelPlannerDesktopApp.Pages
         private void DetailsButton_Click(object sender, RoutedEventArgs e)
         {
             LoggedUser.SelectedTrip = this.tripsListBox.SelectedItem as Trip;
+
+            if (LoggedUser.SelectedTrip != null)
+            {
+                var clickedButton = e.OriginalSource as NavButton;
+
+                NavigationService?.Navigate(clickedButton.NavUri);
+            }
         }
     }
 }

@@ -78,12 +78,6 @@ namespace TravelPlannerLibrary.DAL
         public Transportation CreateANewTransportation(int tripId,
             DateTime startTime, DateTime endTime, string description, string type, string origin, string destination)
         {
-            if (string.IsNullOrEmpty(description))
-            {
-                const string parameterName = "description";
-                throw new ArgumentNullException(parameterName, "Description cannot be null");
-            }
-
             if (startTime.CompareTo(endTime) > 0)
             {
                 throw new ArgumentException("End date must be on or after selected start date");
@@ -141,12 +135,6 @@ namespace TravelPlannerLibrary.DAL
 
         public Transportation EditTransportation(DateTime startTime, DateTime endTime, string description, string type, string origin, string destination)
         {
-            if (string.IsNullOrEmpty(description))
-            {
-                const string parameterName = "description";
-                throw new ArgumentNullException(parameterName, "Description cannot be null");
-            }
-
             if (startTime.CompareTo(endTime) > 0)
             {
                 throw new ArgumentException("End date must be on or after selected start date");
