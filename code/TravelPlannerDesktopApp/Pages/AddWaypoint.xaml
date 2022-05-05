@@ -7,7 +7,10 @@
       xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddWaypoint">
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      Title="AddWaypoint"
+      >
 
     <Grid Background="White">
         <controls:NavButton x:Name="backButton" Text="Back" Click="BackButton_Click" ImageSource="/Images/Back.png"

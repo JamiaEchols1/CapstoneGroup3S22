@@ -7,18 +7,27 @@
       mc:Ignorable="d"
       HorizontalAlignment="Center"
       VerticalAlignment="Center"
-      Title="checkLoginCredentials">
+      Title="checkLoginCredentials"
+      Height="500"
+      Width="750" MinWidth="750" MinHeight="500" MaxWidth="750" MaxHeight="500"
+>
 
-    <Grid Background="White" ButtonBase.Click="Grid_Click">
-        <TextBox x:Name="usernameTextBox" HorizontalAlignment="Left" Height="23" Margin="305,190,0,0"
-                 TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <TextBlock HorizontalAlignment="Left" Margin="215,194,0,0" TextWrapping="Wrap" Text="Username"
-                   VerticalAlignment="Top" />
-        <TextBlock HorizontalAlignment="Left" Margin="220,235,0,0" TextWrapping="Wrap" Text="Password"
-                   VerticalAlignment="Top" />
-        <PasswordBox x:Name="passwordTextBox" HorizontalAlignment="Left" Margin="305,232,0,0" VerticalAlignment="Top"
-                     Width="120" Height="23" />
-        <n1:NavButton Text="Login" ImageSource="/Images/Login.png" NavUri="Pages/Landing.xaml" Margin="284,290,315,10"
-                      Click="handleLogin" />
+    <Grid x:Name="pageGrid" Background="White" Height="500" Width="750" ButtonBase.Click="Grid_Click" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+        <Grid Background="LightBlue" Margin="0,0,522,0">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Travel Planner" Margin="0" FontSize="30" Width="193" />
+            <Image Source="/Images/travelplannericon.jpg" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,100" />
+        </Grid>
+        <TextBlock Text="Log in" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="200,0,0,150"/>
+        <TextBox x:Name="usernameTextBox" HorizontalAlignment="Center" Height="33" Margin="250,0,0,0"
+                 TextWrapping="Wrap" VerticalAlignment="Center" Width="230" FontSize="20"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,0,75,0" TextWrapping="Wrap" Text="Username:"
+                   VerticalAlignment="Center" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,100,75,0" TextWrapping="Wrap" Text="Password:"
+                   VerticalAlignment="Center" FontSize="18"/>
+        <PasswordBox x:Name="passwordTextBox" FontSize="20" HorizontalAlignment="Center" Margin="250,100,0,0" VerticalAlignment="Center"
+                     Width="230" Height="33" />
+        <n1:NavButton  ImageSource="/Images/Login-Button.png" NavUri="Pages/Landing.xaml"
+                      Click="handleLogin" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="200,250,0,0" Height="41" Width="139" />
     </Grid>
 </Page>

@@ -92,22 +92,30 @@ namespace TravelPlannerDesktopApp.Pages
         /// <param name="e">The <see cref="object" /> instance containing the event data.</param>
         private void datePicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (this.startDatePicker.Value != null && this.endDatePicker.Value != null)
+            try
             {
-                this.overlappingListBox.ItemsSource =
-                    this.lodgingDal.GetOverlappingLodging(DateTime.Parse(this.startDatePicker.Text),
-                        DateTime.Parse(this.endDatePicker.Text));
-            }
+                if (this.startDatePicker.Value != null && this.endDatePicker.Value != null)
+                {
+                    this.overlappingListBox.ItemsSource =
+                        this.lodgingDal.GetOverlappingLodging(DateTime.Parse(this.startDatePicker.Text),
+                            DateTime.Parse(this.endDatePicker.Text));
+                }
 
-            if (this.overlappingListBox.Items.Count > 0)
-            {
-                this.overlappingListBox.Visibility = Visibility.Visible;
-                this.overlappingLabel.Visibility = Visibility.Visible;
+                if (this.overlappingListBox.Items.Count > 0)
+                {
+                    this.overlappingListBox.Visibility = Visibility.Visible;
+                    this.overlappingLabel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.overlappingListBox.Visibility = Visibility.Collapsed;
+                    this.overlappingLabel.Visibility = Visibility.Collapsed;
+                }
+
             }
-            else
+            catch (Exception exception)
             {
-                this.overlappingListBox.Visibility = Visibility.Collapsed;
-                this.overlappingLabel.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Error updating the date");
             }
         }
 

@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using TravelPlannerDesktopApp.Controls;
 using TravelPlannerLibrary.DAL;
@@ -26,8 +30,9 @@ namespace TravelPlannerDesktopApp.Pages
         {
             this.tripDal = new TripDal();
             this.InitializeComponent();
+            this.setPageSize();
             this.SampleSetupText();
-            this.tripsListBox.ItemsSource = this.tripDal.GetTrips(LoggedUser.User.Id);
+            this.tripsDataGrid.ItemsSource = this.tripDal.GetTrips(LoggedUser.User.Id);
         }
 
         #endregion
@@ -74,6 +79,18 @@ namespace TravelPlannerDesktopApp.Pages
 
         #endregion
 
+        private void setPageSize()
+        {
+            this.pageGrid.Width = this.Width;
+            this.pageGrid.Height = this.Height;
+            Application.Current.MainWindow.Height = this.Height;
+            Application.Current.MainWindow.Width = this.Width;
+            Application.Current.MainWindow.MinWidth = this.MinWidth;
+            Application.Current.MainWindow.MinHeight = this.MinHeight;
+            Application.Current.MainWindow.MaxHeight = this.MaxHeight;
+            Application.Current.MainWindow.MaxWidth = this.MaxWidth;
+        }
+
         /// <summary>
         /// Deletes the selected trip
         /// </summary>
@@ -81,7 +98,7 @@ namespace TravelPlannerDesktopApp.Pages
         /// <param name="e"></param>
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            LoggedUser.SelectedTrip = this.tripsListBox.SelectedItem as Trip;
+            LoggedUser.SelectedTrip = this.tripsDataGrid.SelectedItem as Trip;
 
             if (LoggedUser.SelectedTrip != null)
             {
@@ -95,7 +112,7 @@ namespace TravelPlannerDesktopApp.Pages
                 if (result == MessageBoxResult.Yes)
                 {
                     this.tripDal.RemoveTrip(LoggedUser.SelectedTrip.Id);
-                    this.tripsListBox.ItemsSource = this.tripDal.GetTrips(LoggedUser.User.Id);
+                    this.tripsDataGrid.ItemsSource = this.tripDal.GetTrips(LoggedUser.User.Id);
 
                     var clickedButton = e.OriginalSource as NavButton;
 
@@ -109,7 +126,7 @@ namespace TravelPlannerDesktopApp.Pages
 
         private void DetailsButton_Click(object sender, RoutedEventArgs e)
         {
-            LoggedUser.SelectedTrip = this.tripsListBox.SelectedItem as Trip;
+            LoggedUser.SelectedTrip = this.tripsDataGrid.SelectedItem as Trip;
 
             if (LoggedUser.SelectedTrip != null)
             {
@@ -118,5 +135,6 @@ namespace TravelPlannerDesktopApp.Pages
                 NavigationService?.Navigate(clickedButton.NavUri);
             }
         }
+
     }
 }
