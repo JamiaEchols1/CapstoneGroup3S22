@@ -125,7 +125,10 @@
     <Compile Include="DALs\LodgingDALTests\CreateNewLodgingTests.cs" />
     <Compile Include="DALs\LodgingDALTests\GetLodgingsTests.cs" />
     <Compile Include="DALs\LodgingDALTests\RemoveLodgingsTests.cs" />
+    <Compile Include="DALs\LodgingDALTests\EditLodgingTests.cs" />
     <Compile Include="DALs\LoginDALTests\TestLogin.cs" />
+    <Compile Include="DALs\TransportationDALTests\EditTransportationTest.cs" />
+    <Compile Include="DALs\WaypointDALTests\EditWaypointTests.cs" />
     <Compile Include="DesktopModels\LodgingTests.cs" />
     <Compile Include="DesktopModels\TransportationTests.cs" />
     <Compile Include="DesktopModels\TripTests.cs" />

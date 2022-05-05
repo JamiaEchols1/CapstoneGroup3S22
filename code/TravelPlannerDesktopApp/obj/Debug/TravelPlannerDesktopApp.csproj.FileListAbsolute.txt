@@ -428,3 +428,11 @@ C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\ob
 C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.csproj.CopyComplete
 C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.exe
 C:\Users\jamia\Source\Repos\CapstoneGroup3S22(1)\code\TravelPlannerDesktopApp\obj\Debug\TravelPlannerDesktopApp.pdb
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Controls\LocationDialog.g.cs
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\EditTransportation.g.cs
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\EditWaypoint.g.cs
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\EditLodging.g.cs
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Controls\LocationDialog.baml
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\EditTransportation.baml
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\EditWaypoint.baml
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDesktopApp\obj\Debug\Pages\EditLodging.baml

@@ -46,3 +46,4 @@ C:\Users\jamia\source\repos\Capstone\CapstoneGroup3S22\code\TravelPlannerDatabas
 C:\Users\jamia\source\repos\Capstone\CapstoneGroup3S22\code\TravelPlannerDatabase\bin\Debug\TravelPlannerDatabase.pdb
 C:\Users\jamia\source\repos\Capstone\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.dll
 C:\Users\jamia\source\repos\Capstone\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.pdb
+C:\Users\jechols5\Source\Repos\JamiaEchols1\CapstoneGroup3S22\code\TravelPlannerDatabase\obj\Debug\TravelPlannerDatabase.sqlproj.AssemblyReference.cache
