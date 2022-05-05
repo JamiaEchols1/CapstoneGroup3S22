@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TravelPlannerLibrary.Models 
 { 
-    public enum Types { Driving = 0, Transit =1, Walking=2, Cycling=3}
+    public enum Types { DRIVING = 0, TRANSIT =1, WALKING=2, CYCLING=3}
     public class TransportationTypes
     {
         public static ICollection<Types> GetTypes() { 
-            return new[] { Types.Driving, Types.Transit, Types.Walking, Types.Cycling };
+            return new[] { Types.DRIVING, Types.TRANSIT, Types.WALKING, Types.CYCLING };
         }
     }
 }
