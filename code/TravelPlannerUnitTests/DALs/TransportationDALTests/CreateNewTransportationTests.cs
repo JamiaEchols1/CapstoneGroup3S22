@@ -62,7 +62,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
 
             var service = new TransportationDal(mockContext.Object);
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsException<NullReferenceException>(() =>
                 service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), null, "Car", null, null));
         }
 
@@ -100,7 +100,7 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
             mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
 
             var service = new TransportationDal(mockContext.Object);
-            Assert.ThrowsException<ArgumentNullException>(() =>
+            Assert.ThrowsException<NullReferenceException>(() =>
                 service.CreateANewTransportation(1, DateTime.Now, DateTime.Now.AddMinutes(7), "", "Car", null, null));
         }
 

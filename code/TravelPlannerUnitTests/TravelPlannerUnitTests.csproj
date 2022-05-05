@@ -121,6 +121,7 @@
     <Compile Include="Controllers\WaypointsControllerTests\DetailsTests.cs" />
     <Compile Include="Controllers\WaypointsControllerTests\CreateTests.cs" />
     <Compile Include="Controllers\WaypointsControllerTests\DeleteTests.cs" />
+    <Compile Include="Controllers\WaypointsControllerTests\EditTests.cs" />
     <Compile Include="DALs\LodgingDALTests\GetOverlappingLodgingsTests.cs" />
     <Compile Include="DALs\LodgingDALTests\CreateNewLodgingTests.cs" />
     <Compile Include="DALs\LodgingDALTests\GetLodgingsTests.cs" />

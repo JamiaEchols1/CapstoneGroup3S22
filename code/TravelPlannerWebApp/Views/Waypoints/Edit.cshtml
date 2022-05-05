@@ -84,14 +84,12 @@
 
     <script type="text/javascript">
     $(function() {
-        $('#StartDateTime').datetimepicker({
-            minDate: new moment("@ViewBag.StartDate")         
+        $('#StartDateTime').datetimepicker({       
         }).on('dp.change',
             function(e) {
                 $(this).data('DateTimePicker').hide();
             });
         $('#EndDateTime').datetimepicker({
-            minDate: new moment("@ViewBag.StartDate")
         }).on('dp.change',
             function(e) {
                 $(this).data('DateTimePicker').hide();

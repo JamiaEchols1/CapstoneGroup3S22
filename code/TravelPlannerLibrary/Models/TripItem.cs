@@ -15,7 +15,7 @@ namespace TravelPlannerLibrary.Models
         public DateTime StartDate;
 
         /// <summary>
-        /// The end date
+        /// The end time
         /// </summary>
         public DateTime EndDate;
 

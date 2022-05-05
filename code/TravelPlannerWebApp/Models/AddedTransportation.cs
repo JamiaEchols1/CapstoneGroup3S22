@@ -74,6 +74,7 @@ namespace WebApplication4.Models
         /// <value>
         /// The origin.
         /// </value>
+        [Required]
         public string Origin { get; set; }
 
         /// <summary>
@@ -82,6 +83,7 @@ namespace WebApplication4.Models
         /// <value>
         /// The destination.
         /// </value>
+        [Required]
         public string Destination { get; set; }
 
         /// <summary>
