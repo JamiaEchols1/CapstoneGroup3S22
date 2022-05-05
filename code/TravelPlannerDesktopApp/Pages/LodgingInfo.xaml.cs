@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using TravelPlannerDesktopApp.Controls;
@@ -53,14 +54,10 @@ namespace TravelPlannerDesktopApp.Pages
         private string FormatLocationString()
         {
             var output = "";
+            var mapURL = "https://www.google.com/maps/embed/v1/place?key=AIzaSyDJEezkTFgj0PAnzJQJVVEhfZbpUmH27s0";
+            var Location = HttpUtility.UrlEncode(LoggedUser.SelectedLodging.Location);
+            output = mapURL + "&q=" + Location;
 
-            var locationParts = LoggedUser.SelectedLodging.Location.Split(' ');
-            foreach (var part in locationParts)
-            {
-                output += part + "+";
-            }
-
-            output.Remove(output.Length - 1);
             return output;
         }
 

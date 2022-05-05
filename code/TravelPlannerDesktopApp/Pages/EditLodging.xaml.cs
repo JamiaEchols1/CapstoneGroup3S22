@@ -94,24 +94,30 @@ namespace TravelPlannerDesktopApp.Pages
         /// <param name="e">The <see cref="object" /> instance containing the event data.</param>
         private void datePicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (this.startDatePicker.Value != null && this.endDatePicker.Value != null)
+            try
             {
-                var overlappingList = this.lodgingDal.GetOverlappingLodging(DateTime.Parse(this.startDatePicker.Text),
-                        DateTime.Parse(this.endDatePicker.Text));
-                overlappingList.RemoveAll(x => x.Id == LoggedUser.SelectedLodging.Id);
+                if (this.startDatePicker.Value != null && this.endDatePicker.Value != null)
+                {
+                    var overlappingList = this.lodgingDal.GetOverlappingLodging(DateTime.Parse(this.startDatePicker.Text),
+                            DateTime.Parse(this.endDatePicker.Text));
+                    overlappingList.RemoveAll(x => x.Id == LoggedUser.SelectedLodging.Id);
 
-                this.overlappingListBox.ItemsSource = overlappingList;
-            }
+                    this.overlappingListBox.ItemsSource = overlappingList;
+                }
 
-            if (this.overlappingListBox.Items.Count > 0)
+                if (this.overlappingListBox.Items.Count > 0)
+                {
+                    this.overlappingListBox.Visibility = Visibility.Visible;
+                    this.overlappingLabel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.overlappingListBox.Visibility = Visibility.Collapsed;
+                    this.overlappingLabel.Visibility = Visibility.Collapsed;
+                }
+            } catch (Exception exception)
             {
-                this.overlappingListBox.Visibility = Visibility.Visible;
-                this.overlappingLabel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                this.overlappingListBox.Visibility = Visibility.Collapsed;
-                this.overlappingLabel.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Error updating date");
             }
         }
 
