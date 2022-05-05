@@ -105,6 +105,16 @@ namespace TravelPlannerUnitTests.DALs.LoginDALTests
             Assert.AreEqual(null, loggedUser);
         }
 
+        /// <summary>
+        ///     Tests the encrypt method.
+        /// </summary>
+        [TestMethod]
+        public void TestEncrypt()
+        {
+            Assert.AreEqual(null, LoginDal.Encrypt(null));
+        }
+
+
         #endregion
     }
 }
