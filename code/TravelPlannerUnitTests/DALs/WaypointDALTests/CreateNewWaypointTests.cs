@@ -268,24 +268,7 @@ namespace TravelPlannerUnitTests.DALs.WaypointDALTests
                     Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0
                 }
             }.AsQueryable();
-
-            var waypoint = new Waypoint {
-                Location = "Nowhere",
-                StartDateTime = DateTime.Now,
-                EndDateTime = DateTime.Now.AddMinutes(120),
-                TripId = 0,
-                Id = 0
-            };
             var waypointData = new List<Waypoint> {
-                waypoint,
-                new Waypoint {
-                    Location = "Out here", StartDateTime = DateTime.Now, EndDateTime = DateTime.Now.AddMinutes(120),
-                    TripId = 0, Id = 2
-                },
-                new Waypoint {
-                    Location = "Somewhere", StartDateTime = DateTime.Now.AddDays(1),
-                    EndDateTime = DateTime.Now.AddDays(1).AddMinutes(120), TripId = 0, Id = 1
-                }
             }.AsQueryable();
 
             var mockSetTrip = new Mock<DbSet<Trip>>();

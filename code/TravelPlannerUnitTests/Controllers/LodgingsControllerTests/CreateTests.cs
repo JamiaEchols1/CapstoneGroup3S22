@@ -34,18 +34,7 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
             }.AsQueryable();
 
             var lodgingsData = new List<Lodging> {
-                new Lodging {
-                    Location = "test lodging", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 0
-                },
-                new Lodging {
-                    Location = "test lodging 1", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 1
-                },
-                new Lodging {
-                    Location = "test lodging 2", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 2
-                }
+                
             }.AsQueryable();
 
             var mockSetLodgings = new Mock<DbSet<Lodging>>();
@@ -92,19 +81,7 @@ namespace TravelPlannerUnitTests.Controllers.LodgingsControllerTests
                 }
             }.AsQueryable();
 
-            var lodgingsData = new List<Lodging> {
-                new Lodging {
-                    Location = "test lodging", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 0
-                },
-                new Lodging {
-                    Location = "test lodging 1", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 1
-                },
-                new Lodging {
-                    Location = "test lodging 2", StartTime = DateTime.Now.AddMinutes(10),
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0, Id = 2
-                }
+            var lodgingsData = new List<Lodging> {             
             }.AsQueryable();
 
             var mockSetLodgings = new Mock<DbSet<Lodging>>();

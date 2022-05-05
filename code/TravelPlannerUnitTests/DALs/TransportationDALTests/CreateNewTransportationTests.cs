@@ -190,6 +190,39 @@ namespace TravelPlannerUnitTests.DALs.TransportationDALTests
         }
 
         /// <summary>
+        ///     Tests the end time after trip end time.
+        /// </summary>
+        [TestMethod]
+        public void TestEndTimeAfterTripEndTime()
+        {
+            LoggedUser.SelectedTrip = new Trip
+            {
+                Name = "Trip1",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(14),
+                UserId = 0,
+                Id = 0
+            };
+            var data = new List<Transportation> {
+            }.AsQueryable();
+
+            var mockSet = new Mock<DbSet<Transportation>>();
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockSet.As<IQueryable<Transportation>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
+            mockContext.Setup(c => c.Transportations).Returns(mockSet.Object);
+
+            var service = new TransportationDal(mockContext.Object);
+            Assert.ThrowsException<ArgumentException>(() =>
+                service.CreateANewTransportation(0, DateTime.Now.AddDays(1), DateTime.Now.AddDays(14).AddMinutes(40),
+                    "Description", "Car", null, null));
+            LoggedUser.SelectedTrip = null;
+        }
+
+        /// <summary>
         ///     Tests the valid transportation.
         /// </summary>
         [TestMethod]

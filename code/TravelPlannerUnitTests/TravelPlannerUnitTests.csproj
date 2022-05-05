@@ -107,10 +107,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeControllerTests\HomeControllerTests.cs" />
+    <Compile Include="Controllers\LodgingsControllerTests\EditWithConflicts.cs" />
+    <Compile Include="Controllers\LodgingsControllerTests\EditTests.cs" />
     <Compile Include="Controllers\LodgingsControllerTests\CreateTests.cs" />
     <Compile Include="Controllers\LodgingsControllerTests\DeleteTests.cs" />
     <Compile Include="Controllers\LodgingsControllerTests\DetailsTests.cs" />
     <Compile Include="Controllers\LodgingsControllerTests\CreateWithConflictsTests.cs" />
+    <Compile Include="Controllers\TransportationControllerTests\EditTests.cs" />
     <Compile Include="Controllers\TransportationControllerTests\CreateTests.cs" />
     <Compile Include="Controllers\TransportationControllerTests\DeleteTests.cs" />
     <Compile Include="Controllers\TransportationControllerTests\DetailsTests.cs" />
@@ -122,11 +125,14 @@
     <Compile Include="Controllers\WaypointsControllerTests\CreateTests.cs" />
     <Compile Include="Controllers\WaypointsControllerTests\DeleteTests.cs" />
     <Compile Include="Controllers\WaypointsControllerTests\EditTests.cs" />
+    <Compile Include="DALs\LodgingDALTests\EditLodgingTests.cs" />
     <Compile Include="DALs\LodgingDALTests\GetOverlappingLodgingsTests.cs" />
     <Compile Include="DALs\LodgingDALTests\CreateNewLodgingTests.cs" />
     <Compile Include="DALs\LodgingDALTests\GetLodgingsTests.cs" />
     <Compile Include="DALs\LodgingDALTests\RemoveLodgingsTests.cs" />
     <Compile Include="DALs\LoginDALTests\TestLogin.cs" />
+    <Compile Include="DALs\TransportationDALTests\EditTransportationTests.cs" />
+    <Compile Include="DALs\WaypointDALTests\EditWaypointTests.cs" />
     <Compile Include="DesktopModels\LodgingTests.cs" />
     <Compile Include="DesktopModels\TransportationTests.cs" />
     <Compile Include="DesktopModels\TripTests.cs" />
@@ -155,6 +161,7 @@
     <Compile Include="WebModels\AddedTripTests.cs" />
     <Compile Include="WebModels\AddedWaypointTests.cs" />
     <Compile Include="WebModels\AddWaypointViewModelTests.cs" />
+    <Compile Include="WebModels\VerifyTimeViewModelTests.cs" />
     <Compile Include="WebModels\TripDetailsViewModelTests.cs" />
     <Compile Include="WebModels\AddedTransportationTests.cs" />
     <Compile Include="WebModels\UserCredentialsTests.cs" />

@@ -235,6 +235,75 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
         }
 
         /// <summary>
+        ///     Tests the POST: create valid waypoint without conflicts.
+        /// </summary>
+        [TestMethod]
+        public void TestPostCreateWaypointWithoutExistingWaypoints()
+        {
+            var tripData = new List<Trip> {
+                new Trip {
+                    Name = "Trip1", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14), UserId = 0, Id = 0
+                }
+            }.AsQueryable();
+
+            var waypointData = new List<Waypoint> {            
+            }.AsQueryable();
+
+            var mockSetTrip = new Mock<DbSet<Trip>>();
+            mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.Provider).Returns(tripData.Provider);
+            mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.Expression).Returns(tripData.Expression);
+            mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.ElementType).Returns(tripData.ElementType);
+            mockSetTrip.As<IQueryable<Trip>>().Setup(m => m.GetEnumerator()).Returns(tripData.GetEnumerator());
+
+            var mockSetWaypoint = new Mock<DbSet<Waypoint>>();
+            mockSetWaypoint.As<IQueryable<Waypoint>>().Setup(m => m.Provider).Returns(waypointData.Provider);
+            mockSetWaypoint.As<IQueryable<Waypoint>>().Setup(m => m.Expression).Returns(waypointData.Expression);
+            mockSetWaypoint.As<IQueryable<Waypoint>>().Setup(m => m.ElementType).Returns(waypointData.ElementType);
+            mockSetWaypoint.As<IQueryable<Waypoint>>().Setup(m => m.GetEnumerator())
+                           .Returns(waypointData.GetEnumerator());
+
+            var mockContext = new Mock<TravelPlannerDatabaseEntities>();
+            mockContext.Setup(c => c.Waypoints).Returns(mockSetWaypoint.Object);
+            mockContext.Setup(c => c.Trips).Returns(mockSetTrip.Object);
+
+            var waypointService = new WaypointDal(mockContext.Object);
+            var tripService = new TripDal(mockContext.Object);
+
+            var controller = new WaypointsController(tripService, waypointService);
+            LoggedUser.SelectedTrip = new Trip
+            {
+                Name = "Trip1",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(14),
+                UserId = 0,
+                Id = 0
+            };
+
+            var startDate = DateTime.Today;
+            var endDate = DateTime.Today.AddDays(1);
+
+            var newWaypoint = new Waypoint
+            {
+                Location = "there",
+                StartDateTime = DateTime.Now.AddDays(5),
+                EndDateTime = DateTime.Now.AddDays(10),
+                TripId = 0,
+                Description = "No"
+            };
+            var addedWaypoint = new AddedWaypoint
+            {
+                Id = newWaypoint.Id,
+                StartDateTime = newWaypoint.StartDateTime,
+                EndDateTime = newWaypoint.EndDateTime,
+                Location = newWaypoint.Location,
+                TripId = newWaypoint.Id,
+                Description = newWaypoint.Description
+            };
+            var result = controller.Create(addedWaypoint);
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));         
+        }
+
+        /// <summary>
         ///     Tests the post create waypoint with transportation time conflicts.
         /// </summary>
         [TestMethod]
@@ -352,7 +421,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
 
             var waypoint = new Waypoint
             {
-                Location = "Nowhere",
+                Location = "Aldi Carrollton GA 30117",
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now.AddMinutes(120),
                 TripId = 0,
@@ -361,12 +430,8 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             var waypointData = new List<Waypoint> {
                 waypoint,
                 new Waypoint {
-                    Location = "Out here", StartDateTime = DateTime.Now, EndDateTime = DateTime.Now.AddMinutes(120),
+                    Location = "Aldi Carrollton GA 30117", StartDateTime = DateTime.Now, EndDateTime = DateTime.Now.AddMinutes(120),
                     TripId = 0, Id = 2
-                },
-                new Waypoint {
-                    Location = "Las Vegas Airport", StartDateTime = DateTime.Now.AddDays(6),
-                    EndDateTime = DateTime.Now.AddDays(6).AddMinutes(120), TripId = 0, Id = 1
                 }
             }.AsQueryable();
 
@@ -556,7 +621,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
 
             var waypoint = new Waypoint
             {
-                Location = "Nowhere",
+                Location = "Walmart Carrollton GA 30117",
                 StartDateTime = DateTime.Now,
                 EndDateTime = DateTime.Now.AddMinutes(120),
                 TripId = 0,
@@ -564,10 +629,6 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
             };
             var waypointData = new List<Waypoint> {
                 waypoint,
-                new Waypoint {
-                    Location = "Out here", StartDateTime = DateTime.Now, EndDateTime = DateTime.Now.AddMinutes(120),
-                    TripId = 0, Id = 2
-                },
                 new Waypoint {
                     Location = "Las Vegas Airport", StartDateTime = DateTime.Now.AddDays(6),
                     EndDateTime = DateTime.Now.AddDays(6).AddMinutes(120), TripId = 0, Id = 1
