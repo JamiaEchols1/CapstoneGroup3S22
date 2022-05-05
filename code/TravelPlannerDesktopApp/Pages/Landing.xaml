@@ -8,11 +8,7 @@
       Title="Landing" Height="500" Width="750" MinWidth="750" MinHeight="500" MaxWidth="750" MaxHeight="500" HorizontalAlignment="Center" VerticalAlignment="Center">
 
     <Grid x:Name="pageGrid" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="750">
-        <Grid Background="LightBlue" Margin="0,0,650,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="98" Height="500">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="0*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Background="LightBlue" Margin="0,0,650,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="500">
             <n:NavButton Text="Create Trip" ImageSource="/Images/CreateTrip.png" Click="Grid_Click" NavUri="Pages/AddTrip.xaml" Margin="0,0,0,350" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="62" />
             <n:NavButton Text="Delete Trip" ImageSource="/Images/Delete.png" Click="DeleteButton_Click" NavUri="Pages/Landing.xaml" Margin="0,0,0,200" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="62"/>
             <n:NavButton Text="Trip Details" ImageSource="/Images/info-icon.png" Click="DetailsButton_Click" NavUri="Pages/TripInfo.xaml" Margin="0,0,0,50" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="62"/>

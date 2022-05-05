@@ -5,39 +5,61 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
       mc:Ignorable="d"
-      Title="Waypoints">
+      Title="Waypoints" Height="650" Width="750" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="750" MinHeight="650" MaxWidth="750" MaxHeight="650">
 
-    <Grid Background="White" ButtonBase.Click="Grid_Click" Height="405" Width="710">
-        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Left" Width="90">
+    <Grid x:Name="pageGrid" Background="White" ButtonBase.Click="Grid_Click" Height="650" Width="750" MinWidth="750" MinHeight="650" MaxWidth="750" MaxHeight="650" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid  Background="LightBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Height="650" Width="100" Margin="0,0,650,-2">
             <n:NavButton Text="Create Waypoint" ImageSource="/Images/CreateTrip.png" NavUri="Pages/AddWaypoint.xaml"
-                         Width="83" />
-            <n:NavButton Text="Create Lodging" ImageSource="/Images/lodging.png" NavUri="Pages/AddLodging.xaml"
-                         Width="83" />
-            <n:NavButton Text="Create Transportation" ImageSource="/Images/transportation.png"
+                         Width="83" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50" />
+            <n:NavButton Text="Create Lodging" ImageSource="/Images/lodging-icon.png" NavUri="Pages/AddLodging.xaml"
+                         Width="83" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,250" />
+            <n:NavButton Text="Create Transportation" ImageSource="/Images/transportation-icon.jpg"
                          NavUri="Pages/AddTransportationPage.xaml"
-                         Width="83" />
-        </WrapPanel>
-
-        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Right">
-            <n:NavButton Text="Back" ImageSource="/Images/Back.png" NavUri="Pages/Landing.xaml" Width="70" />
-        </WrapPanel>
+                         Width="83" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,450" />
+            <n:NavButton Text="Back" ImageSource="/Images/back-icon.png" NavUri="Pages/Landing.xaml" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,150,0,0" />
+        </Grid>
 
 
-        <ListBox x:Name="waypointsAndTransportListBox" Margin="120,175,0,0"
-                 VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Height="180"
-                 SelectionChanged="WaypointsListBox_OnSelectionChanged" />
-        <ListBox x:Name="lodgingListBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="255" Height="184" Margin="385,175,0,0"  SelectionChanged="LodgingListBox_OnSelectionChanged" />
+        <DataGrid x:Name="waypointsAndTransportDataGrid" SelectionChanged="WaypointsAndTransportDataGrid_SelectionChanged" IsReadOnly="True" HeadersVisibility="Column" AutoGenerateColumns="False" Height="200" HorizontalAlignment="Left" Margin="125,0,0,125" VerticalAlignment="Center" Width="600" >
+            <DataGrid.Columns>
+                <DataGridTextColumn MaxWidth="100" MinWidth="100" Header="Type" Binding="{Binding ItemType}" />
+                <DataGridTextColumn MaxWidth="230" MinWidth="230" Header="Location" Binding="{Binding ItemLocation}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn MaxWidth="124" MinWidth="124" Header="Start Date" Binding="{Binding StartDate}" />
+                <DataGridTextColumn MaxWidth="124" MinWidth="124" Header="End Date" Binding="{Binding EndDate}" />
+            </DataGrid.Columns>
+        </DataGrid>
 
-        <TextBlock x:Name="selectedTripTextBlock" HorizontalAlignment="Left" Margin="99,10,0,0" TextWrapping="Wrap"
-                   Text="Selected Trip:" VerticalAlignment="Top" Height="20" Width="446" />
-        <TextBlock x:Name="tripStartDateTextBlock" HorizontalAlignment="Left" Margin="99,30,0,0" TextWrapping="Wrap"
+        <DataGrid x:Name="lodgingDataGrid" SelectionChanged="LodgingDataGrid_SelectionChanged" IsReadOnly="True" HeadersVisibility="Column" AutoGenerateColumns="False" Height="200" HorizontalAlignment="Left" Margin="125,375,0,0" VerticalAlignment="Center" Width="600" >
+            <DataGrid.Columns>
+                <DataGridTextColumn MaxWidth="300" MinWidth="300" Header="Location" Binding="{Binding Location}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn MaxWidth="149" MinWidth="149" Header="Start Date" Binding="{Binding StartTime}" />
+                <DataGridTextColumn MaxWidth="149" MinWidth="149" Header="End Date" Binding="{Binding EndTime}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <TextBlock x:Name="selectedTripTextBlock" FontSize="20" HorizontalAlignment="Left" Margin="125,30,0,0" TextWrapping="Wrap"
+                   Text="Selected Trip:" VerticalAlignment="Top" Width="446" />
+        <TextBlock x:Name="tripStartDateTextBlock" HorizontalAlignment="Left" Margin="125,60,0,0" TextWrapping="Wrap"
                    Text="Start Date:" VerticalAlignment="Top" Height="20" Width="408" />
-        <TextBlock x:Name="tripEndDateTextBlock" HorizontalAlignment="Left" Margin="99,50,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="tripEndDateTextBlock" HorizontalAlignment="Left" Margin="125,80,0,0" TextWrapping="Wrap"
                    Text="End Date:" VerticalAlignment="Top" Height="20" Width="408" />
-        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="99,70,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="125,100,0,0" TextWrapping="Wrap"
                    Text="Description:" VerticalAlignment="Top" Height="20" Width="606" />
-        <Label Content="Waypoints and Transportation" HorizontalAlignment="Left" Margin="120,134,0,0"
-               VerticalAlignment="Top" />
-        <Label Content="Lodging" HorizontalAlignment="Left" Margin="391,125,0,0" VerticalAlignment="Top" />
+        <Label FontSize="15" Content="Waypoints and Transportations" HorizontalAlignment="Left" Margin="125,0,0,360"
+               VerticalAlignment="Center" />
+        <Label FontSize="15" Content="Lodgings" HorizontalAlignment="Left" Margin="125,135,0,0" VerticalAlignment="Center" />
     </Grid>
 </Page>
