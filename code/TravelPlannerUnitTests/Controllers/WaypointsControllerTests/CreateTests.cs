@@ -704,7 +704,7 @@ namespace TravelPlannerUnitTests.Controllers.WaypointsControllerTests
                 Description = newWaypoint.Description
             };
             var result = controller.Create(addedWaypoint);
-            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
 
         /// <summary>
