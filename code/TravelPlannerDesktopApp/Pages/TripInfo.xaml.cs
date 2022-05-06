@@ -113,7 +113,11 @@ namespace TravelPlannerDesktopApp.Pages
         {
             var clickedButton = e.OriginalSource as NavButton;
 
-            NavigationService?.Navigate(clickedButton.NavUri);
+            if (clickedButton != null)
+            {
+                NavigationService?.Navigate(clickedButton.NavUri);
+            }
+            
         }
 
         /// <summary>
