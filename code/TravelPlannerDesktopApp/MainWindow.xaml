@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Travel Planner"
-        WindowState="Maximized">
+        Icon="/Images/travelplannericon.jpg">
     <Grid>
         <Frame Source="Pages/Login.xaml" NavigationUIVisibility="Hidden" />
     </Grid>

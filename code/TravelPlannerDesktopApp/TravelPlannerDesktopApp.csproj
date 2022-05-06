@@ -270,6 +270,33 @@
   <ItemGroup>
     <Resource Include="Images\Details.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\travelplannericon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\travelplannericon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Login-Button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\info-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logout-icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\back-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\transportation-icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\lodging-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\edit-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

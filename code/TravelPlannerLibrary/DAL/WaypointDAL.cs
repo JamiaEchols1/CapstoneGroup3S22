@@ -138,10 +138,6 @@ namespace TravelPlannerLibrary.DAL
         public Waypoint EditWaypoint(string location, DateTime startTime, DateTime endTime,
             string description)
         {
-            if (string.IsNullOrEmpty(description))
-            {
-                throw new ArgumentException("Must enter a description!");
-            }
 
             if (string.IsNullOrEmpty(location))
             {

@@ -157,7 +157,7 @@ namespace TravelPlannerLibrary.DAL
         /// @postconditon - the trip with the id and all its waypoints, lodging and transport are removed if it exists, else none
         public void RemoveTrip(int id)
         {
-            var trip = db.Trips.Find(id);
+            var trip = this.GetTripById(id);
             if (trip != null)
             {
                 db.Trips.Remove(trip);

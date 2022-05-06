@@ -10,15 +10,39 @@ namespace TravelPlannerLibrary.Models
         #region Data members
 
         /// <summary>
-        ///     The start date
+        /// The type
         /// </summary>
-        public DateTime StartDate;
+        public TripItemType ItemType { get; set; }
 
         /// <summary>
-        /// The end time
+        /// The location
         /// </summary>
-        public DateTime EndDate;
+        public string ItemLocation { get; set; }
+
+        /// <summary>
+        ///     The start date
+        /// </summary>
+        public DateTime StartDate { get; set; }
+
+        /// <summary>
+        /// The end date
+        /// </summary>
+        public DateTime EndDate { get; set; }
 
         #endregion
+        /// <summary>
+        /// Enum of possible trip item types
+        /// </summary>
+        public enum TripItemType
+        {
+            /// <summary>
+            /// The transportation
+            /// </summary>
+            Transportation,
+            /// <summary>
+            /// The waypoint
+            /// </summary>
+            Waypoint
+        }
     }
 }

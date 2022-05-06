@@ -27,12 +27,32 @@ namespace TravelPlannerDesktopApp.Pages
         {
             this.lodgingDal = new LodgingDal();
             this.InitializeComponent();
-            this.addLodgingTitle.Content = "Add New Lodging: " + LoggedUser.SelectedTrip;
+            this.setPageSize();
+            this.setTripInfo();
         }
 
         #endregion
 
         #region Methods
+
+        private void setPageSize()
+        {
+            this.pageGrid.Width = this.Width;
+            this.pageGrid.Height = this.Height;
+            Application.Current.MainWindow.Height = this.Height;
+            Application.Current.MainWindow.Width = this.Width;
+            Application.Current.MainWindow.MinWidth = this.MinWidth;
+            Application.Current.MainWindow.MinHeight = this.MinHeight;
+            Application.Current.MainWindow.MaxHeight = this.MaxHeight;
+            Application.Current.MainWindow.MaxWidth = this.MaxWidth;
+        }
+
+        private void setTripInfo()
+        {
+            this.tripName.Content = LoggedUser.SelectedTrip.Name;
+            this.tripStart.Content = LoggedUser.SelectedTrip.StartDate;
+            this.tripEnd.Content = LoggedUser.SelectedTrip.EndDate;
+        }
 
         /// <summary>
         ///     Handles the Click event of the NavButton control.
@@ -92,22 +112,18 @@ namespace TravelPlannerDesktopApp.Pages
         /// <param name="e">The <see cref="object" /> instance containing the event data.</param>
         private void datePicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (this.startDatePicker.Value != null && this.endDatePicker.Value != null)
+            try
             {
-                this.overlappingListBox.ItemsSource =
-                    this.lodgingDal.GetOverlappingLodging(DateTime.Parse(this.startDatePicker.Text),
-                        DateTime.Parse(this.endDatePicker.Text));
+                if (this.startDatePicker.Value != null && this.endDatePicker.Value != null)
+                {
+                    this.overlappingListBox.ItemsSource =
+                        this.lodgingDal.GetOverlappingLodging(DateTime.Parse(this.startDatePicker.Text),
+                            DateTime.Parse(this.endDatePicker.Text));
+                }
             }
-
-            if (this.overlappingListBox.Items.Count > 0)
+            catch (Exception exception)
             {
-                this.overlappingListBox.Visibility = Visibility.Visible;
-                this.overlappingLabel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                this.overlappingListBox.Visibility = Visibility.Collapsed;
-                this.overlappingLabel.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Error updating the date");
             }
         }
 

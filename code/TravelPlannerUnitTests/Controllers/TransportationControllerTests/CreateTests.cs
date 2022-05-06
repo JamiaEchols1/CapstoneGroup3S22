@@ -96,21 +96,6 @@ namespace TravelPlannerUnitTests.Controllers.TransportationConrtollerTests
             var startDate = DateTime.Today.AddDays(1);
             var endDate = DateTime.Today.AddDays(2);
             var data = new List<Transportation> {
-                new Transportation {
-                    Description = "test transportation", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0,
-                    Id = 0
-                },
-                new Transportation {
-                    Description = "test transportation 1", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0,
-                    Id = 1
-                },
-                new Transportation {
-                    Description = "test transportation 2", StartTime = DateTime.Now,
-                    EndTime = DateTime.Now.AddMinutes(14), TripId = 0,
-                    Id = 2
-                }
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Transportation>>();

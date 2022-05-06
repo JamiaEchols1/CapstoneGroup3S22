@@ -3,39 +3,78 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:controls="clr-namespace:TravelPlannerDesktopApp.Controls"
+      xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
       xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddWaypoint">
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      Title="AddWaypoint" Width="600" Height="600" MinWidth="600" MinHeight="600" MaxWidth="600" MaxHeight="600"
+      >
+    <Page.Resources>
+        <Style x:Key="Sub-Headers" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="Input-Textboxes" TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="270"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="DateTimePickers" TargetType="wpfTool:DateTimePicker">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="270"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Page.Resources>
 
-    <Grid Background="White">
-        <controls:NavButton x:Name="backButton" Text="Back" Click="BackButton_Click" ImageSource="/Images/Back.png"
-                            NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right" />
-        <Label x:Name="addWaypointTitle" Content="Add A New Waypoint" HorizontalAlignment="Left" Margin="10,10,0,0"
-               VerticalAlignment="Top"
-               Width="694" />
+    <Grid x:Name="pageGrid" Background="White">
+        <Grid Background="LightBlue"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="600" Width="100" Margin="500,0,0,0">
+            <n:NavButton x:Name="backButton" Text="Back" Click="BackButton_Click" ImageSource="/Images/back-icon.png"
+                         NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,25,0,0" />
+        </Grid>
+            
+        <Label x:Name="addWaypointTitle" FontSize="25" Content="Add A New Waypoint" HorizontalAlignment="Center" Margin="0,20,0,0"
+               VerticalAlignment="Top" />
 
-        <Label Content="Location:" Margin="160,61,534,0" VerticalAlignment="Top" />
-        <TextBox x:Name="locationTextBox" HorizontalAlignment="Left" Margin="271,68,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Location Name" />
-        <Button x:Name="createWaypointButton" Content="Create Waypoint" HorizontalAlignment="Left" Margin="265,338,0,0"
-                VerticalAlignment="Top" Click="CreateWaypointButton_OnClick" Width="270" />
+        <Label x:Name="tripNameHeader" Style="{StaticResource Sub-Headers}" Content="Trip Name:" Margin="0,0,450,450" />
+        <Label x:Name="tripName" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,450"/>
 
-        <Label Content="Start Date and Time:" Margin="105,141,534,0" VerticalAlignment="Top" />
-        <wpfTool:DateTimePicker x:Name="startDateTimePicker" HorizontalAlignment="Left" Margin="271,146,0,0"
-                                VerticalAlignment="Top" Width="270" ValueChanged="datePicker_ValueChanged" />
+        <Label x:Name="tripStartHeader" Style="{StaticResource Sub-Headers}" Content="Trip Start:" Margin="0,0,450,400"/>
+        <Label x:Name="tripStart" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="150,0,0,400"/>
 
-        <Label Content="End Date and Time:" Margin="105,181,534,0" VerticalAlignment="Top" />
-        <wpfTool:DateTimePicker x:Name="endDateTimePicker" HorizontalAlignment="Left" Margin="271,186,0,0"
-                                VerticalAlignment="Top" Width="270" ValueChanged="datePicker_ValueChanged" />
+        <Label x:Name="tripEndHeader" Style="{StaticResource Sub-Headers}"  Content="Trip End:" Margin="0,0,450,350"/>
+        <Label x:Name="tripEnd" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,350"/>
 
-        <Label Content="Description:" Margin="150,101,534,0" VerticalAlignment="Top" />
-        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Margin="271,106,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Description Name" />
+        <Label Style="{StaticResource Sub-Headers}" Content="Location:" Margin="0,0,450,250" />
+        <TextBox x:Name="locationTextBox" Style="{StaticResource Input-Textboxes}" Margin="0,0,0,250"
+                 AutomationProperties.HelpText="Enter Location Name" />
 
-        <TextBlock x:Name="overlappingLabel" Margin="100,255,496,114" TextWrapping="Wrap" Visibility="Collapsed"
-                   Text="Overlapping Transportation and Waypoints: " />
-        <ListBox x:Name="overlappingListBox" Margin="271,220,242,87" Visibility="Collapsed" />
+        <Label Style="{StaticResource Sub-Headers}" Content="Description:" Margin="0,0,450,150" />
+        <TextBox x:Name="descriptionTextBox" Style="{StaticResource Input-Textboxes}" Margin="0,0,0,150"
+                 AutomationProperties.HelpText="Enter Description Name" />
+
+        <Label Style="{StaticResource Sub-Headers}" Content="Start Date:" Margin="35,0,450,50"  />
+        <wpfTool:DateTimePicker x:Name="startDateTimePicker" Style="{StaticResource DateTimePickers}" Margin="0,0,0,50"
+                                ValueChanged="datePicker_ValueChanged" />
+
+        <Label Style="{StaticResource Sub-Headers}" Content="End Date:" Margin="0,50,450,0"  />
+        <wpfTool:DateTimePicker x:Name="endDateTimePicker" Style="{StaticResource DateTimePickers}"  Margin="0,50,0,0"
+                                ValueChanged="datePicker_ValueChanged" />
+
+        <Button x:Name="createWaypointButton" Background="LightBlue" Content="Create Waypoint" HorizontalAlignment="Center" Margin="0,150,0,0"
+                VerticalAlignment="Center" Click="CreateWaypointButton_OnClick" Width="270" Height="34" />
+
+        <TextBlock x:Name="overlappingLabel" Margin="35,375,450,0" TextWrapping="Wrap" FontSize="18"
+                   Text="Overlapping Transportation and Waypoints: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <ListBox x:Name="overlappingListBox" Margin="0,375,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="270" Height="150"  />
     </Grid>
 </Page>

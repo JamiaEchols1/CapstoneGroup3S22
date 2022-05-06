@@ -5,23 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
       mc:Ignorable="d"
-      Title="Landing" Height="795" Width="1025">
+      Title="Landing" Height="500" Width="750" MinWidth="750" MinHeight="500" MaxWidth="750" MaxHeight="500" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-    <Grid Background="White">
-
-        <WrapPanel Margin="5,5,659,0">
-            <n:NavButton Text="Create Trip" ImageSource="/Images/CreateTrip.png" Click="Grid_Click" NavUri="Pages/AddTrip.xaml" />
-            <n:NavButton Text="Delete Trip" ImageSource="/Images/Delete.png" Click="DeleteButton_Click" NavUri="Pages/Landing.xaml"/>
-            <n:NavButton Text="Trip Details" ImageSource="/Images/Details.png" Click="DetailsButton_Click" NavUri="Pages/TripInfo.xaml"/>
-        </WrapPanel>
-
-        <WrapPanel Margin="900,-5,-224,15">
-            <n:NavButton  Text="Logout" Click="Grid_Click" ImageSource="/Images/Logout.png" NavUri="Pages/Login.xaml" />
-        </WrapPanel>
-
-
-        <ListBox x:Name="tripsListBox" Margin="70,120,40,40" />
-        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Left" Margin="244,30,0,0" TextWrapping="Wrap"
-                   Text="Welcome" VerticalAlignment="Top" Height="20" Width="196" />
+    <Grid x:Name="pageGrid" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Height="500" Width="750">
+        <Grid Background="LightBlue" Margin="0,0,650,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="500">
+            <n:NavButton Text="Create Trip" ImageSource="/Images/CreateTrip.png" Click="Grid_Click" NavUri="Pages/AddTrip.xaml" Margin="0,0,0,350" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="62" />
+            <n:NavButton Text="Delete Trip" ImageSource="/Images/Delete.png" Click="DeleteButton_Click" NavUri="Pages/Landing.xaml" Margin="0,0,0,200" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="62"/>
+            <n:NavButton Text="Trip Details" ImageSource="/Images/info-icon.png" Click="DetailsButton_Click" NavUri="Pages/TripInfo.xaml" Margin="0,0,0,50" HorizontalAlignment="Center" VerticalAlignment="Center" Height="70" Width="62"/>
+            <n:NavButton  Text="Logout" Click="Grid_Click" ImageSource="/Images/logout-icon.jpg" NavUri="Pages/Login.xaml" Margin="0,100,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="70" Width="50" />
+        </Grid>
+        <DataGrid x:Name="tripsDataGrid" IsReadOnly="True" HeadersVisibility="Column" AutoGenerateColumns="False" Height="320" HorizontalAlignment="Center" Margin="100,50,0,0" VerticalAlignment="Center" Width="550" >
+            <DataGrid.Columns>
+                <DataGridTextColumn MaxWidth="250" MinWidth="250" Width="Auto" Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn MaxWidth="149" MinWidth="149" Header="Start Date" Binding="{Binding StartDate}" />
+                <DataGridTextColumn MaxWidth="149" MinWidth="149" Header="End Date" Binding="{Binding EndDate}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock x:Name="welcomeTextBlock" HorizontalAlignment="Center" Margin="150,0,0,375" TextWrapping="Wrap"
+                       Text="Welcome" VerticalAlignment="Center" Height="40" Width="600" FontSize="25"/>
     </Grid>
 </Page>

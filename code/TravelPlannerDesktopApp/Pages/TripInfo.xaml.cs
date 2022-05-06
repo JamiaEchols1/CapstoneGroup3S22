@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Windows;
@@ -33,6 +34,7 @@ namespace TravelPlannerDesktopApp.Pages
             this.transportationDal = new TransportationDal();
             this.lodgingDal = new LodgingDal();
             this.InitializeComponent();
+            this.setPageSize();
             this.SetListSources();
             this.SetSelectedTripText();
         }
@@ -40,6 +42,18 @@ namespace TravelPlannerDesktopApp.Pages
         #endregion
 
         #region Methods
+
+        private void setPageSize()
+        {
+            this.pageGrid.Width = this.Width;
+            this.pageGrid.Height = this.Height;
+            Application.Current.MainWindow.Height = this.Height;
+            Application.Current.MainWindow.Width = this.Width;
+            Application.Current.MainWindow.MinWidth = this.MinWidth;
+            Application.Current.MainWindow.MinHeight = this.MinHeight;
+            Application.Current.MainWindow.MaxHeight = this.MaxHeight;
+            Application.Current.MainWindow.MaxWidth = this.MaxWidth;
+        }
 
         /// <summary>
         ///     Sets the trip info text
@@ -71,17 +85,23 @@ namespace TravelPlannerDesktopApp.Pages
             foreach (var item in waypoints)
             {
                 item.StartDate = item.StartDateTime;
+                item.EndDate = item.EndDateTime;
+                item.ItemType = TripItem.TripItemType.Waypoint;
+                item.ItemLocation = item.Location;
             }
 
             foreach (var item in transport)
             {
                 item.StartDate = item.StartTime;
+                item.EndDate = item.EndTime;
+                item.ItemType = TripItem.TripItemType.Transportation;
+                item.ItemLocation = $"Origin: {item.Origin},{Environment.NewLine}Destination: {item.Destination}";
             }
 
             waypointsAndTransportation.AddRange(waypoints);
             waypointsAndTransportation.AddRange(transport);
-            this.waypointsAndTransportListBox.ItemsSource = waypointsAndTransportation.OrderBy(x => x.StartDate);
-            this.lodgingListBox.ItemsSource = this.lodgingDal.GetLodgings(LoggedUser.SelectedTrip.Id);
+            this.waypointsAndTransportDataGrid.ItemsSource = waypointsAndTransportation.OrderBy(x => x.StartDate);
+            this.lodgingDataGrid.ItemsSource = this.lodgingDal.GetLodgings(LoggedUser.SelectedTrip.Id);
         }
 
         /// <summary>
@@ -101,14 +121,14 @@ namespace TravelPlannerDesktopApp.Pages
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="SelectionChangedEventArgs" /> instance containing the event data.</param>
-        private void WaypointsListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void WaypointsAndTransportDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedItemType =
-                ObjectContext.GetObjectType(this.waypointsAndTransportListBox.SelectedItem.GetType());
+                ObjectContext.GetObjectType(this.waypointsAndTransportDataGrid.SelectedItem.GetType());
 
             if (selectedItemType == typeof(Waypoint))
             {
-                LoggedUser.SelectedWaypoint = this.waypointsAndTransportListBox.SelectedItem as Waypoint;
+                LoggedUser.SelectedWaypoint = this.waypointsAndTransportDataGrid.SelectedItem as Waypoint;
                 if (LoggedUser.SelectedWaypoint != null)
                 {
                     var waypointInfo = new WaypointInfo();
@@ -117,7 +137,7 @@ namespace TravelPlannerDesktopApp.Pages
             }
             else if (selectedItemType == typeof(Transportation))
             {
-                LoggedUser.SelectedTransportation = this.waypointsAndTransportListBox.SelectedItem as Transportation;
+                LoggedUser.SelectedTransportation = this.waypointsAndTransportDataGrid.SelectedItem as Transportation;
                 if (LoggedUser.SelectedTransportation != null)
                 {
                     var transportationInfo = new TransportationInfo();
@@ -131,9 +151,9 @@ namespace TravelPlannerDesktopApp.Pages
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="SelectionChangedEventArgs" /> instance containing the event data.</param>
-        private void LodgingListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LodgingDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LoggedUser.SelectedLodging = this.lodgingListBox.SelectedItem as Lodging;
+            LoggedUser.SelectedLodging = this.lodgingDataGrid.SelectedItem as Lodging;
             if (LoggedUser.SelectedLodging != null)
             {
                 var lodgingInfo = new LodgingInfo();

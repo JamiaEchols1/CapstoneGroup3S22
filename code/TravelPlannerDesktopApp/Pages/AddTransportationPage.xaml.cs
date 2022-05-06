@@ -32,13 +32,33 @@ namespace TravelPlannerDesktopApp.Pages
             this.waypointDal = new WaypointDal();
             this.transportationDal = new TransportationDal();
             this.InitializeComponent();
+            this.setPageSize();
+            this.setTripInfo();
             this.typeComboBox.ItemsSource = TransportationTypes.GetTypes();
-            this.addTransportTitle.Content = "Add New Transportation: " + LoggedUser.SelectedTrip;
         }
 
         #endregion
 
         #region Methods
+
+        private void setPageSize()
+        {
+            this.pageGrid.Width = this.Width;
+            this.pageGrid.Height = this.Height;
+            Application.Current.MainWindow.Height = this.Height;
+            Application.Current.MainWindow.Width = this.Width;
+            Application.Current.MainWindow.MinWidth = this.MinWidth;
+            Application.Current.MainWindow.MinHeight = this.MinHeight;
+            Application.Current.MainWindow.MaxHeight = this.MaxHeight;
+            Application.Current.MainWindow.MaxWidth = this.MaxWidth;
+        }
+
+        private void setTripInfo()
+        {
+            this.tripName.Content = LoggedUser.SelectedTrip.Name;
+            this.tripStart.Content = LoggedUser.SelectedTrip.StartDate;
+            this.tripEnd.Content = LoggedUser.SelectedTrip.EndDate;
+        }
 
         /// <summary>
         ///     Handles the Click event of the createTransportationButton control.
@@ -137,26 +157,21 @@ namespace TravelPlannerDesktopApp.Pages
         /// <param name="e">The <see cref="object" /> instance containing the event data.</param>
         private void datePicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (this.startDateTimePicker.Value != null && this.endDateTimePicker.Value != null)
+            try
             {
-                var startDate = DateTime.Parse(this.startDateTimePicker.Text);
-                var endDate = DateTime.Parse(this.endDateTimePicker.Text);
-                var waypointsAndTransportation = new List<object>();
-                waypointsAndTransportation.AddRange(this.waypointDal.GetOverlappingWaypoints(startDate, endDate));
-                waypointsAndTransportation.AddRange(
-                    this.transportationDal.GetOverlappingTransportation(startDate, endDate));
-                this.overlappingListBox.ItemsSource = waypointsAndTransportation;
-            }
-
-            if (this.overlappingListBox.Items.Count > 0)
+                if (this.startDateTimePicker.Value != null && this.endDateTimePicker.Value != null)
+                {
+                    var startDate = DateTime.Parse(this.startDateTimePicker.Text);
+                    var endDate = DateTime.Parse(this.endDateTimePicker.Text);
+                    var waypointsAndTransportation = new List<object>();
+                    waypointsAndTransportation.AddRange(this.waypointDal.GetOverlappingWaypoints(startDate, endDate));
+                    waypointsAndTransportation.AddRange(
+                        this.transportationDal.GetOverlappingTransportation(startDate, endDate));
+                    this.overlappingListBox.ItemsSource = waypointsAndTransportation;
+                }
+            } catch (Exception exception)
             {
-                this.overlappingListBox.Visibility = Visibility.Visible;
-                this.overlappingLabel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                this.overlappingListBox.Visibility = Visibility.Collapsed;
-                this.overlappingLabel.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Error updating the date");
             }
         }
 

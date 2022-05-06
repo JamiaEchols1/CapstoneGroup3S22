@@ -109,6 +109,22 @@ namespace TravelPlannerLibrary.DAL
             return lodging;
         }
 
+        /// <summary>
+        /// Edits the lodging.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The end time.</param>
+        /// <param name="description">The description.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">Must enter a location!</exception>
+        /// <exception cref="System.ArgumentException">
+        /// Start date must be on or after trip start date
+        /// or
+        /// End date must be on or before trip end date
+        /// or
+        /// End date must be on or after selected start date
+        /// </exception>
         public Lodging EditLodging(string location, DateTime startTime, DateTime endTime, string description)
         {
             if (string.IsNullOrEmpty(location))

@@ -31,16 +31,41 @@ namespace TravelPlannerDesktopApp.Pages
             this.waypointDal = new WaypointDal();
             this.transportationDal = new TransportationDal();
             this.InitializeComponent();
-            this.editWaypointTitle.Content = "Edit A New Waypoint: " + LoggedUser.SelectedTrip;
-            this.descriptionTextBox.Text = LoggedUser.SelectedWaypoint.Description;
-            this.locationTextBox.Text = LoggedUser.SelectedWaypoint.Location;
-            this.startDateTimePicker.Value = LoggedUser.SelectedWaypoint.StartDateTime;
-            this.endDateTimePicker.Value = LoggedUser.SelectedWaypoint.EndDateTime;
+            this.setWaypointInfo();
+            this.setPageSize();
+            this.setTripInfo();
         }
 
         #endregion
 
         #region Methods
+
+        private void setPageSize()
+        {
+            this.pageGrid.Width = this.Width;
+            this.pageGrid.Height = this.Height;
+            Application.Current.MainWindow.Height = this.Height;
+            Application.Current.MainWindow.Width = this.Width;
+            Application.Current.MainWindow.MinWidth = this.MinWidth;
+            Application.Current.MainWindow.MinHeight = this.MinHeight;
+            Application.Current.MainWindow.MaxHeight = this.MaxHeight;
+            Application.Current.MainWindow.MaxWidth = this.MaxWidth;
+        }
+
+        private void setTripInfo()
+        {
+            this.tripName.Content = LoggedUser.SelectedTrip.Name;
+            this.tripStart.Content = LoggedUser.SelectedTrip.StartDate;
+            this.tripEnd.Content = LoggedUser.SelectedTrip.EndDate;
+        }
+
+        private void setWaypointInfo()
+        {
+            this.descriptionTextBox.Text = LoggedUser.SelectedWaypoint.Description;
+            this.locationTextBox.Text = LoggedUser.SelectedWaypoint.Location;
+            this.startDateTimePicker.Value = LoggedUser.SelectedWaypoint.StartDateTime;
+            this.endDateTimePicker.Value = LoggedUser.SelectedWaypoint.EndDateTime;
+        }
 
         /// <summary>
         ///     Handles the Click event of the BackButton control.
@@ -138,17 +163,6 @@ namespace TravelPlannerDesktopApp.Pages
 
                     waypointsAndTransportation.AddRange(overlappingWaypoints);
                     this.overlappingListBox.ItemsSource = waypointsAndTransportation;
-                }
-
-                if (this.overlappingListBox.Items.Count > 0)
-                {
-                    this.overlappingListBox.Visibility = Visibility.Visible;
-                    this.overlappingLabel.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    this.overlappingListBox.Visibility = Visibility.Collapsed;
-                    this.overlappingLabel.Visibility = Visibility.Collapsed;
                 }
             } catch (Exception ex)
             {
