@@ -9,6 +9,31 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddLodging" Width="600" Height="600" MinWidth="600" MinHeight="600" MaxWidth="600" MaxHeight="600" HorizontalAlignment="Center" VerticalAlignment="Center">
 
+    <Page.Resources>
+        <Style x:Key="Sub-Headers" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="Input-Textboxes" TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="270"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style x:Key="DateTimePickers" TargetType="wpfTool:DateTimePicker">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="270"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Page.Resources>
+
     <Grid x:Name="pageGrid" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Height="600">
         <Grid Background="LightBlue"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="600" Width="100" Margin="500,0,0,0">
             <n:NavButton x:Name="backButton" Text="Back" Click="NavButton_Click" ImageSource="/Images/back-icon.png"
@@ -17,30 +42,30 @@
         <Label x:Name="addLodgingTitle" FontSize="25" Content="Add New Lodging" HorizontalAlignment="Center" Margin="0,20,0,0"
                VerticalAlignment="Top" />
 
-        <Label x:Name="tripNameHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip Name:" VerticalAlignment="Center" Margin="0,0,450,450"/>
+        <Label x:Name="tripNameHeader" Style="{StaticResource Sub-Headers}" Content="Trip Name:" Margin="0,0,450,450"/>
         <Label x:Name="tripName" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,450"/>
 
-        <Label x:Name="tripStartHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip Start:" VerticalAlignment="Center" Margin="0,0,450,400"/>
+        <Label x:Name="tripStartHeader" Style="{StaticResource Sub-Headers}" Content="Trip Start:" Margin="0,0,450,400"/>
         <Label x:Name="tripStart" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="150,0,0,400"/>
 
-        <Label x:Name="tripEndHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip End:" VerticalAlignment="Center" Margin="0,0,450,350"/>
+        <Label x:Name="tripEndHeader" Style="{StaticResource Sub-Headers}" Content="Trip End:" Margin="0,0,450,350"/>
         <Label x:Name="tripEnd" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,350"/>
 
-        <Label Content="Location:" FontSize="18" Margin="0,0,450,250" VerticalAlignment="Center" HorizontalAlignment="Right" />
-        <TextBox x:Name="locationTextBox" FontSize="15" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,0,0,250" TextWrapping="Wrap"
-                 VerticalAlignment="Center" Width="270" AutomationProperties.HelpText="Enter Location Name" Height="34" />
+        <Label Content="Location:" Style="{StaticResource Sub-Headers}" Margin="0,0,450,250" />
+        <TextBox x:Name="locationTextBox" Style="{StaticResource Input-Textboxes}" Margin="0,0,0,250"
+                  AutomationProperties.HelpText="Enter Location Name" />
 
-        <Label Content="Description:" FontSize="18" Margin="0,0,450,150" VerticalAlignment="Center" HorizontalAlignment="Right" />
-        <TextBox x:Name="descriptionTextBox" FontSize="15" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,0,0,150" TextWrapping="Wrap"
-                 VerticalAlignment="Center" Width="270" AutomationProperties.HelpText="Enter Description Name" Height="34" />
+        <Label Content="Description:" Style="{StaticResource Sub-Headers}" Margin="0,0,450,150" />
+        <TextBox x:Name="descriptionTextBox" Style="{StaticResource Input-Textboxes}"   Margin="0,0,0,150" 
+                  AutomationProperties.HelpText="Enter Description Name"  />
 
-        <Label Content="Start Time:" FontSize="18" Margin="0,0,450,50" VerticalAlignment="Center" HorizontalAlignment="Right" />
-        <wpfTool:DateTimePicker x:Name="startDatePicker" FontSize="15" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,0,0,50"
-                                VerticalAlignment="Center" Width="270" ValueChanged="datePicker_ValueChanged" Height="34" />
+        <Label Content="Start Time:" Style="{StaticResource Sub-Headers}"  Margin="0,0,450,50" />
+        <wpfTool:DateTimePicker x:Name="startDatePicker" Style="{StaticResource DateTimePickers}"   Margin="0,0,0,50"
+                                 ValueChanged="datePicker_ValueChanged"  />
 
-        <Label Content="End Time:" FontSize="18" Margin="0,50,450,0" VerticalAlignment="Center" HorizontalAlignment="Right" />
-        <wpfTool:DateTimePicker x:Name="endDatePicker" FontSize="15" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,50,0,0"
-                                VerticalAlignment="Center" Width="270" ValueChanged="datePicker_ValueChanged" Height="34" />
+        <Label Content="End Time:" Style="{StaticResource Sub-Headers}"  Margin="0,50,450,0"  />
+        <wpfTool:DateTimePicker x:Name="endDatePicker" Style="{StaticResource DateTimePickers}"  Margin="0,50,0,0"
+                                 ValueChanged="datePicker_ValueChanged" />
 
         <Button x:Name="createLodgingButton" FontSize="18" Background="LightBlue" Content="Create Lodging" HorizontalAlignment="Center" Margin="0,150,0,0"
                 VerticalAlignment="Center" Click="createLodgingButton_Click" Width="270" Height="34" />

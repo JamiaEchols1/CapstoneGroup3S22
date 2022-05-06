@@ -16,19 +16,19 @@
         <Label FontSize="25" Content="Add A New Trip" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" />
         <Label FontSize="18" Content="Name:" Margin="0,0,450,200" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <TextBox x:Name="nameTextBox" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,200" TextWrapping="Wrap"
-                 VerticalAlignment="Center" Width="270" AutomationProperties.HelpText="Enter Trip name" Height="34" />
+                 VerticalContentAlignment="Center" Width="270" AutomationProperties.HelpText="Enter Trip name" Height="34" />
         <Label FontSize="18" Content="Description:" Margin="0,0,450,100" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <TextBox x:Name="descriptionTextBox" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,100" TextWrapping="Wrap"
-                 VerticalAlignment="Center" Width="270" Height="34" AutomationProperties.HelpText="Enter Description Name" />
+                 VerticalContentAlignment="Center" Width="270" Height="34" AutomationProperties.HelpText="Enter Description Name" />
 
         <Label FontSize="18" Content="Start Date:" Margin="0,0,450,0" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <DatePicker x:Name="startDatePicker" FontSize="15" DisplayDateStart="{x:Static sys:DateTime.Today}"
-                    HorizontalAlignment="Center" Margin="0" Width="270" VerticalAlignment="Center" Height="34" />
+                    HorizontalAlignment="Center" Margin="0" Width="270" VerticalContentAlignment="Center" Height="34" />
 
         <Label FontSize="18" Content="End Date:" Margin="0,100,450,0" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <DatePicker x:Name="endDatePicker" FontSize="15" DisplayDateStart="{x:Static sys:DateTime.Today}" HorizontalAlignment="Center"
                     Margin="0,100,0,0"
-                    VerticalAlignment="Center" Width="270" RenderTransformOrigin="-1.181,-0.208" Height="34" />
+                    VerticalContentAlignment="Center" Width="270" RenderTransformOrigin="-1.181,-0.208" Height="34" />
         <Button x:Name="createTripButton" Background="LightBlue" FontSize="15" Content="Create Trip" HorizontalAlignment="Center" Margin="0,200,0,0"
                 VerticalAlignment="Center" Click="createTripButton_Click" Width="270" Height="34" />
     </Grid>

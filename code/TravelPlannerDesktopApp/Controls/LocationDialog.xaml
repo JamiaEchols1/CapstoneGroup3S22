@@ -11,7 +11,7 @@
         <WebBrowser Name="wbMaps" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="100,100,100,100"/>
         <Button Content="Yes" HorizontalAlignment="right" Margin="0,0,100,50" VerticalAlignment="Bottom" Click="YesButton_Click" Height="36" Width="111"/>
         <Button Content="No" HorizontalAlignment="Left" Margin="100,0,0,50" VerticalAlignment="Bottom" Click="NoButton_Click" Height="36" Width="120"/>
-        <Label Content="Confirm selected transportation route" HorizontalAlignment="Left" Margin="55,18,0,0" VerticalAlignment="Top"/>
+        <Label FontSize="20" Content="Confirm selected transportation route" HorizontalAlignment="Left" Margin="55,18,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

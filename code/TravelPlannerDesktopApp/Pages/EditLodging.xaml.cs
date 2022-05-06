@@ -27,16 +27,41 @@ namespace TravelPlannerDesktopApp.Pages
         {
             this.lodgingDal = new LodgingDal();
             this.InitializeComponent();
-            this.editLodgingTitle.Content = "Edit Lodging: " + LoggedUser.SelectedLodging;
-            this.descriptionTextBox.Text = LoggedUser.SelectedLodging.Description;
-            this.locationTextBox.Text = LoggedUser.SelectedLodging.Location;
-            this.startDatePicker.Value = LoggedUser.SelectedLodging.StartTime;
-            this.endDatePicker.Value = LoggedUser.SelectedLodging.EndTime;
+            this.setPageSize();
+            this.setTripInfo();
+            this.setLodgingInfo();
         }
 
         #endregion
 
         #region Methods
+
+        private void setPageSize()
+        {
+            this.pageGrid.Width = this.Width;
+            this.pageGrid.Height = this.Height;
+            Application.Current.MainWindow.Height = this.Height;
+            Application.Current.MainWindow.Width = this.Width;
+            Application.Current.MainWindow.MinWidth = this.MinWidth;
+            Application.Current.MainWindow.MinHeight = this.MinHeight;
+            Application.Current.MainWindow.MaxHeight = this.MaxHeight;
+            Application.Current.MainWindow.MaxWidth = this.MaxWidth;
+        }
+
+        private void setTripInfo()
+        {
+            this.tripName.Content = LoggedUser.SelectedTrip.Name;
+            this.tripStart.Content = LoggedUser.SelectedTrip.StartDate;
+            this.tripEnd.Content = LoggedUser.SelectedTrip.EndDate;
+        }
+
+        private void setLodgingInfo()
+        {
+            this.descriptionTextBox.Text = LoggedUser.SelectedLodging.Description;
+            this.locationTextBox.Text = LoggedUser.SelectedLodging.Location;
+            this.startDatePicker.Value = LoggedUser.SelectedLodging.StartTime;
+            this.endDatePicker.Value = LoggedUser.SelectedLodging.EndTime;
+        }
 
         /// <summary>
         ///     Handles the Click event of the NavButton control.
@@ -103,17 +128,6 @@ namespace TravelPlannerDesktopApp.Pages
                     overlappingList.RemoveAll(x => x.Id == LoggedUser.SelectedLodging.Id);
 
                     this.overlappingListBox.ItemsSource = overlappingList;
-                }
-
-                if (this.overlappingListBox.Items.Count > 0)
-                {
-                    this.overlappingListBox.Visibility = Visibility.Visible;
-                    this.overlappingLabel.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    this.overlappingListBox.Visibility = Visibility.Collapsed;
-                    this.overlappingLabel.Visibility = Visibility.Collapsed;
                 }
             } catch (Exception exception)
             {

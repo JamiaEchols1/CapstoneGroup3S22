@@ -9,6 +9,31 @@
       d:DesignWidth="800"
       Title="AddTransportationPage" Width="600" Height="700" MinWidth="600" MinHeight="700" MaxWidth="600" MaxHeight="700" HorizontalAlignment="Center" VerticalAlignment="Center">
 
+    <Page.Resources>
+        <Style x:Key="Sub-Headers" TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="Input-Textboxes" TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Width" Value="270" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="15" />
+        </Style>
+        <Style x:Key="DateTimePickers" TargetType="wpfTool:DateTimePicker">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Width" Value="270" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="15" />
+        </Style>
+    </Page.Resources>
+
     <Grid x:Name="pageGrid" Background="White" Margin="0" Height="700" Width="600" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid Background="LightBlue"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="700" Width="100" Margin="500,0,0,0">
             <n:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/back-icon.png"
@@ -18,34 +43,34 @@
         <Label x:Name="addTransportTitle" FontSize="25" Content="Add New Transportation" HorizontalAlignment="Center"
                Margin="0,20,0,0" VerticalAlignment="Top" />
 
-        <Label x:Name="tripNameHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip Name:" VerticalAlignment="Center" Margin="0,0,450,550"/>
+        <Label x:Name="tripNameHeader" Style="{StaticResource Sub-Headers}" Content="Trip Name:"  Margin="0,0,450,550"/>
         <Label x:Name="tripName" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,550"/>
 
-        <Label x:Name="tripStartHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip Start:" VerticalAlignment="Center" Margin="0,0,450,500"/>
+        <Label x:Name="tripStartHeader" Style="{StaticResource Sub-Headers}" Content="Trip Start:"  Margin="0,0,450,500"/>
         <Label x:Name="tripStart" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="150,0,0,500"/>
 
-        <Label x:Name="tripEndHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip End:" VerticalAlignment="Center" Margin="0,0,450,450"/>
+        <Label x:Name="tripEndHeader" Style="{StaticResource Sub-Headers}"  Content="Trip End:"  Margin="0,0,450,450"/>
         <Label x:Name="tripEnd" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,450"/>
 
-        <Label Content="Type:" FontSize="18"  Margin="0,0,450,350" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <Label Content="Type:" Style="{StaticResource Sub-Headers}"  Margin="0,0,450,350" />
         <ComboBox x:Name="typeComboBox" VerticalContentAlignment="Center" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,350" VerticalAlignment="Center" Width="270" Height="34" />
 
-        <Label Content="Start Time:" FontSize="18" Margin="0,0,450,250" VerticalAlignment="Center" HorizontalAlignment="Right" />
-        <wpfTool:DateTimePicker x:Name="startDateTimePicker" VerticalContentAlignment="Center" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,250"
-                                VerticalAlignment="Center" Width="270" ValueChanged="datePicker_ValueChanged" Height="34" />
+        <Label Content="Start Time:" Style="{StaticResource Sub-Headers}" Margin="0,0,450,250" />
+        <wpfTool:DateTimePicker x:Name="startDateTimePicker" Style="{StaticResource DateTimePickers}"  Margin="0,0,0,250"
+                                 ValueChanged="datePicker_ValueChanged" />
 
-        <Label Content="End Time:" FontSize="18" Margin="0,0,450,150" VerticalAlignment="Center" HorizontalAlignment="Right" />
-        <wpfTool:DateTimePicker x:Name="endDateTimePicker" FontSize="15" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,150"
-                                VerticalAlignment="Center" Width="270" ValueChanged="datePicker_ValueChanged" Height="34" />
+        <Label Content="End Time:" Style="{StaticResource Sub-Headers}"  Margin="0,0,450,150" />
+        <wpfTool:DateTimePicker x:Name="endDateTimePicker" Style="{StaticResource DateTimePickers}" Margin="0,0,0,150"
+                                  ValueChanged="datePicker_ValueChanged" />
 
-        <Label x:Name="descriptionLabel" FontSize="18" Content="Description:" Margin="0,0,450,50" VerticalAlignment="Center" HorizontalAlignment="Right" />
-        <TextBox x:Name="descriptionTextBox" TextAlignment="Center" HorizontalAlignment="Center" FontSize="15" Margin="0,0,0,50" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="270" Height="34"/>
+        <Label x:Name="descriptionLabel" Style="{StaticResource Sub-Headers}" Content="Description:" Margin="0,0,450,50" />
+        <TextBox x:Name="descriptionTextBox" Style="{StaticResource Input-Textboxes}" Margin="0,0,0,50" />
 
-        <Label x:Name="OriginLabel" FontSize="18" Content="Origin:" HorizontalAlignment="Right" Margin="0,50,450,0" VerticalAlignment="Center"/>
-        <TextBox  x:Name="originLocationTextBox" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15" Height="34" Margin="0,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="270"/>
+        <Label x:Name="OriginLabel" Style="{StaticResource Sub-Headers}" Content="Origin:"  Margin="0,50,450,0"/>
+        <TextBox  x:Name="originLocationTextBox" Style="{StaticResource Input-Textboxes}" Margin="0,50,0,0"/>
 
-        <Label x:Name="destinationLabel" FontSize="18" Content="Destination:" Margin="0,150,450,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="destinationLocationTextBox" FontSize="15" HorizontalAlignment="Center" TextAlignment="Center" Height="34" Margin="0,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="270"/>
+        <Label x:Name="destinationLabel" Style="{StaticResource Sub-Headers}" Content="Destination:" Margin="0,150,450,0" />
+        <TextBox x:Name="destinationLocationTextBox" Style="{StaticResource Input-Textboxes}" Margin="0,150,0,0"/>
 
         <Button x:Name="saveButton" Background="LightBlue" FontSize="18" Content="Create Transportation" HorizontalAlignment="Center" Margin="0,250,0,0"
                 VerticalAlignment="Center" Width="270" Click="createTransportationButton_Click" Height="34" />
