@@ -25,7 +25,7 @@
         <Label x:Name="tripStart" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="150,0,0,500"/>
 
         <Label x:Name="tripEndHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip End:" VerticalAlignment="Center" Margin="0,0,450,450"/>
-        <Label x:Name="tripEnd" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,450"/>
+        <Label x:Name="tripEnd" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,450"/>
 
         <Label Content="Type:" FontSize="18"  Margin="0,0,450,350" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <ComboBox x:Name="typeComboBox" VerticalContentAlignment="Center" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,350" VerticalAlignment="Center" Width="270" Height="34" />

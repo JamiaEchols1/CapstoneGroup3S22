@@ -24,7 +24,7 @@
         <Label x:Name="tripStart" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="150,0,0,400"/>
 
         <Label x:Name="tripEndHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip End:" VerticalAlignment="Center" Margin="0,0,450,350"/>
-        <Label x:Name="tripEnd" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,350"/>
+        <Label x:Name="tripEnd" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,350"/>
 
         <Label Content="Location:" FontSize="18" Margin="0,0,450,250" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <TextBox x:Name="locationTextBox" FontSize="15" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,0,0,250" TextWrapping="Wrap"

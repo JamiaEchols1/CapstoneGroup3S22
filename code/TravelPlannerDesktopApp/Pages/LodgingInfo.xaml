@@ -6,40 +6,49 @@
       xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
       mc:Ignorable="d"
       d:DesignHeight="605" d:DesignWidth="945"
-      Title="LodgingInfo">
+      Title="LodgingInfo" MinWidth="800" MinHeight="650" MaxWidth="800" MaxHeight="650" HorizontalAlignment="Center"
+      VerticalAlignment="Center" Width="800" Height="650">
 
-    <Grid Background="White">
-        <n:NavButton x:Name="backButton" Text="Back" Click="backButton_Click" ImageSource="/Images/Back.png"
-                     NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right" Margin="0,2,2,0" />
+    <Grid x:Name="pageGrid" Background="White">
+        <Grid Background="LightBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Height="650" Width="100"
+              Margin="0,0,700,0">
+            <n:NavButton x:Name="editButton" Text="Edit" Click="editLodgingButton_Click"
+                         ImageSource="/Images/edit-icon.png"
+                         NavUri="Pages/TripInfo.xaml" Width="70" HorizontalAlignment="Center"
+                         VerticalAlignment="Center" Margin="0,0,0,450" />
+            <n:NavButton x:Name="deleteButton" Text="Delete" Click="removeLodgingButton_Click"
+                         ImageSource="/Images/Delete.png"
+                         NavUri="Pages/TripInfo.xaml" Width="70" HorizontalAlignment="Center"
+                         VerticalAlignment="Center" Margin="0,0,0,250" />
+            <n:NavButton x:Name="backButton" Text="Back" Click="backButton_Click" ImageSource="/Images/back-icon.png"
+                         NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Center" Margin="0,0,0,50"
+                         VerticalAlignment="Center" />
+        </Grid>
 
-        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="125,85,0,0" TextWrapping="Wrap"
-                   Text="Description:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="locationTextBlock" HorizontalAlignment="Left" Margin="129,110,0,0" TextWrapping="Wrap"
-                   Text="Location:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="startDateTextBlock" HorizontalAlignment="Left" Margin="125,135,0,0" TextWrapping="Wrap"
-                   Text="Start Date:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="endDateTextBlock" HorizontalAlignment="Left" Margin="125,160,0,0" TextWrapping="Wrap"
-                   Text="End Date:" VerticalAlignment="Top" Height="20" Width="196" />
-        <Button x:Name="editLodgingButton" Content="Edit Lodging" HorizontalAlignment="Left" Margin="159,535,0,0"
-                VerticalAlignment="Top" Click="editLodgingButton_Click" />
-        <Button x:Name="removeLodgingButton" Content="Remove Lodging" HorizontalAlignment="Left" Margin="615,535,0,0"
-                VerticalAlignment="Top" Click="removeLodgingButton_Click" />
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Lodging Info"
+        <TextBlock HorizontalAlignment="Left" FontSize="25" Margin="125,25,0,0" TextWrapping="Wrap" Text="Lodging Info"
                    VerticalAlignment="Top" />
 
-        <Viewbox HorizontalAlignment="Left" Height="340" Margin="105,180,0,0" VerticalAlignment="Top" Width="728">
-            <WebBrowser x:Name="mapWebBrowser" Source="https://www.google.com/maps" HorizontalAlignment="Left"
-                        Height="13283" VerticalAlignment="Top" Width="28482" Margin="364,58,0,0"
-                        RenderTransformOrigin="0.5,0.5">
-                <WebBrowser.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="-1" />
-                        <SkewTransform />
-                        <RotateTransform />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </WebBrowser.RenderTransform>
-            </WebBrowser>
-        </Viewbox>
+
+        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="125,60,0,0" TextWrapping="Wrap"
+                   Text="Description:" VerticalAlignment="Top" />
+        <TextBlock x:Name="locationTextBlock" HorizontalAlignment="Left" Margin="125,80,0,0" TextWrapping="Wrap"
+                   Text="Location:" VerticalAlignment="Top" />
+        <TextBlock x:Name="startDateTextBlock" HorizontalAlignment="Left" Margin="125,100,0,0" TextWrapping="Wrap"
+                   Text="Start Date:" VerticalAlignment="Top" />
+        <TextBlock x:Name="endDateTextBlock" HorizontalAlignment="Left" Margin="125,120,0,0" TextWrapping="Wrap"
+                   Text="End Date:" VerticalAlignment="Top" />
+
+        <WebBrowser x:Name="mapWebBrowser" Source="https://www.google.com/maps" HorizontalAlignment="Left"
+                    Height="450" VerticalAlignment="Center" Width="650" Margin="125,100,0,0"
+                    RenderTransformOrigin="0.5,0.5">
+            <WebBrowser.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1" />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </WebBrowser.RenderTransform>
+        </WebBrowser>
     </Grid>
 </Page>
