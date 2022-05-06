@@ -50,7 +50,7 @@
         </DataGrid>
 
 
-        <TextBlock x:Name="selectedTripTextBlock" FontSize="20" HorizontalAlignment="Left" Margin="125,30,0,0" TextWrapping="Wrap"
+        <TextBlock x:Name="selectedTripTextBlock" FontSize="25" HorizontalAlignment="Left" Margin="125,25,0,0" TextWrapping="Wrap"
                    Text="Selected Trip:" VerticalAlignment="Top" Width="446" />
         <TextBlock x:Name="tripStartDateTextBlock" HorizontalAlignment="Left" Margin="125,60,0,0" TextWrapping="Wrap"
                    Text="Start Date:" VerticalAlignment="Top" Height="20" Width="408" />

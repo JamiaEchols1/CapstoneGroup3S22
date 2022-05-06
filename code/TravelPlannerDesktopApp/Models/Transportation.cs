@@ -50,8 +50,20 @@ namespace TravelPlannerDesktopApp.Models
         /// </value>
         public string Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the origin.
+        /// </summary>
+        /// <value>
+        /// The origin.
+        /// </value>
         public string Origin { get; set; }
 
+        /// <summary>
+        /// Gets or sets the destination.
+        /// </summary>
+        /// <value>
+        /// The destination.
+        /// </value>
         public string Destination { get; set; }
 
         #endregion

@@ -5,38 +5,90 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d"
-      xmlns:controls="clr-namespace:TravelPlannerDesktopApp.Controls"
+      xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
       d:DesignHeight="" d:DesignWidth="800"
-      Title="EditTransportation">
+      Title="EditTransportation" Width="600" Height="700" MinWidth="600" MinHeight="700" HorizontalAlignment="Center"
+      VerticalAlignment="Center" MaxWidth="600" MaxHeight="700">
 
-    <Grid Background="White" Margin="0,0,0,-268">
-        <Label x:Name="editTransportTitle" Content="Edit Transportation" HorizontalAlignment="Left"
-               Margin="10,10,0,0" VerticalAlignment="Top"
-               Width="702" />
-        <controls:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/Back.png"
-                            NavUri="Pages/TripInfo.xaml" HorizontalAlignment="Right" />
+    <Page.Resources>
+        <Style x:Key="Sub-Headers" TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="Input-Textboxes" TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Width" Value="270" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="15" />
+        </Style>
+        <Style x:Key="DateTimePickers" TargetType="wpfTool:DateTimePicker">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Width" Value="270" />
+            <Setter Property="Height" Value="34" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="15" />
+        </Style>
+    </Page.Resources>
 
-        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Margin="271,106,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="270" AutomationProperties.HelpText="Enter Description" />
-        <Label x:Name="descriptionLabel" Content="Description:" Margin="150,101,534,0" VerticalAlignment="Top" />
+    <Grid x:Name="pageGrid" Background="White" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="700"
+          Width="600">
+        <Grid Background="LightBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Height="700" Width="100"
+              Margin="500,0,0,0">
+            <n:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/back-icon.png"
+                         NavUri="Pages/TransportationInfo.xaml" HorizontalAlignment="Center" VerticalAlignment="Top"
+                         Margin="0,25,0,0" />
+        </Grid>
+        <Label x:Name="editTransportTitle" FontSize="25" Content="Edit Transportation" HorizontalAlignment="Center"
+               Margin="0,20,0,0" VerticalAlignment="Top" />
 
-        <Label Content="Type:" Margin="160,61,534,0" VerticalAlignment="Top" />
-        <Label Content="Start Time:" Margin="156,141,534,0" VerticalAlignment="Top" />
-        <Label Content="End Time:" Margin="156,181,534,0" VerticalAlignment="Top" />
-        <Button x:Name="saveButton" Content="Edit Transportation" HorizontalAlignment="Left" Margin="271,368,0,0"
-                VerticalAlignment="Top" Width="270" Click="editTransportationButton_Click" />
-        <wpfTool:DateTimePicker x:Name="startDateTimePicker" HorizontalAlignment="Left" Margin="271,146,0,0"
-                                VerticalAlignment="Top" Width="270" ValueChanged="datePicker_ValueChanged" />
-        <wpfTool:DateTimePicker x:Name="endDateTimePicker" HorizontalAlignment="Left" Margin="271,186,0,0"
-                                VerticalAlignment="Top" Width="270" ValueChanged="datePicker_ValueChanged" />
-        <TextBlock x:Name="overlappingLabel" Margin="275,480,321,212" TextWrapping="Wrap" Visibility="Collapsed"
-                   Text="Overlapping Transportation and Waypoints: " />
-        <ListBox x:Name="overlappingListBox" Margin="254,511,259,64" Visibility="Collapsed" />
-        <TextBox x:Name="originLocationTextBox" HorizontalAlignment="Left" Height="20" Margin="271,255,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270"/>
-        <TextBox x:Name="destinationLocationTextBox" HorizontalAlignment="Left" Height="19" Margin="274,300,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266"/>
-        <Label x:Name="OriginLabel" Content="Origin" HorizontalAlignment="Left" Margin="160,255,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="destinationLabel" Content="Destination" Height="29" Margin="163,291,560,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="275,65,0,0" VerticalAlignment="Top" Width="265" />
+        <Label x:Name="tripNameHeader" Style="{StaticResource Sub-Headers}" Content="Trip Name:" Margin="0,0,450,550" />
+        <Label x:Name="tripName" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"
+               Margin="150,0,0,550" />
+
+        <Label x:Name="tripStartHeader" Style="{StaticResource Sub-Headers}" Content="Trip Start:" Margin="0,0,450,500" />
+        <Label x:Name="tripStart" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"
+               Margin="150,0,0,500" />
+
+        <Label x:Name="tripEndHeader" Style="{StaticResource Sub-Headers}" Content="Trip End:" Margin="0,0,450,450" />
+        <Label x:Name="tripEnd" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center"
+               Margin="150,0,0,450" />
+
+        <Label Content="Type:" Style="{StaticResource Sub-Headers}" Margin="0,0,450,350" />
+        <ComboBox x:Name="typeComboBox" FontSize="15" HorizontalAlignment="Center" Margin="0,0,0,350" VerticalAlignment="Center"
+                  Width="270" Height="34" />
+
+
+        <Label Content="Start Time:" Style="{StaticResource Sub-Headers}" Margin="0,0,450,250" />
+        <wpfTool:DateTimePicker x:Name="startDateTimePicker" Style="{StaticResource DateTimePickers}"
+                                Margin="0,0,0,250"
+                                ValueChanged="datePicker_ValueChanged" />
+
+        <Label Content="End Time:" Style="{StaticResource Sub-Headers}" Margin="0,0,450,150" />
+        <wpfTool:DateTimePicker x:Name="endDateTimePicker" HorizontalAlignment="Center"
+                                Style="{StaticResource DateTimePickers}" Margin="0,0,0,150"
+                                ValueChanged="datePicker_ValueChanged" />
+
+        <Label x:Name="descriptionLabel" Style="{StaticResource Sub-Headers}" Content="Description:" Margin="0,0,450,50" />
+        <TextBox x:Name="descriptionTextBox" Style="{StaticResource Input-Textboxes}" Margin="0,0,0,50"
+                  AutomationProperties.HelpText="Enter Description" />
+
+        <Label x:Name="OriginLabel" Style="{StaticResource Sub-Headers}" Content="Origin:" Margin="0,50,450,0"/>
+        <TextBox x:Name="originLocationTextBox" Style="{StaticResource Input-Textboxes}" Margin="0,50,0,0"/>
+
+        <Label x:Name="destinationLabel" Style="{StaticResource Sub-Headers}" Content="Destination:" Margin="0,150,450,0"/>
+        <TextBox x:Name="destinationLocationTextBox" Style="{StaticResource Input-Textboxes}" Margin="0,150,0,0"/>
+
+        <Button x:Name="saveButton" Background="LightBlue" FontSize="18" Content="Edit Transportation" HorizontalAlignment="Center" Margin="0,250,0,0"
+                VerticalAlignment="Center" Width="270" Click="editTransportationButton_Click" Height="34" />
+
+        <TextBlock x:Name="overlappingLabel" FontSize="18" Margin="35,475,450,0" TextWrapping="Wrap"
+                   Text="Overlapping Transportation and Waypoints: " HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <ListBox x:Name="overlappingListBox" Margin="0,475,0,0" Width="270" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
     </Grid>
 </Page>

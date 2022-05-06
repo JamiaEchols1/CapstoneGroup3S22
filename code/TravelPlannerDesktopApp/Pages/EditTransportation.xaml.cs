@@ -33,7 +33,36 @@ namespace TravelPlannerDesktopApp.Pages
             this.transportationDal = new TransportationDal();
             this.InitializeComponent();
             this.typeComboBox.ItemsSource = TransportationTypes.GetTypes();
-            this.editTransportTitle.Content = "Edit Transportation: " + LoggedUser.SelectedTransportation;
+            this.setPageSize();
+            this.setTripInfo();
+            this.setTransportInfo();
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void setPageSize()
+        {
+            this.pageGrid.Width = this.Width;
+            this.pageGrid.Height = this.Height;
+            Application.Current.MainWindow.Height = this.Height;
+            Application.Current.MainWindow.Width = this.Width;
+            Application.Current.MainWindow.MinWidth = this.MinWidth;
+            Application.Current.MainWindow.MinHeight = this.MinHeight;
+            Application.Current.MainWindow.MaxHeight = this.MaxHeight;
+            Application.Current.MainWindow.MaxWidth = this.MaxWidth;
+        }
+
+        private void setTripInfo()
+        {
+            this.tripName.Content = LoggedUser.SelectedTrip.Name;
+            this.tripStart.Content = LoggedUser.SelectedTrip.StartDate;
+            this.tripEnd.Content = LoggedUser.SelectedTrip.EndDate;
+        }
+
+        private void setTransportInfo()
+        {
             this.descriptionTextBox.Text = LoggedUser.SelectedTransportation.Description;
             this.destinationLocationTextBox.Text = LoggedUser.SelectedTransportation.Destination;
             this.originLocationTextBox.Text = LoggedUser.SelectedTransportation.Origin;
@@ -41,10 +70,6 @@ namespace TravelPlannerDesktopApp.Pages
             this.startDateTimePicker.Value = LoggedUser.SelectedTransportation.StartTime;
             this.typeComboBox.Text = LoggedUser.SelectedTransportation.Type;
         }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         ///     Handles the Click event of the createTransportationButton control.
@@ -157,17 +182,6 @@ namespace TravelPlannerDesktopApp.Pages
                     waypointsAndTransportation.AddRange(overlappingTransportations);
 
                     this.overlappingListBox.ItemsSource = waypointsAndTransportation;
-                }
-
-                if (this.overlappingListBox.Items.Count > 0)
-                {
-                    this.overlappingListBox.Visibility = Visibility.Visible;
-                    this.overlappingLabel.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    this.overlappingListBox.Visibility = Visibility.Collapsed;
-                    this.overlappingLabel.Visibility = Visibility.Collapsed;
                 }
             } catch (Exception ex)
             {

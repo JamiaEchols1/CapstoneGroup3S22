@@ -5,28 +5,29 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:n="clr-namespace:TravelPlannerDesktopApp.Controls"
       mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="TransportationInfo">
+      
+      Title="TransportationInfo" Height="650" MinWidth="800" MinHeight="650" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="800" MaxHeight="650">
+    
 
-    <Grid Background="White" Margin="0,0,0,-70">
-        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="64,57,0,0" TextWrapping="Wrap"
-                   Text="Description:" VerticalAlignment="Top" Height="23" Width="196" />
-        <TextBlock x:Name="typeTextBlock" HorizontalAlignment="Left" Margin="65,85,0,0" TextWrapping="Wrap"
-                   Text="Type:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="startTimeTextBlock" HorizontalAlignment="Left" Margin="64,110,0,0" TextWrapping="Wrap"
-                   Text="Start Date:" VerticalAlignment="Top" Height="20" Width="196" />
-        <TextBlock x:Name="endTimeTextBlock"  HorizontalAlignment="Left" Margin="64,130,0,0" TextWrapping="Wrap"
-                   Text="End Date:" VerticalAlignment="Top" Height="20" Width="196" />
-        <Button x:Name="editTransportationButton" Content="Edit Transportation" HorizontalAlignment="Left" Margin="100,0,0,100"
-                VerticalAlignment="Bottom" Click="editTransportationButton_Click" />
-        <Button x:Name="removeTransportationButton" Content="Remove Transportation" HorizontalAlignment="Right" Margin="0,0,100,100"
-                VerticalAlignment="Bottom" Click="removeTransportationButton_Click" />
+    <Grid x:Name="pageGrid" Background="White" Margin="0" Height="650" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800">
+        <Grid  Background="LightBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Height="650" Width="100" Margin="0,0,700,0">
+            <n:NavButton x:Name="editButton" Text="Edit" Click="editTransportationButton_Click" ImageSource="/Images/edit-icon.png"
+                         NavUri="Pages/TripInfo.xaml" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,450" />
+            <n:NavButton x:Name="deleteButton" Text="Delete" Click="removeTransportationButton_Click" ImageSource="/Images/Delete.png"
+                         NavUri="Pages/TripInfo.xaml" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,250" />
+            <n:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/back-icon.png"
+                         NavUri="Pages/TripInfo.xaml" Width="70" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50" />
+        </Grid>
+        <TextBlock HorizontalAlignment="Left" FontSize="25" Margin="125,25,0,0" TextWrapping="Wrap" Text="Transportation Info" VerticalAlignment="Top"/>
 
-        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Right">
-            <n:NavButton x:Name="backButton" Text="Back" Click="BackButton_OnClick" ImageSource="/Images/Back.png"
-                         NavUri="Pages/TripInfo.xaml" Width="70" />
-        </WrapPanel>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Transportation Info" VerticalAlignment="Top"/>
-        <WebBrowser x:Name="wbMaps" Margin="100,200,100,200" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock x:Name="descriptionTextBlock" HorizontalAlignment="Left" Margin="125,60,0,0" TextWrapping="Wrap"
+                   Text="Description:" VerticalAlignment="Top" Height="23" />
+        <TextBlock x:Name="typeTextBlock" HorizontalAlignment="Left" Margin="125,80,0,0" TextWrapping="Wrap"
+                   Text="Type:" VerticalAlignment="Top" Height="20" />
+        <TextBlock x:Name="startTimeTextBlock" HorizontalAlignment="Left" Margin="125,100,0,0" TextWrapping="Wrap"
+                   Text="Start Date:" VerticalAlignment="Top" Height="20" />
+        <TextBlock x:Name="endTimeTextBlock"  HorizontalAlignment="Left" Margin="125,120,0,0" TextWrapping="Wrap"
+                   Text="End Date:" VerticalAlignment="Top" Height="20" />
+        <WebBrowser x:Name="wbMaps" Margin="125,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="650" Height="450" />
     </Grid>
 </Page>
