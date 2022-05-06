@@ -120,18 +120,6 @@ namespace TravelPlannerDesktopApp.Pages
                         this.lodgingDal.GetOverlappingLodging(DateTime.Parse(this.startDatePicker.Text),
                             DateTime.Parse(this.endDatePicker.Text));
                 }
-
-                if (this.overlappingListBox.Items.Count > 0)
-                {
-                    this.overlappingListBox.Visibility = Visibility.Visible;
-                    this.overlappingLabel.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    this.overlappingListBox.Visibility = Visibility.Collapsed;
-                    this.overlappingLabel.Visibility = Visibility.Collapsed;
-                }
-
             }
             catch (Exception exception)
             {

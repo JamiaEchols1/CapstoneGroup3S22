@@ -18,13 +18,13 @@
                VerticalAlignment="Top" />
 
         <Label x:Name="tripNameHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip Name:" VerticalAlignment="Center" Margin="0,0,450,450"/>
-        <Label x:Name="tripName" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,550"/>
+        <Label x:Name="tripName" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,450"/>
 
         <Label x:Name="tripStartHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip Start:" VerticalAlignment="Center" Margin="0,0,450,400"/>
-        <Label x:Name="tripStart" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="150,0,0,500"/>
+        <Label x:Name="tripStart" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="150,0,0,400"/>
 
         <Label x:Name="tripEndHeader" FontSize="18" HorizontalAlignment="Right" Content="Trip End:" VerticalAlignment="Center" Margin="0,0,450,350"/>
-        <Label x:Name="tripEnd" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,450"/>
+        <Label x:Name="tripEnd" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="150,0,0,350"/>
 
         <Label Content="Location:" FontSize="18" Margin="0,0,450,250" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <TextBox x:Name="locationTextBox" FontSize="15" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,0,0,250" TextWrapping="Wrap"
@@ -42,11 +42,11 @@
         <wpfTool:DateTimePicker x:Name="endDatePicker" FontSize="15" HorizontalAlignment="Center" TextAlignment="Center" Margin="0,50,0,0"
                                 VerticalAlignment="Center" Width="270" ValueChanged="datePicker_ValueChanged" Height="34" />
 
-        <Button x:Name="createLodgingButton" Background="LightBlue" Content="Create Lodging" HorizontalAlignment="Center" Margin="0,150,0,0"
+        <Button x:Name="createLodgingButton" FontSize="18" Background="LightBlue" Content="Create Lodging" HorizontalAlignment="Center" Margin="0,150,0,0"
                 VerticalAlignment="Center" Click="createLodgingButton_Click" Width="270" Height="34" />
 
-        <TextBlock x:Name="overlappingLabel" FontSize="18" Margin="35,375,450,0" Text="Overlapping Lodging:" Visibility="Collapsed" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <ListBox x:Name="overlappingListBox" Margin="0,375,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Height="150" Width="270"  />
+        <TextBlock x:Name="overlappingLabel" FontSize="18" Margin="35,375,450,0" Text="Overlapping Lodging:" TextWrapping="Wrap" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <ListBox x:Name="overlappingListBox" Margin="0,375,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="150" Width="270"  />
 
     </Grid>
 </Page>

@@ -47,11 +47,11 @@
         <Label x:Name="destinationLabel" FontSize="18" Content="Destination:" Margin="0,150,450,0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
         <TextBox x:Name="destinationLocationTextBox" FontSize="15" HorizontalAlignment="Center" TextAlignment="Center" Height="34" Margin="0,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="270"/>
 
-        <Button x:Name="saveButton" Content="Create Transportation" HorizontalAlignment="Center" Margin="0,250,0,0"
+        <Button x:Name="saveButton" Background="LightBlue" FontSize="18" Content="Create Transportation" HorizontalAlignment="Center" Margin="0,250,0,0"
                 VerticalAlignment="Center" Width="270" Click="createTransportationButton_Click" Height="34" />
 
         <TextBlock x:Name="overlappingLabel" FontSize="18" Margin="35,475,450,0" TextWrapping="Wrap"
-                   Text="Overlapping Transportation and Waypoints:" Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Center" />
-        <ListBox x:Name="overlappingListBox" Margin="0,475,0,0" Visibility="Collapsed"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="270" Height="150" />
+                   Text="Overlapping Transportation and Waypoints:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+        <ListBox x:Name="overlappingListBox" Margin="0,475,0,0"   HorizontalAlignment="Center" VerticalAlignment="Center" Width="270" Height="150" />
     </Grid>
 </Page>
